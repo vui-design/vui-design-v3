@@ -1,0 +1,176 @@
+@vui-timeline: ~"@{vui}-timeline";
+
+.@{vui-timeline} {
+  display:block;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  list-style:none;
+  color:@timeline-font-color;
+  font-size:@timeline-font-size;
+  line-height:@timeline-line-height;
+
+  &-item {
+    position:relative;
+    display:block;
+    box-sizing:border-box;
+    margin:0;
+    padding:0 0 @timeline-item-padding-bottom 0;
+    list-style:none;
+
+    &-tail {
+      position:absolute;
+      bottom:0;
+      display:block;
+      box-sizing:border-box;
+      width:@timeline-item-tail-size;
+      height:calc(100% - floor(@timeline-font-size * @timeline-line-height));
+      background-color:@timeline-item-tail-color;
+    }
+
+    &-header {
+      position:absolute;
+      top:(floor(@timeline-font-size * @timeline-line-height) - @timeline-item-header-size) / 2;
+      display:block;
+      box-sizing:border-box;
+      width:@timeline-item-header-size;
+      height:@timeline-item-header-size;
+      border:@timeline-item-header-border-width solid transparent;
+      border-radius:50%;
+      background-color:@timeline-item-header-background-color;
+      line-height:1;
+    }
+    &-header-custom {
+      top:floor(@timeline-font-size * @timeline-line-height) / 2;
+      width:auto;
+      height:auto;
+      border:none;
+      border-radius:0;
+      padding:(floor(@timeline-font-size * @timeline-line-height) - @timeline-item-header-size) / 2 0;
+    }
+    &-header-gray {
+      border-color:@timeline-item-header-gray-color;
+      color:@timeline-item-header-gray-color;
+    }
+    &-header-blue {
+      border-color:@timeline-item-header-blue-color;
+      color:@timeline-item-header-blue-color;
+    }
+    &-header-yellow {
+      border-color:@timeline-item-header-yellow-color;
+      color:@timeline-item-header-yellow-color;
+    }
+    &-header-green {
+      border-color:@timeline-item-header-green-color;
+      color:@timeline-item-header-green-color;
+    }
+    &-header-red {
+      border-color:@timeline-item-header-red-color;
+      color:@timeline-item-header-red-color;
+    }
+
+    &-body {
+      position:relative;
+      display:block;
+      box-sizing:border-box;
+      .writeBreak;
+    }
+  }
+
+  &-item:last-child {
+    padding-bottom:0;
+  }
+  &-item:last-child &-item-tail {
+    display:none;
+  }
+
+  // left
+  &-left &-item {
+    &-tail {
+      left:(@timeline-item-header-size - @timeline-item-tail-size) / 2;
+    }
+
+    &-header { 
+      left:0;
+    }
+    &-header-custom {
+      left:@timeline-item-header-size / 2;
+      transform:translate(-50%,-50%);
+    }
+
+    &-body {
+      padding-left:@timeline-item-body-padding;
+      text-align:left;
+    }
+  }
+
+  // right
+  &-right &-item {
+    &-tail {
+      right:(@timeline-item-header-size - @timeline-item-tail-size) / 2;
+    }
+
+    &-header {
+      right:0;
+    }
+    &-header-custom {
+      right:@timeline-item-header-size / 2;
+      transform:translate(50%,-50%);
+    }
+
+    &-body {
+      padding-right:@timeline-item-body-padding;
+      text-align:right;
+    }
+  }
+
+  // alternate
+  &-alternate &-item:nth-of-type(odd) &-item-tail {
+    left:50%;
+    transform:translate(-50%,0);
+  }
+
+  &-alternate &-item:nth-of-type(odd) &-item-header {
+    left:50%;
+    transform:translate(-50%,0);
+  }
+  &-alternate &-item:nth-of-type(odd) &-item-header-custom {
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  &-alternate &-item:nth-of-type(odd) &-item-body {
+    margin-left:50%;
+    padding-left:@timeline-item-body-padding - (@timeline-item-header-size / 2);
+    text-align:left;
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-tail {
+    right:50%;
+    transform:translate(50%,0);
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-header {
+    right:50%;
+    transform:translate(50%,0);
+  }
+  &-alternate &-item:nth-of-type(even) &-item-header-custom {
+    right:50%;
+    transform:translate(50%,-50%);
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-body {
+    margin-right:50%;
+    padding-right:@timeline-item-body-padding - (@timeline-item-header-size / 2);
+    text-align:right;
+  }
+
+  // pending
+  &-pending &-item:nth-last-of-type(2) {
+    padding-bottom:@timeline-item-padding-bottom * 2;
+  }
+  &-pending &-item:nth-last-of-type(2) &-item-tail {
+    background:linear-gradient(to bottom, @timeline-item-tail-color, @timeline-item-tail-color 3px, transparent 3px, transparent);
+    background-size:100% 8px;
+  }
+}

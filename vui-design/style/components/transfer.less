@@ -1,0 +1,144 @@
+@vui-transfer: ~"@{vui}-transfer";
+
+.@{vui-transfer} {
+	display:flex;
+	align-items:center;
+	box-sizing:border-box;
+	color:@transfer-font-color;
+	font-size:@transfer-font-size;
+	line-height:@transfer-line-height;
+
+	&-panel {
+		display:flex;
+		flex-direction:column;
+		box-sizing:border-box;
+		width:@transfer-panel-width;
+		height:@transfer-panel-height;
+		border:1px solid @transfer-panel-border-color;
+		border-radius:@transfer-panel-border-radius;
+		transition:border-color @transition-duration @transition-timing-function;
+
+		&-with-search {
+			height:@transfer-panel-with-search-height;
+		}
+
+		&-header {
+			display:flex;
+			align-items:center;
+			box-sizing:border-box;
+			border-bottom:1px solid @transfer-panel-header-border-color;
+			background-color: @transfer-panel-header-background-color;
+			padding:@transfer-panel-header-padding;
+
+			&-checkbox {
+				display:block;
+				box-sizing:border-box;
+				margin-right:@padding-xs;
+
+				label {
+					display:block;
+				}
+			}
+
+			&-title {
+				flex:1;
+				display:block;
+				box-sizing:border-box;
+				.writeEllipsis;
+			}
+
+			&-selection {
+				display:block;
+				box-sizing:border-box;
+				margin-left:@padding-xs;
+			}
+		}
+
+		&-search {
+			display:block;
+			box-sizing:border-box;
+			border-bottom:1px solid @transfer-panel-search-border-color;
+			padding:@transfer-panel-search-padding;
+		}
+
+		&-body {
+			flex:auto;
+			display:block;
+			box-sizing:border-box;
+			overflow:auto;
+
+			&-menu {
+				flex:auto;
+				display:block;
+				box-sizing:border-box;
+
+				&-item {
+					cursor:pointer;
+					display:flex;
+					flex-flow:row nowrap;
+					justify-content:flex-start;
+					align-items:center;
+					height:@transfer-panel-body-menu-item-height;
+					padding:@transfer-panel-body-menu-item-padding;
+					transition:all @transition-duration @transition-timing-function;
+
+					&:hover {
+						background-color:@transfer-panel-body-menu-item-hover-background-color;
+					}
+
+					&-checked {
+						background-color:@transfer-panel-body-menu-item-checked-background-color;
+
+						&:hover {
+							background-color:@transfer-panel-body-menu-item-checked-hover-background-color;
+						}
+					}
+
+					&-disabled {
+						cursor:not-allowed;
+						background-color:@transfer-panel-body-menu-item-disabled-background-color;
+
+						&:hover {
+							background-color:@transfer-panel-body-menu-item-disabled-hover-background-color;
+						}
+					}
+				}
+			}
+
+			&-empty {
+				display:flex;
+				justify-content:center;
+				align-items:center;
+				box-sizing:border-box;
+				height:100%;
+			}
+		}
+
+		&-footer {
+			display:block;
+			box-sizing:border-box;
+			border-top:1px solid @transfer-panel-footer-border-color;
+			padding:@transfer-panel-footer-padding;
+		}
+	}
+
+	&-operation {
+		display:flex;
+		flex-direction:column;
+		box-sizing:border-box;
+		margin:@transfer-operation-margin;
+
+		&-button {
+			display:block;
+			width:100%;
+
+			i {
+				transform:scale(0.85);
+			}
+		}
+
+		&-button + &-button {
+			margin-top:@transfer-operation-button-margin-top;
+		}
+	}
+}

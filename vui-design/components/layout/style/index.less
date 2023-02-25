@@ -1,0 +1,129 @@
+@import "./token.less";
+
+.@{vui-layout} {
+  flex:auto;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  background-color:@layout-background-color;
+
+  &-header {
+    flex:0 0 auto;
+    display:block;
+    height:@layout-header-height;
+    padding:@layout-header-padding;
+    line-height:@layout-header-height;
+
+    &-light {
+      background-color:@layout-header-light-background-color;
+    }
+
+    &-dark {
+      background-color:@layout-header-dark-background-color;
+    }
+  }
+
+  &-sider {
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:stretch;
+    min-width:0;
+    transition:all @transition-duration @transition-timing-function;
+
+    & &-body {
+      flex:1;
+      display:block;
+      height:100%;
+      overflow:hidden;
+    }
+    & &-body-scroller {
+      display:block;
+      height:100%;
+      overflow-x:hidden;
+      overflow-y:auto;
+    }
+
+    & &-footer {
+      cursor:pointer;
+      display:block;
+      width:100%;
+      border-top:1px solid transparent;
+      transition:all @transition-duration @transition-timing-function;
+    }
+
+    & &-trigger {
+      cursor:pointer;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      height:@layout-sider-trigger-height;
+      border-top:1px solid transparent;
+      font-size:@layout-sider-trigger-font-size;
+      transition:all @transition-duration @transition-timing-function;
+    }
+
+    &-light {
+      background-color:@layout-sider-light-background-color;
+    }
+    &-light &-footer {
+      border-top-color:@layout-sider-footer-light-border-color;
+      background-color:@layout-sider-light-background-color;
+    }
+    &-light &-trigger {
+      border-top-color:@layout-sider-trigger-light-border-color;
+      background-color:@layout-sider-light-background-color;
+      color:@layout-sider-trigger-light-font-color;
+    }
+    &-light &-trigger:hover {
+      color:@layout-sider-trigger-light-hover-font-color;
+    }
+    &-light &-trigger:active {
+      color:@layout-sider-trigger-light-active-font-color;
+    }
+
+    &-dark {
+      background-color:@layout-sider-dark-background-color;
+    }
+    &-dark &-footer {
+      border-top-color:@layout-sider-footer-dark-border-color;
+      background-color:@layout-sider-dark-background-color;
+    }
+    &-dark &-trigger {
+      border-top-color:@layout-sider-trigger-dark-border-color;
+      background-color:@layout-sider-dark-background-color;
+      color:@layout-sider-trigger-dark-font-color;
+    }
+    &-dark &-trigger:hover {
+      color:@layout-sider-trigger-dark-hover-font-color;
+    }
+    &-dark &-trigger:active {
+      color:@layout-sider-trigger-dark-active-font-color;
+    }
+  }
+
+  &-content {
+    flex:auto;
+    display:block;
+    min-height:0;
+  }
+
+  &-footer {
+    flex:0 0 auto;
+    display:block;
+    padding:@layout-footer-padding;
+    color:@layout-footer-font-color;
+    font-size:@layout-footer-font-size;
+    line-height:@layout-footer-line-height;
+  }
+
+  &-with-sider {
+    flex-direction:row;
+  }
+  &-with-sider &,
+  &-with-sider &-content {
+    overflow-x:hidden;
+  }
+}

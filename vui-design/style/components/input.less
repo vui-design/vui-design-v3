@@ -1,0 +1,285 @@
+@vui-input: ~"@{vui}-input";
+
+.@{vui-input} {
+  display:inline-table;
+  box-sizing:border-box;
+  border-collapse:separate;
+  border-spacing:0;
+  width:100%;
+  vertical-align:middle;
+  line-height:normal;
+
+  &-prepend,
+  &-append {
+    display:table-cell;
+    box-sizing:border-box;
+    width:0;
+    border:1px solid @input-border-color;
+    background-color:@input-addon-background-color;
+    vertical-align:middle;
+    color:@input-font-color;
+    font-family:@input-font-family;
+    margin:0;
+    text-align:center;
+    line-height:normal;
+    white-space:nowrap;
+    transition:all @transition-duration @transition-timing-function;
+  }
+
+  &-prepend {
+    border-right-width:0;
+    border-top-left-radius:@input-border-radius;
+    border-bottom-left-radius:@input-border-radius;
+  }
+
+  &-append {
+    border-left-width:0;
+    border-top-right-radius:@input-border-radius;
+    border-bottom-right-radius:@input-border-radius;
+  }
+
+  &-prefix,
+  &-suffix {
+    position:absolute;
+    top:50%;
+    z-index:3;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    color:@input-affix-color;
+    line-height:1;
+    transform:translate(0, -50%);
+    transition:all @transition-duration @transition-timing-function;
+
+    i,
+    svg {
+      display:block;
+    }
+  }
+
+  &-input {
+    position:relative;
+    display:table-cell;
+    box-sizing:border-box;
+    width:100%;
+
+    input {
+      appearance:none;
+      outline:none;
+      display:block;
+      box-sizing:border-box;
+      width:100%;
+      border-style:solid;
+      border-color:@input-border-color;
+      border-radius:@input-border-radius;
+      background-color:@input-background-color;
+      margin:0;
+      color:@input-font-color;
+      font-family:@input-font-family;
+      transition:all @transition-duration @transition-timing-function;
+    }
+
+    &:not(:first-child) input {
+      border-top-left-radius:0;
+      border-bottom-left-radius:0;
+    }
+    &:not(:last-child) input {
+      border-top-right-radius:0;
+      border-bottom-right-radius:0;
+    }
+  }
+
+  &-btn-clear,
+  &-btn-toggle {
+    cursor:pointer;
+    color:@input-btn-clear-color;
+    transition:all @transition-duration @transition-timing-function;
+
+    &:hover {
+      color:@input-btn-clear-hover-color;
+    }
+  }
+
+  &-btn-clear {
+    color:@input-btn-clear-color;
+
+    &:hover {
+      color:@input-btn-clear-hover-color;
+    }
+  }
+
+  &-btn-toggle {
+    color:@input-btn-toggle-color;
+
+    &:hover {
+      color:@input-btn-toggle-hover-color;
+    }
+  }
+
+  &-small &-prepend,
+  &-small &-append {
+    height:@input-size-sm;
+    padding:0 @input-padding-sm;
+    font-size:@input-font-size-sm;
+  }
+  &-small &-prefix,
+  &-small &-suffix {
+    font-size:@input-font-size-sm;
+  }
+  &-small &-prefix {
+    left:@input-padding-sm;
+  }
+  &-small &-suffix {
+    right:@input-padding-sm;
+  }
+  &-small &-input {
+    input {
+      border-width:0;
+      height:@input-size-sm;
+      padding:0 @input-padding-sm;
+      font-size:@input-font-size-sm;
+      line-height:@input-size-sm;
+    }
+  }
+  &-with-prefix&-small &-input {
+    input {
+      padding-left:@input-padding-sm * 2 + @input-font-size-sm;
+    }
+  }
+  &-with-suffix&-small &-input {
+    input {
+      padding-right:@input-padding-sm * 2 + @input-font-size-sm;
+    }
+  }
+  &-bordered&-small &-prefix {
+    left:@input-padding-sm + 1px;
+  }
+  &-bordered&-small &-suffix {
+    right:@input-padding-sm + 1px;
+  }
+  &-bordered&-small &-input {
+    input {
+      border-width:1px;
+    }
+  }
+
+  &-medium &-prepend,
+  &-medium &-append {
+    height:@input-size-md;
+    padding:0 @input-padding-md;
+    font-size:@input-font-size-md;
+  }
+  &-medium &-prefix,
+  &-medium &-suffix {
+    font-size:@input-font-size-md;
+  }
+  &-medium &-prefix {
+    left:@input-padding-md;
+  }
+  &-medium &-suffix {
+    right:@input-padding-md;
+  }
+  &-medium &-input {
+    input {
+      border-width:0;
+      height:@input-size-md;
+      padding:0 @input-padding-md;
+      font-size:@input-font-size-md;
+      line-height:@input-size-md;
+    }
+  }
+  &-with-prefix&-medium &-input {
+    input {
+      padding-left:@input-padding-md * 2 + @input-font-size-md;
+    }
+  }
+  &-with-suffix&-medium &-input {
+    input {
+      padding-right:@input-padding-md * 2 + @input-font-size-md;
+    }
+  }
+  &-bordered&-medium &-prefix {
+    left:@input-padding-md + 1px;
+  }
+  &-bordered&-medium &-suffix {
+    right:@input-padding-md + 1px;
+  }
+  &-bordered&-medium &-input {
+    input {
+      border-width:1px;
+    }
+  }
+
+  &-large &-prepend,
+  &-large &-append {
+    height:@input-size-lg;
+    padding:0 @input-padding-lg;
+    font-size:@input-font-size-lg;
+  }
+  &-large &-prefix,
+  &-large &-suffix {
+    font-size:@input-font-size-lg;
+  }
+  &-large &-prefix {
+    left:@input-padding-lg;
+  }
+  &-large &-suffix {
+    right:@input-padding-lg;
+  }
+  &-large &-input {
+    input {
+      border-width:0;
+      height:@input-size-lg;
+      padding:0 @input-padding-lg;
+      font-size:@input-font-size-lg;
+      line-height:@input-size-lg;
+    }
+  }
+  &-with-prefix&-large &-input {
+    input {
+      padding-left:@input-padding-lg * 2 + @input-font-size-lg;
+    }
+  }
+  &-with-suffix&-large &-input {
+    input {
+      padding-right:@input-padding-lg * 2 + @input-font-size-lg;
+    }
+  }
+  &-bordered&-large &-prefix {
+    left:@input-padding-lg + 1px;
+  }
+  &-bordered&-large &-suffix {
+    right:@input-padding-lg + 1px;
+  }
+  &-bordered&-large &-input {
+    input {
+      border-width:1px;
+    }
+  }
+
+  &-hovered &-input {
+    z-index:1;
+
+    input {
+      border-color:@input-hover-border-color;
+    }
+  }
+
+  &-focused &-input {
+    z-index:2;
+
+    input {
+      border-color:@input-focus-border-color;
+    }
+  }
+
+  &-disabled &-input {
+    input {
+      cursor:not-allowed;
+      border-color:@input-disabled-border-color;
+      background-color:@input-disabled-background-color;
+      color:@input-disabled-font-color;
+    }
+  }
+}

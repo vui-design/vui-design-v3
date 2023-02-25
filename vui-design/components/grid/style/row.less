@@ -1,0 +1,37 @@
+@import "./token.less";
+
+.@{vui-row} {
+  display:flex;
+  flex-flow:row wrap;
+  min-width:0;
+
+  &-justify-start {
+    justify-content:flex-start;
+  }
+  &-justify-center {
+    justify-content:center;
+  }
+  &-justify-end {
+    justify-content:flex-end;
+  }
+  &-justify-space-between {
+    justify-content:space-between;
+  }
+  &-justify-space-around {
+    justify-content:space-around;
+  }
+
+  &-align-top {
+    align-items:flex-start;
+  }
+  &-align-middle {
+    align-items:center;
+  }
+  &-align-bottom {
+    align-items:flex-end;
+  }
+
+  &-nowrap {
+    flex-wrap:nowrap;
+  }
+}

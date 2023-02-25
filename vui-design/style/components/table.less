@@ -1,0 +1,723 @@
+@vui-table: ~"@{vui}-table";
+
+.@{vui-table} {
+	& {
+		position:relative;
+		z-index:1;
+		display:block;
+		box-sizing:border-box;
+		width:100%;
+		line-height:@table-line-height;
+
+		&-bordered {
+			&:before,
+			&:after {
+				position:absolute;
+				top:0;
+				bottom:0;
+				left:0;
+				right:0;
+				z-index:3;
+				content:"";
+				display:block;
+				box-sizing:border-box;
+				border-radius:@table-border-radius;
+				pointer-events:none;
+			}
+
+			&:before {
+				border-top:1px solid @table-border-color;
+				border-bottom:1px solid @table-border-color;
+			}
+			&:after {
+				border-left:1px solid @table-border-color;
+				border-right:1px solid @table-border-color;
+			}
+		}
+	}
+
+	&-header {
+		position:relative;
+		display:block;
+		box-sizing:border-box;
+		border-bottom:1px solid @table-border-color;
+		background-color:@table-header-background-color;
+		overflow:hidden;
+
+		&-scrollbar {
+			display:block;
+			box-sizing:border-box;
+			width:100%;
+			height:100%;
+			overflow:hidden;
+
+			& > table {
+				table-layout:fixed;
+				min-width:100%;
+				border-collapse:separate;
+				border-spacing:0;
+
+				& > thead > tr > th {
+					position:relative;
+					box-sizing:border-box;
+					vertical-align:middle;
+					transition:background-color @transition-duration @transition-timing-function, padding @transition-duration @transition-timing-function;
+
+					.writeBreak;
+
+					&.@{vui-table}-column-fixed-left {
+						position:sticky;
+						z-index:1;
+						background:#fafafa;
+					}
+					&.@{vui-table}-column-fixed-left-last:after {
+						content:"";
+						position:absolute;
+						right:-6px;
+						top:0;
+						bottom:0;
+						display:block;
+						box-sizing:border-box;
+						width:6px;
+						background:linear-gradient(to right, rgba(0, 0, 0, 0.06) -40%, rgba(0, 0, 0, 0) 100%);
+						pointer-events:none;
+					}
+					&.@{vui-table}-column-fixed-right {
+						position:sticky;
+						z-index:1;
+						background:#fafafa;
+					}
+					&.@{vui-table}-column-fixed-right-first:after {
+						content:"";
+						position:absolute;
+						left:-6px;
+						top:0;
+						bottom:0;
+						display:block;
+						box-sizing:border-box;
+						width:6px;
+						background:linear-gradient(to left, rgba(0, 0, 0, 0.06) -40%, rgba(0, 0, 0, 0) 100%);
+						pointer-events:none;
+					}
+
+					&.@{vui-table}-column-align-left {
+						text-align:left;
+					}
+					&.@{vui-table}-column-align-center {
+						text-align:center;
+					}
+					&.@{vui-table}-column-align-right {
+						text-align:right;
+					}
+
+					&.@{vui-table}-column-with-expansion {
+
+					}
+
+					&.@{vui-table}-column-with-selection {
+
+					}
+
+					&.@{vui-table}-column-with-sorter {
+						cursor:pointer;
+						user-select:none;
+					}
+
+					&.@{vui-table}-column-with-filter {
+						padding-right:@table-filter-width !important;
+						user-select:none;
+					}
+
+					&.@{vui-table}-column-hidden {
+						visibility:hidden;
+					}
+				}
+			}
+		}
+	}
+
+	&-body {
+		position:relative;
+		display:block;
+		box-sizing:border-box;
+		background-color:@table-body-background-color;
+		overflow:hidden;
+
+		&-scrollbar {
+			display:block;
+			box-sizing:border-box;
+			width:100%;
+			height:100%;
+			overflow:hidden;
+
+			& > table {
+				table-layout:fixed;
+				min-width:100%;
+				border-collapse:separate;
+				border-spacing:0;
+
+				& > tbody > tr > td {
+					box-sizing:border-box;
+					border-bottom:1px solid @table-border-color;
+					vertical-align:middle;
+					transition:background-color @transition-duration @transition-timing-function, padding @transition-duration @transition-timing-function;
+
+					.writeBreak;
+
+					&.@{vui-table}-column-fixed-left {
+						position:sticky;
+						z-index:1;
+						background:#fff;
+					}
+					&.@{vui-table}-column-fixed-left-last:after {
+						content:"";
+						position:absolute;
+						right:-6px;
+						top:0;
+						bottom:0;
+						display:block;
+						box-sizing:border-box;
+						width:6px;
+						background:linear-gradient(to right, rgba(0, 0, 0, 0.06) -40%, rgba(0, 0, 0, 0) 100%);
+						pointer-events:none;
+					}
+					&.@{vui-table}-column-fixed-right {
+						position:sticky;
+						z-index:1;
+						background:#fff;
+					}
+					&.@{vui-table}-column-fixed-right-first:after {
+						content:"";
+						position:absolute;
+						left:-6px;
+						top:0;
+						bottom:0;
+						display:block;
+						box-sizing:border-box;
+						width:6px;
+						background:linear-gradient(to left, rgba(0, 0, 0, 0.06) -40%, rgba(0, 0, 0, 0) 100%);
+						pointer-events:none;
+					}
+
+					&.@{vui-table}-column-align-left {
+						text-align:left;
+					}
+					&.@{vui-table}-column-align-center {
+						text-align:center;
+					}
+					&.@{vui-table}-column-align-right {
+						text-align:right;
+					}
+
+					&.@{vui-table}-column-with-expansion {
+
+					}
+
+					&.@{vui-table}-column-with-selection {
+
+					}
+
+					&.@{vui-table}-column-with-sorter {
+
+					}
+
+					&.@{vui-table}-column-with-filter {
+
+					}
+
+					&.@{vui-table}-column-hidden {
+						visibility:hidden;
+					}
+				}
+			}
+		}
+	}
+
+	&-column-body {
+		display:flex;
+		align-items:center;
+		box-sizing:border-box;
+		width:100%;
+	}
+	&-column-align-left &-column-body {
+		justify-content:flex-start;
+	}
+	&-column-align-center &-column-body {
+		justify-content:center;
+	}
+	&-column-align-right &-column-body {
+		justify-content:flex-end;
+	}
+
+	&-column-extra {
+		position:absolute;
+		top:0;
+		bottom:0;
+		right:0;
+		display:block;
+		box-sizing:border-box;
+	}
+
+	&-column-title {
+		flex:1;
+		display:block;
+		box-sizing:border-box;
+		color:@table-font-primary-color;
+		font-weight:500;
+
+		.writeBreak;
+	}
+	&-column-ellipsis &-column-title {
+		.writeEllipsis;
+	}
+
+	&-column-content {
+		flex:1;
+		display:block;
+		box-sizing:border-box;
+
+		.writeBreak;
+	}
+	&-column-ellipsis &-column-content {
+		.writeEllipsis;
+	}
+
+	&-column-tooltip {
+		flex-shrink:0;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		box-sizing:border-box;
+		margin-left:8px;
+		color:@font-secondary-color;
+
+		.@{vui}-tooltip {
+			display:block;
+		}
+
+		.@{vui}-icon {
+			display:block;
+		}
+	}
+
+	&-column-sorter {
+		flex-shrink:0;
+		display:block;
+		box-sizing:border-box;
+		width:@table-sorter-caret-size * 2;
+		height:@table-sorter-caret-size * 2 + 2px;
+		margin-left:8px;
+
+		&-caret {
+			cursor:pointer;
+			display:block;
+			box-sizing:border-box;
+			width:0;
+			height:0;
+			border-width:@table-sorter-caret-size;
+			border-style:solid;
+			border-color:transparent;
+			border-top-color:currentColor;
+			border-bottom-color:currentColor;
+			color:@table-sorter-caret-color;
+			transition:color @transition-duration @transition-timing-function;
+
+			&:nth-child(1) {
+				border-top-width:0;
+				margin-bottom:2px;
+			}
+			&:nth-child(2) {
+				border-bottom-width:0;
+				margin-top:2px;
+			}
+
+			&.active {
+				color:@table-sorter-caret-active-color;
+			}
+		}
+	}
+
+	&-column-filter {
+		cursor:pointer;
+		display:block;
+		box-sizing:border-box;
+		width:@table-filter-width;
+		height:100%;
+
+		&-trigger {
+			position:relative;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			box-sizing:border-box;
+			width:100%;
+			height:100%;
+			background-color:@table-filter-trigger-background-color;
+			overflow:hidden;
+			color:@table-filter-trigger-color;
+			transition:background-color @transition-duration @transition-timing-function, color @transition-duration @transition-timing-function;
+
+			svg {
+				display:block;
+				box-sizing:border-box;
+				width:10px;
+				height:10px;
+				fill:currentColor;
+			}
+
+			&:hover {
+				background-color:@table-filter-trigger-hover-background-color;
+				color:@table-filter-trigger-hover-color;
+			}
+			&.open {
+				background-color:@table-filter-trigger-open-background-color;
+				color:@table-filter-trigger-open-color;
+			}
+			&.active {
+				color:@table-filter-trigger-active-color;
+			}
+		}
+
+		&-dropdown {
+			position:absolute;
+			top:0;
+			left:0;
+			display:block;
+			box-sizing:border-box;
+			min-width:@table-filter-dropdown-min-width;
+			border-radius:@table-filter-dropdown-border-radius;
+			background-color:@table-filter-dropdown-background-color;
+			box-shadow:@table-filter-dropdown-box-shadow;
+			margin:4px 0;
+			overflow:hidden;
+
+			&[data-placement^="top"] {
+				transform-origin:center bottom;
+			}
+			&[data-placement^="bottom"] {
+				transform-origin:center top;
+			}
+
+			&-body {
+				display:block;
+				box-sizing:border-box;
+				max-height:284px;
+				padding:4px 0;
+				overflow:auto;
+			}
+
+			&-footer {
+				display:flex;
+				justify-content:flex-end;
+				align-items:center;
+				box-sizing:border-box;
+				border-top:1px solid @table-filter-dropdown-footer-border-color;
+				padding:@table-filter-dropdown-footer-padding;
+
+				a {
+					cursor:pointer;
+					display:block;
+					box-sizing:border-box;
+					color:@table-filter-dropdown-footer-btn-color;
+					transition:color @transition-duration @transition-timing-function;
+
+					&:hover {
+						color:@table-filter-dropdown-footer-btn-hover-color;
+					}
+				}
+				a + a {
+					margin-left:8px;
+				}
+			}
+
+			.@{vui}-checkbox-group {
+				display:block;
+			}
+
+			.@{vui}-checkbox-group .@{vui}-checkbox {
+				display:flex;
+				height:34px;
+				margin:0;
+				padding:0 12px;
+				line-height:34px;
+				transition:background-color @transition-duration @transition-timing-function, color @transition-duration @transition-timing-function;
+			}
+			.@{vui}-checkbox-group .@{vui}-checkbox:hover {
+				background-color:#fafafa;
+			}
+			.@{vui}-checkbox-group .@{vui}-checkbox.@{vui}-checkbox-checked {
+				background-color:#e6f7ff;
+				color:#2d8cf0;
+			}
+			.@{vui}-checkbox-group .@{vui}-checkbox + .@{vui}-checkbox {
+				margin:0;
+			}
+
+			.@{vui}-radio-group {
+				display:block;
+			}
+
+			.@{vui}-radio-group .@{vui}-radio {
+				display:flex;
+				height:34px;
+				margin:0;
+				padding:0 12px;
+				line-height:34px;
+				transition:background-color @transition-duration @transition-timing-function, color @transition-duration @transition-timing-function;
+			}
+			.@{vui}-radio-group .@{vui}-radio:hover {
+				background-color:#fafafa;
+			}
+			.@{vui}-radio-group .@{vui}-radio.@{vui}-radio-checked {
+				background-color:#e6f7ff;
+				color:#2d8cf0;
+			}
+			.@{vui}-radio-group .@{vui}-radio + .vui-radio {
+				margin:0;
+			}
+
+			&-slide-enter-active {
+				animation:vuiTableColumnFilterDropdownSlideIn @animation-in-duration @animation-in-timing-function both;
+			}
+			&-slide-leave-active {
+				animation:vuiTableColumnFilterDropdownSlideOut @animation-out-duration @animation-out-timing-function both;
+			}
+		}
+	}
+
+	&-column-switch {
+		position:relative;
+		cursor:pointer;
+		display:block;
+		box-sizing:border-box;
+		width:@table-switch-size;
+		height:@table-switch-size;
+		border:1px solid @table-switch-border-color;
+		border-radius:@table-switch-border-radius;
+		background-color:@table-switch-background-color;
+		margin-right:8px;
+		color:@table-switch-color;
+		user-select:none;
+		outline:none;
+		transition:border-color @transition-duration @transition-timing-function, color @transition-duration @transition-timing-function;
+
+		&:before,
+		&:after {
+			content:"";
+			position:absolute;
+			display:block;
+			box-sizing:border-box;
+			background-color:currentColor;
+			transition:transform @transition-duration @transition-timing-function;
+		}
+
+		&:before {
+			top:7px;
+			left:3px;
+			right:3px;
+			height:1px;
+			transform:rotate(-180deg);
+		}
+		&:after {
+			left:7px;
+			top:3px;
+			bottom:3px;
+			width:1px;
+			transform:rotate(0deg);
+		}
+
+		&:hover {
+			border-color:@table-switch-hover-border-color;
+			color:@table-switch-hover-color;
+		}
+		&:hover:before {
+
+		}
+		&:hover:after {
+
+		}
+
+		&:active {
+			border-color:@table-switch-active-border-color;
+			color:@table-switch-active-color;
+		}
+		&:active:before {
+
+		}
+		&:active:after {
+
+		}
+
+		&.active {
+
+		}
+		&.active:before {
+			transform:rotate(0deg);
+		}
+		&.active:after {
+			transform:rotate(90deg);
+		}
+	}
+
+	&-column-expansion {
+		position:relative;
+		cursor:pointer;
+		display:block;
+		box-sizing:border-box;
+		width:@table-expansion-size;
+		height:@table-expansion-size;
+		border:1px solid @table-expansion-border-color;
+		border-radius:@table-expansion-border-radius;
+		background-color:@table-expansion-background-color;
+		color:@table-expansion-color;
+		user-select:none;
+		outline:none;
+		transition:border-color @transition-duration @transition-timing-function, color @transition-duration @transition-timing-function;
+
+		&:before,
+		&:after {
+			content:"";
+			position:absolute;
+			display:block;
+			box-sizing:border-box;
+			background-color:currentColor;
+			transition:transform @transition-duration @transition-timing-function;
+		}
+
+		&:before {
+			top:7px;
+			left:3px;
+			right:3px;
+			height:1px;
+			transform:rotate(-180deg);
+		}
+		&:after {
+			left:7px;
+			top:3px;
+			bottom:3px;
+			width:1px;
+			transform:rotate(0deg);
+		}
+
+		&:hover {
+			border-color:@table-expansion-hover-border-color;
+			color:@table-expansion-hover-color;
+		}
+		&:hover:before {
+
+		}
+		&:hover:after {
+
+		}
+
+		&:active {
+			border-color:@table-expansion-active-border-color;
+			color:@table-expansion-active-color;
+		}
+		&:active:before {
+
+		}
+		&:active:after {
+
+		}
+
+		&.active {
+
+		}
+		&.active:before {
+			transform:rotate(0deg);
+		}
+		&.active:after {
+			transform:rotate(90deg);
+		}
+	}
+
+	&-column-selection {
+
+	}
+
+	/* table size */
+	&-small > &-header > &-header-scrollbar > table > thead > tr > th,
+	&-small > &-body > &-body-scrollbar > table > tbody > tr > td {
+		padding:@table-cell-padding-sm;
+	}
+
+	&-medium > &-header > &-header-scrollbar > table > thead > tr > th,
+	&-medium > &-body > &-body-scrollbar > table > tbody > tr > td {
+		padding:@table-cell-padding-md;
+	}
+
+	&-large > &-header > &-header-scrollbar > table > thead > tr > th,
+	&-large > &-body > &-body-scrollbar > table > tbody > tr > td {
+		padding:@table-cell-padding-lg;
+	}
+
+	/* table bordered */
+	&-bordered > &-header {
+		border-bottom:none;
+	}
+	&-bordered > &-header > &-header-scrollbar > table > thead > tr > th,
+	&-bordered > &-body > &-body-scrollbar > table > tbody > tr > td {
+		border-right:1px solid @table-border-color;
+		border-bottom:1px solid @table-border-color;
+	}
+
+	/* table row color */
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row > td {
+
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-even > td {
+		background-color:@table-row-even-background-color;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-odd > td {
+		background-color:@table-row-odd-background-color;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-strikeout > td {
+		text-decoration:line-through;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-weaken > td {
+		opacity:0.4;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-error > td {
+		color:@error-color;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-selected > td {
+		border-color:rgba(0,0,0,0.04);
+		background-color:@table-row-selected-background-color;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr:hover > td {
+		background-color:@table-row-hover-background-color;
+	}
+
+	& > &-body > &-body-scrollbar > table > tbody > tr.@{vui}-table-row-selected:hover > td {
+		background-color:darken(@table-row-selected-background-color, 2%)
+	}
+}
+
+@keyframes vuiTableColumnFilterDropdownSlideIn {
+	0% {
+		opacity:0;
+		transform:scaleY(0.8);
+	}
+	100% {
+		opacity:1;
+		transform:scaleY(1);
+	}
+}
+@keyframes vuiTableColumnFilterDropdownSlideOut {
+	0% {
+		opacity:1;
+		transform:scaleY(1);
+	}
+	100% {
+		opacity:0;
+		transform:scaleY(0.8);
+	}
+}

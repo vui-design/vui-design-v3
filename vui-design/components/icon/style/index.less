@@ -1,0 +1,39 @@
+@import "./token.less";
+
+@keyframes vuiIconSpin {
+  0% { transform:rotate(0deg); }
+  50% { transform:rotate(180deg); }
+  100% { transform:rotate(360deg); }
+}
+
+.@{vui-icon} {
+  display:inline-block;
+  vertical-align:-0.125em;
+  color:inherit;
+  font-size:inherit;
+  font-style:normal;
+  font-weight:normal;
+  text-align:center;
+  text-decoration:inherit;
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant:normal;
+  text-transform:none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height:0;
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+
+  & svg {
+    width:1em;
+    height:1em;
+    fill:currentColor;
+  }
+
+  &-loading,
+  &-loading-filled,
+  &-loading-spinner,
+  &-loading-spinner-filled {
+    animation:vuiIconSpin 1s infinite linear;
+  }
+}

@@ -1,0 +1,27 @@
+@vui-loading: ~"@{vui}-loading";
+
+@keyframes vuiLoadingSpinner {
+	0% { transform:rotate(0deg); }
+	50% { transform:rotate(180deg); }
+	100% { transform:rotate(360deg); }
+}
+
+.@{vui-loading} {
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	z-index:2000;
+	display:block;
+	box-sizing:border-box;
+	width:100%;
+	height:@loading-bar-size;
+
+	&-bar {
+		display:block;
+		box-sizing:border-box;
+		width:0;
+		height:@loading-bar-size;
+		background-color:@loading-bar-color;
+	}
+}

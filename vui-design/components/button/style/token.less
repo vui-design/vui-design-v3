@@ -1,0 +1,120 @@
+@vui-button: ~"@{vui}-button";
+
+@button-border-width: @border-width;
+@button-border-radius: @border-radius;
+
+@button-size-sm: @height-sm;
+@button-size-md: @height-md;
+@button-size-lg: @height-lg;
+
+@button-padding-size-sm: @padding-xs;
+@button-padding-size-md: @padding-sm;
+@button-padding-size-lg: @padding-md;
+
+@button-font-size-sm: @font-size-sm;
+@button-font-size-md: @font-size;
+@button-font-size-lg: @font-size-lg;
+
+@button-default-border-color: @border-color;
+@button-default-background-color: @component-background-color;
+@button-default-font-color: @font-color;
+@button-default-hover-border-color: tint(@primary-color, 10%);
+@button-default-hover-background-color: @component-background-color;
+@button-default-hover-font-color: tint(@primary-color, 10%);
+@button-default-active-border-color: shade(@primary-color, 10%);
+@button-default-active-background-color: @component-background-color;
+@button-default-active-font-color: shade(@primary-color, 10%);
+@button-default-disabled-border-color: @border-color;
+@button-default-disabled-background-color: shade(@component-background-color, 2%);
+@button-default-disabled-font-color: @font-disabled-color;
+
+@button-primary-border-color: @primary-color;
+@button-primary-background-color: @primary-color;
+@button-primary-font-color: @font-reverse-color;
+@button-primary-hover-border-color: tint(@primary-color, 10%);
+@button-primary-hover-background-color: tint(@primary-color, 10%);
+@button-primary-hover-font-color: @font-reverse-color;
+@button-primary-active-border-color: shade(@primary-color, 10%);
+@button-primary-active-background-color: shade(@primary-color, 10%);
+@button-primary-active-font-color: @font-reverse-color;
+@button-primary-disabled-border-color: @border-color;
+@button-primary-disabled-background-color: shade(@component-background-color, 2%);
+@button-primary-disabled-font-color: @font-disabled-color;
+
+@button-info-border-color: @info-color;
+@button-info-background-color: @info-color;
+@button-info-font-color: @font-reverse-color;
+@button-info-hover-border-color: tint(@info-color, 10%);
+@button-info-hover-background-color: tint(@info-color, 10%);
+@button-info-hover-font-color: @font-reverse-color;
+@button-info-active-border-color: shade(@info-color, 10%);
+@button-info-active-background-color: shade(@info-color, 10%);
+@button-info-active-font-color: @font-reverse-color;
+@button-info-disabled-border-color: @border-color;
+@button-info-disabled-background-color: shade(@component-background-color, 2%);
+@button-info-disabled-font-color: @font-disabled-color;
+
+@button-warning-border-color: @warning-color;
+@button-warning-background-color: @warning-color;
+@button-warning-font-color: @font-reverse-color;
+@button-warning-hover-border-color: tint(@warning-color, 10%);
+@button-warning-hover-background-color: tint(@warning-color, 10%);
+@button-warning-hover-font-color: @font-reverse-color;
+@button-warning-active-border-color: shade(@warning-color, 10%);
+@button-warning-active-background-color: shade(@warning-color, 10%);
+@button-warning-active-font-color: @font-reverse-color;
+@button-warning-disabled-border-color: @border-color;
+@button-warning-disabled-background-color: shade(@component-background-color, 2%);
+@button-warning-disabled-font-color: @font-disabled-color;
+
+@button-success-border-color: @success-color;
+@button-success-background-color: @success-color;
+@button-success-font-color: @font-reverse-color;
+@button-success-hover-border-color: tint(@success-color, 10%);
+@button-success-hover-background-color: tint(@success-color, 10%);
+@button-success-hover-font-color: @font-reverse-color;
+@button-success-active-border-color: shade(@success-color, 10%);
+@button-success-active-background-color: shade(@success-color, 10%);
+@button-success-active-font-color: @font-reverse-color;
+@button-success-disabled-border-color: @border-color;
+@button-success-disabled-background-color: shade(@component-background-color, 2%);
+@button-success-disabled-font-color: @font-disabled-color;
+
+@button-danger-border-color: @error-color;
+@button-danger-background-color: @error-color;
+@button-danger-font-color: @font-reverse-color;
+@button-danger-hover-border-color: tint(@error-color, 10%);
+@button-danger-hover-background-color: tint(@error-color, 10%);
+@button-danger-hover-font-color: @font-reverse-color;
+@button-danger-active-border-color: shade(@error-color, 10%);
+@button-danger-active-background-color: shade(@error-color, 10%);
+@button-danger-active-font-color: @font-reverse-color;
+@button-danger-disabled-border-color: @border-color;
+@button-danger-disabled-background-color: shade(@component-background-color, 2%);
+@button-danger-disabled-font-color: @font-disabled-color;
+
+@button-dashed-border-color: @border-color;
+@button-dashed-background-color: @component-background-color;
+@button-dashed-font-color: @font-color;
+@button-dashed-hover-border-color: tint(@primary-color, 10%);
+@button-dashed-hover-background-color: @component-background-color;
+@button-dashed-hover-font-color: tint(@primary-color, 10%);
+@button-dashed-active-border-color: shade(@primary-color, 10%);
+@button-dashed-active-background-color: @component-background-color;
+@button-dashed-active-font-color: shade(@primary-color, 10%);
+@button-dashed-disabled-border-color: @border-color;
+@button-dashed-disabled-background-color: shade(@component-background-color, 2%);
+@button-dashed-disabled-font-color: @font-disabled-color;
+
+@button-text-border-color: transparent;
+@button-text-background-color: transparent;
+@button-text-font-color: @font-color;
+@button-text-hover-border-color: transparent;
+@button-text-hover-background-color: transparent;
+@button-text-hover-font-color: tint(@primary-color, 10%);
+@button-text-active-border-color: transparent;
+@button-text-active-background-color: transparent;
+@button-text-active-font-color: shade(@primary-color, 10%);
+@button-text-disabled-border-color: transparent;
+@button-text-disabled-background-color: transparent;
+@button-text-disabled-font-color: @font-disabled-color;

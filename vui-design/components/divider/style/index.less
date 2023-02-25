@@ -1,0 +1,139 @@
+@import "./token.less";
+
+.@{vui-divider} {
+  display:block;
+  border-color:@divider-color;
+  margin:0;
+  padding:0;
+
+  &-solid {
+    border-style:solid;
+  }
+  &-dashed {
+    border-style:dashed;
+  }
+  &-dotted {
+    border-style:dotted;
+  }
+  &-double {
+    border-style:double;
+  }
+
+  &-horizontal {
+    clear:both;
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:0;
+    margin:@divider-horizontal-gutter 0;
+  }
+  &-solid&-horizontal {
+    border-width:1px 0 0 0;
+  }
+  &-dashed&-horizontal {
+    border-width:1px 0 0 0;
+  }
+  &-dotted&-horizontal {
+    border-width:1px 0 0 0;
+  }
+  &-double&-horizontal {
+    border-width:3px 0 0 0;
+  }
+
+  &-vertical {
+    position:relative;
+    top:-0.06em;
+    display:inline-block;
+    width:0;
+    height:0.9em;
+    margin:0 @divider-vertical-gutter;
+    vertical-align:middle;
+  }
+  &-solid&-vertical {
+    border-width:0 0 0 1px;
+  }
+  &-dashed&-vertical {
+    border-width:0 0 0 1px;
+  }
+  &-dotted&-vertical {
+    border-width:0 0 0 1px;
+  }
+  &-double&-vertical {
+    border-width:0 0 0 3px;
+  }
+
+  &-with-text {
+    display:flex;
+    align-items:center;
+    height:auto;
+    border-top:none;
+
+    &:before, &:after {
+      content:"";
+      display:block;
+      height:0;
+      border-color:@divider-color;
+    }
+  }
+  &-solid&-with-text {
+    &:before, &:after {
+      border-top-width:1px;
+      border-top-style:solid;
+    }
+  }
+  &-dashed&-with-text {
+    &:before, &:after {
+      border-top-width:1px;
+      border-top-style:dashed;
+    }
+  }
+  &-dotted&-with-text {
+    &:before, &:after {
+      border-top-width:1px;
+      border-top-style:dotted;
+    }
+  }
+  &-double&-with-text {
+    &:before, &:after {
+      border-top-width:3px;
+      border-top-style:double;
+    }
+  }
+
+  &-with-text-left {
+    &:before {
+      width:5%;
+    }
+    &:after {
+      width:95%;
+    }
+  }
+  &-with-text-center {
+    &:before {
+      width:50%;
+    }
+    &:after {
+      width:50%;
+    }
+  }
+  &-with-text-right {
+    &:before {
+      width:95%;
+    }
+    &:after {
+      width:5%;
+    }
+  }
+
+  &-text {
+    display:block;
+    margin:0;
+    padding:0 1em;
+    color:@divider-text-font-color;
+    font-size:@divider-text-font-size;
+    font-style:normal;
+    white-space:nowrap;
+    text-align:center;
+    line-height:1;
+  }
+}
