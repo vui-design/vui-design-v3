@@ -363,16 +363,16 @@ export default [
 	// 			},
 	// 			component: () => import("src/views/upload/index.vue")
 	// 		},
-	// 		// 数据展示组件
-	// 		{
-	// 			path: "/components/avatar",
-	// 			name: "avatar",
-	// 			meta: {
-	// 				title: "Avatar",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/avatar/index.vue")
-	// 		},
+			// 数据展示组件
+			{
+				path: "/components/avatar",
+				name: "avatar",
+				meta: {
+					title: "Avatar",
+					group: "data-display"
+				},
+				component: () => import("src/views/avatar/index.vue")
+			},
 	// 		{
 	// 			path: "/components/badge",
 	// 			name: "badge",

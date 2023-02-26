@@ -15,7 +15,7 @@ export const createProps = () => {
     // 链接类型
     type: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "default"
     },
     // 链接是否为块级元素
@@ -26,7 +26,7 @@ export const createProps = () => {
     // 链接尺寸
     size: {
       type: String as PropType<Size>,
-      validator: (size: string) => sizes.includes(size),
+      validator: (size: Size) => sizes.includes(size),
       default: "medium"
     },
     // 链接图标类型

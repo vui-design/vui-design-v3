@@ -19,13 +19,13 @@ export const createProps = () => {
     // Flex 布局下的水平排列方式
     justify: {
       type: String as PropType<Justify>,
-      validator: (justify: string) => justifys.includes(justify),
+      validator: (justify: Justify) => justifys.includes(justify),
       default: "start"
     },
     // Flex 布局下的垂直对齐方式
     align: {
       type: String as PropType<Align>,
-      validator: (align: string) => aligns.includes(align),
+      validator: (align: Align) => aligns.includes(align),
       default: "top"
     },
     // 栅格间隔
@@ -52,12 +52,12 @@ export default defineComponent({
 
     // 
     const screens = ref<Screens>({
-      xs: true,
-      sm: true,
-      md: true,
-      lg: true,
+      xxl: true,
       xl: true,
-      xxl: true
+      lg: true,
+      md: true,
+      sm: true,
+      xs: true
     });
 
     // 间隔
@@ -68,7 +68,7 @@ export default defineComponent({
 
       normalizedGutter.forEach((g, index) => {
         if (is.object(g)) {
-          for (let i = breakpoints.length - 1; i >=0; i--) {
+          for (let i = 0; i < breakpoints.length; i++) {
             const breakpoint: Breakpoint = breakpoints[i];
 
             if (screens.value[breakpoint] && g[breakpoint] !== undefined) {

@@ -64,8 +64,7 @@ import Transfer from "./components/transfer";
 import CascadeTransfer from "./components/cascade-transfer";
 import Upload from "./components/upload";
 // Data Display
-import Avatar from "./components/avatar";
-import AvatarGroup from "./components/avatar-group";
+import Avatar, { AvatarGroup } from "./components/avatar";
 import Badge from "./components/badge";
 import Card from "./components/card";
 import CardGrid from "./components/card-grid";

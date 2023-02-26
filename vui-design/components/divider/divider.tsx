@@ -16,19 +16,19 @@ export const createProps = () => {
     // 分割线类型
     type: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "solid"
     },
     // 分割线的方向
     direction: {
       type: String as PropType<Direction>,
-      validator: (direction: string) => directions.includes(direction),
+      validator: (direction: Direction) => directions.includes(direction),
       default: "horizontal"
     },
     // 分割线文本的位置
     orientation: {
       type: String as PropType<Orientation>,
-      validator: (orientation: string) => orientations.includes(orientation),
+      validator: (orientation: Orientation) => orientations.includes(orientation),
       default: "center"
     },
     // 分割线的宽度/高度

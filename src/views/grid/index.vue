@@ -76,7 +76,7 @@
         </tr>
         <tr>
           <td>gutter</td>
-          <td>栅格间隔，可以写成像素值或支持响应式的对象来设置水平间隔 <code>{ xs: 8, sm: 16, md: 24}</code>；或者使用数组形式同时设置 <code>[水平间距, 垂直间距]</code></td>
+          <td>栅格间隔，可以写成像素值或支持响应式的对象来设置水平间隔 <code>{ xs: 8, sm: 16, md: 24 }</code>；或者使用数组形式同时设置 <code>[水平间距, 垂直间距]</code></td>
           <td>Number | Object | Array</td>
           <td>0</td>
         </tr>

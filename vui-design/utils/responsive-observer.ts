@@ -1,7 +1,7 @@
-export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
+export type Breakpoint = "xxxl" | "xxl" | "xl" | "lg" | "md" | "sm" | "xs";
 export type BreakpointMediaQueries = Record<Breakpoint, string>;
 export type Screens = Partial<Record<Breakpoint, boolean>>;
-export type ScreenSizeMap = Partial<Record<Breakpoint, number>>;
+export type ScreenSizes = Partial<Record<Breakpoint, string | number>>;
 export type Subscriber = (screens: Screens, breakpoint: Breakpoint) => void;
 export interface MatchHandlers {
   [prop: string]: {
@@ -10,7 +10,7 @@ export interface MatchHandlers {
   };
 };
 
-export const breakpoints: Breakpoint[] = ["xs", "sm", "md", "lg", "xl", "xxl", "xxxl"];
+export const breakpoints: Breakpoint[] = ["xxxl", "xxl", "xl", "lg", "md", "sm", "xs"];
 export const breakpointMediaQueries: BreakpointMediaQueries = {
   xs: "(max-width: 575px)",
   sm: "(min-width: 576px)",

@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-avatar-basic-usage">
-    <template slot="demo">
+  <vui-example id="example-avatar-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-avatar-basic-usage">
         <section>
           <vui-avatar icon="user" v-bind:size="54" />
@@ -16,27 +16,28 @@
         </section>
       </div>
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>头像有三种尺寸，两种形状可选；其中尺寸支持自定义数值。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

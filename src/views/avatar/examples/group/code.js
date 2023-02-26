@@ -3,7 +3,9 @@ const code = `
   <div class="example-avatar-group">
     <vui-avatar-group>
       <vui-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <vui-avatar style="background-color: #f56a00">U</vui-avatar>
+      <a href="https://github.com/vui-design/vui-design" target="_blank">
+        <vui-avatar style="background-color: #f56a00">U</vui-avatar>
+      </a>
       <vui-tooltip content="User Name">
         <vui-avatar icon="user" style="background-color: #52c41a" />
       </vui-tooltip>
@@ -11,7 +13,9 @@ const code = `
     </vui-avatar-group>
     <vui-avatar-group v-bind:maxCount="2">
       <vui-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <vui-avatar style="background-color: #f56a00">U</vui-avatar>
+      <a href="https://github.com/vui-design/vui-design" target="_blank">
+        <vui-avatar style="background-color: #f56a00">U</vui-avatar>
+      </a>
       <vui-tooltip content="User Name">
         <vui-avatar icon="user" style="background-color: #52c41a" />
       </vui-tooltip>
@@ -19,12 +23,6 @@ const code = `
     </vui-avatar-group>
   </div>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 
 <style>
   .example-avatar-group .vui-avatar-group + .vui-avatar-group { margin-left:16px; }

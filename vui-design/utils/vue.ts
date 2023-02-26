@@ -17,6 +17,10 @@ export enum ShapeFlags {
   COMPONENT_KEPT_ALIVE = 1 << 9
 };
 
+export const isText = (vnode: VNode, children: VNode["children"]): children is string => {
+  return Boolean(vnode && vnode.shapeFlag & ShapeFlags.TEXT_CHILDREN);
+};
+
 export const isElement = (vnode: VNode) => {
   return Boolean(vnode && vnode.shapeFlag & ShapeFlags.ELEMENT);
 };

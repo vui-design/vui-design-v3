@@ -15,7 +15,7 @@ export const createProps = () => {
     // 按钮类型
     type: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "default"
     },
     // 幽灵按钮
@@ -26,13 +26,13 @@ export const createProps = () => {
     // 按钮形状
     shape: {
       type: String as PropType<Shape>,
-      validator: (shape: string) => shapes.includes(shape),
+      validator: (shape: Shape) => shapes.includes(shape),
       default: undefined
     },
     // 按钮尺寸
     size: {
       type: String as PropType<Size>,
-      validator: (size: string) => sizes.includes(size),
+      validator: (size: Size) => sizes.includes(size),
       default: undefined
     },
     // 按钮是否为禁用状态

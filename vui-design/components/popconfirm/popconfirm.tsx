@@ -41,7 +41,7 @@ export const createProps = () => {
     // 触发方式
     trigger: {
       type: String as PropType<Trigger>,
-      validator: (trigger: string) => triggers.includes(trigger),
+      validator: (trigger: Trigger) => triggers.includes(trigger),
       default: "click"
     },
     // 气泡确认框的挂载容器
@@ -52,7 +52,7 @@ export const createProps = () => {
     // 气泡确认框的弹出位置
     placement: {
       type: String as PropType<Placement>,
-      validator: (placement: string) => placements.includes(placement),
+      validator: (placement: Placement) => placements.includes(placement),
       default: "top"
     },
     // 弹出动画
@@ -63,7 +63,7 @@ export const createProps = () => {
     // 取消按钮类型
     cancelType: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "default"
     },
     // 取消按钮文本
@@ -74,7 +74,7 @@ export const createProps = () => {
     // 确认按钮类型
     okType: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "primary"
     },
     // 确认按钮文本

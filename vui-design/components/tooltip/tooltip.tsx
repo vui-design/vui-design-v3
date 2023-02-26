@@ -1,10 +1,11 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement } from "../popup/types";
+import type { Color } from "./types";
 import { defineComponent, ref, computed } from "vue";
 import VuiPopup from "../popup";
 import getClassName from "../../utils/getClassName";
-import { colors } from "./constants";
 import { triggers, placements } from "../popup/constants";
+import { colors } from "./constants";
 
 export const createProps = () => {
   return {
@@ -25,7 +26,7 @@ export const createProps = () => {
     },
     // 颜色
     color: {
-      type: String as PropType<string>,
+      type: String as PropType<string | Color>,
       default: "dark"
     },
     // 提示框内容
@@ -36,7 +37,7 @@ export const createProps = () => {
     // 触发方式
     trigger: {
       type: String as PropType<Trigger>,
-      validator: (trigger: string) => triggers.includes(trigger),
+      validator: (trigger: Trigger) => triggers.includes(trigger),
       default: "hover"
     },
     // 提示框的挂载容器
@@ -47,7 +48,7 @@ export const createProps = () => {
     // 提示框的弹出位置
     placement: {
       type: String as PropType<Placement>,
-      validator: (placement: string) => placements.includes(placement),
+      validator: (placement: Placement) => placements.includes(placement),
       default: "top"
     },
     // 弹出动画

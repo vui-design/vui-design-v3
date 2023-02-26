@@ -21,19 +21,19 @@ export const createProps = () => {
     // 项目排列方向
     direction: {
       type: String as PropType<Direction>,
-      validator: (direction: string) => directions.includes(direction),
+      validator: (direction: Direction) => directions.includes(direction),
       default: "horizontal"
     },
     // 项目水平排列方式
     justify: {
       type: String as PropType<Justify>,
-      validator: (justify: string) => justifys.includes(justify),
+      validator: (justify: Justify) => justifys.includes(justify),
       default: "start"
     },
     // 项目垂直对齐方式
     align: {
       type: String as PropType<Align>,
-      validator: (align: string) => aligns.includes(align),
+      validator: (align: Align) => aligns.includes(align),
       default: "middle"
     },
     // 是否在项目间插入分割线，可设置为具体的数值，用于指定分割线高度

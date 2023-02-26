@@ -22,13 +22,13 @@ export const createProps = () => {
     // 多选框样式类型
     type: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "default"
     },
     // 多选框尺寸
     size: {
       type: String as PropType<Size>,
-      validator: (size: string) => sizes.includes(size),
+      validator: (size: Size) => sizes.includes(size),
       default: undefined
     },
     // 该属性仅在 type 为 button 时有效，用于指定多选按钮的最小宽度
@@ -149,7 +149,7 @@ export default defineComponent({
     const styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (type.value === "button" && minWidth.value) {
         style.minWidth = is.string(minWidth.value) ? minWidth.value : `${minWidth.value}px`;

@@ -3,7 +3,7 @@ import type { Breakpoint } from "../../utils/responsive-observer";
 import type { Color } from "./types";
 import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import VuiIcon from "../icon";
-import useResponsive from "../../hooks/useResponsive";
+import useBreakpoint from "../../hooks/useBreakpoint";
 import is from "../../utils/is";
 import guid from "../../utils/guid";
 import getScrollbarSize from "../../utils/getScrollbarSize";
@@ -164,7 +164,7 @@ export default defineComponent({
     };
 
     // 订阅响应
-    useResponsive(props.breakpoint, (matched: boolean) => {
+    useBreakpoint(props.breakpoint, (matched: boolean) => {
       const value = !matched;
 
       if (defaultCollapsed.value !== value) {

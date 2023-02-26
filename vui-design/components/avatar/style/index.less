@@ -1,35 +1,45 @@
-@vui-avatar: ~"@{vui}-avatar";
+@import "./token.less";
 
 .@{vui-avatar} {
   position:relative;
   display:inline-block;
-  box-sizing:border-box;
   overflow:hidden;
   vertical-align:middle;
   color:@avatar-font-color;
   text-align:center;
   white-space:nowrap;
-  transition:all @transition-duration;
+  transition:all @transition-duration @transition-timing-function;
 
   & &-image {
     display:block;
     width:100%;
     height:100%;
-    object-fit:cover;
-    object-position:center;
+
+    img {
+      display:block;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
   }
   & &-icon {
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
+
+    .@{vui}-icon {
+      display:block;
+    }
   }
-  & &-children {
+  & &-text {
     position:absolute;
+    top:50%;
     left:50%;
-    transform-origin:0 center;
-    transform:scale(1) translateX(-50%);
-    line-height:inherit;
+    transform-origin:top left;
+    transform:scale(1) translate(-50%, -50%);
+    line-height:1;
   }
 
   &-with-image {
@@ -38,7 +48,7 @@
   &-with-icon {
     background-color:@avatar-background-color;
   }
-  &-with-children {
+  &-with-text {
     background-color:@avatar-background-color;
   }
 
@@ -70,30 +80,17 @@
 
   &-group {
     display:inline-flex;
-    box-sizing:border-box;
+    justify-content:flex-start;
     align-items:center;
-
-    &-item,
-    &-placeholder {
-      margin-left:-@margin-xs;
-    }
-
-    &-item:first-child {
-      margin-left:0;
-    }
   }
-
   &-group & {
     box-shadow:0px 0px 0px 1px rgba(255, 255, 255, 1);
   }
-
-  &-group &-group-placeholder & {
+  &-group &-group-placeholder {
     background-color:@avatar-placeholder-background-color;
     color:@avatar-placeholder-font-color;
   }
-
-  &-group-tooltip-content {
-    display:block;
-    box-sizing:border-box;
+  &-group :not(:first-child) {
+    margin-left:-@margin-xs;
   }
 }

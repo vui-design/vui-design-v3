@@ -1,38 +1,53 @@
 const code = `
 <template>
   <div class="example-avatar-dynamic">
-    <vui-avatar v-bind:style="{backgroundColor: color}">{{user}}</vui-avatar>
-    <vui-button size="small" v-on:click="handleChange">Change</vui-button>
+    <vui-avatar v-bind:gap="gap" v-bind:style="{backgroundColor: color}">{{user}}</vui-avatar>
+    <vui-button size="small" v-on:click="handleChangeUser">Change User</vui-button>
+    <vui-button size="small" v-on:click="handleChangeGap">Change Gap</vui-button>
   </div>
 </template>
 
-<script>
-  const colors = ["#f56a00", "#7265e6", "#ffbf00", "#00a2ae"];
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
   const users = ["U", "Lucy", "Tom", "Edward"];
+  const gaps = [4, 3, 2, 1];
+  const colors = ["#f56a00", "#7265e6", "#ffbf00", "#00a2ae"];
 
-  export default {
-    components: {
-      Example
-    },
-    data() {
-      return {
-        color: colors[0],
-        user: users[0]
+  export default defineComponent({
+    setup() {
+      const user = ref(users[0]);
+      const gap = ref(gaps[0]);
+      const color = ref(colors[0]);
+
+      const handleChangeUser = () => {
+        const index = users.indexOf(user.value);
+        let i = index < users.length - 1 ? (index + 1) : 0;
+
+        user.value = users[i];
+        color.value = colors[i];
       };
-    },
-    methods: {
-      handleChange() {
-        const index = users.indexOf(this.user);
 
-        this.color = index < colors.length - 1 ? colors[index + 1] : colors[0];
-        this.user = index < users.length - 1 ? users[index + 1] : users[0];
-      }
+      const handleChangeGap = () => {
+        const index = gaps.indexOf(gap.value);
+        let i = index < users.length - 1 ? (index + 1) : 0;
+
+        gap.value = gaps[i];
+      };
+
+      return {
+        color,
+        user,
+        gap,
+        handleChangeUser,
+        handleChangeGap
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-avatar-badge .vui-badge + .vui-badge { margin-left:16px; }
+  .example-avatar-dynamic .vui-button { margin-left:16px; }
 </style>
 `;
 

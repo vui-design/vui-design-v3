@@ -36,7 +36,7 @@ export const createProps = () => {
     // 触发方式
     trigger: {
       type: String as PropType<Trigger>,
-      validator: (trigger: string) => triggers.includes(trigger),
+      validator: (trigger: Trigger) => triggers.includes(trigger),
       default: "hover"
     },
     // 弹出框的挂载容器
@@ -47,7 +47,7 @@ export const createProps = () => {
     // 弹出框的弹出位置
     placement: {
       type: String as PropType<Placement>,
-      validator: (placement: string) => placements.includes(placement),
+      validator: (placement: Placement) => placements.includes(placement),
       default: "top"
     },
     // 弹出动画

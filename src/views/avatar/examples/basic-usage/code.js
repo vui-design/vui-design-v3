@@ -16,12 +16,6 @@ const code = `
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-avatar-basic-usage section + section { margin-top:24px; }
   .example-avatar-basic-usage .vui-avatar + .vui-avatar { margin-left:16px; }

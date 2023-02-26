@@ -23,19 +23,19 @@ export const createProps = () => {
     // 多选组合布局方式
     layout: {
       type: String as PropType<Layout>,
-      validator: (layout: string) => layouts.includes(layout),
+      validator: (layout: Layout) => layouts.includes(layout),
       default: "horizontal"
     },
     // 多选组合样式类型
     type: {
       type: String as PropType<Type>,
-      validator: (type: string) => types.includes(type),
+      validator: (type: Type) => types.includes(type),
       default: "default"
     },
     // 多选组合尺寸
     size: {
       type: String as PropType<Size>,
-      validator: (size: string) => sizes.includes(size),
+      validator: (size: Size) => sizes.includes(size),
       default: undefined
     },
     // 该属性仅在 type 为 button 时有效，用于指定每个多选按钮的最小宽度

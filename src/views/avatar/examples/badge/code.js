@@ -10,12 +10,6 @@ const code = `
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-avatar-badge .vui-badge + .vui-badge { margin-left:16px; }
 </style>

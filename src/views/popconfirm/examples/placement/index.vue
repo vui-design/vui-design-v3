@@ -59,7 +59,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
-  import VuiExample from "src/components/example";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
   export default defineComponent({
