@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-badge-status">
-    <template slot="demo">
+  <vui-example id="example-badge-status" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-badge-status">
         <vui-badge status="default" />
         <vui-badge status="processing" />
@@ -8,40 +8,41 @@
         <vui-badge status="success" />
         <vui-badge status="error" />
         <br />
-        <vui-badge status="default" text="默认" />
+        <vui-badge status="default" text="Default" />
         <br />
-        <vui-badge status="processing" text="处理中" />
+        <vui-badge status="processing" text="Processing" />
         <br />
-        <vui-badge status="warning" text="警告" />
+        <vui-badge status="warning" text="Warning" />
         <br />
-        <vui-badge status="success" text="成功" />
+        <vui-badge status="success" text="Success" />
         <br />
-        <vui-badge status="error" text="错误" />
+        <vui-badge status="error" text="Error" />
       </div>
     </template>
-    <template slot="title">状态点</template>
-    <template slot="description">
+    <template v-slot:title>状态点</template>
+    <template v-slot:description>
       <p>用于表示状态的小圆点。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-badge-status > .vui-badge { margin-right:16px; }
+  .example-badge-status .vui-badge + .vui-badge { margin-left:16px; }
 </style>

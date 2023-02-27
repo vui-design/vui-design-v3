@@ -7,26 +7,20 @@ const code =
     <vui-badge status="success" />
     <vui-badge status="error" />
     <br />
-    <vui-badge status="default" text="默认" />
+    <vui-badge status="default" text="Default" />
     <br />
-    <vui-badge status="processing" text="处理中" />
+    <vui-badge status="processing" text="Processing" />
     <br />
-    <vui-badge status="warning" text="警告" />
+    <vui-badge status="warning" text="Warning" />
     <br />
-    <vui-badge status="success" text="成功" />
+    <vui-badge status="success" text="Success" />
     <br />
-    <vui-badge status="error" text="错误" />
+    <vui-badge status="error" text="Error" />
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-badge-status > .vui-badge { margin-right:16px; }
+  .example-badge-status .vui-badge + .vui-badge { margin-left:16px; }
 </style>
 `;
 

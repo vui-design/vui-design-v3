@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-badge-dot">
-    <template slot="demo">
+  <vui-example id="example-badge-dot" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-badge-dot">
         <vui-badge dot v-bind:count="99">
           <img src="https://dummyimage.com/48x48/e6e6e6/6a6a6a" />
@@ -9,34 +9,35 @@
           <vui-icon type="mail" />
         </vui-badge>
         <vui-badge dot v-bind:count="1000">
-          <a href="javascript:;">可以是一个链接</a>
+          <a href="javascript:;">Link</a>
         </vui-badge>
       </div>
     </template>
-    <template slot="title">小红点</template>
-    <template slot="description">
+    <template v-slot:title>小红点</template>
+    <template v-slot:description>
       <p>不显示具体的数值或文本。友情提醒，强迫症患者慎用！</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-badge-dot > .vui-badge { margin-right:16px; }
-  .example-badge-dot > .vui-badge > img { width:48px; height:48px; border-radius:5px; }
+  .example-badge-dot .vui-badge + .vui-badge { margin-left:16px; }
+  .example-badge-dot .vui-badge img { width:48px; height:48px; border-radius:5px; }
 </style>

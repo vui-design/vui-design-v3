@@ -1,0 +1,173 @@
+@import "./token.less";
+
+@keyframes vuiBadgeStatusProcessing {
+  0% { opacity:0.6; transform:scale(0.8); }
+  100% { opacity:0; transform:scale(2.4); }
+}
+
+.@{vui-badge} {
+  position:relative;
+  display:inline-block;
+  margin:0;
+  padding:0;
+  vertical-align:middle;
+  line-height:1;
+
+  &-dot {
+    position:absolute;
+    top:0;
+    right:0;
+    z-index:10;
+    display:block;
+    width:@badge-dot-size;
+    height:@badge-dot-size;
+    border-radius:@badge-dot-size;
+    background-color:@badge-dot-color;
+    box-shadow:@badge-dot-shadow;
+    transform:translate(50%,-50%);
+  }
+
+  &-count, &-text {
+    position:absolute;
+    top:0;
+    right:0;
+    z-index:10;
+    display:block;
+    min-width:@badge-count-size;
+    height:@badge-count-size;
+    border-radius:@badge-count-size;
+    background-color:@badge-count-color;
+    box-shadow:@badge-count-shadow;
+    padding:@badge-count-padding;
+    color:@badge-count-font-color;
+    font-size:@badge-count-font-size;
+    white-space:nowrap;
+    text-align:center;
+    line-height:@badge-count-size;
+    transform:translate(50%,-50%);
+  }
+
+  &-alone &-dot {
+    position:static;
+    top:auto;
+    right:auto;
+    z-index:auto;
+    transform:none;
+  }
+
+  &-alone &-count, &-alone &-text {
+    position:static;
+    top:auto;
+    right:auto;
+    z-index:auto;
+    transform:none;
+  }
+
+  &-status {
+    font-size:0;
+  }
+
+  &-status &-dot {
+    position:relative;
+    top:auto;
+    right:auto;
+    z-index:auto;
+    display:inline-block;
+    vertical-align:middle;
+    transform:none;
+  }
+  &-status &-dot-default {
+    background-color:@badge-status-dot-default-color;
+  }
+  &-status &-dot-processing {
+    background-color:@badge-status-dot-processing-color;
+
+    &:after {
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      display:block;
+      width:100%;
+      height:100%;
+      border-width:1px;
+      border-style:solid;
+      border-color:@badge-status-dot-processing-color;
+      border-radius:50%;
+      animation:vuiBadgeStatusProcessing 1.2s infinite ease-in-out;
+    }
+  }
+  &-status &-dot-warning {
+    background-color:@badge-status-dot-warning-color;
+  }
+  &-status &-dot-success {
+    background-color:@badge-status-dot-success-color;
+  }
+  &-status &-dot-error {
+    background-color:@badge-status-dot-error-color;
+  }
+  &-status &-dot-blue {
+    background-color:@badge-status-dot-blue-color;
+  }
+  &-status &-dot-cyan {
+    background-color:@badge-status-dot-cyan-color;
+  }
+  &-status &-dot-geekblue {
+    background-color:@badge-status-dot-geekblue-color;
+  }
+  &-status &-dot-gold {
+    background-color:@badge-status-dot-gold-color;
+  }
+  &-status &-dot-green {
+    background-color:@badge-status-dot-green-color;
+  }
+  &-status &-dot-lime {
+    background-color:@badge-status-dot-lime-color;
+  }
+  &-status &-dot-magenta {
+    background-color:@badge-status-dot-magenta-color;
+  }
+  &-status &-dot-orange {
+    background-color:@badge-status-dot-orange-color;
+  }
+  &-status &-dot-pink {
+    background-color:@badge-status-dot-pink-color;
+  }
+  &-status &-dot-purple {
+    background-color:@badge-status-dot-purple-color;
+  }
+  &-status &-dot-red {
+    background-color:@badge-status-dot-red-color;
+  }
+  &-status &-dot-volcano {
+    background-color:@badge-status-dot-volcano-color;
+  }
+  &-status &-dot-yellow {
+    background-color:@badge-status-dot-yellow-color;
+  }
+
+  &-status &-text {
+    position:static;
+    top:auto;
+    right:auto;
+    z-index:auto;
+    display:inline-block;
+    width:auto;
+    min-width:auto;
+    height:auto;
+    border-radius:0;
+    background-color:transparent;
+    box-shadow:none;
+    margin-left:@badge-status-text-margin-left;
+    padding:0;
+    vertical-align:middle;
+    color:@badge-status-text-font-color;
+    font-size:@badge-status-text-font-size;
+    text-align:left;
+    line-height:1;
+    white-space:nowrap;
+    transform:none;
+  }
+}

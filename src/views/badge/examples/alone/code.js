@@ -9,14 +9,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-badge-alone > .vui-badge { margin-right:16px; }
+  .example-badge-alone .vui-badge + .vui-badge { margin-left:16px; }
 </style>
 `;
 

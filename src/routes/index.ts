@@ -373,15 +373,15 @@ export default [
 				},
 				component: () => import("src/views/avatar/index.vue")
 			},
-	// 		{
-	// 			path: "/components/badge",
-	// 			name: "badge",
-	// 			meta: {
-	// 				title: "Badge",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/badge/index.vue")
-	// 		},
+			{
+				path: "/components/badge",
+				name: "badge",
+				meta: {
+					title: "Badge",
+					group: "data-display"
+				},
+				component: () => import("src/views/badge/index.vue")
+			},
 	// 		{
 	// 			path: "/components/card",
 	// 			name: "card",

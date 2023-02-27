@@ -2,7 +2,7 @@ const code =
 `<template>
   <div>
     <div class="example-badge-colorful">
-      <h4>Presets</h4>
+      <vui-divider orientation="left">Presets</vui-divider>
       <vui-badge color="blue" text="blue" />
       <vui-badge color="cyan" text="cyan" />
       <vui-badge color="geekblue" text="geekblue" />
@@ -18,7 +18,7 @@ const code =
       <vui-badge color="yellow" text="yellow" />
     </div>
     <div class="example-badge-colorful">
-      <h4>Custom</h4>
+      <vui-divider orientation="left">Custom</vui-divider>
       <vui-badge color="#f60" text="#f60" />
       <vui-badge color="#2db7f5" text="#2db7f5" />
       <vui-badge color="#87d068" text="#87d068" />
@@ -27,17 +27,11 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-badge-colorful + .example-badge-colorful { margin-top:24px; }
-  .example-badge-colorful > h4 { margin-bottom:8px; }
-  .example-badge-colorful > .vui-badge { display:block; }
-  .example-badge-colorful > .vui-badge + .vui-badge { margin-top:8px; }
+  .example-badge-colorful .vui-divider { margin-top:0; }
+  .example-badge-colorful .vui-badge { display:block; }
+  .example-badge-colorful .vui-badge + .vui-badge { margin-top:8px; }
 </style>
 `;
 

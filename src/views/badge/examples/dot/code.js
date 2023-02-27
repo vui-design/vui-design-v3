@@ -8,20 +8,14 @@ const code =
       <vui-icon type="mail" />
     </vui-badge>
     <vui-badge dot v-bind:count="1000">
-      <a href="javascript:;">可以是一个链接</a>
+      <a href="javascript:;">Link</a>
     </vui-badge>
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-badge-dot > .vui-badge { margin-right:16px; }
-  .example-badge-dot > .vui-badge > img { width:48px; height:48px; border-radius:5px; }
+  .example-badge-dot .vui-badge + .vui-badge { margin-left:16px; }
+  .example-badge-dot .vui-badge img { width:48px; height:48px; border-radius:5px; }
 </style>
 `;
 
