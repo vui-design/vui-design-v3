@@ -66,9 +66,7 @@ import Upload from "./components/upload";
 // Data Display
 import Avatar, { AvatarGroup } from "./components/avatar";
 import Badge from "./components/badge";
-import Card from "./components/card";
-import CardGrid from "./components/card-grid";
-import CardMeta from "./components/card-meta";
+import Card, { CardMeta, CardGrid } from "./components/card";
 import Cell from "./components/cell";
 import CellGroup from "./components/cell-group";
 import Collapse from "./components/collapse";

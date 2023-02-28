@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Breakpoint } from "../../utils/responsive-observer";
 import type { Color } from "./types";
-import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, onBeforeMount, onBeforeUnmount } from "vue";
 import VuiIcon from "../icon";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import is from "../../utils/is";
@@ -176,8 +176,8 @@ export default defineComponent({
       }
     });
 
-    // 组件挂载完成后执行
-    onMounted(() => {
+    // 组件挂载之前执行
+    onBeforeMount(() => {
       vuiLayout?.addSiderRef?.(id);
     });
 

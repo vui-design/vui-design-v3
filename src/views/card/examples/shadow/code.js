@@ -1,7 +1,7 @@
 const code =
 `<template>
   <div class="example-card-shadow">
-    <vui-row v-bind:gutter="16">
+    <vui-row v-bind:gutter="24">
       <vui-col v-bind:span="12">
         <vui-card v-bind:bordered="false" shadow="hover" title="Card title">
           <p>Card content...</p>
@@ -20,14 +20,10 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-card-shadow { background-color:#f6f6f6; padding:16px; }
+  .example-card-shadow { background-color:#f6f6f6; padding:24px; }
+  .example-card-shadow p { margin:0; }
+  .example-card-shadow p + p { margin-top:8px; }
 </style>
 `;
 

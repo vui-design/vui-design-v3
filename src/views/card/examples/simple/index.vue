@@ -1,31 +1,39 @@
 <template>
-  <example v-bind:code="code" id="example-card-simple">
-    <template slot="demo">
-      <vui-card>
-        <p>Card content...</p>
-        <p>Card content...</p>
-        <p>Card content...</p>
-      </vui-card>
+  <vui-example id="example-card-simple" v-bind:code="code">
+    <template v-slot:demo>
+      <div class="example-card-simple">
+        <vui-card>
+          <p>Card content...</p>
+          <p>Card content...</p>
+          <p>Card content...</p>
+        </vui-card>
+      </div>
     </template>
-    <template slot="title">简洁卡片</template>
-    <template slot="description">
-      <p>只含有主体内容。</p>
+    <template v-slot:title>简洁卡片</template>
+    <template v-slot:description>
+      <p>只包含内容区域。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
+
+<style>
+  .example-card-simple p { margin:0; }
+  .example-card-simple p + p { margin-top:8px; }
+</style>

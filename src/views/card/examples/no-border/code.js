@@ -9,14 +9,10 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-card-borderless { background-color:#f6f6f6; padding:24px; }
+  .example-card-no-border { background-color:#f6f6f6; padding:24px; }
+  .example-card-no-border p { margin:0; }
+  .example-card-no-border p + p { margin-top:8px; }
 </style>
 `;
 

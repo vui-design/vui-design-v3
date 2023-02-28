@@ -1,36 +1,42 @@
 <template>
-  <example v-bind:code="code" id="example-card-basic-usage">
-    <template slot="demo">
-      <vui-card icon="menu-unfold" title="Card title">
-        <p>Card content...</p>
-        <p>Card content...</p>
-        <p>Card content...</p>
-        <a href="javascript:;" slot="extra">More</a>
-      </vui-card>
+  <vui-example id="example-card-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
+      <div class="example-card-basic-usage">
+        <vui-card icon="menu-unfold" title="Card title">
+          <p>Card content...</p>
+          <p>Card content...</p>
+          <p>Card content...</p>
+          <template v-slot:extra>
+            <a href="javascript:;">More</a>
+          </template>
+        </vui-card>
+      </div>
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>自定义图标、标题、主体和附加内容，可以完全自由控制各个部分，也可以结合其它组件一起使用，较为灵活。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-card-basic-usage .vui-card + .vui-card { margin-top:24px; }
+  .example-card-basic-usage p { margin:0; }
+  .example-card-basic-usage p + p { margin-top:8px; }
 </style>

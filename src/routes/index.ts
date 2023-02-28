@@ -382,15 +382,15 @@ export default [
 				},
 				component: () => import("src/views/badge/index.vue")
 			},
-	// 		{
-	// 			path: "/components/card",
-	// 			name: "card",
-	// 			meta: {
-	// 				title: "Card",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/card/index.vue")
-	// 		},
+			{
+				path: "/components/card",
+				name: "card",
+				meta: {
+					title: "Card",
+					group: "data-display"
+				},
+				component: () => import("src/views/card/index.vue")
+			},
 	// 		{
 	// 			path: "/components/cell",
 	// 			name: "cell",

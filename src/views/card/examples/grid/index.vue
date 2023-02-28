@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-card-grid">
-    <template slot="demo">
+  <vui-example id="example-card-grid" v-bind:code="code">
+    <template v-slot:demo>
       <vui-card title="Card title">
         <vui-card-grid style="width: 25%;">Content...</vui-card-grid>
         <vui-card-grid style="width: 25%;">Content...</vui-card-grid>
@@ -12,25 +12,26 @@
         <vui-card-grid style="width: 25%;">Content...</vui-card-grid>
       </vui-card>
     </template>
-    <template slot="title">内容区隔</template>
-    <template slot="description">
+    <template v-slot:title>内容区隔</template>
+    <template v-slot:description>
       <p>常见的卡片内容区隔模式。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

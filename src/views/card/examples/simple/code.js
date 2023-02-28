@@ -1,17 +1,18 @@
 const code =
 `<template>
-  <vui-card>
-    <p>Card content...</p>
-    <p>Card content...</p>
-    <p>Card content...</p>
-  </vui-card>
+  <div class="example-card-simple">
+    <vui-card>
+      <p>Card content...</p>
+      <p>Card content...</p>
+      <p>Card content...</p>
+    </vui-card>
+  </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
+<style>
+  .example-card-simple p { margin:0; }
+  .example-card-simple p + p { margin-top:8px; }
+</style>
 `;
 
 export default code;

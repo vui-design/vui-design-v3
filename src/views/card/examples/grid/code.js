@@ -11,12 +11,6 @@ const code =
     <vui-card-grid style="width: 25%;">Content...</vui-card-grid>
   </vui-card>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;
