@@ -88,15 +88,6 @@ export default defineComponent({
     const defaultVisible = ref(props.defaultVisible);
     const visible = computed(() => props.visible ?? defaultVisible.value);
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "popover"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => `${className.value}`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elArrow = computed(() => `${className.value}-arrow`);
-
     // onChange 事件回调
     const handleChange = (visible: boolean) => {
       defaultVisible.value = visible;
@@ -114,6 +105,8 @@ export default defineComponent({
 
       return (
         <VuiPopup
+          classNamePrefix={props.classNamePrefix}
+          name="popover"
           visible={visible.value}
           trigger={props.trigger}
           getPopupContainer={props.getPopupContainer}
@@ -125,10 +118,6 @@ export default defineComponent({
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
           disabled={props.disabled}
-          class={classes.el.value}
-          titleClassName={classes.elTitle.value}
-          contentClassName={classes.elContent.value}
-          arrowClassName={classes.elArrow.value}
           onChange={handleChange}
           v-slots={slots}
         >

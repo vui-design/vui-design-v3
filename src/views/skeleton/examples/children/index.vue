@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-skeleton-children">
-    <template slot="demo">
+  <vui-example id="example-skeleton-children" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-skeleton-children">
         <vui-skeleton animated v-bind:loading="loading">
           <h4>What is Vue.js?</h4>
@@ -9,37 +9,40 @@
         <vui-button v-bind:disabled="loading" v-on:click="showSkeleton">Show Skeleton</vui-button>
       </div>
     </template>
-    <template slot="title">包含子组件</template>
-    <template slot="description">
+    <template v-slot:title>包含子组件</template>
+    <template v-slot:description>
       <p>加载占位图包含子组件。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const loading = ref(false);
+      const showSkeleton = () => {
+        loading.value = true;
+        setTimeout(() => loading.value = false, 3000);
+      };
+
       return {
         code,
-        loading: false
+        loading,
+        showSkeleton
       };
-    },
-    methods: {
-      showSkeleton() {
-        this.loading = true;
-        setTimeout(() => this.loading = false, 3000);
-      }
     }
-  };
+  });
 </script>
 
 <style>
-  .example-skeleton-children h4 { margin-bottom:16px; color:#262626; }
-  .example-skeleton-children button { margin-top:16px; }
+  .example-skeleton-children h4 { margin:0 0 16px 0; color:#262626; }
+  .example-skeleton-children p { margin:0; }
+  .example-skeleton-children .vui-button { margin-top:16px; }
 </style>

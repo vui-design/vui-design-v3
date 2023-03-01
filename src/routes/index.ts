@@ -617,15 +617,15 @@ export default [
 	// 			},
 	// 			component: () => import("src/views/result/index.vue")
 	// 		},
-	// 		{
-	// 			path: "/components/skeleton",
-	// 			name: "skeleton",
-	// 			meta: {
-	// 				title: "Skeleton",
-	// 				group: "feedback"
-	// 			},
-	// 			component: () => import("src/views/skeleton/index.vue")
-	// 		},
+			{
+				path: "/components/skeleton",
+				name: "skeleton",
+				meta: {
+					title: "Skeleton",
+					group: "feedback"
+				},
+				component: () => import("src/views/skeleton/index.vue")
+			},
 	// 		{
 	// 			path: "/components/spin",
 	// 			name: "spin",

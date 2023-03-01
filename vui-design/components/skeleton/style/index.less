@@ -1,4 +1,9 @@
-@vui-skeleton: ~"@{vui}-skeleton";
+@import "./token.less";
+
+@keyframes vuiSkeletonLoading {
+  0% { background-position:100% 50%; }
+  100% { background-position:0 50%; }
+}
 
 .@{vui-skeleton} {
   display:table;
@@ -37,7 +42,6 @@
     &-circle {
       border-radius:50%;
     }
-
     &-square {
       border-radius:@skeleton-avatar-border-radius;
     }
@@ -55,18 +59,18 @@
     margin:0;
     padding:0;
 
-    & > li {
+    & > div {
       width:100%;
       height:@skeleton-paragraph-row-height;
       border-radius:@skeleton-paragraph-row-border-radius;
       background-color:@skeleton-color;
     }
 
-    & > li + li {
+    & > div + div {
       margin-top:@skeleton-paragraph-row-margin-top;
     }
 
-    & > li:last-child:not(:first-child):not(:nth-child(2)) {
+    & > div:last-child:not(:first-child):not(:nth-child(2)) {
       width:60%;
     }
   }
@@ -168,7 +172,7 @@
 
   &-avatar-animated,
   &-title-animated,
-  &-paragraph-animated > li,
+  &-paragraph-animated > div,
   &-input-animated,
   &-button-animated,
   &-image-animated {
@@ -176,9 +180,4 @@
     background-size:400% 100%;
     animation:vuiSkeletonLoading 1s ease infinite;
   }
-}
-
-@keyframes vuiSkeletonLoading {
-  0% { background-position:100% 50%; }
-  100% { background-position:0 50%; }
 }

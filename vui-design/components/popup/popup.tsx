@@ -23,6 +23,11 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
+    // 组件名称
+    name: {
+      type: String as PropType<string>,
+      default: "popup"
+    },
     // 弹出框默认是否可见（非受控模式）
     defaultVisible: {
       type: Boolean as PropType<boolean>,
@@ -551,7 +556,7 @@ export default defineComponent({
     vuiPopup?.addChildRef?.(popup);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "popup"));
+    const className = computed(() => getClassName(props.classNamePrefix, props.name));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {

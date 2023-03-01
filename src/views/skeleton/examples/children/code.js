@@ -9,25 +9,29 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        loading: false
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const loading = ref(false);
+      const showSkeleton = () => {
+        loading.value = true;
+        setTimeout(() => loading.value = false, 3000);
       };
-    },
-    methods: {
-      showSkeleton() {
-        this.loading = true;
-        setTimeout(() => this.loading = false, 3000);
-      }
+
+      return {
+        loading,
+        showSkeleton
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-skeleton-children h4 { margin-bottom:16px; color:#262626; }
-  .example-skeleton-children button { margin-top:16px; }
+  .example-skeleton-children h4 { margin:0 0 16px 0; color:#262626; }
+  .example-skeleton-children p { margin:0; }
+  .example-skeleton-children .vui-button { margin-top:16px; }
 </style>
 `;
 

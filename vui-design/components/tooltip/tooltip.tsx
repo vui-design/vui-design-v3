@@ -100,12 +100,9 @@ export default defineComponent({
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
         [`${className.value}-${props.color}`]: withPresetColor.value
       };
     });
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elArrow = computed(() => `${className.value}-arrow`);
 
     // 计算 style 样式
     const styles: Record<string, ComputedRef> = {};
@@ -154,6 +151,8 @@ export default defineComponent({
 
       return (
         <VuiPopup
+          classNamePrefix={props.classNamePrefix}
+          name="tooltip"
           visible={visible.value}
           trigger={props.trigger}
           getPopupContainer={props.getPopupContainer}
@@ -167,9 +166,7 @@ export default defineComponent({
           disabled={props.disabled}
           class={classes.el.value}
           style={styles.el.value}
-          contentClassName={classes.elContent.value}
           contentStyle={styles.elContent.value}
-          arrowClassName={classes.elArrow.value}
           arrowStyle={styles.elArrow.value}
           onChange={handleChange}
           v-slots={slots}

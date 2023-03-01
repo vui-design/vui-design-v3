@@ -100,13 +100,7 @@ import Notice from "./components/notice";
 import Popconfirm from "./components/popconfirm";
 import Progress from "./components/progress";
 import Result from "./components/result";
-import Skeleton from "./components/skeleton";
-import SkeletonAvatar from "./components/skeleton-avatar";
-import SkeletonTitle from "./components/skeleton-title";
-import SkeletonParagraph from "./components/skeleton-paragraph";
-import SkeletonInput from "./components/skeleton-input";
-import SkeletonButton from "./components/skeleton-button";
-import SkeletonImage from "./components/skeleton-image";
+import Skeleton, { SkeletonAvatar, SkeletonTitle, SkeletonParagraph, SkeletonInput, SkeletonButton, SkeletonImage } from "./components/skeleton";
 import Spin from "./components/spin";
 // Other
 import Anchor from "./components/anchor";

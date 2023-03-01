@@ -1,27 +1,28 @@
 <template>
-  <example v-bind:code="code" id="example-skeleton-animated">
-    <template slot="demo">
+  <vui-example id="example-skeleton-animated" v-bind:code="code">
+    <template v-slot:demo>
       <vui-skeleton animated />
     </template>
-    <template slot="title">动画效果</template>
-    <template slot="description">
+    <template v-slot:title>动画效果</template>
+    <template v-slot:description>
       <p>显示动画效果。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

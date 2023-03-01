@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-skeleton-element">
-    <template slot="demo">
+  <vui-example id="example-skeleton-element" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-skeleton-element">
         <section>
           <vui-space>
@@ -50,32 +50,39 @@
         </section>
       </div>
     </template>
-    <template slot="title">头像/输入框/按钮/图像</template>
-    <template slot="description">
+    <template v-slot:title>头像/输入框/按钮/图像</template>
+    <template v-slot:description>
       <p>骨架头像、输入框、按钮和图像。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const animated = ref(false);
+      const block = ref(false);
+      const avatarShape = ref("square");
+      const buttonShape = ref("default");
+      const size = ref("medium");
+
       return {
         code,
-        animated: false,
-        block: false,
-        avatarShape: "square",
-        buttonShape: "default",
-        size: "medium"
+        animated,
+        block,
+        avatarShape,
+        buttonShape,
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>

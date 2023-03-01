@@ -50,18 +50,26 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const animated = ref(false);
+      const block = ref(false);
+      const avatarShape = ref("square");
+      const buttonShape = ref("default");
+      const size = ref("medium");
+
       return {
-        animated: false,
-        block: false,
-        avatarShape: "square",
-        buttonShape: "default",
-        size: "medium"
+        animated,
+        block,
+        avatarShape,
+        buttonShape,
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>

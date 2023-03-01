@@ -136,11 +136,7 @@ export default defineComponent({
     const className = computed(() => getClassName(props.classNamePrefix, "popconfirm"));
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
     classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elArrow = computed(() => `${className.value}-arrow`);
 
     // 切换显示状态
     const toggle = (visible: boolean) => {
@@ -218,6 +214,8 @@ export default defineComponent({
       // 
       return (
         <VuiPopup
+          classNamePrefix={props.classNamePrefix}
+          name="popconfirm"
           visible={visible.value}
           trigger={props.trigger}
           getPopupContainer={props.getPopupContainer}
@@ -229,10 +227,6 @@ export default defineComponent({
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
           disabled={props.disabled}
-          class={classes.el.value}
-          titleClassName={classes.elTitle.value}
-          contentClassName={classes.elContent.value}
-          arrowClassName={classes.elArrow.value}
           onChange={handleChange}
           v-slots={slots}
         >
