@@ -33,7 +33,7 @@
           <th width="140">属性</th>
           <th>说明</th>
           <th width="220">类型</th>
-          <th width="240">默认值</th>
+          <th width="250">默认值</th>
         </tr>
       </thead>
       <tbody>
@@ -99,13 +99,13 @@
         </tr>
         <tr>
           <td>checkedValue</td>
-          <td>该属性仅在单独使用时有效，用于设置选中时的值，例如使用 <code>0</code> 和 <code>1</code> 来标记多选框的选中状态</td>
+          <td>该属性仅在单独使用时有效，用于设置选中时的值，例如使用 <code>1</code> 来标记选中状态</td>
           <td>Boolean | String | Number</td>
           <td>true</td>
         </tr>
         <tr>
           <td>uncheckedValue</td>
-          <td>该属性仅在单独使用时有效，用于设置未选中时的值，例如使用 <code>0</code> 和 <code>1</code> 来标记多选框的选中状态</td>
+          <td>该属性仅在单独使用时有效，用于设置未选中时的值，例如使用 <code>0</code> 来标记未选中状态</td>
           <td>Boolean | String | Number</td>
           <td>false</td>
         </tr>
@@ -124,19 +124,19 @@
           <th width="140">事件名</th>
           <th>说明</th>
           <th width="220">类型</th>
-          <th width="240">回调参数</th>
+          <th width="250">回调参数</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>update:checked</td>
-          <td>在多选框的选中状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
+          <td>在选中状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
         <tr>
           <td>change</td>
-          <td>在多选框的选中状态发生变化时触发的事件回调函数</td>
+          <td>在选中状态发生变化时触发的事件回调函数</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
@@ -149,7 +149,7 @@
           <th width="140">属性</th>
           <th>说明</th>
           <th width="220">类型</th>
-          <th width="240">默认值</th>
+          <th width="250">默认值</th>
         </tr>
       </thead>
       <tbody>
@@ -222,7 +222,7 @@
           <th width="140">事件名</th>
           <th>说明</th>
           <th width="220">类型</th>
-          <th width="240">回调参数</th>
+          <th width="250">回调参数</th>
         </tr>
       </thead>
       <tbody>

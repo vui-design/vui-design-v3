@@ -1,25 +1,28 @@
 const code =
 `<template>
   <vui-switch
-    v-model="value"
+    v-model:checked="checked"
     v-bind:checkedValue="1"
     v-bind:uncheckedValue="0"
   />
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        value: 0
-      };
-    },
-    watch: {
-      value(value) {
+<script lang="ts">
+  import { defineComponent, ref, watch } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const checked = ref<number>(1);
+
+      watch(checked, value => {
         console.log(value);
-      }
+      });
+
+      return {
+        checked
+      };
     }
-  };
+  });
 </script>
 `;
 

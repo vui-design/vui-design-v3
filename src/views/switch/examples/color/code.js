@@ -1,21 +1,28 @@
 const code =
 `<template>
-  <vui-switch v-model="value" checkedColor="#52c41a" uncheckedColor="#ff4d4f" />
+  <vui-switch
+    v-model:checked="checked"
+    checkedColor="#52c41a"
+    uncheckedColor="#ff4d4f"
+  />
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        value: false
-      };
-    },
-    watch: {
-      value(value) {
+<script lang="ts">
+  import { defineComponent, ref, watch } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const checked = ref<boolean>(false);
+
+      watch(checked, value => {
         console.log(value);
-      }
+      });
+
+      return {
+        checked
+      };
     }
-  };
+  });
 </script>
 `;
 

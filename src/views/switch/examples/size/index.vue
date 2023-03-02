@@ -1,35 +1,50 @@
 <template>
-  <example v-bind:code="code" id="example-switch-size">
-    <template slot="demo">
+  <vui-example id="example-switch-size" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-switch-size">
-        <vui-switch size="small" />
-        <vui-switch />
-        <vui-switch size="large" />
+        <section>
+          <vui-switch size="small" />
+          <vui-switch />
+          <vui-switch size="large" />
+        </section>
+        <section>
+          <vui-switch type="round" size="small" />
+          <vui-switch type="round" />
+          <vui-switch type="round" size="large" />
+        </section>
+        <section>
+          <vui-switch type="line" size="small" />
+          <vui-switch type="line" />
+          <vui-switch type="line" size="large" />
+        </section>
       </div>
     </template>
-    <template slot="title">尺寸</template>
-    <template slot="description">
+    <template v-slot:title>尺寸</template>
+    <template v-slot:description>
       <p>设置 <code>size</code> 为 <code>small</code> 或 <code>large</code> 使用小号或大号开关。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-switch-size .vui-switch + .vui-switch { margin-left:16px; }
+  .example-switch-size section { display:flex; justify-content:flex-start; align-items:center; }
+  .example-switch-size section + section { margin-top:16px; }
+  .example-switch-size section .vui-switch + .vui-switch { margin-left:16px; }
 </style>

@@ -327,15 +327,15 @@ export default [
 	// 			},
 	// 			component: () => import("src/views/slider/index.vue")
 	// 		},
-	// 		{
-	// 			path: "/components/switch",
-	// 			name: "switch",
-	// 			meta: {
-	// 				title: "Switch",
-	// 				group: "data-entry"
-	// 			},
-	// 			component: () => import("src/views/switch/index.vue")
-	// 		},
+			{
+				path: "/components/switch",
+				name: "switch",
+				meta: {
+					title: "Switch",
+					group: "data-entry"
+				},
+				component: () => import("src/views/switch/index.vue")
+			},
 	// 		{
 	// 			path: "/components/textarea",
 	// 			name: "textarea",

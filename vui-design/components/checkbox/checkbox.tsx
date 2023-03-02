@@ -111,13 +111,13 @@ export default defineComponent({
     // 选中状态
     const defaultChecked = ref(props.defaultChecked);
     const checked = computed(() => {
-      let checked = props.checked ?? defaultChecked.value;
+      const value = props.checked ?? defaultChecked.value;
 
       if (vuiCheckboxGroup) {
         return vuiCheckboxGroup.value.includes(props.value as string | number);
       }
       else {
-        return checked === props.checkedValue;
+        return value === props.checkedValue;
       }
     });
 
@@ -159,13 +159,13 @@ export default defineComponent({
     });
 
     // onFocus 事件回调
-    const handleFocus = (e: MouseEvent) => {
+    const handleFocus = (e: FocusEvent) => {
       focused.value = true;
       context.emit("focus", e);
     };
 
     // onBlur 事件回调
-    const handleBlur = (e: MouseEvent) => {
+    const handleBlur = (e: FocusEvent) => {
       focused.value = false;
       context.emit("blur", e);
     };

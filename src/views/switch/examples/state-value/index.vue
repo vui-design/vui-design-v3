@@ -1,37 +1,39 @@
 <template>
-  <example v-bind:code="code" id="example-switch-state-value">
-    <template slot="demo">
+  <vui-example id="example-switch-state-value" v-bind:code="code">
+    <template v-slot:demo>
       <vui-switch
-        v-model="value"
+        v-model:checked="checked"
         v-bind:checkedValue="1"
         v-bind:uncheckedValue="0"
       />
     </template>
-    <template slot="title">自定义状态值</template>
-    <template slot="description">
-      <p>设置 <code>Switch</code> 打开/关闭时的状态值。</p>
+    <template v-slot:title>自定义状态值</template>
+    <template v-slot:description>
+      <p>设置 <code>Switch</code> 打开/关闭时的状态值，默认为 <code>true</code> / <code>false</code>。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref, watch } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const checked = ref<number>(1);
+
+      watch(checked, value => {
+        console.log(value);
+      });
+
       return {
         code,
-        value: 1
+        checked
       };
-    },
-    watch: {
-      value(value) {
-        console.log(value);
-      }
     }
-  };
+  });
 </script>

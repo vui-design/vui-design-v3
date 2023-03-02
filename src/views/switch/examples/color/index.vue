@@ -1,33 +1,39 @@
 <template>
-  <example v-bind:code="code" id="example-switch-color">
-    <template slot="demo">
-      <vui-switch v-model="value" checkedColor="#52c41a" uncheckedColor="#ff4d4f" />
+  <vui-example id="example-switch-color" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-switch
+        v-model:checked="checked"
+        checkedColor="#52c41a"
+        uncheckedColor="#ff4d4f"
+      />
     </template>
-    <template slot="title">自定义颜色</template>
-    <template slot="description">
+    <template v-slot:title>自定义颜色</template>
+    <template v-slot:description>
       <p>通过 <code>checkedColor</code> 和 <code>uncheckedColor</code> 属性自定义颜色。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref, watch } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const checked = ref<boolean>(false);
+
+      watch(checked, value => {
+        console.log(value);
+      });
+
       return {
         code,
-        value: false
+        checked
       };
-    },
-    watch: {
-      value(value) {
-        console.log(value);
-      }
     }
-  };
+  });
 </script>

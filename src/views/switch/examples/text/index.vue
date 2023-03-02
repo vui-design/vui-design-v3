@@ -1,38 +1,44 @@
 <template>
-  <example v-bind:code="code" id="example-switch-text">
-    <template slot="demo">
+  <vui-example id="example-switch-text" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-switch-text">
         <vui-switch checkedText="开" uncheckedText="关" />
         <vui-switch v-bind:checkedText="1" v-bind:uncheckedText="0" />
-        <vui-switch checked>
-          <vui-icon type="checkmark" slot="checkedText" />
-          <vui-icon type="crossmark" slot="uncheckedText" />
+        <vui-switch v-bind:defaultChecked="true">
+          <template v-slot:checkedText>
+            <vui-icon type="checkmark" />
+          </template>
+          <template v-slot:uncheckedText>
+            <vui-icon type="crossmark" />
+          </template>
         </vui-switch>
       </div>
     </template>
-    <template slot="title">文字图标</template>
-    <template slot="description">
+    <template v-slot:title>文字图标</template>
+    <template v-slot:description>
       <p>带有文字或图标的开关。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
+  .example-switch-text { display:flex; justify-content:flex-start; align-items:center; }
   .example-switch-text .vui-switch + .vui-switch { margin-left:16px; }
 </style>

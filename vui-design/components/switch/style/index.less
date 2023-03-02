@@ -1,0 +1,454 @@
+@import "./token.less";
+
+@keyframes vuiSwitchLoading {
+  0% { transform:rotate(0deg); }
+  100% { transform:rotate(360deg); }
+}
+
+.@{vui-switch} {
+  position:relative;
+  cursor:pointer;
+  outline:none;
+  display:inline-block;
+  border:none;
+  margin:0;
+  padding:0;
+  vertical-align:middle;
+  user-select:none;
+  white-space:nowrap;
+  color:@switch-font-color;
+  text-align:right;
+  -webkit-appearance:none;
+  appearance:none;
+  transition:all @transition-duration @transition-timing-function;
+
+  &-input {
+    position:absolute;
+    display:block;
+    box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.35);
+    background-color:@switch-input-background-color;
+    transition:all @transition-duration @transition-timing-function;
+
+    &-spin {
+      content:"";
+      display:block;
+      border-width:1px;
+      border-style:solid;
+      border-color:transparent;
+      border-radius:50%;
+      margin:2px;
+      animation:vuiSwitchLoading 1s infinite linear;
+    }
+  }
+
+  &-label {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    transition:all @transition-duration @transition-timing-function;
+  }
+
+  // type
+  &-circle {
+    background-color:@switch-background-color;
+  }
+  &-circle::before {
+    content:none;
+  }
+  &-circle &-input {
+    border-radius:50%;
+  }
+
+  &-round {
+    background-color:@switch-background-color;
+  }
+  &-round::before {
+    content:none;
+  }
+  &-round &-input {
+    border-radius:@border-radius;
+  }
+
+  &-line {
+    background-color:transparent;
+  }
+  &-line::before {
+    content:"";
+    display:block;
+    width:100%;
+    background-color:@switch-background-color;
+    transition:all @transition-duration @transition-timing-function;
+  }
+  &-line &-input {
+    border-radius:50%;
+  }
+
+  // size
+  &-small {
+    height:@switch-size-sm;
+    font-size:@switch-font-size-sm;
+    line-height:@switch-size-sm;
+  }
+  &-small &-input {
+    width:@switch-input-size-sm;
+    height:@switch-input-size-sm;
+
+    &-spin {
+      width:@switch-input-spin-size-sm;
+      height:@switch-input-spin-size-sm;
+    }
+  }
+  &-small &-label {
+    padding-left:@switch-input-size-sm + @switch-input-gutter-sm + 6px;
+    padding-right:6px;
+  }
+
+  &-circle&-small {
+    min-width:@switch-input-size-sm * 2 + @switch-input-gutter-sm * 2;
+    border-radius:@switch-size-sm;
+  }
+  &-circle&-small::before {
+    height:0;
+    border-radius:0;
+  }
+  &-circle&-small &-input {
+    top:@switch-input-gutter-sm;
+    left:@switch-input-gutter-sm;
+  }
+
+  &-round&-small {
+    min-width:@switch-input-size-sm * 2 + @switch-input-gutter-sm * 2;
+    border-radius:@border-radius;
+  }
+  &-round&-small::before {
+    height:0;
+    border-radius:0;
+  }
+  &-round&-small &-input {
+    top:@switch-input-gutter-sm;
+    left:@switch-input-gutter-sm;
+  }
+
+  &-line&-small {
+    min-width:@switch-input-size-sm * 2;
+    border-radius:0;
+  }
+  &-line&-small::before {
+    height:4px;
+    border-radius:4px;
+  }
+  &-line&-small &-input {
+    top:@switch-input-gutter-sm;
+    left:0;
+  }
+
+  &-medium {
+    height:@switch-size-md;
+    font-size:@switch-font-size-md;
+    line-height:@switch-size-md;
+  }
+  &-medium &-input {
+    width:@switch-input-size-md;
+    height:@switch-input-size-md;
+
+    &-spin {
+      width:@switch-input-spin-size-md;
+      height:@switch-input-spin-size-md;
+    }
+  }
+  &-medium &-label {
+    padding-left:@switch-input-size-md + @switch-input-gutter-md + 8px;
+    padding-right:8px;
+  }
+
+  &-circle&-medium {
+    min-width:@switch-input-size-md * 2 + @switch-input-gutter-md * 2;
+    border-radius:@switch-size-md;
+  }
+  &-circle&-medium::before {
+    height:0;
+    border-radius:0;
+  }
+  &-circle&-medium &-input {
+    top:@switch-input-gutter-md;
+    left:@switch-input-gutter-md;
+  }
+
+  &-round&-medium {
+    min-width:@switch-input-size-md * 2 + @switch-input-gutter-md * 2;
+    border-radius:@border-radius;
+  }
+  &-round&-medium::before {
+    height:0;
+    border-radius:0;
+  }
+  &-round&-medium &-input {
+    top:@switch-input-gutter-md;
+    left:@switch-input-gutter-md;
+  }
+
+  &-line&-medium {
+    min-width:@switch-input-size-md * 2;
+    border-radius:0;
+  }
+  &-line&-medium::before {
+    height:6px;
+    border-radius:6px;
+  }
+  &-line&-medium &-input {
+    top:@switch-input-gutter-md;
+    left:0;
+  }
+
+  &-large {
+    height:@switch-size-lg;
+    font-size:@switch-font-size-lg;
+    line-height:@switch-size-lg;
+  }
+  &-large &-input {
+    width:@switch-input-size-lg;
+    height:@switch-input-size-lg;
+
+    &-spin {
+      width:@switch-input-spin-size-lg;
+      height:@switch-input-spin-size-lg;
+    }
+  }
+  &-large &-label {
+    padding-left:@switch-input-size-lg + @switch-input-gutter-lg + 10px;
+    padding-right:10px;
+  }
+
+  &-circle&-large {
+    min-width:@switch-input-size-lg * 2 + @switch-input-gutter-lg * 2;
+    border-radius:@switch-size-lg;
+  }
+  &-circle&-large::before {
+    height:0;
+    border-radius:0;
+  }
+  &-circle&-large &-input {
+    top:@switch-input-gutter-lg;
+    left:@switch-input-gutter-lg;
+  }
+
+  &-round&-large {
+    min-width:@switch-input-size-lg * 2 + @switch-input-gutter-lg * 2;
+    border-radius:@border-radius;
+  }
+  &-round&-large::before {
+    height:0;
+    border-radius:0;
+  }
+  &-round&-large &-input {
+    top:@switch-input-gutter-lg;
+    left:@switch-input-gutter-lg;
+  }
+
+  &-line&-large {
+    min-width:@switch-input-size-lg * 2;
+    border-radius:0;
+  }
+  &-line&-large::before {
+    height:8px;
+    border-radius:8px;
+  }
+  &-line&-large &-input {
+    top:@switch-input-gutter-lg;
+    left:0;
+  }
+
+  // loading
+  &-loading {
+    cursor:not-allowed;
+  }
+  &-loading &-input {
+    &-spin {
+      border-bottom-color:tint(@switch-background-color, 20%);
+    }
+  }
+
+  &-circle&-loading {
+    background-color:tint(@switch-background-color, 40%);
+  }
+  &-circle&-loading::before {
+    background-color:transparent;
+  }
+
+  &-round&-loading {
+    background-color:tint(@switch-background-color, 40%);
+  }
+  &-round&-loading::before {
+    background-color:transparent;
+  }
+
+  &-line&-loading {
+    background-color:transparent;
+  }
+  &-line&-loading::before {
+    background-color:tint(@switch-background-color, 40%);
+  }
+
+  // checked
+  &-circle&-checked {
+    background-color:@switch-checked-background-color;
+  }
+  &-circle&-checked::before {
+    background-color:transparent;
+  }
+
+  &-round&-checked {
+    background-color:@switch-checked-background-color;
+  }
+  &-round&-checked::before {
+    background-color:transparent;
+  }
+
+  &-line&-checked {
+    background-color:transparent;
+  }
+  &-line&-checked::before {
+    background-color:@switch-checked-background-color;
+  }
+
+  // disabled
+  &-disabled {
+    cursor:not-allowed;
+    background-color:tint(@switch-background-color, 40%);
+  }
+
+  &-circle&-disabled {
+    background-color:tint(@switch-background-color, 40%);
+  }
+  &-circle&-disabled::before {
+    background-color:transparent;
+  }
+
+  &-round&-disabled {
+    background-color:tint(@switch-background-color, 40%);
+  }
+  &-round&-disabled::before {
+    background-color:transparent;
+  }
+
+  &-line&-disabled {
+    background-color:transparent;
+  }
+  &-line&-disabled::before {
+    background-color:tint(@switch-background-color, 40%);
+  }
+
+  // loading && checked
+  &-circle&-loading&-checked {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+  &-circle&-loading&-checked::before {
+    background-color:transparent;
+  }
+  &-circle&-loading&-checked &-input {
+    &-spin {
+      border-bottom-color:tint(@switch-checked-background-color, 20%);
+    }
+  }
+
+  &-round&-loading&-checked {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+  &-round&-loading&-checked::before {
+    background-color:transparent;
+  }
+  &-round&-loading&-checked &-input {
+    &-spin {
+      border-bottom-color:tint(@switch-checked-background-color, 20%);
+    }
+  }
+
+  &-line&-loading&-checked {
+    background-color:transparent;
+  }
+  &-line&-loading&-checked::before {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+  &-line&-loading&-checked &-input {
+    &-spin {
+      border-bottom-color:tint(@switch-checked-background-color, 20%);
+    }
+  }
+
+  // checked & disabled
+  &-circle&-checked&-disabled {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+  &-circle&-checked&-disabled::before {
+    background-color:transparent;
+  }
+
+  &-round&-checked&-disabled {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+  &-round&-checked&-disabled::before {
+    background-color:transparent;
+  }
+
+  &-line&-checked&-disabled {
+    background-color:transparent;
+  }
+  &-line&-checked&-disabled::before {
+    background-color:tint(@switch-checked-background-color, 40%);
+  }
+
+  //
+  &-small&-checked &-label {
+    padding-left:6px;
+    padding-right:@switch-input-size-sm + @switch-input-gutter-sm + 6px;
+  }
+
+  &-circle&-small&-checked &-input {
+    left:calc(100% - @switch-input-size-sm - @switch-input-gutter-sm);
+  }
+
+  &-round&-small&-checked &-input {
+    left:calc(100% - @switch-input-size-sm - @switch-input-gutter-sm);
+  }
+
+  &-line&-small&-checked &-input {
+    left:calc(100% - @switch-input-size-sm);
+  }
+
+  // 
+  &-medium&-checked &-label {
+    padding-left:8px;
+    padding-right:@switch-input-size-md + @switch-input-gutter-md + 8px;
+  }
+
+  &-circle&-medium&-checked &-input {
+    left:calc(100% - @switch-input-size-md - @switch-input-gutter-md);
+  }
+
+  &-round&-medium&-checked &-input {
+    left:calc(100% - @switch-input-size-md - @switch-input-gutter-md);
+  }
+
+  &-line&-medium&-checked &-input {
+    left:calc(100% - @switch-input-size-md);
+  }
+
+  // 
+  &-large&-checked &-label {
+    padding-left:10px;
+    padding-right:@switch-input-size-lg + @switch-input-gutter-lg + 10px;
+  }
+
+  &-circle&-large&-checked &-input {
+    left:calc(100% - @switch-input-size-lg - @switch-input-gutter-lg);
+  }
+
+  &-round&-large&-checked &-input {
+    left:calc(100% - @switch-input-size-lg - @switch-input-gutter-lg);
+  }
+
+  &-line&-large&-checked &-input {
+    left:calc(100% - @switch-input-size-lg);
+  }
+}
