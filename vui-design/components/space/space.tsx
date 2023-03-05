@@ -59,7 +59,7 @@ export type SpaceProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>
 export default defineComponent({
   name: "vui-space",
   props: createProps(),
-  setup(props, { slots }) {
+  setup(props, context) {
     // 判断间距大小为预设值，还是自定义值
     const withPresetGutter = computed(() => props.gutter && gutters.includes(props.gutter as string));
     const withCustomGutter = computed(() => props.gutter && gutters.indexOf(props.gutter as string) === -1);
@@ -118,7 +118,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const elements = getValidElements(slots.default?.());
+      const elements = getValidElements(context.slots.default?.());
 
       if (elements.length === 0) {
         return null;

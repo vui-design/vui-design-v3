@@ -202,7 +202,7 @@ export default defineComponent({
 
       if (context.slots.actions) {
         const children = getValidElements(context.slots.actions?.());
-        let kids: any = [];
+        let kids: any[] = [];
 
         children.forEach((child: VNode, index: number) => {
           if (index > 0) {

@@ -7,14 +7,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-spin-size > .vui-spin + .vui-spin { margin-left:16px; }
+  .example-spin-size .vui-spin + .vui-spin { margin-left:16px; }
 </style>
 `;
 

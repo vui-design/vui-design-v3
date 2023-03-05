@@ -5,12 +5,6 @@ const code =
     </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-spin-inside { border-radius:2px; background-color:#fafafa; padding:48px; text-align:center; }
 </style>

@@ -1,7 +1,10 @@
 const code =
 `<template>
   <div class="example-spin-nested">
-    <vui-switch v-model="spinning" />
+    <div class="example-spin-nested-title">
+      <label>Loading State:</label>
+      <vui-switch type="line" v-model:checked="spinning" />
+    </div>
     <vui-spin v-bind:spinning="spinning">
       <vui-alert
         type="info"
@@ -12,18 +15,23 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const spinning = ref<boolean>(false);
+
       return {
-        spinning: false
+        spinning
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-spin-nested .vui-spin { margin-top:16px; }
+  .example-spin-nested-title { display:flex; justify-content:flex-start; align-items:center; margin-bottom:16px; }
+  .example-spin-nested-title label { margin-right:8px;; }
 </style>
 `;
 

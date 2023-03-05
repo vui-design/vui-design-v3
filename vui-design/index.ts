@@ -18,7 +18,7 @@ import Link from "./components/link";
 // Layout
 import Divider from "./components/divider";
 import { Row, Col } from "./components/grid";
-import Layout, { Header, Sider, Content, Footer } from "./components/layout";
+import Layout, { LayoutHeader, LayoutSider, LayoutContent, LayoutFooter } from "./components/layout";
 import Space from "./components/space";
 // Navigation
 import Affix from "./components/affix";
@@ -67,17 +67,13 @@ import Upload from "./components/upload";
 import Avatar, { AvatarGroup } from "./components/avatar";
 import Badge from "./components/badge";
 import Card, { CardMeta, CardGrid } from "./components/card";
-import Cell from "./components/cell";
-import CellGroup from "./components/cell-group";
 import Collapse from "./components/collapse";
 import Panel from "./components/panel";
 import Descriptions from "./components/descriptions";
 import Description from "./components/description";
 import Empty from "./components/empty";
 import Image from "./components/image";
-import List from "./components/list";
-import ListItem from "./components/list-item";
-import ListItemMeta from "./components/list-item-meta";
+import List, { ListItem, ListItemMeta } from "./components/list";
 import Popover from "./components/popover";
 import Qrcode from "./components/qrcode";
 import Ratio from "./components/ratio";
@@ -123,10 +119,10 @@ const components = [
   Row,
   Col,
   Layout,
-  Header,
-  Sider,
-  Content,
-  Footer,
+  LayoutHeader,
+  LayoutSider,
+  LayoutContent,
+  LayoutFooter,
   Space,
   // Navigation
   Affix,
@@ -180,8 +176,6 @@ const components = [
   Card,
   CardGrid,
   CardMeta,
-  Cell,
-  CellGroup,
   Collapse,
   Panel,
   Descriptions,
@@ -273,10 +267,10 @@ export {
   Row,
   Col,
   Layout,
-  Header,
-  Sider,
-  Content,
-  Footer,
+  LayoutHeader,
+  LayoutSider,
+  LayoutContent,
+  LayoutFooter,
   Space,
   // Navigation
   Affix,
@@ -330,8 +324,6 @@ export {
   Card,
   CardGrid,
   CardMeta,
-  Cell,
-  CellGroup,
   Collapse,
   Panel,
   Descriptions,

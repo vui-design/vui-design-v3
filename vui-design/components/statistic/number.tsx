@@ -1,11 +1,12 @@
-import type { FunctionalComponent, VNodeTypes } from "vue";
+import type { FunctionalComponent } from "vue";
+import type { VNodeAtom } from "../../types";
 import type { NumberProps } from "./types";
 import is from "../../utils/is";
 import padEnd from "../../utils/padEnd";
 
 const Number: FunctionalComponent<NumberProps> = props => {
   const { classNamePrefix, value, precision, placeholder, decimalSeparator = "", groupSeparator = "", formatter } = props;
-  let children: VNodeTypes = [];
+  let children: VNodeAtom[] = [];
 
   if (is.null(value) || is.undefined(value)) {
     children.push(

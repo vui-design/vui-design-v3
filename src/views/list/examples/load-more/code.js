@@ -2,84 +2,78 @@ const code =
 `<template>
   <vui-list>
     <vui-list-item v-for="(item, index) in data" v-bind:key="index">
-      <vui-list-item-meta v-bind:avatar="item.avatar" v-bind:description="item.description">
-        <a slot="title" href="javascript:;">{{item.title}}</a>
-      </vui-list-item-meta>
-      <template slot="actions">
+      <vui-skeleton avatar v-bind:title="false" v-bind:paragraph="{ rows: 2, width: ['40%', '100%'] }" animated v-bind:loading="!!item.loading">
+        <vui-list-item-meta v-bind:avatar="item.picture.large" description="This is the description of the list item, which may be very long!">
+          <template v-slot:title>
+            <a href="javascript:;">{{item.name.last}}</a>
+          </template>
+        </vui-list-item-meta>
+      </vui-skeleton>
+      <template v-if="!item.loading" v-slot:actions>
         <a href="javascript:;">Edit</a>
         <a href="javascript:;">More</a>
       </template>
     </vui-list-item>
-    <template slot="more">
-      <vui-spin v-if="loading" />
-      <a href="javascript:;" v-else v-on:click="handleLoadMore">loading more</a>
+    <template v-if="!loading" v-slot:more>
+      <a href="javascript:;" v-on:click="handleLoad">Load more</a>
     </template>
   </vui-list>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        loading: false,
-        data: [
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!"
-          },
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!"
-          },
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!"
-          },
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!"
-          }
-        ]
-      };
-    },
-    methods: {
-      handleLoadMore() {
-        this.loading = true;
+<script lang="ts">
+  import { defineComponent, ref, onMounted } from "vue";
 
-        setTimeout(() => {
-          const data = [
-            {
-              avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-              title: "List Item Title",
-              description: "This is the description of the list item, which may be very long!"
-            },
-            {
-              avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-              title: "List Item Title",
-              description: "This is the description of the list item, which may be very long!"
-            },
-            {
-              avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-              title: "List Item Title",
-              description: "This is the description of the list item, which may be very long!"
-            },
-            {
-              avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-              title: "List Item Title",
-              description: "This is the description of the list item, which may be very long!"
-            }
-          ];
-
-          this.loading = false;
-          this.data = this.data.concat(data);
-        }, 1000);
-      }
-    }
+  interface DataSourceItem {
+    name: {
+      title?: string;
+      first?: string;
+      last?: string;
+    };
+    picture: {
+      large?: string;
+      medium?: string;
+      thumbnail?: string;
+    };
+    gender?: string;
+    email?: string;
+    nat?: string;
+    loading?: boolean;
   };
+
+  const pageSize = 3;
+  const url = "https://randomuser.me/api/?results=" + pageSize + "&inc=name,gender,email,nat,picture&noinfo";
+
+  export default defineComponent({
+    setup() {
+      const loading = ref<boolean>(false);
+      const cache = ref<DataSourceItem[]>([]);
+      const data = ref<DataSourceItem[]>([]);
+      const handleLoad = () => {
+        const array = [...new Array(pageSize)];
+
+        loading.value = true;
+        data.value = cache.value.concat(array.map(() => ({ loading: true, name: {}, picture: {} })));
+
+        fetch(url).then(response => response.json()).then(response => {
+          const value = cache.value.concat(response.results);
+
+          loading.value = false;
+          cache.value = value;
+          data.value = value;
+        });
+      };
+
+      onMounted(() => {
+        handleLoad();
+      });
+
+      return {
+        loading,
+        data,
+        handleLoad
+      };
+    }
+  });
 </script>
 `;
 

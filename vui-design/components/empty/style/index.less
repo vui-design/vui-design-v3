@@ -1,0 +1,29 @@
+@import "./token.less";
+
+.@{vui-empty} {
+  display:block;
+  text-align:center;
+
+  &-image {
+    height:@empty-image-height;
+
+    svg, img {
+      display:block;
+      height:100%;
+      margin:0 auto;
+    }
+  }
+
+  &-description {
+    display:block;
+    margin-top:@empty-description-margin-top;
+    color:@empty-description-font-color;
+    font-size:@empty-description-font-size;
+    line-height:@empty-description-line-height;
+  }
+
+  &-content {
+    display:block;
+    margin-top:@empty-content-margin-top;
+  }
+}

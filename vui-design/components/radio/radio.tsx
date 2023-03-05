@@ -116,7 +116,7 @@ export default defineComponent({
       }
     });
 
-    // 
+    // 监听 checked 属性变化
     watch(() => props.checked, newValue => {
       if (is.boolean(newValue) || is.string(newValue) || is.number(newValue)) {
         defaultChecked.value = newValue;

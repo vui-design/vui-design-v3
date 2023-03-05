@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType, Ref, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement, Position } from "./types";
-import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick, onMounted, onUpdated, onBeforeUnmount, onDeactivated, Teleport, Transition } from "vue";
+import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick, onMounted, onUpdated, onBeforeUnmount, onDeactivated } from "vue";
 import VuiResizeObserver from "../resize-observer";
 import VuiLazyRender from "../lazy-render";
 import useFirstElement from "../../hooks/useFirstElement";

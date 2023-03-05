@@ -1,8 +1,11 @@
 const code =
 `<template>
   <div class="example-spin-delay">
-    <vui-switch v-model="spinning" />
-    <vui-spin v-bind:delay="delay" v-bind:spinning="spinning">
+    <div class="example-spin-delay-title">
+      <label>Loading State:</label>
+      <vui-switch type="line" v-model:checked="spinning" />
+    </div>
+    <vui-spin v-bind:spinning="spinning" v-bind:delay="500">
       <vui-alert
         type="info"
         message="Alert message title"
@@ -12,19 +15,23 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const spinning = ref<boolean>(false);
+
       return {
-        delay: 500,
-        spinning: false
+        spinning
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-spin-delay .vui-spin { margin-top:16px; }
+  .example-spin-delay-title { display:flex; justify-content:flex-start; align-items:center; margin-bottom:16px; }
+  .example-spin-delay-title label { margin-right:8px;; }
 </style>
 `;
 

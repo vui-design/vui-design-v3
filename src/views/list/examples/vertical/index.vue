@@ -1,13 +1,15 @@
 <template>
-  <example v-bind:code="code" id="example-list-vertical">
-    <template slot="demo">
+  <vui-example id="example-list-vertical" v-bind:code="code">
+    <template v-slot:demo>
       <vui-list layout="vertical" size="large">
         <vui-list-item v-for="(item, index) in data" v-bind:key="index">
           <vui-list-item-meta v-bind:avatar="item.avatar" v-bind:description="item.description" >
-            <a slot="title" href="javascript:;">{{item.title}}</a>
+            <template v-slot:title>
+              <a href="javascript:;">{{item.title}}</a>
+            </template>
           </vui-list-item-meta>
           <article>{{item.content}}</article>
-          <template slot="actions">
+          <template v-slot:actions>
             <a href="javascript:;">
               <vui-icon type="star" style="margin-right: 4px;" />{{item.collection}}
             </a>
@@ -18,51 +20,56 @@
               <vui-icon type="chat-ellipsis" style="margin-right: 4px;" />{{item.comment}}
             </a>
           </template>
-          <img slot="extra" width="280" height="166" v-bind:src="item.image" />
+          <template v-slot:extra>
+            <img width="280" height="166" v-bind:src="item.image" />
+          </template>
         </vui-list-item>
       </vui-list>
     </template>
-    <template slot="title">竖排列表样式</template>
-    <template slot="description">
+    <template v-slot:title>竖排列表样式</template>
+    <template v-slot:description>
       <p>通过设置 <code>layout</code> 属性为 <code>vertical</code> 可实现竖排列表样式。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
-    components: {
-      Example
+  const data = [
+    {
+      avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+      title: "List Item Title",
+      description: "This is the description of the list item, which may be very long!",
+      content: "The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back!",
+      collection: 100,
+      like: 666,
+      comment: 888,
+      image: "https://dummyimage.com/280x166/ececec/595959"
     },
-    data() {
+    {
+      avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+      title: "List Item Title",
+      description: "This is the description of the list item, which may be very long!",
+      content: "The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back!",
+      collection: 100,
+      like: 666,
+      comment: 888,
+      image: "https://dummyimage.com/280x166/ececec/595959"
+    }
+  ];
+
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
       return {
         code,
-        data: [
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!",
-            content: "The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back!",
-            collection: 100,
-            like: 666,
-            comment: 888,
-            image: "https://dummyimage.com/280x166/ececec/595959"
-          },
-          {
-            avatar: "https://dummyimage.com/32x32/2d8cf0/fff",
-            title: "List Item Title",
-            description: "This is the description of the list item, which may be very long!",
-            content: "The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back!",
-            collection: 100,
-            like: 666,
-            comment: 888,
-            image: "https://dummyimage.com/280x166/ececec/595959"
-          }
-        ]
+        data
       };
     }
-  };
+  });
 </script>

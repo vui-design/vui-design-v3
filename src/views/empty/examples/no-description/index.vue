@@ -1,27 +1,28 @@
 <template>
-	<example v-bind:code="code" id="example-empty-no-description">
-		<template slot="demo">
-			<vui-empty v-bind:description="false" />
-		</template>
-		<template slot="title">无描述</template>
-		<template slot="description">
-			<p>无描述的空状态。</p>
-		</template>
-	</example>
+  <vui-example id="example-empty-no-description" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-empty v-bind:description="false" />
+    </template>
+    <template v-slot:title>无描述</template>
+    <template v-slot:description>
+      <p>无描述的空状态。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code
-			};
-		}
-	};
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      return {
+        code
+      };
+    }
+  });
 </script>

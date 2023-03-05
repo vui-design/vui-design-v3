@@ -150,11 +150,26 @@ export default defineComponent({
         });
 
         children = options.map((option, optionIndex) => {
+          let label;
+
+          if (context.slots.label) {
+            label = context.slots.label({
+              option,
+              index: optionIndex
+            });
+          }
+          else {
+            label = is.function(option.label) ? option.label() : option.label;
+          }
+
           return (
-            <VuiRadio key={is.boolean(option.value) ? optionIndex : option.value} value={option.value} disabled={option.disabled} validator={false}>
-              {
-                context.slots.label ? context.slots.label(option) : (is.function(option.label) ? option.label() : option.label)
-              }
+            <VuiRadio
+              key={is.boolean(option.value) ? optionIndex : option.value}
+              value={option.value}
+              disabled={option.disabled}
+              validator={false}
+            >
+              {label}
             </VuiRadio>
           );
         });

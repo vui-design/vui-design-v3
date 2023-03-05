@@ -199,8 +199,8 @@ export default defineComponent({
           );
         },
         content: () => {
-          const cancelText = props.cancelText || translate("popconfirm.cancelText");
-          const okText = props.okText || translate("popconfirm.okText");
+          const cancelText = props.cancelText ?? translate("popconfirm.cancelText");
+          const okText = props.okText ?? translate("popconfirm.okText");
 
           return (
             <>

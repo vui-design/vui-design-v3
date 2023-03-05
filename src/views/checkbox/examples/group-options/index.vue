@@ -12,7 +12,7 @@
         <br />
         <br />
         <vui-checkbox-group v-model:value="value4" v-bind:options="options4">
-          <template v-slot:label="option">{{option.label}}</template>
+          <template v-slot:label="{ option }">{{option.label}}</template>
         </vui-checkbox-group>
       </div>
     </template>

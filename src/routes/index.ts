@@ -392,15 +392,6 @@ export default [
 				component: () => import("src/views/card/index.vue")
 			},
 	// 		{
-	// 			path: "/components/cell",
-	// 			name: "cell",
-	// 			meta: {
-	// 				title: "Cell",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/cell/index.vue")
-	// 		},
-	// 		{
 	// 			path: "/components/collapse",
 	// 			name: "collapse",
 	// 			meta: {
@@ -418,15 +409,15 @@ export default [
 	// 			},
 	// 			component: () => import("src/views/descriptions/index.vue")
 	// 		},
-	// 		{
-	// 			path: "/components/empty",
-	// 			name: "empty",
-	// 			meta: {
-	// 				title: "Empty",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/empty/index.vue")
-	// 		},
+			{
+				path: "/components/empty",
+				name: "empty",
+				meta: {
+					title: "Empty",
+					group: "data-display"
+				},
+				component: () => import("src/views/empty/index.vue")
+			},
 	// 		{
 	// 			path: "/components/image",
 	// 			name: "image",
@@ -436,15 +427,15 @@ export default [
 	// 			},
 	// 			component: () => import("src/views/image/index.vue")
 	// 		},
-	// 		{
-	// 			path: "/components/list",
-	// 			name: "list",
-	// 			meta: {
-	// 				title: "List",
-	// 				group: "data-display"
-	// 			},
-	// 			component: () => import("src/views/list/index.vue")
-	// 		},
+			{
+				path: "/components/list",
+				name: "list",
+				meta: {
+					title: "List",
+					group: "data-display"
+				},
+				component: () => import("src/views/list/index.vue")
+			},
 			{
 				path: "/components/popover",
 				name: "popover",
@@ -626,15 +617,15 @@ export default [
 				},
 				component: () => import("src/views/skeleton/index.vue")
 			},
-	// 		{
-	// 			path: "/components/spin",
-	// 			name: "spin",
-	// 			meta: {
-	// 				title: "Spin",
-	// 				group: "feedback"
-	// 			},
-	// 			component: () => import("src/views/spin/index.vue")
-	// 		},
+			{
+				path: "/components/spin",
+				name: "spin",
+				meta: {
+					title: "Spin",
+					group: "feedback"
+				},
+				component: () => import("src/views/spin/index.vue")
+			},
 	// 		// 其它
 	// 		{
 	// 			path: "/components/anchor",

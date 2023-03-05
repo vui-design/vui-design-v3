@@ -1,41 +1,44 @@
 <template>
-  <example v-bind:code="code" id="example-spin-nested">
-    <template slot="demo">
+  <vui-example id="example-spin-nested" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-spin-nested">
-        <vui-switch v-model="spinning" />
+        <div class="example-spin-nested-title">
+          <label>Loading State:</label>
+          <vui-switch type="line" v-model:checked="spinning" />
+        </div>
         <vui-spin v-bind:spinning="spinning">
-          <vui-alert
-            type="info"
-            message="Alert message title"
-            description="Further details about the context of this alert."
-          />
+          <div style="border: 1px solid #e0e0e0; border-radius: 2px; height: 100px; background-color: #fafafa; text-align: center; line-height: 100px;">Spin 组件</div>
         </vui-spin>
       </div>
     </template>
-    <template slot="title">卡片加载中</template>
-    <template slot="description">
+    <template v-slot:title>卡片加载中</template>
+    <template v-slot:description>
       <p>可以直接把内容内嵌到 <code>Spin</code> 中，将现有容器变为加载状态。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const spinning = ref<boolean>(false);
+
       return {
         code,
-        spinning: false
+        spinning
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-spin-nested .vui-spin { margin-top:16px; }
+  .example-spin-nested-title { display:flex; justify-content:flex-start; align-items:center; margin-bottom:16px; }
+  .example-spin-nested-title label { margin-right:8px;; }
 </style>

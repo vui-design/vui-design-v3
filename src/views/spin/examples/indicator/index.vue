@@ -1,46 +1,50 @@
 <template>
-  <example v-bind:code="code" id="example-spin-indicator">
-    <template slot="demo">
+  <vui-example id="example-spin-indicator" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-spin-indicator">
         <vui-spin>
-          <vui-icon slot="indicator" type="loading-filled" style="font-size: 24px" />
+          <template v-slot:indicator>
+            <vui-icon type="loading-filled" style="font-size: 24px" />
+          </template>
         </vui-spin>
         <vui-spin v-bind:indicator="indicator" />
       </div>
     </template>
-    <template slot="title">自定义指示符</template>
-    <template slot="description">
+    <template v-slot:title>自定义指示符</template>
+    <template v-slot:description>
       <p>使用自定义指示符。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, h } from "vue";
+  import { Icon } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const indicator = () => {
+        return h(Icon, {
+          type: "loading-spinner",
+          style: {
+            fontSize: "24px"
+          }
+        });
+      };
+
       return {
         code,
-        indicator(h) {
-          return h("vui-icon", {
-            props: {
-              type: "loading-spinner"
-            },
-            style: {
-              fontSize: "24px"
-            }
-          });
-        }
+        indicator
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-spin-indicator > .vui-spin + .vui-spin { margin-left:24px; }
+  .example-spin-indicator .vui-spin + .vui-spin { margin-left:24px; }
 </style>

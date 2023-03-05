@@ -6,37 +6,45 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showSpin() {
-        const spin = this.$spin.spinning();
+<script lang="ts">
+  import { defineComponent, h } from "vue";
+  import { Icon, Spin } from "vui-design";
+
+  export default defineComponent({
+
+    setup() {
+      const showSpin = () => {
+        const spin = Spin.spinning("Loading...");
 
         setTimeout(() => spin.cancel(), 3000);
-      },
-      showCustomSpin() {
-        const spin = this.$spin.spinning({
-          indicator(h) {
+      };
+
+      const showCustomSpin = () => {
+        const spin = Spin.spinning({
+          indicator() {
             const props = {
-              type: "loading-spinner"
-            };
-            const style = {
-              fontSize: "34px"
+              type: "loading-spinner",
+              style: "font-size: 34px;"
             };
 
-            return h("vui-icon", { props, style });
+            return h(Icon, props);
           },
           background: "rgba(0, 0, 0, 0.5)"
         });
 
         setTimeout(() => spin.cancel(), 3000);
-      }
+      };
+
+      return {
+        showSpin,
+        showCustomSpin
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-spin-fullscreen > .vui-button { margin-right:10px; }
+  .example-spin-fullscreen .vui-button + .vui-button { margin-left:16px; }
 </style>
 `;
 

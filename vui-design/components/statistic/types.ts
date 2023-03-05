@@ -1,7 +1,8 @@
-import type { VNodeTypes, Slot, CSSProperties } from "vue";
+import type { Slot, CSSProperties } from "vue";
+import type { VNodeAtom } from "../../types";
 
 export type Value = string | number | undefined;
-export type Formatter = (value: Value, now?: number) => VNodeTypes;
+export type Formatter = (value: Value, now?: number) => VNodeAtom;
 export type Prefix = string | Slot;
 export type Suffix = string | Slot;
 
