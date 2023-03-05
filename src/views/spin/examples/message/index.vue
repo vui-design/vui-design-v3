@@ -3,7 +3,11 @@
     <template v-slot:demo>
       <div class="example-spin-message">
         <vui-spin message="Loading...">
-          <div style="border: 1px solid #e0e0e0; border-radius: 2px; height: 100px; background-color: #fafafa; text-align: center; line-height: 100px;">Spin 组件</div>
+          <vui-alert
+            type="info"
+            message="Alert message title"
+            description="Further details about the context of this alert."
+          />
         </vui-spin>
       </div>
     </template>

@@ -536,15 +536,15 @@ export default [
 	// 			component: () => import("src/views/watermark/index.vue")
 	// 		},
 	// 		// 反馈
-	// 		{
-	// 			path: "/components/alert",
-	// 			name: "alert",
-	// 			meta: {
-	// 				title: "Alert",
-	// 				group: "feedback"
-	// 			},
-	// 			component: () => import("src/views/alert/index.vue")
-	// 		},
+			{
+				path: "/components/alert",
+				name: "alert",
+				meta: {
+					title: "Alert",
+					group: "feedback"
+				},
+				component: () => import("src/views/alert/index.vue")
+			},
 	// 		{
 	// 			path: "/components/drawer",
 	// 			name: "drawer",

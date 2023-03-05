@@ -1,38 +1,39 @@
 <template>
-  <example v-bind:code="code" id="example-alert-banner">
-    <template slot="demo">
-      <browser>
+  <vui-example id="example-alert-banner" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-browser>
         <div class="example-alert-banner">
-          <vui-alert type="warning" showIcon message="Warning" banner />
-          <vui-alert type="warning" showIcon message="Detailed description and advice about warning copywriting." banner closable />
-          <vui-alert type="success" message="Success without icon" banner />
-          <vui-alert type="error" showIcon message="This is an error message about copywriting." banner />
+          <vui-alert type="warning" showIcon banner message="Warning" />
+          <vui-alert type="warning" showIcon banner closable message="Detailed description and advice about warning copywriting." />
+          <vui-alert type="success" banner message="Success without icon" />
+          <vui-alert type="error" showIcon banner message="This is an error message about copywriting." />
         </div>
-      </browser>
+      </vui-browser>
     </template>
-    <template slot="title">顶部公告</template>
-    <template slot="description">
+    <template v-slot:title>顶部公告</template>
+    <template v-slot:description>
       <p>设置 <code>banner</code> 属性可以应用顶部公告样式。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
-  import Browser from "src/components/browser";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import VuiBrowser from "../../../../components/browser/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example,
-      Browser
+      VuiExample,
+      VuiBrowser
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
