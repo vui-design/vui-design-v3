@@ -1,4 +1,9 @@
-@vui-progress: ~"@{vui}-progress";
+@import "./token.less";
+
+@keyframes vuiProgressActive {
+  0% { background-position:0 0; }
+  100% { background-position:40px 0; }
+}
 
 .@{vui-progress} {
   // line
@@ -7,22 +12,29 @@
     display:flex;
     justify-content:flex-start;
     align-items:center;
-    box-sizing:border-box;
     white-space:nowrap;
   }
 
-  &-line &-main {
+  &-line &-bar {
+    position:relative;
     flex:1;
     display:block;
-    box-sizing:border-box;
 
-    &-track {
+    &-trail {
       width:100%;
       background-color:transparent;
       overflow:hidden;
     }
-    &-thumb {
+    &-stroke {
       position:relative;
+      width:0%;
+      background-color:transparent;
+      transition:all @transition-duration @transition-timing-function;
+    }
+    &-stroke-success {
+      position:absolute;
+      top:0;
+      left:0;
       width:0%;
       background-color:transparent;
       transition:all @transition-duration @transition-timing-function;
@@ -49,21 +61,30 @@
   &-line&-status-normal {
     color:@progress-normal-font-color;
   }
-  &-line&-status-normal &-main-track {
-    background-color:@progress-normal-track-color;
+  &-line&-status-normal &-bar-trail {
+    background-color:@progress-normal-trail-color;
   }
-  &-line&-status-normal &-main-thumb {
+  &-line&-status-normal &-bar-stroke {
     background-color:@progress-normal-color;
+  }
+  &-line&-status-normal &-bar-stroke-success {
+    background-color:@progress-success-color;
   }
 
   &-line&-status-active {
     color:@progress-active-font-color;
   }
-  &-line&-status-active &-main-track {
-    background-color:@progress-active-track-color;
+  &-line&-status-active &-bar-trail {
+    background-color:@progress-active-trail-color;
   }
-  &-line&-status-active &-main-thumb {
+  &-line&-status-active &-bar-stroke {
     background-color:@progress-active-color;
+    background-image:linear-gradient(45deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent 100%);
+    background-size:40px 40px;
+    animation:vuiProgressActive 2s linear infinite;
+  }
+  &-line&-status-active &-bar-stroke-success {
+    background-color:@progress-success-color;
     background-image:linear-gradient(45deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent 100%);
     background-size:40px 40px;
     animation:vuiProgressActive 2s linear infinite;
@@ -72,20 +93,26 @@
   &-line&-status-exception {
     color:@progress-exception-font-color;
   }
-  &-line&-status-exception &-main-track {
-    background-color:@progress-exception-track-color;
+  &-line&-status-exception &-bar-trail {
+    background-color:@progress-exception-trail-color;
   }
-  &-line&-status-exception &-main-thumb {
+  &-line&-status-exception &-bar-stroke {
     background-color:@progress-exception-color;
+  }
+  &-line&-status-exception &-bar-stroke-success {
+    background-color:@progress-success-color;
   }
 
   &-line&-status-success {
     color:@progress-success-font-color;
   }
-  &-line&-status-success &-main-track {
-    background-color:@progress-success-track-color;
+  &-line&-status-success &-bar-trail {
+    background-color:@progress-success-trail-color;
   }
-  &-line&-status-success &-main-thumb {
+  &-line&-status-success &-bar-stroke {
+    background-color:@progress-success-color;
+  }
+  &-line&-status-success &-bar-stroke-success {
     background-color:@progress-success-color;
   }
 
@@ -93,20 +120,25 @@
   &-circle {
     position:relative;
     display:block;
-    box-sizing:border-box;
   }
 
-  &-circle &-main {
+  &-circle &-bar {
     display:block;
     width:100%;
     height:100%;
 
-    &-track {
+    &-trail {
       fill:none;
       fill-opacity:0;
       stroke:transparent;
     }
-    &-thumb {
+    &-stroke {
+      fill:none;
+      fill-opacity:0;
+      stroke:transparent;
+      transition:stroke 0.2s ease 0s, stroke-dasharray 0.2s ease 0s, stroke-dashoffset 0.2s ease 0s;
+    }
+    &-stroke-success {
       fill:none;
       fill-opacity:0;
       stroke:transparent;
@@ -138,30 +170,39 @@
   &-circle&-status-normal {
     color:@progress-normal-font-color;
   }
-  &-circle&-status-normal &-main-track {
-    stroke:@progress-normal-track-color;
+  &-circle&-status-normal &-bar-trail {
+    stroke:@progress-normal-trail-color;
   }
-  &-circle&-status-normal &-main-thumb {
+  &-circle&-status-normal &-bar-stroke {
     stroke:@progress-normal-color;
+  }
+  &-circle&-status-normal &-bar-stroke-success {
+    stroke:@progress-success-color;
   }
 
   &-circle&-status-exception {
     color:@progress-exception-font-color;
   }
-  &-circle&-status-exception &-main-track {
-    stroke:@progress-exception-track-color;
+  &-circle&-status-exception &-bar-trail {
+    stroke:@progress-exception-trail-color;
   }
-  &-circle&-status-exception &-main-thumb {
+  &-circle&-status-exception &-bar-stroke {
     stroke:@progress-exception-color;
+  }
+  &-circle&-status-exception &-bar-stroke-success {
+    stroke:@progress-success-color;
   }
 
   &-circle&-status-success {
     color:@progress-success-font-color;
   }
-  &-circle&-status-success &-main-track {
-    stroke:@progress-success-track-color;
+  &-circle&-status-success &-bar-trail {
+    stroke:@progress-success-trail-color;
   }
-  &-circle&-status-success &-main-thumb {
+  &-circle&-status-success &-bar-stroke {
+    stroke:@progress-success-color;
+  }
+  &-circle&-status-success &-bar-stroke-success {
     stroke:@progress-success-color;
   }
 
@@ -169,20 +210,25 @@
   &-dashboard {
     position:relative;
     display:block;
-    box-sizing:border-box;
   }
 
-  &-dashboard &-main {
+  &-dashboard &-bar {
     display:block;
     width:100%;
     height:100%;
 
-    &-track {
+    &-trail {
       fill:none;
       fill-opacity:0;
       stroke:transparent;
     }
-    &-thumb {
+    &-stroke {
+      fill:none;
+      fill-opacity:0;
+      stroke:transparent;
+      transition:stroke 0.2s ease 0s, stroke-dasharray 0.2s ease 0s, stroke-dashoffset 0.2s ease 0s;
+    }
+    &-stroke-success {
       fill:none;
       fill-opacity:0;
       stroke:transparent;
@@ -214,35 +260,39 @@
   &-dashboard&-status-normal {
     color:@progress-normal-font-color;
   }
-  &-dashboard&-status-normal &-main-track {
-    stroke:@progress-normal-track-color;
+  &-dashboard&-status-normal &-bar-trail {
+    stroke:@progress-normal-trail-color;
   }
-  &-dashboard&-status-normal &-main-thumb {
+  &-dashboard&-status-normal &-bar-stroke {
     stroke:@progress-normal-color;
+  }
+  &-dashboard&-status-normal &-bar-stroke-success {
+    stroke:@progress-success-color;
   }
 
   &-dashboard&-status-exception {
     color:@progress-exception-font-color;
   }
-  &-dashboard&-status-exception &-main-track {
-    stroke:@progress-exception-track-color;
+  &-dashboard&-status-exception &-bar-trail {
+    stroke:@progress-exception-trail-color;
   }
-  &-dashboard&-status-exception &-main-thumb {
+  &-dashboard&-status-exception &-bar-stroke {
     stroke:@progress-exception-color;
+  }
+  &-dashboard&-status-exception &-bar-stroke-success {
+    stroke:@progress-success-color;
   }
 
   &-dashboard&-status-success {
     color:@progress-success-font-color;
   }
-  &-dashboard&-status-success &-main-track {
-    stroke:@progress-success-track-color;
+  &-dashboard&-status-success &-bar-trail {
+    stroke:@progress-success-trail-color;
   }
-  &-dashboard&-status-success &-main-thumb {
+  &-dashboard&-status-success &-bar-stroke {
     stroke:@progress-success-color;
   }
-}
-
-@keyframes vuiProgressActive {
-  0% { background-position:0 0; }
-  100% { background-position:40px 0; }
+  &-dashboard&-status-success &-bar-stroke-success {
+    stroke:@progress-success-color;
+  }
 }

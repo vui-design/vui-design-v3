@@ -1,0 +1,1 @@
+export const statuses: string[] = ["info", "warning", "success", "error", "comingsoon", "403", "404", "500"];

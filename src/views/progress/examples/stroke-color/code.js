@@ -9,12 +9,6 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-progress-stroke-color .vui-progress-line { margin-bottom:16px; }
 </style>

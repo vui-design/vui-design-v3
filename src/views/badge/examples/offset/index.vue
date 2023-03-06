@@ -1,7 +1,7 @@
 <template>
   <vui-example id="example-badge-offset" v-bind:code="code">
     <template v-slot:demo>
-      <vui-badge v-bind:count="10" v-bind:offset="[10, 10]">
+      <vui-badge v-bind:count="10" v-bind:offset="[5, -5]">
         <img src="https://dummyimage.com/48x48/e6e6e6/6a6a6a" />
       </vui-badge>
     </template>

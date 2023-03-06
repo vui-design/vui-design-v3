@@ -5,17 +5,11 @@ const code =
     title="403"
     description="Sorry, you are not authorized to access this page."
   >
-    <template slot="extra">
+    <template v-slot:extra>
       <vui-button type="primary">Back Home</vui-button>
     </template>
   </vui-result>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

@@ -1,35 +1,36 @@
 <template>
-  <example v-bind:code="code" id="example-result-404">
-    <template slot="demo">
+  <vui-example id="example-result-404" v-bind:code="code">
+    <template v-slot:demo>
       <vui-result
         status="404"
         title="404"
         description="Sorry, the page you visited does not exist."
       >
-        <template slot="extra">
+        <template v-slot:extra>
           <vui-button type="primary">Back Home</vui-button>
         </template>
       </vui-result>
     </template>
-    <template slot="title">404</template>
-    <template slot="description">
+    <template v-slot:title>404</template>
+    <template v-slot:description>
       <p>此页面未找到。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

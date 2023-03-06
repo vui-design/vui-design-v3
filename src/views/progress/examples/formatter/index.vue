@@ -1,37 +1,43 @@
 <template>
-  <example v-bind:code="code" id="example-progress-formatter">
-    <template slot="demo">
+  <vui-example id="example-progress-formatter" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-formatter">
         <vui-progress type="circle" v-bind:percentage="75" v-bind:formatter="formatter" />
         <vui-progress type="circle" v-bind:percentage="100" v-bind:formatter="formatter" />
+        <vui-progress type="circle" v-bind:percentage="75">
+          <template v-slot:formatter="percentage">
+            <span style="color: #f00;">{{percentage}}%</span>
+          </template>
+        </vui-progress>
       </div>
     </template>
-    <template slot="title">自定义文字格式</template>
-    <template slot="description">
-      <p>利用 <code>formatter</code> 属性指定文字格式。</p>
+    <template v-slot:title>自定义文字格式</template>
+    <template v-slot:description>
+      <p>利用 <code>formatter</code> 插槽或属性指定文字格式。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
-      };
-    },
-    methods: {
-      formatter(percentage) {
+    setup() {
+      const formatter = (percentage: number) => {
         return percentage < 100 ? `${percentage} Days` : `Done`;
-      }
+      };
+
+      return {
+        code,
+        formatter
+      };
     }
-  };
+  });
 </script>
 
 <style>

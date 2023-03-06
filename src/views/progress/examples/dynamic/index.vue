@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-progress-dynamic">
-    <template slot="demo">
+  <vui-example id="example-progress-dynamic" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-dynamic">
         <vui-button-group>
           <vui-button icon="minus" v-on:click="handleDecrease" />
@@ -13,48 +13,45 @@
         </vui-space>
       </div>
     </template>
-    <template slot="title">动态展示</template>
-    <template slot="description">
+    <template v-slot:title>动态展示</template>
+    <template v-slot:description>
       <p>通过数据的联动和逻辑控制，实现动态效果。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const percentage = ref(10);
+
+      const handleDecrease = () => {
+        const value = percentage.value - 10;
+
+        percentage.value = value < 0 ? 0 : value;
+      };
+
+      const handleIncrease = () => {
+        const value = percentage.value + 10;
+
+        percentage.value = value > 100 ? 100 : value;
+      };
+
       return {
         code,
-        percentage: 10
+        percentage,
+        handleDecrease,
+        handleIncrease
       };
-    },
-    methods: {
-      handleDecrease() {
-        let percentage = this.percentage - 10;
-
-        if (percentage < 0) {
-          percentage = 0;
-        }
-
-        this.percentage = percentage;
-      },
-      handleIncrease() {
-        let percentage = this.percentage + 10;
-
-        if (percentage > 100) {
-          percentage = 100;
-        }
-
-        this.percentage = percentage;
-      }
     }
-  };
+  });
 </script>
 
 <style>

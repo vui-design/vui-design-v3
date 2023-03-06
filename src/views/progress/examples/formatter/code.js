@@ -3,17 +3,28 @@ const code =
   <div class="example-progress-formatter">
     <vui-progress type="circle" v-bind:percentage="75" v-bind:formatter="formatter" />
     <vui-progress type="circle" v-bind:percentage="100" v-bind:formatter="formatter" />
+    <vui-progress type="circle" v-bind:percentage="75">
+      <template v-slot:formatter="percentage">
+        <span style="color: #f00;">{{percentage}}%</span>
+      </template>
+    </vui-progress>
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      formatter(percentage) {
-        return percentage < 100 ? (percentage + "Days") : "Done";
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const formatter = (percentage: number) => {
+        return percentage < 100 ? (percentage + " Days") : "Done";
+      };
+
+      return {
+        formatter
+      };
     }
-  };
+  });
 </script>
 
 <style>

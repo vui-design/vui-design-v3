@@ -13,34 +13,32 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        percentage: 10
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const percentage = ref(10);
+
+      const handleDecrease = () => {
+        const value = percentage.value - 10;
+
+        percentage.value = value < 0 ? 0 : value;
       };
-    },
-    methods: {
-      handleDecrease() {
-        let percentage = this.percentage - 10;
 
-        if (percentage < 0) {
-          percentage = 0;
-        }
+      const handleIncrease = () => {
+        const value = percentage.value + 10;
 
-        this.percentage = percentage;
-      },
-      handleIncrease() {
-        let percentage = this.percentage + 10;
+        percentage.value = value > 100 ? 100 : value;
+      };
 
-        if (percentage > 100) {
-          percentage = 100;
-        }
-
-        this.percentage = percentage;
-      }
+      return {
+        percentage,
+        handleDecrease,
+        handleIncrease
+      };
     }
-  };
+  });
 </script>
 
 <style>

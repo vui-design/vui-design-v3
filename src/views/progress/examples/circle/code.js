@@ -7,12 +7,6 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
   .example-progress-circle { display:flex; justify-content:flex-start; align-items:center; }
   .example-progress-circle .vui-progress + .vui-progress { margin-left:16px; }

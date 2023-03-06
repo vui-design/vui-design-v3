@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-progress-stroke-color">
-    <template slot="demo">
+  <vui-example id="example-progress-stroke-color" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-stroke-color">
         <vui-progress v-bind:percentage="50" strokeColor="#722ed1" />
         <vui-space block>
@@ -9,27 +9,28 @@
         </vui-space>
       </div>
     </template>
-    <template slot="title">自定义颜色</template>
-    <template slot="description">
+    <template v-slot:title>自定义颜色</template>
+    <template v-slot:description>
       <p>通过 <code>strokeColor</code> 自定义颜色（会覆盖 <code>status</code> 状态下的默认颜色）。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

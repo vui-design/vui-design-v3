@@ -5,39 +5,35 @@ const code =
     title="This is result title"
     description="Here is a brief description of the result of the operation."
   >
-    <div class="example-result-error-content">
-      <h4 class="example-result-error-content-title">The content you submitted has the following error:</h4>
-      <div class="example-result-error-content-reason">
+    <dl class="example-result-error">
+      <dt>The content you submitted has the following error:</dt>
+      <dd>
         <vui-icon type="crossmark-circle" color="#ff4d4f" />
         <span>Your account has been frozen.</span>
         <a href="javascript:;">Thaw immediately ></a>
-      </div>
-      <div class="example-result-error-content-reason">
+      </dd>
+      <dd>
         <vui-icon type="crossmark-circle" color="#ff4d4f" />
         <span>Your account is not yet eligible to apply.</span>
         <a href="javascript:;">Apply Unlock ></a>
-      </div>
-    </div>
-    <vui-space slot="extra">
-      <vui-button type="primary">Back Home</vui-button>
-      <vui-button>Try Again</vui-button>
-    </vui-space>
+      </dd>
+    </dl>
+    <template v-slot:extra>
+      <vui-space>
+        <vui-button type="primary">Back Home</vui-button>
+        <vui-button>Try Again</vui-button>
+      </vui-space>
+    </template>
   </vui-result>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-result-error-content {  }
-  .example-result-error-content-title { margin-bottom:16px; color:#262626; font-size:16px; font-weight:600; }
-  .example-result-error-content-reason { color:#595959; }
-  .example-result-error-content-reason span { margin-left:4px; }
-  .example-result-error-content-reason a { margin-left:4px; }
-  .example-result-error-content-reason +  .example-result-error-content-reason { margin-top:4px; }
+  .example-result-error { margin:0; padding:0; }
+  .example-result-error dt { margin-bottom:24px; color:#262626; font-size:16px; font-weight:600; }
+  .example-result-error dd { margin:0; padding:0; color:#595959; }
+  .example-result-error dd + dd { margin-top:8px; }
+  .example-result-error dd span { margin-left:8px; }
+  .example-result-error dd a { margin-left:8px; }
 </style>
 `;
 

@@ -1,33 +1,34 @@
 <template>
-  <example v-bind:code="code" id="example-progress-dashboard">
-    <template slot="demo">
+  <vui-example id="example-progress-dashboard" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-dashboard">
         <vui-progress type="dashboard" v-bind:percentage="75" />
         <vui-progress type="dashboard" v-bind:percentage="75" status="exception" />
         <vui-progress type="dashboard" v-bind:percentage="100" />
       </div>
     </template>
-    <template slot="title">仪表盘</template>
-    <template slot="description">
+    <template v-slot:title>仪表盘</template>
+    <template v-slot:description>
       <p>通过设置 <code>type</code> 为 <code>dashboard</code>，可以很方便地实现仪表盘样式的进度条。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

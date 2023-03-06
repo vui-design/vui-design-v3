@@ -590,24 +590,24 @@ export default [
 				},
 				component: () => import("src/views/popconfirm/index.vue")
 			},
-	// 		{
-	// 			path: "/components/progress",
-	// 			name: "progress",
-	// 			meta: {
-	// 				title: "Progress",
-	// 				group: "feedback"
-	// 			},
-	// 			component: () => import("src/views/progress/index.vue")
-	// 		},
-	// 		{
-	// 			path: "/components/result",
-	// 			name: "result",
-	// 			meta: {
-	// 				title: "Result",
-	// 				group: "feedback"
-	// 			},
-	// 			component: () => import("src/views/result/index.vue")
-	// 		},
+			{
+				path: "/components/progress",
+				name: "progress",
+				meta: {
+					title: "Progress",
+					group: "feedback"
+				},
+				component: () => import("src/views/progress/index.vue")
+			},
+			{
+				path: "/components/result",
+				name: "result",
+				meta: {
+					title: "Result",
+					group: "feedback"
+				},
+				component: () => import("src/views/result/index.vue")
+			},
 			{
 				path: "/components/skeleton",
 				name: "skeleton",

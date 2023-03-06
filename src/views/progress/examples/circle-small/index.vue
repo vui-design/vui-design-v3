@@ -1,33 +1,34 @@
 <template>
-  <example v-bind:code="code" id="example-progress-circle-small">
-    <template slot="demo">
+  <vui-example id="example-progress-circle-small" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-circle-small">
         <vui-progress type="circle" size="small" v-bind:percentage="75" />
         <vui-progress type="circle" size="small" v-bind:percentage="75" status="exception" />
         <vui-progress type="circle" size="small" v-bind:percentage="100" />
       </div>
     </template>
-    <template slot="title">小型进度环</template>
-    <template slot="description">
+    <template v-slot:title>小型进度环</template>
+    <template v-slot:description>
       <p>适合放在较狭窄的区域内。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

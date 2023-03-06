@@ -1,35 +1,36 @@
 <template>
-  <example v-bind:code="code" id="example-result-comingsoon">
-    <template slot="demo">
+  <vui-example id="example-result-comingsoon" v-bind:code="code">
+    <template v-slot:demo>
       <vui-result
         status="comingsoon"
         title="Coming Soon!"
         description="Sorry, The current page is under development, so stay tuned!"
       >
-        <template slot="extra">
+        <template v-slot:extra>
           <vui-button type="primary">Back Home</vui-button>
         </template>
       </vui-result>
     </template>
-    <template slot="title">Coming Soon</template>
-    <template slot="description">
+    <template v-slot:title>Coming Soon</template>
+    <template v-slot:description>
       <p>敬请期待！</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-progress-stroke-linecap">
-    <template slot="demo">
+  <vui-example id="example-progress-stroke-linecap" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-progress-stroke-linecap">
         <vui-progress v-bind:percentage="50" strokeLinecap="square" />
         <vui-space block>
@@ -9,27 +9,28 @@
         </vui-space>
       </div>
     </template>
-    <template slot="title">线条边缘形状</template>
-    <template slot="description">
+    <template v-slot:title>线条边缘形状</template>
+    <template v-slot:description>
       <p>通过 <code>strokeLinecap</code> 可以调整线条边缘形状。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
