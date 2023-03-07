@@ -12,15 +12,16 @@
     display:flex;
     justify-content:flex-start;
     align-items:center;
+    line-height:1;
     white-space:nowrap;
   }
 
   &-line &-bar {
-    position:relative;
     flex:1;
     display:block;
 
     &-trail {
+      position:relative;
       width:100%;
       background-color:transparent;
       overflow:hidden;
@@ -28,6 +29,7 @@
     &-stroke {
       position:relative;
       width:0%;
+      height:100%;
       background-color:transparent;
       transition:all @transition-duration @transition-timing-function;
     }
@@ -36,6 +38,7 @@
       top:0;
       left:0;
       width:0%;
+      height:100%;
       background-color:transparent;
       transition:all @transition-duration @transition-timing-function;
     }
@@ -43,19 +46,26 @@
 
   &-line &-info {
     display:block;
-    width:36px;
     margin-left:@margin-xs;
-    line-height:1;
   }
 
   &-line&-small {
     font-size:@progress-line-font-size-sm;
   }
+  &-line&-small &-info {
+    width:32px;
+  }
   &-line&-medium {
     font-size:@progress-line-font-size-md;
   }
+  &-line&-medium &-info {
+    width:36px;
+  }
   &-line&-large {
     font-size:@progress-line-font-size-lg;
+  }
+  &-line&-large &-info {
+    width:40px;
   }
 
   &-line&-status-normal {
@@ -116,102 +126,16 @@
     background-color:@progress-success-color;
   }
 
-  // circle
-  &-circle {
-    position:relative;
-    display:block;
-  }
-
-  &-circle &-bar {
-    display:block;
-    width:100%;
-    height:100%;
-
-    &-trail {
-      fill:none;
-      fill-opacity:0;
-      stroke:transparent;
-    }
-    &-stroke {
-      fill:none;
-      fill-opacity:0;
-      stroke:transparent;
-      transition:stroke 0.2s ease 0s, stroke-dasharray 0.2s ease 0s, stroke-dashoffset 0.2s ease 0s;
-    }
-    &-stroke-success {
-      fill:none;
-      fill-opacity:0;
-      stroke:transparent;
-      transition:stroke 0.2s ease 0s, stroke-dasharray 0.2s ease 0s, stroke-dashoffset 0.2s ease 0s;
-    }
-  }
-
-  &-circle &-info {
-    position:absolute;
-    top:50%;
-    left:0;
-    right:0;
-    width:100%;
-    text-align:center;
-    line-height:1;
-    transform:translateY(-50%);
-  }
-
-  &-circle&-small {
-    font-size:@progress-circle-font-size-sm;
-  }
-  &-circle&-medium {
-    font-size:@progress-circle-font-size-md;
-  }
-  &-circle&-large {
-    font-size:@progress-circle-font-size-lg;
-  }
-
-  &-circle&-status-normal {
-    color:@progress-normal-font-color;
-  }
-  &-circle&-status-normal &-bar-trail {
-    stroke:@progress-normal-trail-color;
-  }
-  &-circle&-status-normal &-bar-stroke {
-    stroke:@progress-normal-color;
-  }
-  &-circle&-status-normal &-bar-stroke-success {
-    stroke:@progress-success-color;
-  }
-
-  &-circle&-status-exception {
-    color:@progress-exception-font-color;
-  }
-  &-circle&-status-exception &-bar-trail {
-    stroke:@progress-exception-trail-color;
-  }
-  &-circle&-status-exception &-bar-stroke {
-    stroke:@progress-exception-color;
-  }
-  &-circle&-status-exception &-bar-stroke-success {
-    stroke:@progress-success-color;
-  }
-
-  &-circle&-status-success {
-    color:@progress-success-font-color;
-  }
-  &-circle&-status-success &-bar-trail {
-    stroke:@progress-success-trail-color;
-  }
-  &-circle&-status-success &-bar-stroke {
-    stroke:@progress-success-color;
-  }
-  &-circle&-status-success &-bar-stroke-success {
-    stroke:@progress-success-color;
-  }
-
-  // dashboard
+  // circle & dashboard
+  &-circle,
   &-dashboard {
     position:relative;
     display:block;
+    text-align:center;
+    line-height:1;
   }
 
+  &-circle &-bar,
   &-dashboard &-bar {
     display:block;
     width:100%;
@@ -236,63 +160,184 @@
     }
   }
 
+  &-circle &-info,
   &-dashboard &-info {
     position:absolute;
     top:50%;
     left:0;
     right:0;
     width:100%;
-    text-align:center;
-    line-height:1;
     transform:translateY(-50%);
   }
 
+  &-circle&-small,
   &-dashboard&-small {
-    font-size:@progress-dashboard-font-size-sm;
+    font-size:@progress-circle-font-size-sm;
   }
+  &-circle&-medium,
   &-dashboard&-medium {
-    font-size:@progress-dashboard-font-size-md;
+    font-size:@progress-circle-font-size-md;
   }
+  &-circle&-large,
   &-dashboard&-large {
-    font-size:@progress-dashboard-font-size-lg;
+    font-size:@progress-circle-font-size-lg;
   }
 
+  &-circle&-status-normal,
   &-dashboard&-status-normal {
     color:@progress-normal-font-color;
   }
+  &-circle&-status-normal &-bar-trail,
   &-dashboard&-status-normal &-bar-trail {
     stroke:@progress-normal-trail-color;
   }
+  &-circle&-status-normal &-bar-stroke,
   &-dashboard&-status-normal &-bar-stroke {
     stroke:@progress-normal-color;
   }
+  &-circle&-status-normal &-bar-stroke-success,
   &-dashboard&-status-normal &-bar-stroke-success {
     stroke:@progress-success-color;
   }
 
+  &-circle&-status-exception,
   &-dashboard&-status-exception {
     color:@progress-exception-font-color;
   }
+  &-circle&-status-exception &-bar-trail,
   &-dashboard&-status-exception &-bar-trail {
     stroke:@progress-exception-trail-color;
   }
+  &-circle&-status-exception &-bar-stroke,
   &-dashboard&-status-exception &-bar-stroke {
     stroke:@progress-exception-color;
   }
+  &-circle&-status-exception &-bar-stroke-success,
   &-dashboard&-status-exception &-bar-stroke-success {
     stroke:@progress-success-color;
   }
 
+  &-circle&-status-success,
   &-dashboard&-status-success {
     color:@progress-success-font-color;
   }
+  &-circle&-status-success &-bar-trail,
   &-dashboard&-status-success &-bar-trail {
     stroke:@progress-success-trail-color;
   }
+  &-circle&-status-success &-bar-stroke,
   &-dashboard&-status-success &-bar-stroke {
     stroke:@progress-success-color;
   }
+  &-circle&-status-success &-bar-stroke-success,
   &-dashboard&-status-success &-bar-stroke-success {
     stroke:@progress-success-color;
+  }
+
+  // steps
+  &-steps {
+    position:relative;
+    display:inline-flex;
+    justify-content:flex-start;
+    align-items:center;
+    line-height:1;
+    white-space:nowrap;
+  }
+
+  &-steps &-bar {
+    flex:1;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    white-space:nowrap;
+
+    &-step {
+      position:relative;
+      background-color:transparent;
+      transition:all @transition-duration @transition-timing-function;
+
+      &:not(:first-child) {
+        margin-left:2px;
+      }
+    }
+  }
+
+  &-steps &-info {
+    display:block;
+    margin-left:@margin-xs;
+  }
+
+  &-steps&-small {
+    font-size:@progress-line-font-size-sm;
+  }
+  &-steps&-small &-bar-step {
+    width:2px;
+    height:8px;
+  }
+  &-steps&-small &-info {
+    width:32px;
+  }
+  &-steps&-medium {
+    font-size:@progress-line-font-size-md;
+  }
+  &-steps&-medium &-bar-step {
+    width:16px;
+    height:8px;
+  }
+  &-steps&-medium &-info {
+    width:36px;
+  }
+  &-steps&-large {
+    font-size:@progress-line-font-size-lg;
+  }
+  &-steps&-large &-bar-step {
+    width:32px;
+    height:8px;
+  }
+  &-steps&-large &-info {
+    width:40px;
+  }
+
+  &-steps&-status-normal {
+    color:@progress-normal-font-color;
+  }
+  &-steps&-status-normal &-bar-step {
+    background-color:@progress-normal-trail-color;
+  }
+  &-steps&-status-normal &-bar-step-active {
+    background-color:@progress-normal-color;
+  }
+
+  &-steps&-status-active {
+    color:@progress-active-font-color;
+  }
+  &-steps&-status-active &-bar-step {
+    background-color:@progress-active-trail-color;
+  }
+  &-steps&-status-active &-bar-step-active {
+    background-color:@progress-active-color;
+    background-image:linear-gradient(45deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent 100%);
+    background-size:40px 40px;
+    animation:vuiProgressActive 2s linear infinite;
+  }
+
+  &-steps&-status-exception {
+    color:@progress-exception-font-color;
+  }
+  &-steps&-status-exception &-bar-step {
+    background-color:@progress-exception-trail-color;
+  }
+  &-steps&-status-exception &-bar-step-active {
+    background-color:@progress-exception-color;
+  }
+
+  &-steps&-status-success {
+    color:@progress-success-font-color;
+  }
+  &-steps&-status-success &-bar-step {
+    background-color:@progress-success-trail-color;
+  }
+  &-steps&-status-success &-bar-step-active {
+    background-color:@progress-success-color;
   }
 }
