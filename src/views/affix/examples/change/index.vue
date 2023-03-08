@@ -1,35 +1,35 @@
 <template>
-  <example v-bind:code="code" id="example-affix-change">
-    <template slot="demo">
+  <vui-example id="example-affix-change" v-bind:code="code">
+    <template v-slot:demo>
       <vui-affix v-bind:offsetTop="top" v-on:change="handleChange">
         <vui-button>100px to affix top</vui-button>
       </vui-affix>
     </template>
-    <template slot="title">监听状态变化</template>
-    <template slot="description">
+    <template v-slot:title>监听状态变化</template>
+    <template v-slot:description>
       <p>通过 <code>change</code> 事件监听固定状态的变化。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const top = ref<number>(100);
+      const handleChange = affixed => console.log(affixed);
+
       return {
         code,
-        top: 100
+        top,
+        handleChange
       };
-    },
-    methods: {
-      handleChange(affixed) {
-        console.log(affixed);
-      }
     }
-  };
+  });
 </script>

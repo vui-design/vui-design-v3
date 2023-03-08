@@ -153,16 +153,16 @@ export default [
 				},
 				component: () => import("src/views/space/index.vue")
 			},
-	// 		// 导航组件
-	// 		{
-	// 			path: "/components/affix",
-	// 			name: "affix",
-	// 			meta: {
-	// 				title: "Affix",
-	// 				group: "navigation"
-	// 			},
-	// 			component: () => import("src/views/affix/index.vue")
-	// 		},
+			// 导航组件
+			{
+				path: "/components/affix",
+				name: "affix",
+				meta: {
+					title: "Affix",
+					group: "navigation"
+				},
+				component: () => import("src/views/affix/index.vue")
+			},
 	// 		{
 	// 			path: "/components/breadcrumb",
 	// 			name: "breadcrumb",

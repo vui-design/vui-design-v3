@@ -127,7 +127,7 @@
 <style>
 	.app-layout { position:relative; min-height:100vh; background-color:#fff; padding-top:64px; }
 
-	.app-layout-header { position:fixed; top:0; left:0; right:0; z-index:100; border-bottom:1px solid #f0f0f0; padding:0 20px; }
+	.app-layout-header { position:fixed; top:0; left:0; right:0; z-index:100; border-bottom:1px solid #f0f0f0; padding:0 20px; opacity:0; pointer-events:none; }
 	.app-layout-header .logo { float:left; display:block; margin:0; padding:16px 0; }
 	.app-layout-header .logo a { display:flex; justify-content:flex-start; align-items:center; color:rgba(0,0,0,0.85); font-size:18px; font-weight:500; line-height:32px; }
 	.app-layout-header .logo img { display:block; width:32px; height:32px; margin-right:16px; }

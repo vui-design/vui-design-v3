@@ -14,23 +14,29 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        top: 10,
-        bottom: 10
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const top = ref<number>(10);
+      const bottom = ref<number>(10);
+
+      const addTop = () => {
+        top.value += 10;
       };
-    },
-    methods: {
-      addTop() {
-        this.top += 10;
-      },
-      addBottom() {
-        this.bottom += 10;
-      }
+      const addBottom = () => {
+        bottom.value += 10;
+      };
+
+      return {
+        top,
+        bottom,
+        addTop,
+        addBottom
+      };
     }
-  };
+  });
 </script>
 
 <style>

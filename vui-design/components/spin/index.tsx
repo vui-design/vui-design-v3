@@ -8,7 +8,6 @@ import { sizes } from "./constants";
 
 const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContext) => {
   const { getPopupContainer, ...props } = properties;
-  const apis: Record<string, any> = {};
   const container = is.function(getPopupContainer) ? getPopupContainer() : document.body;
   const component = defineComponent({
     name: "vui-spin-wapper",
@@ -43,7 +42,7 @@ const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContex
         default: "vui-spin-fade"
       }
     },
-    setup(props) {
+    setup(props, context) {
       const visible = ref(props.visible);
       const size = ref(props.size);
       const background = ref(props.background);
@@ -106,9 +105,9 @@ const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContex
         render(null, container);
       };
 
-      onBeforeMount(() => {
-        apis.update = update;
-        apis.cancel = cancel;
+      context.expose({
+        update,
+        cancel
       });
 
       return () => {
@@ -141,7 +140,7 @@ const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContex
 
   render(vm, container);
 
-  return apis;
+  return vm.component?.exposed;
 };
 
 Spin.spinning = function(config: string | SpinWrapperProps = "", appContext?: AppContext) {

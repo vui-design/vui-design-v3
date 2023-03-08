@@ -1,31 +1,44 @@
-import addEventListener from "../../../utils/addEventListener";
+import type { ComponentPublicInstance } from "vue";
+import type { Element, ObserverEntity } from "./types";
+import addEventListener from "../../utils/addEventListener";
 
 const eventTypes = ["resize", "scroll", "touchstart", "touchmove", "touchend", "pageshow", "load"];
-let observerEntities = [];
+let observerEntities: ObserverEntity[] = [];
 
-export const getElementRect = element => {
-  return element === window ? { top: 0, bottom: window.innerHeight } : element.getBoundingClientRect();
+export const getElementRect = (element: Element): DOMRect => {
+  if (element === window) {
+    return {
+      top: 0,
+      bottom: window.innerHeight
+    } as DOMRect;
+  }
+  else {
+    return (element as HTMLElement).getBoundingClientRect();
+  }
 };
 
-export const getFixedTop = (placeholderRect, targetRect, offsetTop) => {
+export const getFixedTop = (placeholderRect: DOMRect, targetRect: DOMRect, offsetTop: number | undefined) => {
   if (offsetTop !== undefined && targetRect.top > placeholderRect.top - offsetTop) {
-    return offsetTop + targetRect.top + "px";
+    return `${offsetTop + targetRect.top}px`;
   }
 
   return undefined;
 };
 
-export const getFixedBottom = (placeholderRect, targetRect, offsetBottom) => {
+export const getFixedBottom = (placeholderRect: DOMRect, targetRect: DOMRect, offsetBottom: number | undefined) => {
   if (offsetBottom !== undefined && targetRect.bottom < placeholderRect.bottom + offsetBottom) {
     const targetBottomOffset = window.innerHeight - targetRect.bottom;
 
-    return offsetBottom + targetBottomOffset + "px";
+    return `${offsetBottom + targetBottomOffset}px`;
   }
 
   return undefined;
 };
 
-export const addObserver = (target, affix) => {
+export const addObserver = (
+  target: HTMLElement | Window | null,
+  affix: ComponentPublicInstance<any>
+) => {
   if (!target) {
     return;
   }
@@ -45,16 +58,20 @@ export const addObserver = (target, affix) => {
     observerEntities.push(entity);
 
     eventTypes.forEach(eventType => {
-      entity.eventHandlers[eventType] = addEventListener(target, eventType, () => {
-        entity.affixList.forEach(target => {
-          target.onLazyUpdatePosition();
+      entity!.eventHandlers[eventType] = addEventListener(target, eventType, () => {
+        entity!.affixList.forEach(target => {
+          const { doLazyUpdatePosition } = (target as any).exposed;
+
+          doLazyUpdatePosition();
         });
       });
     });
   }
 };
 
-export const removeObserver = affix => {
+export const removeObserver = (
+  affix: ComponentPublicInstance<any>
+): void => {
   const observerEntity = observerEntities.find(oriObserverEntity => {
     const hasAffix = oriObserverEntity.affixList.some(target => target === affix);
 

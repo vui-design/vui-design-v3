@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-affix-basic-usage">
-    <template slot="demo">
+  <vui-example id="example-affix-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-affix-basic-usage">
         <section>
           <vui-affix v-bind:offsetTop="top">
@@ -14,37 +14,42 @@
         </section>
       </div>
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>最简单的用法。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const top = ref<number>(10);
+      const bottom = ref<number>(10);
+
+      const addTop = () => {
+        top.value += 10;
+      };
+      const addBottom = () => {
+        bottom.value += 10;
+      };
+
       return {
         code,
-        top: 10,
-        bottom: 10
+        top,
+        bottom,
+        addTop,
+        addBottom
       };
-    },
-    methods: {
-      addTop() {
-        this.top += 10;
-      },
-      addBottom() {
-        this.bottom += 10;
-      }
     }
-  };
+  });
 </script>
 
 <style>

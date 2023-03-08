@@ -5,19 +5,20 @@ const code =
   </vui-affix>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const top = ref<number>(100);
+      const handleChange = affixed => console.log(affixed);
+
       return {
-        top: 100
+        top,
+        handleChange
       };
-    },
-    methods: {
-      handleChange(affixed) {
-        console.log(affixed);
-      }
     }
-  };
+  });
 </script>
 `;
 

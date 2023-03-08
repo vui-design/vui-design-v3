@@ -9,14 +9,20 @@ const code =
     </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      getScrollContainer() {
-        return this.$refs.container;
-      }
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const containerRef = ref<HTMLDivElement>();
+      const getScrollContainer = () => containerRef.value;
+
+      return {
+        containerRef,
+        getScrollContainer
+      };
     }
-  };
+  });
 </script>
 
 <style>
