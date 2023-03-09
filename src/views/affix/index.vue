@@ -29,7 +29,13 @@
       <tbody>
         <tr>
           <td>getScrollContainer</td>
-          <td>设置 <code>Affix</code> 需要监听其滚动事件的元素，值为一个返回对应 <code>DOM</code> 元素的函数</td>
+          <td><code>Affix</code> 所属滚动容器，值为一个返回对应 <code>DOM</code> 元素的函数</td>
+          <td>Function</td>
+          <td>() => window</td>
+        </tr>
+        <tr>
+          <td>getUpperScrollContainer</td>
+          <td>滚动容器的外层滚动元素，默认是 <code>window</code>，<code>Affix</code> 将会监听该元素的滚动事件，并实时更新位置；主要是为了解决 <code>getScrollContainer</code> 属性返回非 <code>window</code> 元素时，如果外层元素滚动，可能会导致固钉跑出其所属滚动容器的问题</td>
           <td>Function</td>
           <td>() => window</td>
         </tr>

@@ -1,9 +1,4 @@
-import type { ComponentPublicInstance } from "vue";
-import type { Element, ObserverEntity } from "./types";
-import addEventListener from "../../utils/addEventListener";
-
-const eventTypes = ["resize", "scroll", "touchstart", "touchmove", "touchend", "pageshow", "load"];
-let observerEntities: ObserverEntity[] = [];
+import type { Element } from "./types";
 
 export const getElementRect = (element: Element): DOMRect => {
   if (element === window) {
@@ -17,17 +12,17 @@ export const getElementRect = (element: Element): DOMRect => {
   }
 };
 
-export const getFixedTop = (placeholderRect: DOMRect, targetRect: DOMRect, offsetTop: number | undefined) => {
-  if (offsetTop !== undefined && targetRect.top > placeholderRect.top - offsetTop) {
-    return `${offsetTop + targetRect.top}px`;
+export const getFixedTop = (scrollContainerRect: DOMRect, containerRect: DOMRect, offsetTop: number | undefined) => {
+  if (offsetTop !== undefined && scrollContainerRect.top > containerRect.top - offsetTop) {
+    return `${offsetTop + scrollContainerRect.top}px`;
   }
 
   return undefined;
 };
 
-export const getFixedBottom = (placeholderRect: DOMRect, targetRect: DOMRect, offsetBottom: number | undefined) => {
-  if (offsetBottom !== undefined && targetRect.bottom < placeholderRect.bottom + offsetBottom) {
-    const targetBottomOffset = window.innerHeight - targetRect.bottom;
+export const getFixedBottom = (scrollContainerRect: DOMRect, containerRect: DOMRect, offsetBottom: number | undefined) => {
+  if (offsetBottom !== undefined && scrollContainerRect.bottom < containerRect.bottom + offsetBottom) {
+    const targetBottomOffset = window.innerHeight - scrollContainerRect.bottom;
 
     return `${offsetBottom + targetBottomOffset}px`;
   }
@@ -35,70 +30,8 @@ export const getFixedBottom = (placeholderRect: DOMRect, targetRect: DOMRect, of
   return undefined;
 };
 
-export const addObserver = (
-  target: HTMLElement | Window | null,
-  affix: ComponentPublicInstance<any>
-) => {
-  if (!target) {
-    return;
-  }
-
-  let entity = observerEntities.find(oriObserverEntity => oriObserverEntity.target === target);
-
-  if (entity) {
-    entity.affixList.push(affix);
-  }
-  else {
-    entity = {
-      target,
-      affixList: [affix],
-      eventHandlers: {}
-    };
-
-    observerEntities.push(entity);
-
-    eventTypes.forEach(eventType => {
-      entity!.eventHandlers[eventType] = addEventListener(target, eventType, () => {
-        entity!.affixList.forEach(target => {
-          const { doLazyUpdatePosition } = (target as any).exposed;
-
-          doLazyUpdatePosition();
-        });
-      });
-    });
-  }
-};
-
-export const removeObserver = (
-  affix: ComponentPublicInstance<any>
-): void => {
-  const observerEntity = observerEntities.find(oriObserverEntity => {
-    const hasAffix = oriObserverEntity.affixList.some(target => target === affix);
-
-    if (hasAffix) {
-      oriObserverEntity.affixList = oriObserverEntity.affixList.filter(target => target !== affix);
-    }
-
-    return hasAffix;
-  });
-
-  if (observerEntity && observerEntity.affixList.length === 0) {
-    observerEntities = observerEntities.filter(oriObserverEntity => oriObserverEntity !== observerEntity);
-
-    eventTypes.forEach(eventType => {
-      const handler = observerEntity.eventHandlers[eventType];
-
-      if (handler && handler.remove) {
-        handler.remove();
-      }
-    });
-  }
-};
-
 export default {
   getElementRect,
   getFixedTop,
-  getFixedBottom,
-  addObserver,
-  removeObserver
+  getFixedBottom
 };
