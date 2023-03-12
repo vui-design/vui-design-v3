@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Progress 进度条</h1>
     <p>展示操作的当前进度。</p>
     <h2>何时使用</h2>
@@ -124,10 +124,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleLine from "./examples/line/index.vue";
   import VuiExampleLineSmall from "./examples/line-small/index.vue";
   import VuiExampleCircle from "./examples/circle/index.vue";

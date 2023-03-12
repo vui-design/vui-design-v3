@@ -23,7 +23,7 @@
         </vui-row>
       </div>
     </template>
-    <template v-slot:title>排序</template>
+    <template v-slot:title>Flex 填充</template>
     <template v-slot:description>
       <p><code>Col</code> 提供 <code>flex</code> 属性以支持填充。</p>
     </template>

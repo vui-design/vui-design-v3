@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Divider 分割线</h1>
     <p>区隔内容的分割线。</p>
     <h2>何时使用</h2>
@@ -61,10 +61,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleVertical from "./examples/vertical/index.vue";
   import VuiExampleWithText from "./examples/with-text/index.vue";

@@ -21,7 +21,7 @@ import { Row, Col } from "./components/grid";
 import Layout, { LayoutHeader, LayoutSider, LayoutContent, LayoutFooter } from "./components/layout";
 import Space from "./components/space";
 // Navigation
-import Affix from "./components/affix";
+import Anchor, { AnchorLink } from "./components/anchor";
 import Breadcrumb from "./components/breadcrumb";
 import BreadcrumbItem from "./components/breadcrumb-item";
 import Dropdown from "./components/dropdown";
@@ -99,8 +99,7 @@ import Result from "./components/result";
 import Skeleton, { SkeletonAvatar, SkeletonTitle, SkeletonParagraph, SkeletonInput, SkeletonButton, SkeletonImage } from "./components/skeleton";
 import Spin from "./components/spin";
 // Other
-import Anchor from "./components/anchor";
-import AnchorLink from "./components/anchor-link";
+import Affix from "./components/affix";
 import Authorizer from "./components/authorizer";
 import Backtop from "./components/backtop";
 import Collapser from "./components/collapser";
@@ -125,7 +124,8 @@ const components = [
   LayoutFooter,
   Space,
   // Navigation
-  Affix,
+  Anchor,
+  AnchorLink,
   Breadcrumb,
   BreadcrumbItem,
   Dropdown,
@@ -217,8 +217,7 @@ const components = [
   SkeletonImage,
   Spin,
   // Other
-  Anchor,
-  AnchorLink,
+  Affix,
   Authorizer,
   Backtop,
   Collapser,
@@ -273,7 +272,8 @@ export {
   LayoutFooter,
   Space,
   // Navigation
-  Affix,
+  Anchor,
+  AnchorLink,
   Breadcrumb,
   BreadcrumbItem,
   Dropdown,
@@ -365,8 +365,7 @@ export {
   SkeletonImage,
   Spin,
   // Other
-  Anchor,
-  AnchorLink,
+  Affix,
   Authorizer,
   Backtop,
   Collapser,

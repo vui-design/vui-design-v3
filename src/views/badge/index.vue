@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Badge 徽标</h1>
     <p>图标右上角的圆形徽标。</p>
     <h2>何时使用</h2>
@@ -81,10 +81,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleOverflowCount from "./examples/overflow-count/index.vue";
   import VuiExampleText from "./examples/text/index.vue";

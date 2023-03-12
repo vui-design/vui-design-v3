@@ -1,5 +1,5 @@
 import type { VNode, VNodeTypes, Component } from "vue";
-import type { Data } from "../types";
+import type { Slots, Data } from "../types";
 import { Fragment, Comment, Text, cloneVNode } from "vue";
 import { isFunction, isArray } from "./is";
 
@@ -35,6 +35,14 @@ export const isComponent = (vnode: VNode, type?: VNodeTypes): type is Component 
 
 export const isArrayChildren = (vnode: VNode, children: VNode["children"]): children is VNode[] => {
   return Boolean(vnode && vnode.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
+};
+
+export const getSlot = (slots: Slots, prop: string = "default") => {
+  return slots[prop]?.();
+};
+
+export const getSlotProp = (slots: Slots, props: Data, prop: string = "default") => {
+  return slots[prop]?.() ?? props[prop];
 };
 
 export const getValidElements = (children: any[] = []) => {

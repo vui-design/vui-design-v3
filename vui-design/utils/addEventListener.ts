@@ -5,12 +5,17 @@
 * @param {Function} listener 事件回调函数
 * @param {Boolean|Object} option 选项
 */
+
+export interface EventListener {
+  remove: () => void;
+};
+
 export default function addEventListener(
   target: Window | HTMLElement,
   type: string,
   listener: EventListenerOrEventListenerObject,
   option?: boolean | AddEventListenerOptions | undefined
-) {
+): EventListener {
   let useCapture = false;
 
   if (typeof option === "boolean") {

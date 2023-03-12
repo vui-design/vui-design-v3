@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Avatar 头像</h1>
     <p>用来代表用户或事物，支持图片、图标或字符展示。</p>
     <h2>代码演示</h2>
@@ -145,10 +145,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
   import VuiExampleBadge from "./examples/badge/index.vue";

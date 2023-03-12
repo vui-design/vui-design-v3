@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Affix 固钉</h1>
     <p>将页面元素钉在可视范围。</p>
     <h2>何时使用</h2>
@@ -72,10 +72,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleChange from "./examples/change/index.vue";
   import VuiExampleContainer from "./examples/container/index.vue";

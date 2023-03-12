@@ -13,6 +13,21 @@ const funToString = funProto.toString;
 // 
 export const isServer = !(typeof window !== "undefined" && typeof document !== "undefined");
 
+// 检查给定的值是否是 Window 对象
+export const isWindow = function(value: any): value is Window {
+  return value !== null && value !== undefined && value === value.window;
+};
+
+// 检查给定的值是否是 Document 对象
+export const isDocument = function(value: any): value is Document {
+  return value instanceof Document || value.constructor.name === "HTMLDocument";
+};
+
+// 检查给定的值是否是 HTMLElement 元素
+export const isElement = function(value: any): value is Element {
+  return value && (value instanceof window.Node) && (value.nodeType === 1);
+};
+
 // 检查给定的值是否是 null
 export const isNull = function(value: any): value is null {
   return value === null;
@@ -131,11 +146,6 @@ export function isPromise<T>(value: any): value is Promise<T> {
   return objToString.call(value) === "[object Promise]";
 };
 
-// 检查给定的值是否是 HTMLElement 元素
-export const isElement = function(value: any): value is Element {
-  return value && (value instanceof window.Node) && (value.nodeType === 1);
-};
-
 // 检查给定的值是否是错误元素
 export const isError = function(value: any): boolean {
   return objToString.call(value) === "[object Error]";
@@ -184,6 +194,9 @@ export const isMergeableObject = function(value: any): boolean {
 // 
 export default {
   server: isServer,
+  window: isWindow,
+  document: isDocument,
+  element: isElement,
   null: isNull,
   undefined: isUndefined,
   nan: isNaN,
@@ -206,7 +219,6 @@ export default {
   plainObject: isPlainObject,
   json: isPlainObject,
   promise: isPromise,
-  element: isElement,
   error: isError,
   empty: isEmpty,
   existy: isExisty,

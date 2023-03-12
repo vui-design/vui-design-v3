@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Popconfirm 气泡确认框</h1>
     <p>点击元素，弹出气泡式的确认框。</p>
     <h2>何时使用</h2>
@@ -179,10 +179,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleIcon from "./examples/icon/index.vue";
   import VuiExampleLocal from "./examples/local/index.vue";

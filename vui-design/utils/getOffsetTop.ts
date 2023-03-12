@@ -3,7 +3,10 @@
 * @param {HTMLElement} element 目标元素
 * @param {Window|HTMLElement} container 容器
 */
-export default function getOffsetTop(element, container) {
+export default function getOffsetTop(
+  element: HTMLElement, 
+  container: Window | HTMLElement
+): number {
   if (!element) {
     return 0;
   }
@@ -12,7 +15,7 @@ export default function getOffsetTop(element, container) {
     return 0;
   }
 
-  const rect = element.getBoundingClientRect();
+  const rect = (element as HTMLElement).getBoundingClientRect();
 
   if (rect.width || rect.height) {
     if (container === window) {
@@ -20,8 +23,9 @@ export default function getOffsetTop(element, container) {
 
       return rect.top - container.clientTop;
     }
-
-    return rect.top - container.getBoundingClientRect().top;
+    else {
+      return rect.top - (container as HTMLElement).getBoundingClientRect().top;
+    }
   }
 
   return rect.top;

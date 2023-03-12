@@ -144,7 +144,7 @@
         nextTick(() => {
           ready.value = true;
           codeHeight.value = codeRef.value?.clientHeight;
-        })
+        });
       });
 
       return {

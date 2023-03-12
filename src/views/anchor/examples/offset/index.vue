@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-anchor-offset">
-    <template slot="demo">
+  <vui-example id="example-anchor-offset" v-bind:code="code">
+    <template v-slot:demo>
       <vui-anchor v-bind:offset="offset">
         <vui-anchor-link href="#example-anchor-basic-usage" title="Basic Usage" />
         <vui-anchor-link href="#example-anchor-static" title="Static" />
@@ -11,29 +11,33 @@
         </vui-anchor-link>
       </vui-anchor>
     </template>
-    <template slot="title">滚动偏移量</template>
-    <template slot="description">
+    <template v-slot:title>滚动偏移量</template>
+    <template v-slot:description>
       <p>设置锚点目标滚动到屏幕正中间。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref, onMounted } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const offset = ref();
+
+      onMounted(() => {
+        offset.value = window.innerHeight / 2;
+      });
+
       return {
         code,
-        offset: undefined
+        offset
       };
-    },
-    mounted() {
-      this.offset = window.innerHeight / 2;
     }
-  };
+  });
 </script>

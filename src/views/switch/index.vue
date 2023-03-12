@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Switch 开关</h1>
     <p>开关选择器。</p>
     <h2>何时使用</h2>
@@ -139,10 +139,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
   import VuiExampleSize from "./examples/size/index.vue";
   import VuiExampleText from "./examples/text/index.vue";

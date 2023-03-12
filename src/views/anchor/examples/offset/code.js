@@ -11,17 +11,22 @@ const code =
   </vui-anchor>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref, onMounted } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const offset = ref();
+
+      onMounted(() => {
+        offset.value = window.innerHeight / 2;
+      });
+
       return {
-        offset: undefined
+        offset
       };
-    },
-    mounted() {
-      this.offset = window.innerHeight / 2;
     }
-  };
+  });
 </script>
 `;
 

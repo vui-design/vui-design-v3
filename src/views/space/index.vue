@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Space 间距</h1>
     <p>设置组件之间的间距。</p>
     <h2>何时使用</h2>
@@ -72,10 +72,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleVertical from "./examples/vertical/index.vue";
   import VuiExampleJustify from "./examples/justify/index.vue";

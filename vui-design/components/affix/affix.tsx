@@ -4,10 +4,10 @@ import { defineComponent, ref, computed, watchEffect, onMounted } from "vue";
 import VuiResizeObserver from "../resize-observer";
 import is from "../../utils/is";
 import throttleByRaf from "../../utils/throttleByRaf";
-import getElement from "../../utils/getElement";
 import addEventListener from "../../utils/addEventListener";
 import getClassName from "../../utils/getClassName";
 import utils from "./utils";
+import { getSlot } from "../../utils/vue";
 
 export const createProps = () => {
   return {
@@ -49,7 +49,7 @@ export default defineComponent({
   emits: ["change"],
   setup(props, context) {
     // DOM 引用
-    const scrollContainerRef = ref();
+    const scrollContainerRef = ref<Window | HTMLElement>();
     const containerRef = ref<HTMLDivElement>();
 
     // 状态
@@ -129,13 +129,12 @@ export default defineComponent({
       // Binding of scroll events inside the scroll container
       watchEffect(onCleanup => {
         const scrollContainer = props.getScrollContainer?.() ?? null;
-        const container = (scrollContainer && scrollContainer !== window && getElement(scrollContainer)) || window;
 
-        scrollContainerRef.value = container;
+        scrollContainerRef.value = scrollContainer;
 
-        if (container) {
-          const scrollEvent = addEventListener(container, "scroll", update);
-          const resizeEvent = addEventListener(container, "resize", update);
+        if (scrollContainer) {
+          const scrollEvent = addEventListener(scrollContainer, "scroll", update);
+          const resizeEvent = addEventListener(scrollContainer, "resize", update);
 
           onCleanup(() => {
             scrollEvent.remove();
@@ -150,12 +149,11 @@ export default defineComponent({
           return;
         }
 
-        const upperScrollContainer = props.getUpperScrollContainer?.() ?? null;
-        const upperContainer = (upperScrollContainer && upperScrollContainer.value !== window && getElement(upperScrollContainer.value as string | HTMLElement)) || window;
+        const upperScrollContainer = props.getUpperScrollContainer();
 
-        if (upperContainer) {
-          const scrollEvent = addEventListener(upperContainer, "scroll", update);
-          const resizeEvent = addEventListener(upperContainer, "resize", update);
+        if (upperScrollContainer) {
+          const scrollEvent = addEventListener(upperScrollContainer, "scroll", update);
+          const resizeEvent = addEventListener(upperScrollContainer, "resize", update);
 
           onCleanup(() => {
             scrollEvent.remove();
@@ -171,7 +169,7 @@ export default defineComponent({
         <VuiResizeObserver onResize={handleResize}>
           <div ref={containerRef} style={containerStyle.value}>
             <div class={classes.el.value} style={affixStyle.value}>
-              {context.slots.default?.()}
+              {getSlot(context.slots)}
             </div>
           </div>
         </VuiResizeObserver>

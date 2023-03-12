@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Grid 栅格系统</h1>
     <p>24栅格系统。</p>
     <h2>设计理念</h2>
@@ -179,11 +179,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from "vue";
+<script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleGutter from "./examples/gutter/index.vue";
   import VuiExampleOffset from "./examples/offset/index.vue";
@@ -195,22 +195,6 @@
   import VuiExampleResponsive from "./examples/responsive/index.vue";
   import VuiExampleResponsiveMore from "./examples/responsive-more/index.vue";
   import VuiExamplePlayground from "./examples/playground/index.vue";
-
-  export default defineComponent({
-    components: {
-      VuiExampleBasicUsage,
-      VuiExampleGutter,
-      VuiExampleOffset,
-      VuiExampleSort,
-      VuiExampleJustify,
-      VuiExampleAlign,
-      VuiExampleOrder,
-      VuiExampleFlexStretch,
-      VuiExampleResponsive,
-      VuiExampleResponsiveMore,
-      VuiExamplePlayground
-    }
-  });
 </script>
 
 <style>

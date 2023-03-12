@@ -1,7 +1,7 @@
 import type { CSSProperties } from "vue";
 
-export type GetScrollContainer = () => any;
-export type Element = HTMLElement | Window;
+export type Element = Window | HTMLElement;
+export type GetScrollContainer = () => Element;
 
 export interface AffixState {
   affixed: boolean;

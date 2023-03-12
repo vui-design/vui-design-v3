@@ -11,12 +11,6 @@ const code =
     </vui-anchor-link>
   </vui-anchor>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

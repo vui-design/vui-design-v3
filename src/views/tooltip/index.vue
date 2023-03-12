@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Tooltip 文字提示</h1>
     <p>简单的文字提示气泡框。</p>
     <h2>何时使用</h2>
@@ -142,10 +142,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleCustomizedContent from "./examples/customized-content/index.vue";
   import VuiExampleTrigger from "./examples/trigger/index.vue";

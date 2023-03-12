@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-anchor-open-in-new-window">
-    <template slot="demo">
+  <vui-example id="example-anchor-open-in-new-window" v-bind:code="code">
+    <template v-slot:demo>
       <vui-anchor v-bind:affix="false">
         <vui-anchor-link href="#example-anchor-basic-usage" title="Basic Usage" />
         <vui-anchor-link href="#example-anchor-open-in-new-window" target="_blank" title="Open in new window" />
@@ -12,25 +12,26 @@
         </vui-anchor-link>
       </vui-anchor>
     </template>
-    <template slot="title">新窗口中打开</template>
-    <template slot="description">
+    <template v-slot:title>新窗口中打开</template>
+    <template v-slot:description>
       <p>设置 <code>AnchorLink</code> 的 <code>target</code> 属性为 <code>_blank</code>，可以在新窗口中打开锚点连接。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

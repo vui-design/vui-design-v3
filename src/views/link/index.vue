@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Link  文字链接</h1>
     <p>文字超链接。</p>
     <h2>何时使用</h2>
@@ -108,10 +108,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
   import VuiExampleIcon from "./examples/icon/index.vue";
   import VuiExampleSize from "./examples/size/index.vue";

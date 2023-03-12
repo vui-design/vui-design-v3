@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Layout 布局</h1>
     <p>协助进行页面级整体布局。</p>
     <h2>设计规则</h2>
@@ -188,10 +188,11 @@
     </table>
     <h3>Breakpoint</h3>
     <vui-example-breakpoint />
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleVertical from "./examples/vertical/index.vue";
   import VuiExampleHeaderSiderFirst from "./examples/header-sider-first/index.vue";

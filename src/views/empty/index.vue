@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Empty 空状态</h1>
     <p>空状态时的展示占位图。</p>
     <h2>何时使用</h2>
@@ -43,10 +43,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleNoDescription from "./examples/no-description/index.vue";
   import VuiExampleCustomize from "./examples/customize/index.vue";

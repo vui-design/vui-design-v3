@@ -626,16 +626,16 @@ export default [
 				},
 				component: () => import("src/views/spin/index.vue")
 			},
-	// 		// 其它
-	// 		{
-	// 			path: "/components/anchor",
-	// 			name: "anchor",
-	// 			meta: {
-	// 				title: "Anchor",
-	// 				group: "other"
-	// 			},
-	// 			component: () => import("src/views/anchor/index.vue")
-	// 		},
+			// 其它
+			{
+				path: "/components/anchor",
+				name: "anchor",
+				meta: {
+					title: "Anchor",
+					group: "other"
+				},
+				component: () => import("src/views/anchor/index.vue")
+			},
 	// 		{
 	// 			path: "/components/authorizer",
 	// 			name: "authorizer",

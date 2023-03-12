@@ -11,14 +11,20 @@ const code =
   </vui-anchor>
 </template>
 
-<script>
-  export default {
-    methods: {
-      handleChange(href) {
-        console.log("currentAnchorLink:", href);
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const handleChange = (newHref, oldHref) => {
+        console.log("newHref:", newHref, "oldHref:", oldHref);
+      };
+
+      return {
+        handleChange
+      };
     }
-  };
+  });
 </script>
 `;
 

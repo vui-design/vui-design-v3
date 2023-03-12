@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Skeleton 骨架屏</h1>
     <p>在需要等待加载内容的位置提供一个占位图形组合。</p>
     <h2>何时使用</h2>
@@ -234,10 +234,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleComplex from "./examples/complex/index.vue";
   import VuiExampleAnimated from "./examples/animated/index.vue";

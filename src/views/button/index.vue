@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Button 按钮</h1>
     <p>按钮用于开始一个即时操作。</p>
     <h2>何时使用</h2>
@@ -168,10 +168,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
   import VuiExampleGhost from "./examples/ghost/index.vue";
   import VuiExampleBlock from "./examples/block/index.vue";

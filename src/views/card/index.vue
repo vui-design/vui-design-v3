@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Card 卡片</h1>
     <p>通用卡片容器。</p>
     <h2>何时使用</h2>
@@ -137,10 +137,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleSimple from "./examples/simple/index.vue";
   import VuiExampleNoBorder from "./examples/no-border/index.vue";

@@ -1,7 +1,7 @@
 <template>
-  <example v-bind:code="code" id="example-anchor-static">
-    <template slot="demo">
-      <vui-anchor v-bind:affix="false">
+  <vui-example id="example-anchor-static" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-anchor v-bind:affix="true">
         <vui-anchor-link href="#example-anchor-basic-usage" title="Basic Usage" />
         <vui-anchor-link href="#example-anchor-static" title="Static" />
         <vui-anchor-link href="#example-api" title="API">
@@ -11,25 +11,26 @@
         </vui-anchor-link>
       </vui-anchor>
     </template>
-    <template slot="title">静态位置</template>
-    <template slot="description">
+    <template v-slot:title>静态位置</template>
+    <template v-slot:description>
       <p>不浮动，状态不随页面滚动变化。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

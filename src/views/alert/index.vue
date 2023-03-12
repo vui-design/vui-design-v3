@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Alert 警告提示</h1>
     <p>警告提示，展现需要关注的信息。</p>
     <h2>何时使用</h2>
@@ -102,10 +102,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
   import VuiExampleDescription from "./examples/description/index.vue";

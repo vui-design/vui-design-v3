@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Statistic 统计数值</h1>
     <p>展示统计数值。</p>
     <h2>何时使用</h2>
@@ -209,10 +209,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleExtra from "./examples/extra/index.vue";
   import VuiExampleIconAndUnit from "./examples/icon-and-unit/index.vue";

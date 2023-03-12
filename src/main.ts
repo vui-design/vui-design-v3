@@ -12,12 +12,7 @@ import store from "src/store";
 
 const app = createApp(App);
 
-app.use(VuiDesign, {
-  i18n: (key: string, value: string) => i18n.t(key, value),
-  authorize: (value: string | string[]) => {
-    return store?.state?.app?.permissions?.some((permission: string) => typeof value === "string" ? value === permission : value.includes(permission));
-  }
-});
+app.use(VuiDesign);
 app.use(HighlightjsVuePlugin);
 app.use(router);
 app.use(i18n);

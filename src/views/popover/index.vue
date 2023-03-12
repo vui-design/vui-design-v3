@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Popover 气泡卡片</h1>
     <p>鼠标移入/点击元素，弹出气泡式的卡片浮层</p>
     <h2>何时使用</h2>
@@ -141,10 +141,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExamplePlacement from "./examples/placement/index.vue";
   import VuiExampleTrigger from "./examples/trigger/index.vue";

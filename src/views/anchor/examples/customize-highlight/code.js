@@ -11,14 +11,18 @@ const code =
   </vui-anchor>
 </template>
 
-<script>
-  export default {
-    methods: {
-      getCurrentAnchorLink() {
-        return "#example-anchor-static";
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const getCurrentAnchorLink = () => "#example-anchor-static";
+
+      return {
+        getCurrentAnchorLink
+      };
     }
-  };
+  });
 </script>
 `;
 

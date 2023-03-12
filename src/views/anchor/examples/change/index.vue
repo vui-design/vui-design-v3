@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-anchor-change">
-    <template slot="demo">
+  <vui-example id="example-anchor-change" v-bind:code="code">
+    <template v-slot:demo>
       <vui-anchor v-bind:affix="false" v-on:change="handleChange">
         <vui-anchor-link href="#example-anchor-basic-usage" title="Basic Usage" />
         <vui-anchor-link href="#example-anchor-static" title="Static" />
@@ -11,30 +11,31 @@
         </vui-anchor-link>
       </vui-anchor>
     </template>
-    <template slot="title">监听锚点链接变化</template>
-    <template slot="description">
+    <template v-slot:title>监听锚点链接变化</template>
+    <template v-slot:description>
       <p>通过 <code>onChange</code> 事件监听锚点链接变化。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
-      };
-    },
-    methods: {
-      handleChange(newHref, oldHref) {
+    setup() {
+      const handleChange = (newHref, oldHref) => {
         console.log("newHref:", newHref, "oldHref:", oldHref);
-      }
+      };
+
+      return {
+        code,
+        handleChange
+      };
     }
-  };
+  });
 </script>

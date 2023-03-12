@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Result 结果</h1>
     <p>用于反馈一系列操作任务的处理结果。</p>
     <h2>何时使用</h2>
@@ -58,10 +58,11 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleInfo from "./examples/info/index.vue";
   import VuiExampleWarning from "./examples/warning/index.vue";
   import VuiExampleSuccess from "./examples/success/index.vue";

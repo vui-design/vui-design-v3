@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <vui-article>
     <h1>Spin 加载中</h1>
     <p>用于页面和区块的加载中状态。</p>
     <h2>何时使用</h2>
@@ -119,10 +119,11 @@
       <li><code>spin.cancel()</code></li>
     </ul>
     <p>其中 <code>spin.upadte</code> 方法的参数 <code>options</code> 同 <code>this.$spin.spinning</code> 一致。</p>
-  </div>
+  </vui-article>
 </template>
 
 <script setup lang="ts">
+  import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleSize from "./examples/size/index.vue";
   import VuiExampleInside from "./examples/inside/index.vue";
