@@ -2,10 +2,12 @@ import type { I18nMessages, Lang } from "./types";
 import { ref, reactive, computed } from "vue";
 import is from "../utils/is";
 import zhCN from "./lang/zh-CN";
+import enUS from "./lang/en-US";
 
 const language = ref("zh-CN");
 const i18nMessages = reactive<I18nMessages>({
-  "zh-CN": zhCN
+  "zh-CN": zhCN,
+  "en-US": enUS
 });
 
 /**
@@ -27,6 +29,13 @@ export const addI18nMessages = (
 };
 
 /**
+ * 获取当前的地区语言
+ */
+export const getLocale = () => {
+  return language.value;
+};
+
+/**
  * 切换地区语言
  * @param lang
  */
@@ -36,13 +45,6 @@ export const useLocale = (lang: string) => {
   }
 
   language.value = lang;
-};
-
-/**
- * 获取当前的地区语言
- */
-export const getLocale = () => {
-  return language.value;
 };
 
 /**
@@ -84,5 +86,8 @@ export const useI18n = () => {
 export default {
   t,
   use: () => {},
-  i18n: () => {}
+  i18n: () => {},
+  addI18nMessages,
+  getLocale,
+  useLocale
 };

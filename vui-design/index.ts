@@ -3,6 +3,7 @@ if (typeof console !== "undefined" && console.warn && typeof window !== "undefin
   console.warn("You are using a whole package of Vui Design, please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.");
 }
 
+// 
 import type { App } from "vue";
 
 // Package
@@ -226,28 +227,12 @@ const components = [
 ];
 
 const install = function(app: App, options = {}) {
-  if (install.installed) {
-    return;
-  }
-
-  if (options.locale) {
-    locale.use(options.locale);
-  }
-
-  if (options.i18n) {
-    locale.i18n(options.i18n);
-  }
-
   components.forEach(component => {
-    app.component(component.name, component);
+    if (component.install) {
+      app.use(component);
+    }
   });
 
-  app.config.globalProperties.$vui = {
-    classNamePrefix: "vui",
-    size: options.size || "",
-    zIndex: options.zIndex || 2000,
-    authorize: options.authorize
-  };
   app.config.globalProperties.$notice = Notice;
   app.config.globalProperties.$message = Message;
   app.config.globalProperties.$modal = Modal;
@@ -377,6 +362,7 @@ export {
 export default {
   version: pkg.version,
   install,
-  // locale: locale.use,
-  // i18n: locale.i18n
+  addI18nMessages: locale.addI18nMessages,
+  getLocale: locale.getLocale,
+  useLocale: locale.useLocale
 };

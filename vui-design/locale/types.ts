@@ -110,11 +110,11 @@ export interface Lang {
   table: {
     confirm: string;
     clear: string;
-    empty: string
+    empty: string;
   };
   drawer: {
     cancelText: string;
-    okText: string
+    okText: string;
   };
   modal: {
     cancelText: string;
@@ -122,8 +122,8 @@ export interface Lang {
   };
   popconfirm: {
     cancelText: string;
-    okText: string
+    okText: string;
   };
-}
+};
 
 export type I18nMessages = Record<string, Lang>;

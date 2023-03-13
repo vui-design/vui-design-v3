@@ -2,8 +2,8 @@ export default {
   "app": {
     // 导航
     "nav": {
-      "guide": "指南",
-      "components": "组件",
+      "guide": "Guide",
+      "components": "Components",
       "ecosystem": "生态系统",
       "placeholder": "搜索组件..."
     },
