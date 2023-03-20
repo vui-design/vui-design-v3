@@ -101,27 +101,10 @@ export default defineComponent({
     const ghost = computed(() => vuiButtonGroup?.ghost ?? props.ghost ?? false);
     const shape = computed(() => vuiButtonGroup?.shape ?? props.shape);
     const size = computed(() => props.size ?? vuiButtonGroup?.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
-    const disabled = computed(() => vuiForm?.disabled ?? vuiButtonGroup?.disabled ?? vuiInputGroup?.disabled ?? props.disabled ?? false);
+    const disabled = computed(() => vuiForm?.disabled || vuiButtonGroup?.disabled || vuiInputGroup?.disabled || props.disabled);
 
     // 定时器，用于自动聚焦
     const timeout = ref();
-
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "button"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-${type.value}`]: type.value,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-ghost`]: ghost.value,
-        [`${className.value}-${shape.value}`]: shape.value,
-        [`${className.value}-${size.value}`]: size.value,
-        [`${className.value}-loading`]: props.loading,
-        [`${className.value}-disabled`]: disabled.value
-      };
-    });
 
     // 将纯文本子元素使用 span 标签包裹
     const insertTextIntoSpan = (target: VNode) => {
@@ -150,7 +133,7 @@ export default defineComponent({
       context.emit("click", e);
     };
 
-    // 组件挂载完成后执行
+    // 组件挂载完成之后执行
     onMounted(() => {
       if (props.autofocus && buttonRef.value) {
         timeout.value = setTimeout(() => buttonRef?.value?.focus());
@@ -162,8 +145,26 @@ export default defineComponent({
       timeout.value && clearTimeout(timeout.value);
     });
 
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "button"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: true,
+        [`${className.value}-${type.value}`]: type.value,
+        [`${className.value}-block`]: props.block,
+        [`${className.value}-ghost`]: ghost.value,
+        [`${className.value}-${shape.value}`]: shape.value,
+        [`${className.value}-${size.value}`]: size.value,
+        [`${className.value}-loading`]: props.loading,
+        [`${className.value}-disabled`]: disabled.value
+      };
+    });
+
     // 渲染
     return () => {
+      // 图标
       let icon;
 
       if (props.icon || props.loading) {
@@ -177,9 +178,7 @@ export default defineComponent({
       const kids = children?.map(child => insertTextIntoSpan(child));
 
       // 
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         class: [classes.el.value, context.attrs.class],
         onClick: handleClick

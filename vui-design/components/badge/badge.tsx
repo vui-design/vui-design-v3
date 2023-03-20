@@ -134,7 +134,9 @@ export default defineComponent({
             }
 
             children.push(
-              <sup class={props.count ? classes.elCount.value : classes.elText.value} style={styles.elDot.value} title={props.title}>{text}</sup>
+              <sup class={props.count ? classes.elCount.value : classes.elText.value} style={styles.elDot.value} title={props.title}>
+                {text}
+              </sup>
             );
           }
         }
@@ -146,13 +148,17 @@ export default defineComponent({
 
         if (props.text) {
           children.push(
-            <div class={classes.elText.value}>{props.text}</div>
+            <div class={classes.elText.value}>
+              {props.text}
+            </div>
           );
         }  
       }
 
       return (
-        <div class={classes.el.value}>{children}</div>
+        <div class={classes.el.value}>
+          {children}
+        </div>
       );
     };
   }

@@ -9,7 +9,6 @@ import getOffsetTop from "../../utils/getOffsetTop";
 import scrollTo from "../../utils/scrollTo";
 import addEventListener from "../../utils/addEventListener";
 import getClassName from "../../utils/getClassName";
-import { getSlot } from "../../utils/vue";
 import { AnchorInjectionKey } from "./context";
 
 const sharpMatcherRegx = /#([^#]+)$/;
@@ -301,9 +300,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         class: [classes.elWrapper.value, context.attrs.class],
         style: [styles.elWrapper.value, context.attrs.style]
@@ -315,7 +312,7 @@ export default defineComponent({
             <div class={classes.elInk.value}>
               <div ref={anchorInkThumbRef} class={classes.elInkThumb.value} style={styles.elInkThumb.value}></div>
             </div>
-            {getSlot(context.slots)}
+            {context.slots.default?.()}
           </div>
         </div>
       );

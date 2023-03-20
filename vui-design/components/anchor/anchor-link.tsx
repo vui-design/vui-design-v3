@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import { defineComponent, inject, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { getSlot, getSlotProp } from "../../utils/vue";
+import { getSlotProp } from "../../utils/vue";
 import { AnchorInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -100,7 +100,7 @@ export default defineComponent({
           >
             {getSlotProp(context.slots, props, "title")}
           </a>
-          {getSlot(context.slots)}
+          {context.slots.default?.()}
         </div>
       );
     };

@@ -129,9 +129,7 @@ export default defineComponent({
       const kids = children?.map(child => insertTextIntoSpan(child));
 
       // 
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         href: props.href,
         target: props.target,
@@ -139,6 +137,7 @@ export default defineComponent({
         onClick: handleClick
       };
 
+      // 
       return (
         <a {...attributes}>
           {icon}

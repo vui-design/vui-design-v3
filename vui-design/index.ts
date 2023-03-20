@@ -32,11 +32,7 @@ import DropdownSubmenu from "./components/dropdown-submenu";
 import DropdownMenuItem from "./components/dropdown-menu-item";
 import DropdownMenuItemGroup from "./components/dropdown-menu-item-group";
 import DropdownMenuDivider from "./components/dropdown-menu-divider";
-import Menu from "./components/menu";
-import Submenu from "./components/submenu";
-import MenuItem from "./components/menu-item";
-import MenuItemGroup from "./components/menu-item-group";
-import MenuDivider from "./components/menu-divider";
+import Menu, { Submenu, MenuItem, MenuItemGroup, MenuItemDivider } from "./components/menu";
 import PageHeader from "./components/page-header";
 import Pagination from "./components/pagination";
 import Steps from "./components/steps";
@@ -140,7 +136,7 @@ const components = [
   Submenu,
   MenuItem,
   MenuItemGroup,
-  MenuDivider,
+  MenuItemDivider,
   PageHeader,
   Pagination,
   Steps,
@@ -272,7 +268,7 @@ export {
   Submenu,
   MenuItem,
   MenuItemGroup,
-  MenuDivider,
+  MenuItemDivider,
   PageHeader,
   Pagination,
   Steps,

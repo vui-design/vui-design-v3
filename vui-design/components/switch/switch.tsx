@@ -99,7 +99,7 @@ export default defineComponent({
     // 基础属性
     const size = computed(() => props.size ?? vuiForm?.size ?? "medium");
     const focused = ref(false);
-    const disabled = computed(() => vuiForm?.disabled || props.disabled || false);
+    const disabled = computed(() => vuiForm?.disabled || props.disabled);
 
     // 打开状态
     const defaultChecked = ref(props.defaultChecked);
@@ -197,9 +197,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const label = checked.value ? (context.slots.checkedText?.() ?? props.checkedText) : (context.slots.uncheckedText?.() ?? props.uncheckedText);
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         class: [classes.el.value, context.attrs.class],
         style: [styles.el.value, context.attrs.style],

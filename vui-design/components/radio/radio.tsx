@@ -101,7 +101,7 @@ export default defineComponent({
     const size = computed(() => props.size ?? vuiRadioGroup?.size ?? vuiForm?.size ?? "medium");
     const minWidth = computed(() => props.minWidth ?? vuiRadioGroup?.minWidth);
     const focused = ref(false);
-    const disabled = computed(() => vuiForm?.disabled || vuiRadioGroup?.disabled || props.disabled || false);
+    const disabled = computed(() => vuiForm?.disabled || vuiRadioGroup?.disabled || props.disabled);
 
     // 选中状态
     const defaultChecked = ref(props.defaultChecked);
@@ -198,9 +198,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const label = context.slots.default?.() ?? props.label;
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         name: name.value,
         value: props.value,

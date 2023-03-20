@@ -7,7 +7,6 @@ import throttleByRaf from "../../utils/throttleByRaf";
 import addEventListener from "../../utils/addEventListener";
 import getClassName from "../../utils/getClassName";
 import utils from "./utils";
-import { getSlot } from "../../utils/vue";
 
 export const createProps = () => {
   return {
@@ -169,7 +168,7 @@ export default defineComponent({
         <VuiResizeObserver onResize={handleResize}>
           <div ref={containerRef} style={containerStyle.value}>
             <div class={classes.el.value} style={affixStyle.value}>
-              {getSlot(context.slots)}
+              {context.slots.default?.()}
             </div>
           </div>
         </VuiResizeObserver>

@@ -106,7 +106,7 @@ export default defineComponent({
     const size = computed(() => props.size ?? vuiCheckboxGroup?.size ?? vuiForm?.size ?? "medium");
     const minWidth = computed(() => props.minWidth ?? vuiCheckboxGroup?.minWidth);
     const focused = ref(false);
-    const disabled = computed(() => vuiForm?.disabled || vuiCheckboxGroup?.disabled || props.disabled || false);
+    const disabled = computed(() => vuiForm?.disabled || vuiCheckboxGroup?.disabled || props.disabled);
 
     // 选中状态
     const defaultChecked = ref(props.defaultChecked);
@@ -204,9 +204,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const label = context.slots.default?.() ?? props.label;
-      const attributes: {
-        [attributeName: string]: any;
-      } = {
+      const attributes: Record<string, any> = {
         ...context.attrs,
         name: name.value,
         value: props.value,
@@ -222,16 +220,14 @@ export default defineComponent({
           <div class={classes.elInput.value}>
             {
               type.value === "button" ? null : (
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
-                  <path d="M0.020966 0l1023.958044 0 0 1024-1023.958044 0 0-1024Z"></path>
-                </svg>
-              )
-            }
-            {
-              type.value === "button" ? null : (
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1248 1024">
-                  <path d="M123.800257 460.153135l291.677674 232.393077 726.28329-669.078427s48.722384-44.483585 91.293444-9.727389c12.638284 10.392563 27.272086 39.993364-5.653359 86.388252L469.106727 988.380911s-58.120238 79.570536-127.131004-0.831161L14.711914 545.710226s-38.829006-59.865554 9.72861-95.701892c16.463333-11.973111 53.713011-30.763938 99.360954 10.14358z"></path>
-                </svg>
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+                    <path d="M0.020966 0l1023.958044 0 0 1024-1023.958044 0 0-1024Z"></path>
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1248 1024">
+                    <path d="M123.800257 460.153135l291.677674 232.393077 726.28329-669.078427s48.722384-44.483585 91.293444-9.727389c12.638284 10.392563 27.272086 39.993364-5.653359 86.388252L469.106727 988.380911s-58.120238 79.570536-127.131004-0.831161L14.711914 545.710226s-38.829006-59.865554 9.72861-95.701892c16.463333-11.973111 53.713011-30.763938 99.360954 10.14358z"></path>
+                  </svg>
+                </>
               )
             }
             <input type="checkbox" ref={checkboxRef} {...attributes} />

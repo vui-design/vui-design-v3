@@ -2,7 +2,7 @@ import type { PropType, Ref, VNode } from "vue";
 
 declare type VueNodeAtom = VNode | string | number | boolean | null | undefined | void;
 
-export type Key = string | number;
+export type Key = string | number | symbol;
 
 export type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never;
 

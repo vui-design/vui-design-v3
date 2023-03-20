@@ -36,21 +36,18 @@
           <img src="~src/assets/images/vui-design-pro.png" />
         </a>
         <div class="menu">
-          <!--
-          <vui-menu mode="vertical" color="light" v-bind:selectedName="$route.path">
+          <vui-menu mode="vertical" color="light" v-bind:selectedKey="route.path" v-on:select="handleNavigate">
             <template v-for="item in menu">
-              <vui-menu-item-group v-if="item.group" v-bind:key="item.group">
-                <template slot="title">{{translate("menu." + item.group)}}</template>
-                <vui-menu-item v-for="child in item.children" v-bind:key="child.name" v-bind:name="child.path" v-bind:to="child.path">
-                  {{translate("menu." + item.group + "-" + child.name)}}
+              <vui-menu-item-group v-if="item.group" v-bind:key="item.group" v-bind:title="translate('app.menu.' + item.group)">
+                <vui-menu-item v-for="child in item.children" v-bind:key="child.path" v-bind:to="child.path">
+                  {{translate("app.menu." + item.group + "-" + child.name)}}
                 </vui-menu-item>
               </vui-menu-item-group>
-              <vui-menu-item v-else v-bind:key="item.name" v-bind:name="item.path" v-bind:to="item.path">
-                {{translate("menu." + item.name)}}
+              <vui-menu-item v-else v-bind:key="item.path" v-bind:to="item.path">
+                {{translate("app.menu." + item.name)}}
               </vui-menu-item>
             </template>
           </vui-menu>
-          -->
         </div>
       </vui-layout-sider>
       <vui-layout class="app-layout-body-content">
@@ -67,25 +64,31 @@
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
-  import { useRoute } from "vue-router";
+  import { useRouter, useRoute } from "vue-router";
   import { useI18n } from "vue-i18n";
+  import getMenuByRoutes from "../utils/getMenuByRoutes";
 
   export default defineComponent({
     setup(props, context) {
       // 
+      const router = useRouter();
       const route = useRoute();
-
-      // 
       const { t: translate } = useI18n();
 
       // 状态
+      const menu = getMenuByRoutes(router.options.routes);
       const year = ref<number>(new Date().getFullYear());
+
+      // 
+      const handleNavigate = key => router.push(key);
 
       // 
       return {
         route,
+        menu,
         translate,
-        year
+        year,
+        handleNavigate
       };
     }
   });
