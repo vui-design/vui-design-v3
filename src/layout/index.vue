@@ -40,11 +40,11 @@
             <template v-for="item in menu">
               <vui-menu-item-group v-if="item.group" v-bind:key="item.group" v-bind:title="translate('app.menu.' + item.group)">
                 <vui-menu-item v-for="child in item.children" v-bind:key="child.path">
-                  {{translate("app.menu." + item.group + "-" + child.name)}}
+                  <router-link v-bind:to="child.path">{{translate("app.menu." + item.group + "-" + child.name)}}</router-link>
                 </vui-menu-item>
               </vui-menu-item-group>
               <vui-menu-item v-else v-bind:key="item.path">
-                {{translate("app.menu." + item.name)}}
+                <router-link v-bind:to="item.path">{{translate("app.menu." + item.name)}}</router-link>
               </vui-menu-item>
             </template>
           </vui-menu>
