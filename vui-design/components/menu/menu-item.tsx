@@ -78,13 +78,13 @@ export default defineComponent({
         return e.preventDefault();
       }
 
-      vuiMenu?.onSelect(key.value);
+      vuiMenu?.onSelect?.(key.value, level.value);
     };
 
     // 组件挂载之前执行
     onBeforeMount(() => {
-      vuiMenu?.addMenuItem?.(key.value);
-      vuiSubmenu?.addMenuItem?.(key.value);
+      vuiMenu?.addMenuItem?.(key.value, level.value);
+      vuiSubmenu?.addMenuItem?.(key.value, level.value);
     });
 
     // 组件卸载之前执行

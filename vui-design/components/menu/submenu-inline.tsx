@@ -71,7 +71,7 @@ export default defineComponent({
 
     // 内部状态
     const open = computed(() => vuiMenu?.openKeys?.includes(key.value));
-    const selected = computed(() => vuiMenu?.selectedKey && menuItems.value.includes(vuiMenu?.selectedKey));
+    const selected = computed(() => vuiMenu?.selectedKey && menuItems.value.findIndex(menuItem => menuItem.key === vuiMenu?.selectedKey) > -1);
 
     // 向后代组件注入当前组件
     provide(SubmenuInjectionKey, reactive({
@@ -89,7 +89,7 @@ export default defineComponent({
         return;
       }
 
-      vuiMenu?.onToggle?.(key.value, !open.value);
+      vuiMenu?.onToggle?.(key.value, level.value, !open.value);
     };
 
     // 打开前事件回调
@@ -124,8 +124,8 @@ export default defineComponent({
 
     // 组件挂载之前执行
     onBeforeMount(() => {
-      vuiMenu?.addSubmenu?.(key.value);
-      vuiSubmenu?.addSubmenu?.(key.value);
+      vuiMenu?.addSubmenu?.(key.value, level.value);
+      vuiSubmenu?.addSubmenu?.(key.value, level.value);
     });
 
     // 组件卸载之前执行

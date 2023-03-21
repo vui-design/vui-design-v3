@@ -10,6 +10,7 @@
     <vui-example-inline />
     <vui-example-inline-collapsed />
     <vui-example-color />
+    <vui-example-accordion />
     <vui-example-switch-mode />
     <h2 id="example-api">API</h2>
     <h3>Menu 属性</h3>
@@ -40,6 +41,12 @@
           <td>层级之间的缩进量</td>
           <td>Number</td>
           <td>22</td>
+        </tr>
+        <tr>
+          <td>accordion</td>
+          <td>是否开启手风琴效果</td>
+          <td>Boolean</td>
+          <td>false</td>
         </tr>
         <tr>
           <td>defaultCollapsed</td>
@@ -274,5 +281,6 @@
   import VuiExampleInline from "./examples/inline/index.vue";
   import VuiExampleInlineCollapsed from "./examples/inline-collapsed/index.vue";
   import VuiExampleColor from "./examples/color/index.vue";
+  import VuiExampleAccordion from "./examples/accordion/index.vue";
   import VuiExampleSwitchMode from "./examples/switch-mode/index.vue";
 </script>

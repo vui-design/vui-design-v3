@@ -39,11 +39,11 @@
           <vui-menu mode="vertical" color="light" v-bind:selectedKey="route.path" v-on:select="handleNavigate">
             <template v-for="item in menu">
               <vui-menu-item-group v-if="item.group" v-bind:key="item.group" v-bind:title="translate('app.menu.' + item.group)">
-                <vui-menu-item v-for="child in item.children" v-bind:key="child.path" v-bind:to="child.path">
+                <vui-menu-item v-for="child in item.children" v-bind:key="child.path">
                   {{translate("app.menu." + item.group + "-" + child.name)}}
                 </vui-menu-item>
               </vui-menu-item-group>
-              <vui-menu-item v-else v-bind:key="item.path" v-bind:to="item.path">
+              <vui-menu-item v-else v-bind:key="item.path">
                 {{translate("app.menu." + item.name)}}
               </vui-menu-item>
             </template>
