@@ -2,8 +2,8 @@ export default {
   "app": {
     // 导航
     "nav": {
-      "guide": "Guide",
-      "components": "Components",
+      "guide": "指南",
+      "components": "组件",
       "ecosystem": "生态系统",
       "placeholder": "搜索组件..."
     },
@@ -229,6 +229,7 @@ export default {
       "example-menu-vertical": "垂直菜单",
       "example-menu-inline": "内嵌菜单",
       "example-menu-inline-collapsed": "折叠内嵌菜单",
+      "example-menu-color": "主题",
       "example-menu-switch-mode": "切换菜单类型",
 
       "example-page-header-basic-usage": "基本用法",

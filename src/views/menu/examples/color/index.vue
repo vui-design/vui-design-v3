@@ -1,11 +1,15 @@
 <template>
-  <vui-example id="example-menu-inline-collapsed" v-bind:code="code">
+  <vui-example id="example-menu-color" v-bind:code="code">
     <template v-slot:demo>
-      <div class="example-menu-inline-collapsed">
-        <vui-button v-on:click="handleToggleCollapsed">
-          <vui-icon v-bind:type="collapsed ? 'menu-unfold' : 'menu-fold'" />
-        </vui-button>
-        <vui-menu mode="inline" v-model:collapsed="collapsed" v-model:selectedKey="selectedKey">
+      <div class="example-menu-color">
+        <vui-switch
+          v-model:checked="color"
+          uncheckedValue="light"
+          checkedValue="dark"
+          uncheckedText="Light"
+          checkedText="Dark"
+        />
+        <vui-menu mode="inline" v-model:color="color" v-model:selectedKey="selectedKey">
           <vui-menu-item key="1" icon="pie-chart" title="Navigation 1" />
           <vui-menu-item key="2" icon="computer" title="Navigation 2" disabled />
           <vui-submenu key="3" icon="inbox" title="Navigation 3 - Submenu">
@@ -30,9 +34,9 @@
         </vui-menu>
       </div>
     </template>
-    <template v-slot:title>折叠内嵌菜单</template>
+    <template v-slot:title>主题</template>
     <template v-slot:description>
-      <p>内嵌菜单可以被折叠或展开。</p>
+      <p>内建了两套主题：<code>light</code> 和 <code>dark</code>，默认为 <code>light</code>。</p>
     </template>
   </vui-example>
 </template>
@@ -47,22 +51,19 @@
       VuiExample
     },
     setup() {
-      const collapsed = ref<boolean>(false);
+      const color = ref<string>("light");
       const selectedKey = ref<string>("1");
-
-      const handleToggleCollapsed = () => collapsed.value = !collapsed.value;
 
       return {
         code,
-        collapsed,
-        selectedKey,
-        handleToggleCollapsed
+        color,
+        selectedKey
       };
     }
   });
 </script>
 
 <style>
-  .example-menu-inline-collapsed { width:240px; }
-  .example-menu-inline-collapsed > .vui-menu { border-right:1px solid #e6e6e6; margin-top:16px; }
+  .example-menu-color { width:240px; }
+  .example-menu-color > .vui-menu { border-right:1px solid #e6e6e6; margin-top:16px; }
 </style>

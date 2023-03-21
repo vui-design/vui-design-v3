@@ -1,15 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Key } from "../../types";
 import type { Trigger } from "../popup/types";
-import { defineComponent, provide, inject, ref, reactive, computed, onBeforeMount, onBeforeUnmount } from "vue";
+import { defineComponent, provide, inject, toRefs, reactive, computed, onBeforeMount, onBeforeUnmount } from "vue";
 import VuiIcon from "../icon";
 import VuiPopup from "../popup";
 import useKey from "../../hooks/useKey";
 import useIndent from "./hooks/useIndent";
+import useRefs from "./hooks/useRefs";
 import getClassName from "../../utils/getClassName";
 import { getSlotProp } from "../../utils/vue";
 import { triggers } from "../popup/constants";
-import { colors } from "./constants";
 import { MenuInjectionKey, SubmenuInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -73,41 +73,24 @@ export default defineComponent({
     const vuiMenu = inject(MenuInjectionKey, undefined);
     const vuiSubmenu = inject(SubmenuInjectionKey, undefined);
 
+    // 
+    const { level, disabled } = toRefs(props);
+
     // 唯一标识
     const key = useKey();
     // 缩进
     const indent = useIndent(props.level);
+    // 用于更新自身及父级 Submenu 的下属 Submenu 或 MenuItem 集合
+    const { menuItems, addSubmenu, removeSubmenu, addMenuItem, removeMenuItem } = useRefs();
 
     // 内部状态
-    const submenus = ref<Key[]>([]);
-    const items = ref<Key[]>([]);
     const open = computed(() => vuiMenu?.openKeys?.includes(key.value));
-    const selected = computed(() => vuiMenu?.selectedKey && items.value.includes(vuiMenu?.selectedKey));
-
-    // 用于更新自身及父级 Submenu 的下属 Submenu 集合
-    const addSubmenu = (key: Key) => {
-      submenus.value.push(key);
-      vuiSubmenu?.addSubmenu?.(key);
-    };
-    const removeSubmenu = (key: Key) => {
-      submenus.value.splice(submenus.value.indexOf(key), 1);
-      vuiSubmenu?.removeSubmenu?.(key);
-    };
-
-    // 用于更新自身及父级 Submenu 的下属 MenuItem 集合
-    const addMenuItem = (key: Key) => {
-      items.value.push(key);
-      vuiSubmenu?.addMenuItem?.(key);
-    };
-    const removeMenuItem = (key: Key) => {
-      items.value.splice(items.value.indexOf(key), 1);
-      vuiSubmenu?.removeSubmenu?.(key);
-    };
+    const selected = computed(() => vuiMenu?.selectedKey && menuItems.value.includes(vuiMenu?.selectedKey));
 
     // 向后代组件注入当前组件
     provide(SubmenuInjectionKey, reactive({
-      level: props.level,
-      disabled: props.disabled,
+      level,
+      disabled,
       addSubmenu,
       removeSubmenu,
       addMenuItem,
@@ -115,12 +98,12 @@ export default defineComponent({
     }));
 
     // onChange 事件回调
-    const handleChange = (visible: boolean) => {
+    const handleChange = (open: boolean) => {
       if (props.disabled) {
         return;
       }
 
-      vuiMenu?.onToggle?.(key.value, visible);
+      vuiMenu?.onToggle?.(key.value, open);
     };
 
     // 组件挂载之前执行
@@ -174,21 +157,8 @@ export default defineComponent({
         [`${mClassName.value}`]: true,
         [`${mClassName.value}-popup`]: true,
         [`${mClassName.value}-vertical`]: true,
-        [`${mClassName.value}-${vuiMenu?.color}`]: vuiMenu?.color && colors.includes(vuiMenu.color)
+        [`${mClassName.value}-${vuiMenu?.color}`]: vuiMenu?.color
       };
-    });
-
-    // 计算内嵌菜单 style 样式
-    const mStyles: Record<string, ComputedRef> = {};
-
-    mStyles.el = computed(() => {
-      let style: CSSProperties = {};
-
-      if (vuiMenu?.color && colors.indexOf(vuiMenu.color) === -1) {
-        style.backgroundColor = vuiMenu.color;
-      }
-
-      return style;
     });
 
     // 渲染
@@ -226,7 +196,7 @@ export default defineComponent({
       // 
       const slots = {
         content: () => (
-          <div class={mClasses.el.value} style={mStyles.el.value}>
+          <div class={mClasses.el.value}>
             {context.slots.default?.()}
           </div>
         )
@@ -243,8 +213,9 @@ export default defineComponent({
             getPopupContainer={props.getPopupContainer}
             placement={vuiMenu?.mode === "horizontal" && props.level === 1 ? "bottom-left" : "right-top"}
             animation={props.animation}
-            offset={10}
+            offset={4}
             showArrow={false}
+            autofitPopupMinWidth={vuiMenu?.mode === "horizontal" && props.level === 1}
             disabled={props.disabled}
             onChange={handleChange}
             v-slots={slots}

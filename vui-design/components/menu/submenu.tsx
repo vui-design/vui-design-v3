@@ -68,7 +68,6 @@ export default defineComponent({
 
     // 唯一标识
     const key = useKey();
-
     // 层级
     const level = useLevel();
 

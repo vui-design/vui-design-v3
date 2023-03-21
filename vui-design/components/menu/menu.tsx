@@ -1,10 +1,11 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Key } from "../../types";
 import type { Mode, Color } from "./types";
-import { defineComponent, provide, ref, reactive, computed, watch } from "vue";
+import { defineComponent, provide, toRefs, ref, reactive, computed, watch } from "vue";
+import useRefs from "./hooks/useRefs";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { colors } from "./constants";
+import { modes, colors } from "./constants";
 import { MenuInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -17,11 +18,13 @@ export const createProps = () => {
     // 菜单类型
     mode: {
       type: String as PropType<Mode>,
+      validator: (mode: Mode) => modes.includes(mode),
       default: "horizontal"
     },
     // 主题颜色
     color: {
       type: String as PropType<string | Color>,
+      validator: (color: Color) => colors.includes(color),
       default: "light"
     },
     // 层级之间的缩进量
@@ -69,9 +72,13 @@ export default defineComponent({
   props: createProps(),
   emits: ["update:collapsed", "update:openKeys", "update:selectedKey", "toggle", "select"],
   setup(props, context) {
+    // 
+    const { mode, color, indent } = toRefs(props);
+
+    // 用于更新自身的下属 Submenu 或 MenuItem 集合
+    const { addSubmenu, removeSubmenu, addMenuItem, removeMenuItem } = useRefs();
+
     // 内部状态
-    const submenus =ref<Key[]>([]);
-    const items =ref<Key[]>([]);
     const direction = computed(() => props.mode === "horizontal" ? "horizontal" : "vertical");
 
     // 折叠状态
@@ -104,30 +111,25 @@ export default defineComponent({
       }
     });
 
-    // 用于更新自身的下属 Submenu 集合
-    const addSubmenu = (key: Key) => submenus.value.push(key);
-    const removeSubmenu = (key: Key) => submenus.value.splice(submenus.value.indexOf(key), 1);
-
-    // 用于更新自身的下属 MenuItem 集合
-    const addMenuItem = (key: Key) => items.value.push(key);
-    const removeMenuItem = (key: Key) => items.value.splice(items.value.indexOf(key), 1);
-
-    // 
+    // 打开 & 关闭 Submenu 事件回调
     const handleToggle = (key: Key, open: boolean) => {
       const index = defaultOpenKeys.value.indexOf(key);
+      let nextOpenKeys = [...defaultOpenKeys.value];
 
       if (open && index === -1) {
-        defaultOpenKeys.value.push(key);
+        nextOpenKeys.push(key);
       }
       else if (!open && index > -1) {
-        defaultOpenKeys.value.splice(index, 1);
+        nextOpenKeys.splice(index, 1);
       }
 
-      context.emit("update:openKeys", defaultOpenKeys.value);
-      context.emit("toggle", key, open);
+      defaultOpenKeys.value = nextOpenKeys;
+
+      context.emit("update:openKeys", nextOpenKeys);
+      context.emit("toggle", nextOpenKeys, key, open);
     };
 
-    // 
+    // 点击 MenuItem 事件回调
     const handleSelect = (key: Key) => {
       // if (props.mode === "horizontal" || props.mode === "vertical" || (props.mode === "inline" && collapsed.value)) {
       //   defaultOpenKeys.value = [];
@@ -141,9 +143,9 @@ export default defineComponent({
 
     // 向后代组件注入当前组件
     provide(MenuInjectionKey, reactive({
-      mode: props.mode,
-      color: props.color,
-      indent: props.indent,
+      mode,
+      color,
+      indent,
       collapsed,
       openKeys,
       selectedKey,
@@ -164,28 +166,15 @@ export default defineComponent({
         [`${className.value}`]: true,
         [`${className.value}-root`]: true,
         [`${className.value}-${direction.value}`]: direction.value,
-        [`${className.value}-${props.color}`]: props.color && colors.includes(props.color),
+        [`${className.value}-${props.color}`]: props.color,
         [`${className.value}-collapsed`]: (props.mode === "vertical" || props.mode === "inline") && collapsed.value
       };
-    });
-
-    // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
-
-    styles.el = computed(() => {
-      let style: CSSProperties = {};
-
-      if (props.color && colors.indexOf(props.color) === -1) {
-        style.backgroundColor = props.color;
-      }
-
-      return style;
     });
 
     // 渲染
     return () => {
       return (
-        <div class={classes.el.value} style={styles.el.value}>
+        <div class={classes.el.value}>
           {context.slots.default?.()}
         </div>
       );

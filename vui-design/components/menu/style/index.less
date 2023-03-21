@@ -2,6 +2,7 @@
 
 .@{vui-menu} {
   // menu
+  line-height:@menu-item-line-height;
   transition:all @transition-duration @transition-timing-function;
   .clearfix;
 
@@ -38,7 +39,6 @@
   }
 
   &-popup {
-    min-width:160px;
     border-radius:@menu-border-radius;
     box-shadow:@menu-box-shadow;
     padding:0;
@@ -61,7 +61,6 @@
       align-items:center;
       overflow:hidden;
       font-size:@menu-item-font-size;
-      line-height:@menu-item-line-height;
       transition:all @transition-duration @transition-timing-function;
     }
     & > &-header > &-icon {
@@ -141,6 +140,7 @@
       position:absolute;
       top:0;
       left:0;
+      min-width:160px;
     }
 
     &-open > &-header > &-arrow-horizontal {
@@ -167,11 +167,11 @@
   }
   &-horizontal &-submenu > &-submenu-header {
     box-shadow:0px -2px 0px transparent inset;
-    padding:0;
   }
 
   &-horizontal&-light &-submenu > &-submenu-header {
     box-shadow:0px -2px 0px transparent inset;
+    padding:0;
     color:@menu-light-item-font-color;
   }
   &-horizontal&-light &-submenu > &-submenu-header:hover,
@@ -195,6 +195,7 @@
 
   &-horizontal&-dark &-submenu > &-submenu-header {
     box-shadow:0px -2px 0px transparent inset;
+    padding:0 @menu-item-padding;
     color:@menu-dark-item-font-color;
   }
   &-horizontal&-dark &-submenu > &-submenu-header:hover,
@@ -286,12 +287,12 @@
   &-submenu-body[data-placement="bottom-right"] { transform-origin:right top; }
 
   &-submenu-body[data-placement="left"] { transform-origin:right center; }
-  &-submenu-body[data-placement="left-top"] { transform-origin:right top; }
-  &-submenu-body[data-placement="left-bottom"] { transform-origin:right bottom; }
+  &-submenu-body[data-placement="left-top"] { margin-top:-@margin-xss; transform-origin:right top; }
+  &-submenu-body[data-placement="left-bottom"] { margin-top:@margin-xss; transform-origin:right bottom; }
 
   &-submenu-body[data-placement="right"] { transform-origin:left center; }
-  &-submenu-body[data-placement="right-top"] { transform-origin:left top; }
-  &-submenu-body[data-placement="right-bottom"] { transform-origin:left bottom; }
+  &-submenu-body[data-placement="right-top"] { margin-top:-@margin-xss; transform-origin:left top; }
+  &-submenu-body[data-placement="right-bottom"] { margin-top:@margin-xss; transform-origin:left bottom; }
 
   &-submenu-body[data-placement^="top"]&-submenu-scale-appear-from,
   &-submenu-body[data-placement^="top"]&-submenu-scale-enter-from { opacity:0; transform:scaleY(0.85); }
@@ -338,7 +339,6 @@
     align-items:center;
     overflow:hidden;
     font-size:@menu-item-font-size;
-    line-height:@menu-item-line-height;
     transition:all @transition-duration @transition-timing-function;
   }
   &-item-icon {
@@ -354,7 +354,6 @@
 
   &-horizontal &-item {
     box-shadow:0px -2px 0px transparent inset;
-    padding:0;
   }
   &-horizontal &-item + &-submenu,
   &-horizontal &-item + &-item {
@@ -363,6 +362,7 @@
 
   &-horizontal&-light &-item {
     box-shadow:0px -2px 0px transparent inset;
+    padding:0;
     color:@menu-light-item-font-color;
   }
   &-horizontal&-light &-item:hover,
@@ -381,6 +381,7 @@
   }
 
   &-horizontal&-dark &-item {
+    padding:0 @menu-item-padding;
     color:@menu-dark-item-font-color;
   }
   &-horizontal&-dark &-item:hover,
@@ -448,21 +449,12 @@
   &-item-group {
     & > &-header {
       font-size:@menu-item-font-size;
-      line-height:@menu-item-line-height;
       transition:all @transition-duration @transition-timing-function;
       .writeEllipsis;
     }
     & > &-body {
       .clearfix;
     }
-  }
-
-  &-horizontal &-item-group > &-item-group-header {
-    padding:0;
-  }
-
-  &-vertical &-item-group > &-item-group-header {
-    padding:0 @menu-item-padding;
   }
 
   &-light &-item-group > &-item-group-header {
@@ -477,6 +469,20 @@
     padding:0 calc((100% - @menu-item-font-size) / 2) !important;
   }
 
+  &-horizontal&-light &-item-group > &-item-group-header {
+    padding:0;
+  }
+  &-horizontal&-dark &-item-group > &-item-group-header {
+    padding:0 @menu-item-padding;
+  }
+
+  &-vertical&-light &-item-group > &-item-group-header {
+    padding:0 @menu-item-padding;
+  }
+  &-vertical&-dark &-item-group > &-item-group-header {
+    padding:0 @menu-item-padding;
+  }
+
   // item divider
   &-item-divider {
     display:block;
@@ -485,6 +491,10 @@
     border-top:1px solid transparent;
     margin:4px 0;
     overflow:hidden;
+
+    &-dashed {
+      border-top-style:dashed;
+    }
   }
 
   &-light &-item-divider {

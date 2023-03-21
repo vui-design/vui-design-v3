@@ -1,7 +1,14 @@
 const code =
 `<template>
-  <div class="example-menu-horizontal">
-    <vui-menu mode="horizontal" v-model:selectedKey="selectedKey">
+  <div class="example-menu-color">
+    <vui-switch
+      v-model:checked="color"
+      uncheckedValue="light"
+      checkedValue="dark"
+      uncheckedText="Light"
+      checkedText="Dark"
+    />
+    <vui-menu mode="inline" v-model:color="color" v-model:selectedKey="selectedKey">
       <vui-menu-item key="1" icon="pie-chart" title="Navigation 1" />
       <vui-menu-item key="2" icon="computer" title="Navigation 2" disabled />
       <vui-submenu key="3" icon="inbox" title="Navigation 3 - Submenu">
@@ -29,12 +36,20 @@ const code =
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
   export default defineComponent({
+    components: {
+      VuiExample
+    },
     setup() {
+      const color = ref<string>("light");
       const selectedKey = ref<string>("1");
 
       return {
+        code,
+        color,
         selectedKey
       };
     }
@@ -42,7 +57,8 @@ const code =
 </script>
 
 <style>
-  .example-menu-horizontal > .vui-menu { box-shadow:0 -1px 0 #e6e6e6 inset; }
+  .example-menu-color { width:240px; }
+  .example-menu-color > .vui-menu { border-right:1px solid #e6e6e6; margin-top:16px; }
 </style>
 `;
 

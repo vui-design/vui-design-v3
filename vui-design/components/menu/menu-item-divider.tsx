@@ -13,7 +13,7 @@ export const createProps = () => {
     // 分割线距离两侧内容的间隔
     gutter: {
       type: [String, Number] as PropType<string | number>,
-      default: 8
+      default: undefined
     },
     // 是否虚线
     dashed: {
@@ -26,7 +26,7 @@ export const createProps = () => {
 export type MenuItemDividerProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-menu-divider",
+  name: "vui-menu-item-divider",
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式

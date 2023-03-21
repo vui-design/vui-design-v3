@@ -151,8 +151,8 @@ export default defineComponent({
       );
 
       // 
-      let item;
-      let itemAttributes: Record<string, any> = {
+      let menuItem;
+      let menuItemAttributes: Record<string, any> = {
         ...context.attrs,
         class: [classes.el.value, context.attrs.class],
         style: [styles.el.value, context.attrs.style],
@@ -160,15 +160,15 @@ export default defineComponent({
       };
 
       if (props.href) {
-        item = (
-          <a href={props.href} target={props.target} {...itemAttributes}>
+        menuItem = (
+          <a href={props.href} target={props.target} {...menuItemAttributes}>
             {children}
           </a>
         );
       }
       else {
-        item = (
-          <div {...itemAttributes}>
+        menuItem = (
+          <div {...menuItemAttributes}>
             {children}
           </div>
         );
@@ -182,12 +182,12 @@ export default defineComponent({
 
         return (
           <VuiTooltip placement="right" color={vuiMenu?.color} v-slots={slots}>
-            {item}
+            {menuItem}
           </VuiTooltip>
         );
       }
       else {
-        return item;
+        return menuItem;
       }
     };
   }

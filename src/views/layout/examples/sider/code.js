@@ -6,9 +6,9 @@ const code =
       <vui-menu
         mode="inline"
         color="dark"
-        v-bind:collapsed="collapsed"
-        v-bind:openKeys="openKeys"
-        v-bind:selectedKeys="selectedKeys"
+        v-model:collapsed="collapsed"
+        v-model:openKeys="openKeys"
+        v-model:selectedKey="selectedKey"
       >
         <vui-submenu key="1" icon="apps" title="Sub Menu 1">
           <vui-menu-item key="1-1" title="Item 1-1" />
@@ -50,14 +50,14 @@ const code =
 
   export default defineComponent({
     setup() {
-      const collapsed = ref(false);
-      const openKeys = ref(["1"])
-      const selectedKeys = ref("1-1");
+      const collapsed = ref<boolean>(false);
+      const openKeys = ref<string[]>(["1"])
+      const selectedKey = ref<string>("1-1");
 
       return {
         collapsed,
         openKeys,
-        selectedKeys
+        selectedKey
       };
     }
   });

@@ -5,18 +5,16 @@
         <vui-layout>
           <vui-layout-header color="dark">
             <h1 style="float: left; width: 120px; height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px 0;" />
-            <!--
             <vui-menu
               mode="horizontal"
               color="dark"
-              selectedKeys="1"
               style="float: left; margin-left: 24px; line-height: 64px;"
+              v-model:selectedKey="selectedKey"
             >
-              <vui-menu-item key="1" title="Item 1" />
-              <vui-menu-item key="2" title="Item 2" />
-              <vui-menu-item key="3" title="Item 3" />
+              <vui-menu-item key="1" title="Nav 1" />
+              <vui-menu-item key="2" title="Nav 2" />
+              <vui-menu-item key="3" title="Nav 3" />
             </vui-menu>
-            -->
           </vui-layout-header>
           <vui-layout-content style="padding: 0 48px;">
             <vui-breadcrumb style="margin: 24px 0;">
@@ -39,7 +37,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, ref } from "vue";
   import VuiExample from "../../../../components/example/index.vue";
   import VuiBrowser from "../../../../components/browser/index.vue";
   import code from "./code";
@@ -50,8 +48,11 @@
       VuiBrowser
     },
     setup() {
+      const selectedKey = ref<string>("1");
+
       return {
-        code
+        code,
+        selectedKey
       };
     }
   });

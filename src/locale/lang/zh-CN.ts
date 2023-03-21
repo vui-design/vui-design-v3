@@ -229,6 +229,7 @@ export default {
       "example-menu-vertical": "垂直菜单",
       "example-menu-inline": "内嵌菜单",
       "example-menu-inline-collapsed": "折叠内嵌菜单",
+      "example-menu-color": "主题",
       "example-menu-switch-mode": "切换菜单类型",
 
       "example-page-header-basic-usage": "基本用法",

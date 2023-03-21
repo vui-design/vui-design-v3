@@ -5,13 +5,12 @@
         <vui-layout>
           <vui-layout-sider color="dark" breakpoint="lg" v-bind:collapsedWidth="80" v-on:collapse="handleCollapse" v-on:breakpoint="handleBreakpoint">
             <h1 style="height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px;"></h1>
-            <!--
             <vui-menu
               mode="inline"
               color="dark"
-              v-bind:collapsed="collapsed"
-              v-bind:openKeys="openKeys"
-              v-bind:selectedKeys="selectedKeys"
+              v-model:collapsed="collapsed"
+              v-model:openKeys="openKeys"
+              v-model:selectedKey="selectedKey"
             >
               <vui-submenu key="1" icon="apps" title="Sub Menu 1">
                 <vui-menu-item key="1-1" title="Item 1-1" />
@@ -32,7 +31,6 @@
                 <vui-menu-item key="3-4" title="Item 3-4" />
               </vui-submenu>
             </vui-menu>
-            -->
           </vui-layout-sider>
           <vui-layout>
             <vui-layout-header color="light" style="padding: 0 24px;"></vui-layout-header>
@@ -69,23 +67,23 @@
       VuiBrowser
     },
     setup() {
-      const collapsed = ref(false);
-      const openKeys = ref(["1"])
-      const selectedKeys = ref("1-1");
+      const collapsed = ref<boolean>(false);
+      const openKeys = ref<string[]>(["1"])
+      const selectedKey = ref<string>("1-1");
 
       const handleCollapse = (newCollapsed: boolean, type: string) => {
-        //console.log(newCollapsed, type);
-        //collapsed.value = newCollapsed;
+        console.log(newCollapsed, type);
+        collapsed.value = newCollapsed;
       };
       const handleBreakpoint = (broken: boolean) => {
-        //console.log(broken);
+        console.log(broken);
       };
 
       return {
         code,
         collapsed,
         openKeys,
-        selectedKeys,
+        selectedKey,
         handleCollapse,
         handleBreakpoint
       };

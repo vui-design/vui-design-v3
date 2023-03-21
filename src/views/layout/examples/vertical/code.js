@@ -6,12 +6,12 @@ const code =
       <vui-menu
         mode="horizontal"
         color="dark"
-        selectedKeys="1"
         style="float: left; margin-left: 24px; line-height: 64px;"
+        v-model:selectedKey="selectedKey"
       >
-        <vui-menu-item key="1" title="Item 1" />
-        <vui-menu-item key="2" title="Item 2" />
-        <vui-menu-item key="3" title="Item 3" />
+        <vui-menu-item key="1" title="Nav 1" />
+        <vui-menu-item key="2" title="Nav 2" />
+        <vui-menu-item key="3" title="Nav 3" />
       </vui-menu>
     </vui-layout-header>
     <vui-layout-content style="padding: 0 48px;">
@@ -25,6 +25,20 @@ const code =
     <vui-layout-footer style="text-align: center;">2010-2020 © EXAMPLE</vui-layout-footer>
   </vui-layout>
 </template>
+
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const selectedKey = ref<string>("1");
+
+      return {
+        selectedKey
+      };
+    }
+  });
+</script>
 `;
 
 export default code;

@@ -5,18 +5,16 @@
         <vui-layout>
           <vui-layout-header color="dark">
             <h1 style="float: left; width: 124px; height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px 0;"></h1>
-            <!--
             <vui-menu
               mode="horizontal"
               color="dark"
-              v-bind:selectedKeys="selectedKeys1"
               style="float: left; margin-left: 24px; line-height: 64px;"
+              v-model:selectedKey="selectedKey1"
             >
-              <vui-menu-item key="1" title="Item 1" />
-              <vui-menu-item key="2" title="Item 2" />
-              <vui-menu-item key="3" title="Item 3" />
+              <vui-menu-item key="1" title="Nav 1" />
+              <vui-menu-item key="2" title="Nav 2" />
+              <vui-menu-item key="3" title="Nav 3" />
             </vui-menu>
-            -->
           </vui-layout-header>
           <vui-layout-content style="padding: 0 48px;">
             <vui-breadcrumb style="margin: 24px 0;">
@@ -26,11 +24,10 @@
             </vui-breadcrumb>
             <vui-layout>
               <vui-layout-sider v-bind:width="200" style="border-right: 1px solid #f0f0f0;">
-                <!--
                 <vui-menu
                   mode="inline"
-                  v-bind:openKeys="openKeys2"
-                  v-bind:selectedKeys="selectedKeys2"
+                  v-model:openKeys="openKeys2"
+                  v-model:selectedKey="selectedKey2"
                 >
                   <vui-submenu key="1" icon="apps" title="Sub Menu 1">
                     <vui-menu-item key="1-1" title="Item 1-1" />
@@ -51,7 +48,6 @@
                     <vui-menu-item key="3-4" title="Item 3-4" />
                   </vui-submenu>
                 </vui-menu>
-                -->
               </vui-layout-sider>
               <vui-layout-content style="min-height: 280px; background-color: #fff; padding: 24px;">Content</vui-layout-content>
             </vui-layout>
@@ -79,15 +75,15 @@
       VuiBrowser
     },
     setup() {
-      const selectedKeys1 = ref("1");
-      const openKeys2 = ref(["1"])
-      const selectedKeys2 = ref("1-1");
+      const selectedKey1 = ref<string>("1");
+      const openKeys2 = ref<string[]>(["1"])
+      const selectedKey2 = ref<string>("1-1");
 
       return {
         code,
-        selectedKeys1,
+        selectedKey1,
         openKeys2,
-        selectedKeys2
+        selectedKey2
       };
     }
   });
