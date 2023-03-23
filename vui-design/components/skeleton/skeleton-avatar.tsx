@@ -53,7 +53,7 @@ export default defineComponent({
     });
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
       let style: CSSProperties = {};

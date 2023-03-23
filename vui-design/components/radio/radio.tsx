@@ -123,35 +123,6 @@ export default defineComponent({
       }
     });
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, type.value === "button" ? "radio-button" : "radio"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-${size.value}`]: size.value,
-        [`${className.value}-focused`]: focused.value,
-        [`${className.value}-checked`]: checked.value,
-        [`${className.value}-disabled`]: disabled.value
-      };
-    });
-    classes.elInput = computed(() => `${className.value}-input`);
-    classes.elLabel = computed(() => `${className.value}-label`);
-
-    // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
-
-    styles.el = computed(() => {
-      let style: CSSProperties = {};
-
-      if (type.value === "button" && minWidth.value) {
-        style.minWidth = is.string(minWidth.value) ? minWidth.value : `${minWidth.value}px`;
-      }
-
-      return style;
-    });
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
       focused.value = true;
@@ -194,6 +165,35 @@ export default defineComponent({
         }
       });
     };
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, type.value === "button" ? "radio-button" : "radio"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: true,
+        [`${className.value}-${size.value}`]: size.value,
+        [`${className.value}-focused`]: focused.value,
+        [`${className.value}-checked`]: checked.value,
+        [`${className.value}-disabled`]: disabled.value
+      };
+    });
+    classes.elInput = computed(() => `${className.value}-input`);
+    classes.elLabel = computed(() => `${className.value}-label`);
+
+    // 计算 style 样式
+    let styles: Record<string, ComputedRef> = {};
+
+    styles.el = computed(() => {
+      let style: CSSProperties = {};
+
+      if (type.value === "button" && minWidth.value) {
+        style.minWidth = is.string(minWidth.value) ? minWidth.value : `${minWidth.value}px`;
+      }
+
+      return style;
+    });
 
     // 渲染
     return () => {

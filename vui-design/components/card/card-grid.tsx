@@ -26,12 +26,6 @@ export default defineComponent({
     // 基础属性
     const id = guid();
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "card-grid"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => `${className.value}`);
-
     // 组件挂载之前执行
     onBeforeMount(() => {
       vuiCard?.addGridRef?.(id);
@@ -41,6 +35,12 @@ export default defineComponent({
     onBeforeUnmount(() => {
       vuiCard?.removeGridRef?.(id);
     });
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "card-grid"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => `${className.value}`);
 
     // 渲染
     return () => {

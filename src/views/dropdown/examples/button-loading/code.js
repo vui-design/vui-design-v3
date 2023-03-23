@@ -4,7 +4,7 @@ const code =
     <vui-dropdown-button type="primary" loading>
       Submit
       <template v-slot:menu>
-        <vui-menu v-on:click="handleMenuClick">
+        <vui-menu>
           <vui-menu-item key="1" title="Menu Item 1" />
           <vui-menu-item key="2" title="Menu Item 2" />
           <vui-menu-item key="3" title="Menu Item 3" />

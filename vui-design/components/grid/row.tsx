@@ -92,6 +92,23 @@ export default defineComponent({
       isSupportRowGap
     }));
 
+    // 订阅响应
+    let token: number;
+
+    onMounted(() => {
+      token = responsiveObserver.subscribe((value: Screens) => {
+        const currentGutter = props.gutter || 0;
+
+        if ((!is.array(currentGutter) && is.object(currentGutter)) || (is.array(currentGutter) && (is.object(currentGutter[0]) || is.object(currentGutter[1])))) {
+          screens.value = value;
+        }
+      });
+    });
+
+    onBeforeUnmount(() => {
+      responsiveObserver.unsubscribe(token);
+    });
+
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "row"));
     let classes: Record<string, ComputedRef> = {};
@@ -106,7 +123,7 @@ export default defineComponent({
     });
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
       const style: CSSProperties = {};
@@ -128,23 +145,6 @@ export default defineComponent({
       }
 
       return style;
-    });
-
-    // 订阅响应
-    let token: number;
-
-    onMounted(() => {
-      token = responsiveObserver.subscribe((value: Screens) => {
-        const currentGutter = props.gutter || 0;
-
-        if ((!is.array(currentGutter) && is.object(currentGutter)) || (is.array(currentGutter) && (is.object(currentGutter[0]) || is.object(currentGutter[1])))) {
-          screens.value = value;
-        }
-      });
-    });
-
-    onBeforeUnmount(() => {
-      responsiveObserver.unsubscribe(token);
     });
 
     // 渲染

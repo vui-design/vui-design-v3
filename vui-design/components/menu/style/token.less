@@ -16,6 +16,11 @@
 @menu-light-item-selected-background-color: #e6f7ff;
 @menu-light-item-selected-font-color: @primary-color;
 @menu-light-item-disabled-font-color: @font-disabled-color;
+@menu-light-item-danger-font-color: @error-color;
+@menu-light-item-danger-hover-font-color: shade(@error-color, 10%);
+@menu-light-item-danger-selected-background-color: ~`colorPalette("@{error-color}", 1) `;
+@menu-light-item-danger-selected-font-color: @error-color;
+@menu-light-item-danger-disabled-font-color: @font-disabled-color;
 @menu-light-divider-color: rgba(0,0,0,0.06);
 
 @menu-dark-background-color: @component-dark-background-color;
@@ -24,4 +29,9 @@
 @menu-dark-item-selected-background-color: @primary-color;
 @menu-dark-item-selected-font-color: @font-reverse-color;
 @menu-dark-item-disabled-font-color: shade(@font-reverse-color, 55%);
+@menu-dark-item-danger-font-color: shade(@error-color, 15%);
+@menu-dark-item-danger-hover-font-color: @error-color;
+@menu-dark-item-danger-selected-background-color: @error-color;
+@menu-dark-item-danger-selected-font-color: @font-reverse-color;
+@menu-dark-item-danger-disabled-font-color: @font-disabled-color;
 @menu-dark-divider-color: rgba(255,255,255,0.06);

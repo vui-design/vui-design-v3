@@ -96,25 +96,6 @@ export default defineComponent({
       immediate: true
     });
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "spin"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-fullscreen`]: props.fullscreen,
-        [`${className.value}-with-content`]: context.slots.default,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-spinning`]: spinning.value
-      };
-    });
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elSpinner = computed(() => `${className.value}-spinner`);
-    classes.elDot = computed(() => `${className.value}-dot`);
-    classes.elDotItem = computed(() => `${className.value}-dot-item`);
-    classes.elMessage = computed(() => `${className.value}-message`);
-
     // 打开前事件回调
     const handleBeforeOpen = () => {
 
@@ -142,6 +123,25 @@ export default defineComponent({
         delayer.value = undefined;
       }
     });
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "spin"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: true,
+        [`${className.value}-fullscreen`]: props.fullscreen,
+        [`${className.value}-with-content`]: context.slots.default,
+        [`${className.value}-${props.size}`]: props.size,
+        [`${className.value}-spinning`]: spinning.value
+      };
+    });
+    classes.elContent = computed(() => `${className.value}-content`);
+    classes.elSpinner = computed(() => `${className.value}-spinner`);
+    classes.elDot = computed(() => `${className.value}-dot`);
+    classes.elDotItem = computed(() => `${className.value}-dot-item`);
+    classes.elMessage = computed(() => `${className.value}-message`);
 
     // 渲染
     return () => {

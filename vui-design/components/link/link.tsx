@@ -70,22 +70,6 @@ export default defineComponent({
   props: createProps(),
   emits: ["click"],
   setup(props, context) {
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "link"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-underline`]: props.underline,
-        [`${className.value}-loading`]: props.loading,
-        [`${className.value}-disabled`]: props.disabled
-      };
-    });
-
     // 将纯文本子元素使用 span 标签包裹
     const insertTextIntoSpan = (target: VNode) => {
       if (target?.type === Text) {
@@ -112,6 +96,22 @@ export default defineComponent({
 
       context.emit("click", e);
     };
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "link"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: true,
+        [`${className.value}-${props.type}`]: props.type,
+        [`${className.value}-${props.size}`]: props.size,
+        [`${className.value}-block`]: props.block,
+        [`${className.value}-underline`]: props.underline,
+        [`${className.value}-loading`]: props.loading,
+        [`${className.value}-disabled`]: props.disabled
+      };
+    });
 
     // 渲染
     return () => {

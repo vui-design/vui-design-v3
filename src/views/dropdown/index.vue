@@ -11,9 +11,9 @@
         <vui-example-other-elements />
         <vui-example-trigger />
         <vui-example-contextmenu />
-        <vui-example-event />
       </vui-col>
       <vui-col v-bind:span="12">
+        <vui-example-event />
         <vui-example-cascaded />
         <vui-example-placement />
         <vui-example-button />

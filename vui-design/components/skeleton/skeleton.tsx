@@ -113,7 +113,6 @@ export default defineComponent({
   name: "vui-skeleton",
   props: createProps(),
   setup(props, context) {
-
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "skeleton"));
     let classes: Record<string, ComputedRef> = {};
@@ -158,9 +157,9 @@ export default defineComponent({
             }} />
           );
         }
-  
+
         let paragraph;
-  
+
         if (props.paragraph) {
           paragraph = (
             <VuiSkeletonParagraph {...{
@@ -171,7 +170,7 @@ export default defineComponent({
             }} />
           );
         }
-  
+
         children.push(
           <div class={classes.elBody.value}>
             {title}

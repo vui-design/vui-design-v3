@@ -121,6 +121,15 @@ export default defineComponent({
       }
     };
 
+    // 组件挂载完成后执行
+    onMounted(() => start());
+
+    // 组件更新后执行
+    onUpdated(() => start());
+
+    // 组件卸载之前执行
+    onBeforeUnmount(() => stop());
+
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "countdown"));
     let classes: Record<string, ComputedRef> = {};
@@ -134,15 +143,6 @@ export default defineComponent({
     classes.elValue = computed(() => `${className.value}-value`);
     classes.elValuePrefix = computed(() => `${className.value}-value-prefix`);
     classes.elValueSuffix = computed(() => `${className.value}-value*suffix`);
-
-    // 组件挂载完成后执行
-    onMounted(() => start());
-
-    // 组件更新后执行
-    onUpdated(() => start());
-
-    // 组件卸载之前执行
-    onBeforeUnmount(() => stop());
 
     // 渲染
     return () => {

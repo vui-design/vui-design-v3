@@ -155,7 +155,7 @@ export default defineComponent({
     classes.elBody = computed(() => `${className.value}-body`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elHeader = computed(() => {
       let style: CSSProperties = {};

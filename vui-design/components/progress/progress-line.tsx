@@ -83,7 +83,7 @@ export default defineComponent({
     classes.elBarStrokeSuccess = computed(() => `${className.value}-bar-stroke-success`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elBarTrail = computed(() => {
       return {

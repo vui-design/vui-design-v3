@@ -18,6 +18,13 @@
 @dropdown-menu-light-item-selected-font-color: @primary-color;
 @dropdown-menu-light-item-disabled-background-color: transparent;
 @dropdown-menu-light-item-disabled-font-color: @font-disabled-color;
+@dropdown-menu-light-item-danger-font-color: @error-color;
+@dropdown-menu-light-item-danger-hover-background-color: ~`colorPalette("@{error-color}", 1) `;
+@dropdown-menu-light-item-danger-hover-font-color: shade(@error-color, 10%);
+@dropdown-menu-light-item-danger-selected-background-color: ~`colorPalette("@{error-color}", 1) `;
+@dropdown-menu-light-item-danger-selected-font-color: @error-color;
+@dropdown-menu-light-item-danger-disabled-background-color: transparent;
+@dropdown-menu-light-item-danger-disabled-font-color: @font-disabled-color;
 @dropdown-menu-light-divider-color: rgba(0,0,0,0.06);
 
 @dropdown-menu-dark-background-color: @component-dark-background-color;
@@ -28,4 +35,11 @@
 @dropdown-menu-dark-item-selected-font-color: @font-reverse-color;
 @dropdown-menu-dark-item-disabled-background-color: transparent;
 @dropdown-menu-dark-item-disabled-font-color: shade(@font-reverse-color, 55%);
+@dropdown-menu-dark-item-danger-font-color: shade(@error-color, 15%);
+@dropdown-menu-dark-item-danger-hover-background-color: @error-color;
+@dropdown-menu-dark-item-danger-hover-font-color: @font-reverse-color;
+@dropdown-menu-dark-item-danger-selected-background-color: @error-color;
+@dropdown-menu-dark-item-danger-selected-font-color: @font-reverse-color;
+@dropdown-menu-dark-item-danger-disabled-background-color: transparent;
+@dropdown-menu-dark-item-danger-disabled-font-color: @font-disabled-color;
 @dropdown-menu-dark-divider-color: rgba(255,255,255,0.06);

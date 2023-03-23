@@ -115,6 +115,39 @@ export default defineComponent({
       collapsedWidth
     }));
 
+    // 折叠按钮点击事件回调
+    const handleTriggerClick = () => {
+      const value = !defaultCollapsed.value;
+
+      defaultCollapsed.value = value;
+
+      context.emit("update:collapsed", value);
+      context.emit("collapse", value, "trigger");
+    };
+
+    // 订阅响应
+    useBreakpoint(props.breakpoint, (matched: boolean) => {
+      const value = !matched;
+
+      if (defaultCollapsed.value !== value) {
+        defaultCollapsed.value = value;
+
+        context.emit("update:collapsed", value);
+        context.emit("collapse", value, "responsive");
+        context.emit("breakpoint", value);
+      }
+    });
+
+    // 组件挂载之前执行
+    onBeforeMount(() => {
+      vuiLayout?.addSiderRef?.(id);
+    });
+
+    // 组件卸载之前执行
+    onBeforeUnmount(() => {
+      vuiLayout?.removeSiderRef?.(id);
+    });
+
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "layout-sider"));
     let classes: Record<string, ComputedRef> = {};
@@ -151,39 +184,6 @@ export default defineComponent({
       return {
         marginRight: `-${scrollbarSize.value}px`
       };
-    });
-
-    // 折叠按钮点击事件回调
-    const handleTriggerClick = () => {
-      const value = !defaultCollapsed.value;
-
-      defaultCollapsed.value = value;
-
-      context.emit("update:collapsed", value);
-      context.emit("collapse", value, "trigger");
-    };
-
-    // 订阅响应
-    useBreakpoint(props.breakpoint, (matched: boolean) => {
-      const value = !matched;
-
-      if (defaultCollapsed.value !== value) {
-        defaultCollapsed.value = value;
-
-        context.emit("update:collapsed", value);
-        context.emit("collapse", value, "responsive");
-        context.emit("breakpoint", value);
-      }
-    });
-
-    // 组件挂载之前执行
-    onBeforeMount(() => {
-      vuiLayout?.addSiderRef?.(id);
-    });
-
-    // 组件卸载之前执行
-    onBeforeUnmount(() => {
-      vuiLayout?.removeSiderRef?.(id);
     });
 
     // 渲染

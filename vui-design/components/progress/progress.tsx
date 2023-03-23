@@ -130,7 +130,7 @@ export default defineComponent({
     classes.elInfo = computed(() => `${className.value}-info`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elInfo = computed(() => {
       return {

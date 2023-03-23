@@ -111,6 +111,17 @@ export default defineComponent({
       scale.value = isOverflowed ? ((boundary - (props.gap * 2)) / width) : 1;
     };
 
+    // 图片类头像加载失败的事件回调
+    const handleError = (e: Event) => {
+      context.emit("error", e);
+    };
+
+    // 组件挂载完成后执行
+    onMounted(() => nextTick(() => response()));
+
+    // 组件更新后执行
+    onUpdated(() => nextTick(() => response()));
+
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "avatar"));
     let classes: Record<string, ComputedRef> = {};
@@ -126,7 +137,7 @@ export default defineComponent({
     classes.elChildren = computed(() => `${className.value}-${type.value}`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
       let style: CSSProperties = {};
@@ -143,17 +154,6 @@ export default defineComponent({
         transform: `scale(${scale.value}) translate(-50%, -50%)`
       };
     });
-
-    // 图片类头像加载失败的事件回调
-    const handleError = (e: Event) => {
-      context.emit("error", e);
-    };
-
-    // 组件挂载完成后执行
-    onMounted(() => nextTick(() => response()));
-
-    // 组件更新后执行
-    onUpdated(() => nextTick(() => response()));
 
     // 渲染
     return () => {

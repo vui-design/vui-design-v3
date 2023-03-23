@@ -107,7 +107,7 @@ export default defineComponent({
     classes.elInkThumb = computed(() => `${className.value}-ink-thumb`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elWrapper = computed(() => {
       const offset = props.offsetTop ?? props.offsetBottom;

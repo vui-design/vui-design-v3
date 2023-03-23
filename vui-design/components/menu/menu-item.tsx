@@ -42,6 +42,11 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
+    // 是否为危险菜单项
+    danger: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
     // 是否禁用
     disabled: {
       type: Boolean as PropType<boolean>,
@@ -102,6 +107,7 @@ export default defineComponent({
     classes.el = computed(() => {
       return {
         [`${className.value}`]: true,
+        [`${className.value}-danger`]: props.danger,
         [`${className.value}-selected`]: selected.value,
         [`${className.value}-disabled`]: disabled.value
       };
@@ -110,7 +116,7 @@ export default defineComponent({
     classes.elTitle = computed(() => `${className.value}-title`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
       let style: CSSProperties = {};

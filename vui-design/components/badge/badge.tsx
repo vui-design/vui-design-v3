@@ -89,7 +89,7 @@ export default defineComponent({
     classes.elText = computed(() => `${className.value}-text`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elDot = computed(() => {
       let style: CSSProperties = {};

@@ -138,7 +138,7 @@ export default defineComponent({
     classes.elArraw = computed(() => vuiMenu?.mode === "horizontal" && props.level === 1 ? `${className.value}-arrow-vertical` : `${className.value}-arrow-horizontal`);
 
     // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
+    let styles: Record<string, ComputedRef> = {};
 
     styles.elHeader = computed(() => {
       let style: CSSProperties = {};

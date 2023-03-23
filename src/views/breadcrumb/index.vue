@@ -16,6 +16,7 @@
         <vui-example-separator />
       </vui-col>
       <vui-col v-bind:span="12">
+        <vui-example-dropdown />
         <vui-example-link />
       </vui-col>
     </vui-row>
@@ -74,6 +75,12 @@
           <td>String</td>
           <td>--</td>
         </tr>
+        <tr>
+          <td>menu</td>
+          <td>下拉菜单</td>
+          <td>Slot</td>
+          <td>--</td>
+        </tr>
       </tbody>
     </table>
     <h3>BreadcrumbItem 事件</h3>
@@ -103,5 +110,6 @@
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleLink from "./examples/link/index.vue";
   import VuiExampleIcon from "./examples/icon/index.vue";
+  import VuiExampleDropdown from "./examples/dropdown/index.vue";
   import VuiExampleSeparator from "./examples/separator/index.vue";
 </script>

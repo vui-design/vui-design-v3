@@ -1,8 +1,7 @@
-import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
+import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
 import VuiPopup from "../popup";
-import getClassName from "../../utils/getClassName";
 import { triggers, placements } from "../popup/constants";
 
 export const createProps = () => {

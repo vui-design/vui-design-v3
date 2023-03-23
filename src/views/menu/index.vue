@@ -226,6 +226,12 @@
           <td>--</td>
         </tr>
         <tr>
+          <td>danger</td>
+          <td>是否为危险菜单项</td>
+          <td>Boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
           <td>disabled</td>
           <td>是否禁用菜单项</td>
           <td>Boolean</td>

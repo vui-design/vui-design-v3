@@ -236,7 +236,7 @@ export default defineComponent({
           getPopupContainer={props.getPopupContainer}
           placement={props.placement}
           animation={props.animation}
-          offset={10}
+          offset={8}
           showArrow={true}
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}

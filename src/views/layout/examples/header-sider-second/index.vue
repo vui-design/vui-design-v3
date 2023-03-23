@@ -4,7 +4,7 @@
       <vui-browser>
         <vui-layout>
           <vui-layout-header color="dark">
-            <h1 style="float: left; width: 124px; height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px 0;"></h1>
+            <h1 style="float: left; width: 128px; height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px 0;"></h1>
             <vui-menu
               mode="horizontal"
               color="dark"

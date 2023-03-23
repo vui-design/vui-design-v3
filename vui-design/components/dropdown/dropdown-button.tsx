@@ -161,6 +161,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
+      // 图标
       let icon;
 
       if (context.slots.icon) {
@@ -172,7 +173,7 @@ export default defineComponent({
         );
       }
 
-      // 
+      // 菜单
       const slots = {
         menu: () => context.slots.menu?.()
       };

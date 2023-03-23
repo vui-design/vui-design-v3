@@ -123,47 +123,6 @@ export default defineComponent({
       }
     });
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "switch"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-${size.value}`]: size.value,
-        [`${className.value}-loading`]: props.loading,
-        [`${className.value}-focused`]: focused.value,
-        [`${className.value}-checked`]: checked.value,
-        [`${className.value}-disabled`]: disabled.value
-      };
-    });
-    classes.elInput = computed(() => `${className.value}-input`);
-    classes.elInputSpin = computed(() => `${className.value}-input-spin`);
-    classes.elLabel = computed(() => `${className.value}-label`);
-
-    // 计算 style 样式
-    const styles: Record<string, ComputedRef> = {};
-
-    styles.el = computed(() => {
-      let style: CSSProperties = {};
-
-      if (color.value) {
-        style.backgroundColor = color.value;
-      }
-
-      return style;
-    });
-    styles.elInputSpin = computed(() => {
-      let style: CSSProperties = {};
-
-      if (color.value && props.loading) {
-        style.borderBottomColor = color.value;
-      }
-
-      return style;
-    });
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
       focused.value = true;
@@ -193,6 +152,47 @@ export default defineComponent({
         vuiFormItem?.onChange(value);
       }
     };
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "switch"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: true,
+        [`${className.value}-${props.type}`]: props.type,
+        [`${className.value}-${size.value}`]: size.value,
+        [`${className.value}-loading`]: props.loading,
+        [`${className.value}-focused`]: focused.value,
+        [`${className.value}-checked`]: checked.value,
+        [`${className.value}-disabled`]: disabled.value
+      };
+    });
+    classes.elInput = computed(() => `${className.value}-input`);
+    classes.elInputSpin = computed(() => `${className.value}-input-spin`);
+    classes.elLabel = computed(() => `${className.value}-label`);
+
+    // 计算 style 样式
+    let styles: Record<string, ComputedRef> = {};
+
+    styles.el = computed(() => {
+      let style: CSSProperties = {};
+
+      if (color.value) {
+        style.backgroundColor = color.value;
+      }
+
+      return style;
+    });
+    styles.elInputSpin = computed(() => {
+      let style: CSSProperties = {};
+
+      if (color.value && props.loading) {
+        style.borderBottomColor = color.value;
+      }
+
+      return style;
+    });
 
     // 渲染
     return () => {

@@ -215,6 +215,7 @@ export default {
       "example-breadcrumb-basic-usage": "基本用法",
       "example-breadcrumb-icon": "带图标的",
       "example-breadcrumb-separator": "分隔符",
+      "example-breadcrumb-dropdown": "带下拉菜单的面包屑",
       "example-breadcrumb-link": "可点击的",
 
       "example-dropdown-basic-usage": "基本用法",

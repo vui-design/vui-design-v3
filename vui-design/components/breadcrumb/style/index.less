@@ -54,6 +54,19 @@
     &:last-child &-link {
       color:@breadcrumb-last-item-color;
     }
+    &-with-menu &-link {
+      cursor:pointer;
+    }
+
+    &-arrow {
+      margin-left:@breadcrumb-item-icon-margin-right;
+
+      .@{vui}-icon {
+        display:block;
+        margin:0;
+        font-size:@font-size-xs;
+      }
+    }
 
     &-separator {
       float:left;
