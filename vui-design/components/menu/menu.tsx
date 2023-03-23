@@ -1,11 +1,12 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Key } from "../../types";
 import type { Mode, Color } from "./types";
-import { defineComponent, provide, toRefs, ref, reactive, computed, watch } from "vue";
+import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
 import useRefs from "./hooks/useRefs";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
 import { modes, colors } from "./constants";
+import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -36,6 +37,11 @@ export const createProps = () => {
     accordion: {
       type: Boolean as PropType<boolean>,
       default: false
+    },
+    // 是否允许选中
+    selectable: {
+      type: Boolean as PropType<boolean>,
+      default: true
     },
     // 默认是否折叠收起菜单
     defaultCollapsed: {
@@ -75,16 +81,20 @@ export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>
 export default defineComponent({
   name: "vui-menu",
   props: createProps(),
-  emits: ["update:collapsed", "update:openKeys", "update:selectedKey", "toggle", "select"],
+  emits: ["update:collapsed", "update:openKeys", "update:selectedKey", "toggle", "select", "click"],
   setup(props, context) {
+    // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
+
     // 
-    const { mode, color, indent } = toRefs(props);
+    const { color, indent } = toRefs(props);
 
     // 用于更新自身的下属 Submenu 或 MenuItem 集合
     const { submenus, addSubmenu, removeSubmenu, addMenuItem, removeMenuItem } = useRefs();
 
     // 内部状态
-    const direction = computed(() => mode.value === "horizontal" ? "horizontal" : "vertical");
+    const mode = computed(() => vuiDropdown ? "vertical" : props.mode);
+    const selectable = computed(() => vuiDropdown ? false : props.selectable);
 
     // 折叠状态
     const defaultCollapsed = ref(props.defaultCollapsed);
@@ -163,14 +173,19 @@ export default defineComponent({
 
     // 点击 MenuItem 事件回调
     const handleSelect = (key: Key, level: number) => {
-      defaultSelectedKey.value = key;
+      if (selectable.value) {
+        defaultSelectedKey.value = key;
 
-      context.emit("update:selectedKey", key);
-      context.emit("select", key);
+        context.emit("update:selectedKey", key);
+        context.emit("select", key);
+      }
 
-      const isInline = mode.value === "horizontal" || mode.value === "vertical" || (mode.value === "inline" && collapsed.value);
+      // 
+      context.emit("click", key);
+      vuiDropdown?.onChange?.(false);
 
-      if (isInline && defaultOpenKeys.value.length > 0) {
+      // 
+      if ((mode.value === "horizontal" || mode.value === "vertical" || (mode.value === "inline" && collapsed.value)) && defaultOpenKeys.value.length > 0) {
         const nextOpenKeys = [] as Key[];
 
         defaultOpenKeys.value = nextOpenKeys;
@@ -197,14 +212,16 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "menu"));
+    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu" : "menu"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
+      const direction = mode.value === "horizontal" ? "horizontal" : "vertical";
+
       return {
         [`${className.value}`]: true,
         [`${className.value}-root`]: true,
-        [`${className.value}-${direction.value}`]: direction.value,
+        [`${className.value}-${direction}`]: true,
         [`${className.value}-${color.value}`]: color.value,
         [`${className.value}-collapsed`]: (mode.value === "vertical" || mode.value === "inline") && collapsed.value
       };

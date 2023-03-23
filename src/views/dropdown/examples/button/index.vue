@@ -1,67 +1,75 @@
 <template>
-  <example v-bind:code="code" id="example-dropdown-button">
-    <template slot="demo">
+  <vui-example id="example-dropdown-button" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-dropdown-button">
         <vui-dropdown-button v-on:click="handleClick">
-          Dropdown
-          <vui-dropdown-menu slot="menu" v-on:click="handleMenuClick">
-            <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-            <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-            <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-            <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-          </vui-dropdown-menu>
-        </vui-dropdown-button>
-        <vui-dropdown-button icon="user" v-on:click="handleClick">
-          Dropdown
-          <vui-dropdown-menu slot="menu" v-on:click="handleMenuClick">
-            <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-            <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-            <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-            <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-          </vui-dropdown-menu>
+          Button
+          <template v-slot:menu>
+            <vui-menu v-on:click="handleMenuClick">
+              <vui-menu-item key="1" title="Menu Item 1" />
+              <vui-menu-item key="2" title="Menu Item 2" />
+              <vui-menu-item key="3" title="Menu Item 3" />
+              <vui-menu-item key="4" title="Menu Item 4" />
+            </vui-menu>
+          </template>
         </vui-dropdown-button>
         <vui-dropdown-button disabled v-on:click="handleClick">
-          Dropdown
-          <vui-dropdown-menu slot="menu" v-on:click="handleMenuClick">
-            <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-            <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-            <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-            <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-          </vui-dropdown-menu>
+          Button
+          <template v-slot:menu>
+            <vui-menu v-on:click="handleMenuClick">
+              <vui-menu-item key="1" title="Menu Item 1" />
+              <vui-menu-item key="2" title="Menu Item 2" />
+              <vui-menu-item key="3" title="Menu Item 3" />
+              <vui-menu-item key="4" title="Menu Item 4" />
+            </vui-menu>
+          </template>
+        </vui-dropdown-button>
+        <vui-dropdown-button icon="user" v-on:click="handleClick">
+          Button
+          <template v-slot:menu>
+            <vui-menu v-on:click="handleMenuClick">
+              <vui-menu-item key="1" title="Menu Item 1" />
+              <vui-menu-item key="2" title="Menu Item 2" />
+              <vui-menu-item key="3" title="Menu Item 3" />
+              <vui-menu-item key="4" title="Menu Item 4" />
+            </vui-menu>
+          </template>
         </vui-dropdown-button>
       </div>
     </template>
-    <template slot="title">带下拉框的按钮</template>
-    <template slot="description">
-      <p>左边是常规按钮，右边是额外的相关功能菜单，可通过 <code>icon</code> 属性来修改右边的图标。</p>
+    <template v-slot:title>带下拉框的按钮</template>
+    <template v-slot:description>
+      <p>左侧是常规按钮，右侧是额外的相关功能菜单，可通过 <code>icon</code> 属性来修改右侧按钮的图标。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
+    setup() {
+      const handleClick = (e: MouseEvent) => {
+        console.log("Clicked on button");
       };
-    },
-    methods: {
-      handleClick() {
-        this.$message.info("Click on button");
-      },
-      handleMenuClick(value) {
-        this.$message.info("Click on menu item " + value);
-      }
+      const handleMenuClick = (key: string) => {
+        console.log("Clicked on Menu Item " + key);
+      };
+
+      return {
+        code,
+        handleClick,
+        handleMenuClick
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-dropdown-button .vui-dropdown-button { margin:0 16px 16px 0; }
+  .example-dropdown-button .vui-dropdown-button + .vui-dropdown-button { margin-left:16px; }
 </style>

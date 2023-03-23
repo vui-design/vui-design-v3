@@ -1,57 +1,41 @@
 const code =
 `<template>
   <div class="example-breadcrumb-link">
-    <section>
-      <h4>A Link</h4>
-      <vui-breadcrumb>
-        <vui-breadcrumb-item href="/">Home</vui-breadcrumb-item>
-        <vui-breadcrumb-item href="/components">Components</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-      </vui-breadcrumb>
-      <vui-breadcrumb>
-        <vui-breadcrumb-item>
-          <a href="/">Home</a>
-        </vui-breadcrumb-item>
-        <vui-breadcrumb-item>
-          <a href="/components">Components</a>
-        </vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-      </vui-breadcrumb>
-    </section>
-    <section>
-      <h4>Router Link</h4>
-      <vui-breadcrumb>
-        <vui-breadcrumb-item to="/">Home</vui-breadcrumb-item>
-        <vui-breadcrumb-item to="/components">Components</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-      </vui-breadcrumb>
-      <vui-breadcrumb>
-        <vui-breadcrumb-item>
-          <router-link to="/">Home</router-link>
-        </vui-breadcrumb-item>
-        <vui-breadcrumb-item>
-          <router-link to="/components">Components</router-link>
-        </vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-      </vui-breadcrumb>
-    </section>
+    <vui-divider orientation="left">A Link</vui-divider>
+    <vui-breadcrumb>
+      <vui-breadcrumb-item href="/">Home</vui-breadcrumb-item>
+      <vui-breadcrumb-item href="/components" target="_blank">Components</vui-breadcrumb-item>
+      <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+      <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+    </vui-breadcrumb>
+    <vui-breadcrumb>
+      <vui-breadcrumb-item>
+        <a href="/">Home</a>
+      </vui-breadcrumb-item>
+      <vui-breadcrumb-item>
+        <a href="/components" target="_blank">Components</a>
+      </vui-breadcrumb-item>
+      <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+      <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+    </vui-breadcrumb>
+    <vui-divider orientation="left">Router Link</vui-divider>
+    <vui-breadcrumb>
+      <vui-breadcrumb-item>
+        <router-link to="/">Home</router-link>
+      </vui-breadcrumb-item>
+      <vui-breadcrumb-item>
+        <router-link to="/components">Components</router-link>
+      </vui-breadcrumb-item>
+      <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+      <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+    </vui-breadcrumb>
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-breadcrumb-link section:not(:last-child) { margin-bottom:20px; }
-  .example-breadcrumb-link section h4 {  }
-  .example-breadcrumb-link section .vui-breadcrumb { margin-top:10px; }
+  .example-breadcrumb-link .vui-divider:first-child { margin-top:0; }
+  .example-breadcrumb-link .vui-breadcrumb + .vui-divider { margin-top:24px; }
+  .example-breadcrumb-link .vui-breadcrumb + .vui-breadcrumb { margin-top:8px; }
 </style>
 `;
 

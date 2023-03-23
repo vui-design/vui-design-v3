@@ -1,50 +1,33 @@
 <template>
-  <example v-bind:code="code" id="example-breadcrumb-icon">
-    <template slot="demo">
-      <div class="example-breadcrumb-icon">
-        <vui-breadcrumb>
-          <vui-breadcrumb-item to="/" icon="home" title="Home" />
-          <vui-breadcrumb-item to="/components" icon="stack" title="Components" />
-          <vui-breadcrumb-item icon="links" title="Navigation" />
-          <vui-breadcrumb-item title="Breadcrumb" />
-        </vui-breadcrumb>
-        <vui-breadcrumb>
-          <vui-breadcrumb-item to="/">
-            <vui-icon type="home" />Home
-          </vui-breadcrumb-item>
-          <vui-breadcrumb-item to="/components">
-            <vui-icon type="stack" />Components
-          </vui-breadcrumb-item>
-          <vui-breadcrumb-item>
-            <vui-icon type="links" />Navigation
-          </vui-breadcrumb-item>
-          <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-        </vui-breadcrumb>
-      </div>
+  <vui-example id="example-breadcrumb-icon" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-breadcrumb>
+        <vui-breadcrumb-item icon="home">Home</vui-breadcrumb-item>
+        <vui-breadcrumb-item icon="stack">Components</vui-breadcrumb-item>
+        <vui-breadcrumb-item icon="links">Navigation</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+      </vui-breadcrumb>
     </template>
-    <template slot="title">带图标的</template>
-    <template slot="description">
+    <template v-slot:title>带图标的</template>
+    <template v-slot:description>
       <p>可自定义每项的内容，比如带有一个图标。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
-
-<style>
-  .example-breadcrumb-icon .vui-breadcrumb + .vui-breadcrumb { margin-top:10px; }
-</style>

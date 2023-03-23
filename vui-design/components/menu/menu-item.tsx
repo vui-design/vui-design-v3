@@ -7,6 +7,7 @@ import useKey from "../../hooks/useKey";
 import useLevel from "./hooks/useLevel";
 import useIndent from "./hooks/useIndent";
 import getClassName from "../../utils/getClassName";
+import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -56,6 +57,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
     const vuiMenu = inject(MenuInjectionKey, undefined);
     const vuiSubmenu = inject(SubmenuInjectionKey, undefined);
     const vuiMenuItemGroup = inject(MenuItemGroupInjectionKey, undefined);
@@ -94,7 +96,7 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "menu-item"));
+    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item" : "menu-item"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
@@ -181,7 +183,7 @@ export default defineComponent({
         };
 
         return (
-          <VuiTooltip placement="right" color={vuiMenu?.color} v-slots={slots}>
+          <VuiTooltip placement="right" color={vuiMenu?.color} disabled={disabled.value} v-slots={slots}>
             {menuItem}
           </VuiTooltip>
         );

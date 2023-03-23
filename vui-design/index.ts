@@ -23,15 +23,8 @@ import Layout, { LayoutHeader, LayoutSider, LayoutContent, LayoutFooter } from "
 import Space from "./components/space";
 // Navigation
 import Anchor, { AnchorLink } from "./components/anchor";
-import Breadcrumb from "./components/breadcrumb";
-import BreadcrumbItem from "./components/breadcrumb-item";
-import Dropdown from "./components/dropdown";
-import DropdownButton from "./components/dropdown-button";
-import DropdownMenu from "./components/dropdown-menu";
-import DropdownSubmenu from "./components/dropdown-submenu";
-import DropdownMenuItem from "./components/dropdown-menu-item";
-import DropdownMenuItemGroup from "./components/dropdown-menu-item-group";
-import DropdownMenuDivider from "./components/dropdown-menu-divider";
+import Breadcrumb, { BreadcrumbItem } from "./components/breadcrumb";
+import Dropdown, { DropdownButton } from "./components/dropdown";
 import Menu, { Submenu, MenuItem, MenuItemGroup, MenuItemDivider } from "./components/menu";
 import PageHeader from "./components/page-header";
 import Pagination from "./components/pagination";
@@ -127,11 +120,6 @@ const components = [
   BreadcrumbItem,
   Dropdown,
   DropdownButton,
-  DropdownMenu,
-  DropdownSubmenu,
-  DropdownMenuItem,
-  DropdownMenuItemGroup,
-  DropdownMenuDivider,
   Menu,
   Submenu,
   MenuItem,
@@ -259,11 +247,6 @@ export {
   BreadcrumbItem,
   Dropdown,
   DropdownButton,
-  DropdownMenu,
-  DropdownSubmenu,
-  DropdownMenuItem,
-  DropdownMenuItemGroup,
-  DropdownMenuDivider,
   Menu,
   Submenu,
   MenuItem,

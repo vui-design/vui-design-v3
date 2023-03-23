@@ -70,7 +70,7 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 是否将弹出框宽度设置为触发器宽度
+    // 是否将弹出框的宽度设置为触发器宽度
     autofitPopupWidth: {
       type: Boolean as PropType<boolean>,
       default: false
@@ -102,6 +102,11 @@ export const createProps = () => {
     },
     // 是否在点击触发器时关闭弹出框
     clickTriggerToClose: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    // 是否在右击触发器时关闭弹出框
+    contextmenuTriggerToClose: {
       type: Boolean as PropType<boolean>,
       default: true
     },
@@ -340,13 +345,18 @@ export default defineComponent({
     const handleTriggerContextmenu = (e: MouseEvent) => {
       (context.attrs as any).onContextmenu?.(e);
 
-      if (props.disabled || !events.value.includes("contextmenu") || (visible.value && !props.clickTriggerToClose)) {
+      if (props.disabled || !events.value.includes("contextmenu")) {
         return;
       }
 
-      changeMousePosition(e);
-      changeVisible(!visible.value);
       e.preventDefault();
+      changeMousePosition(e);
+
+      if (visible.value && !props.contextmenuTriggerToClose) {
+        return changePopupStyle();
+      }
+
+      changeVisible(!visible.value);
     };
 
     // 触发器尺寸改变事件回调
@@ -590,6 +600,7 @@ export default defineComponent({
     styles.el = computed(() => {
       return {
         ...elStyle.value,
+        position: "absolute",
         zIndex: zIndex.value,
         pointerEvents: toggling.value ? "none" : undefined
       };

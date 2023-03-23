@@ -77,7 +77,7 @@
       position:relative;
       width:2px;
       height:10px;
-      margin-left:@menu-item-icon-margin-right;
+      margin-left:@menu-item-arrow-margin-left;
       opacity:1;
       transition:all @transition-duration @transition-timing-function;
 
@@ -106,7 +106,7 @@
       position:relative;
       width:10px;
       height:2px;
-      margin-left:@menu-item-icon-margin-right;
+      margin-left:@menu-item-arrow-margin-left;
       opacity:1;
       transition:all @transition-duration @transition-timing-function;
 
@@ -195,7 +195,7 @@
 
   &-horizontal&-dark &-submenu > &-submenu-header {
     box-shadow:0px -2px 0px transparent inset;
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
     color:@menu-dark-item-font-color;
   }
   &-horizontal&-dark &-submenu > &-submenu-header:hover,
@@ -222,7 +222,7 @@
     margin-bottom:@margin-xss;
   }
   &-vertical &-submenu > &-submenu-header {
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
   }
 
   &-vertical&-light &-submenu > &-submenu-header {
@@ -398,7 +398,7 @@
   }
 
   &-horizontal&-dark &-item {
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
     color:@menu-dark-item-font-color;
   }
   &-horizontal&-dark &-item:hover,
@@ -417,7 +417,7 @@
   &-vertical &-item {
     margin-top:@margin-xss;
     margin-bottom:@margin-xss;
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
   }
 
   &-vertical&-light &-item {
@@ -490,14 +490,14 @@
     padding:0;
   }
   &-horizontal&-dark &-item-group > &-item-group-header {
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
   }
 
   &-vertical&-light &-item-group > &-item-group-header {
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
   }
   &-vertical&-dark &-item-group > &-item-group-header {
-    padding:0 @menu-item-padding;
+    padding:@menu-item-padding;
   }
 
   // item divider

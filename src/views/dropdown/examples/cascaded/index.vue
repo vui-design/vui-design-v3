@@ -1,50 +1,53 @@
 <template>
-  <example v-bind:code="code" id="example-dropdown-cascaded">
-    <template slot="demo">
+  <vui-example id="example-dropdown-cascaded" v-bind:code="code">
+    <template v-slot:demo>
       <vui-dropdown>
         <a href="javascript:;">Hover me</a>
-        <vui-dropdown-menu slot="menu" v-on:click="handleClick">
-          <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-          <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-          <vui-dropdown-menu-item-group title="Group Title">
-            <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-            <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-          </vui-dropdown-menu-item-group>
-          <vui-dropdown-submenu disabled title="Submenu 1">
-            <vui-dropdown-menu-item value="1-1" title="Menu Item 1-1" />
-            <vui-dropdown-menu-item value="1-2" title="Menu Item 1-2" />
-          </vui-dropdown-submenu>
-          <vui-dropdown-submenu title="Submenu 2">
-            <vui-dropdown-menu-item value="2-1" title="Menu Item 2-1" />
-            <vui-dropdown-menu-item value="2-2" title="Menu Item 2-2" />
-          </vui-dropdown-submenu>
-        </vui-dropdown-menu>
+        <template v-slot:menu>
+          <vui-menu v-on:click="handleClick">
+            <vui-menu-item key="1" title="Menu Item 1" />
+            <vui-menu-item key="2" title="Menu Item 2" />
+            <vui-menu-item-group title="Group Title">
+              <vui-menu-item key="3" title="Menu Item 3" />
+              <vui-menu-item key="4" title="Menu Item 4" />
+            </vui-menu-item-group>
+            <vui-submenu key="5" disabled title="Submenu One">
+              <vui-menu-item key="5-1" title="Menu Item 5-1" />
+              <vui-menu-item key="5-2" title="Menu Item 5-2" />
+            </vui-submenu>
+            <vui-submenu key="6" title="Submenu Two">
+              <vui-menu-item key="6-1" title="Menu Item 6-1" />
+              <vui-menu-item key="6-2" title="Menu Item 6-2" />
+            </vui-submenu>
+          </vui-menu>
+        </template>
       </vui-dropdown>
     </template>
-    <template slot="title">级联菜单</template>
-    <template slot="description">
+    <template v-slot:title>级联菜单</template>
+    <template v-slot:description>
       <p>传入的菜单里有多个层级。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
+    setup() {
+      const handleClick = (key: string) => {
+        console.log(key);
       };
-    },
-    methods: {
-      handleClick(value) {
-        this.$message.info("Click on menu item " + value);
-      }
+
+      return {
+        code,
+        handleClick
+      };
     }
-  };
+  });
 </script>

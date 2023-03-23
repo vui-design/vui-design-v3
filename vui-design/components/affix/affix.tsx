@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { GetScrollContainer, AffixState } from "./types";
-import { defineComponent, ref, computed, watchEffect, onMounted } from "vue";
+import { defineComponent, ref, computed, watch, watchEffect, onMounted } from "vue";
 import VuiResizeObserver from "../resize-observer";
 import is from "../../utils/is";
 import throttleByRaf from "../../utils/throttleByRaf";
@@ -60,16 +60,6 @@ export default defineComponent({
     const offsetTop = computed(() => is.undefined(props.offsetTop) && is.undefined(props.offsetBottom) ? 0 : props.offsetTop);
     const offsetBottom = computed(() => props.offsetBottom);
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "affix"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: affixed.value
-      };
-    });
-
     // 
     const update = throttleByRaf(() => {
       if (!scrollContainerRef.value || !containerRef.value) {
@@ -119,6 +109,9 @@ export default defineComponent({
       containerStyle.value = newState.containerStyle;
       affixStyle.value = newState.affixStyle;
     });
+    
+    // 
+    watch([offsetTop, offsetBottom], () => update());
 
     // 
     const handleResize = () => update();
@@ -160,6 +153,16 @@ export default defineComponent({
           });
         }
       });
+    });
+
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "affix"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${className.value}`]: affixed.value
+      };
     });
 
     // 渲染

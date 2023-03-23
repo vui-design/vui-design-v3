@@ -1,34 +1,33 @@
 <template>
-  <example v-bind:code="code" id="example-breadcrumb-basic-usage">
-    <template slot="demo">
-      <div class="example-breadcrumb-basic-usage">
-        <vui-breadcrumb>
-          <vui-breadcrumb-item>Home</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Components</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-        </vui-breadcrumb>
-      </div>
+  <vui-example id="example-breadcrumb-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-breadcrumb>
+        <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+      </vui-breadcrumb>
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>基本用法。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

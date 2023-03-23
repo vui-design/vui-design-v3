@@ -1,21 +1,19 @@
 const code =
 `<template>
   <vui-dropdown>
-    <a href="javascript:;">Hover me</a>
-    <vui-dropdown-menu slot="menu">
-      <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-      <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-      <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-      <vui-dropdown-menu-item value="4" danger title="Menu Item danger" />
-    </vui-dropdown-menu>
+    <vui-link type="primary">
+      Hover me<vui-icon type="chevron-down" />
+    </vui-link>
+    <template v-slot:menu>
+      <vui-menu>
+        <vui-menu-item key="1" title="Menu Item 1" />
+        <vui-menu-item key="2" title="Menu Item 2" />
+        <vui-menu-item key="3" title="Menu Item 3" />
+        <vui-menu-item key="4" danger title="Menu Item danger" />
+      </vui-menu>
+    </template>
   </vui-dropdown>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

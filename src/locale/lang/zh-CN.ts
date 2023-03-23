@@ -30,7 +30,7 @@ export default {
       "layout-space": "Space 间距",
 
       "navigation": "导航",
-      "navigation-affix": "Affix 固钉",
+      "navigation-anchor": "Anchor 锚点",
       "navigation-breadcrumb": "Breadcrumb 面包屑",
       "navigation-dropdown": "Dropdown 下拉菜单",
       "navigation-menu": "Menu 导航菜单",
@@ -93,7 +93,7 @@ export default {
       "feedback-spin": "Spin 加载中",
 
       "other": "其它",
-      "other-anchor": "Anchor 锚点",
+      "other-affix": "Affix 固钉",
       "other-authorizer": "Authorizer 权限校验",
       "other-backtop": "Backtop 回到顶部",
       "other-fullscreen": "Fullscreen 全屏"
@@ -220,10 +220,12 @@ export default {
       "example-dropdown-basic-usage": "基本用法",
       "example-dropdown-other-elements": "其他元素",
       "example-dropdown-trigger": "触发方式",
+      "example-dropdown-contextmenu": "右键菜单",
       "example-dropdown-event": "触发事件",
       "example-dropdown-cascaded": "级联菜单",
       "example-dropdown-placement": "弹出位置",
       "example-dropdown-button": "带下拉框的按钮",
+      "example-dropdown-button-loading": "加载中状态",
 
       "example-menu-horizontal": "水平菜单",
       "example-menu-vertical": "垂直菜单",

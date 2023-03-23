@@ -1,36 +1,41 @@
 <template>
-  <example v-bind:code="code" id="example-dropdown-other-elements">
-    <template slot="demo">
+  <vui-example id="example-dropdown-other-elements" v-bind:code="code">
+    <template v-slot:demo>
       <vui-dropdown>
-        <a href="javascript:;">Hover me</a>
-        <vui-dropdown-menu slot="menu">
-          <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-          <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-          <vui-dropdown-menu-item disabled value="3" title="Menu Item 3" />
-          <vui-dropdown-menu-divider />
-          <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-        </vui-dropdown-menu>
+        <vui-link type="primary">
+          Hover me<vui-icon type="chevron-down" />
+        </vui-link>
+        <template v-slot:menu>
+          <vui-menu>
+            <vui-menu-item key="1" title="Menu Item 1" />
+            <vui-menu-item key="2" title="Menu Item 2" />
+            <vui-menu-item disabled key="3" title="Menu Item 3" />
+            <vui-menu-item-divider />
+            <vui-menu-item key="4" title="Menu Item 4" />
+          </vui-menu>
+        </template>
       </vui-dropdown>
     </template>
-    <template slot="title">其他元素</template>
-    <template slot="description">
+    <template v-slot:title>其他元素</template>
+    <template v-slot:description>
       <p>分割线和不可用菜单项。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

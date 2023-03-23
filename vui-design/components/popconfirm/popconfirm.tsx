@@ -120,7 +120,7 @@ export type PopconfirmProps = Partial<ExtractPropTypes<ReturnType<typeof createP
 export default defineComponent({
   name: "vui-popconfirm",
   props: createProps(),
-  emits: ["update:visible", "change", "show", "hide", "resize"],
+  emits: ["update:visible", "change", "open", "close", "resize"],
   setup(props, context) {
     // 国际化
     const { translate } = useI18n();
@@ -132,18 +132,30 @@ export default defineComponent({
     // 确认按钮 loading 状态
     const okLoading = ref(false);
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "popconfirm"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.elIcon = computed(() => `${className.value}-icon`);
-
     // 切换显示状态
     const toggle = (visible: boolean) => {
       defaultVisible.value = visible;
 
       context.emit("update:visible", visible);
       context.emit("change", visible);
+    };
+
+    // onChange 事件回调
+    const handleChange = (visible: boolean) => toggle(visible);
+
+    // onOpen 事件回调
+    const handleOpen = () => {
+      context.emit("open");
+    };
+
+    // onClose 事件回调
+    const handleClose = () => {
+      context.emit("close");
+    };
+
+    // onResize 事件回调
+    const handleResize = () => {
+      context.emit("resize");
     };
 
     // 取消按钮点击事件回调
@@ -175,8 +187,11 @@ export default defineComponent({
       }
     };
 
-    // onChange 事件回调
-    const handleChange = (visible: boolean) => toggle(visible);
+    // 计算 class 样式
+    const className = computed(() => getClassName(props.classNamePrefix, "popconfirm"));
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.elIcon = computed(() => `${className.value}-icon`);
 
     // 渲染
     return () => {
@@ -228,6 +243,9 @@ export default defineComponent({
           destroyOnClose={props.destroyOnClose}
           disabled={props.disabled}
           onChange={handleChange}
+          onOpen={handleOpen}
+          onClose={handleClose}
+          onResize={handleResize}
           v-slots={slots}
         >
           {context.slots.default?.()}

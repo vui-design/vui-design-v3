@@ -1,7 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
-import { defineComponent, computed } from "vue";
+import { defineComponent, inject, computed } from "vue";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
+import { DropdownInjectionKey } from "../dropdown/context";
 
 export const createProps = () => {
   return {
@@ -29,8 +30,11 @@ export default defineComponent({
   name: "vui-menu-item-divider",
   props: createProps(),
   setup(props, context) {
+    // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
+
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "menu-item-divider"));
+    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item-divider" : "menu-item-divider"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {

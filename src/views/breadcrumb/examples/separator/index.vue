@@ -1,34 +1,33 @@
 <template>
-  <example v-bind:code="code" id="example-breadcrumb-separator">
-    <template slot="demo">
-      <div class="example-breadcrumb-separator">
-        <vui-breadcrumb separator=">">
-          <vui-breadcrumb-item to="/">Home</vui-breadcrumb-item>
-          <vui-breadcrumb-item to="/components">Components</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
-        </vui-breadcrumb>
-      </div>
+  <vui-example id="example-breadcrumb-separator" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-breadcrumb separator=">">
+        <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+        <vui-breadcrumb-item>Breadcrumb</vui-breadcrumb-item>
+      </vui-breadcrumb>
     </template>
-    <template slot="title">分隔符</template>
-    <template slot="description">
+    <template v-slot:title>分隔符</template>
+    <template v-slot:description>
       <p>使用 <code>separator</code> 属性可以自定义分隔符。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

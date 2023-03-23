@@ -84,7 +84,7 @@ export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof createProp
 export default defineComponent({
   name: "vui-tooltip",
   props: createProps(),
-  emits: ["update:visible", "change", "show", "hide", "resize"],
+  emits: ["update:visible", "change", "open", "close", "resize"],
   setup(props, context) {
     // 显示状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
@@ -93,6 +93,29 @@ export default defineComponent({
     // 颜色
     const withPresetColor = computed(() => props.color && colors.indexOf(props.color) > -1);
     const withCustomColor = computed(() => props.color && colors.indexOf(props.color) === -1);
+
+    // onChange 事件回调
+    const handleChange = (visible: boolean) => {
+      defaultVisible.value = visible;
+
+      context.emit("update:visible", visible);
+      context.emit("change", visible);
+    };
+
+    // onOpen 事件回调
+    const handleOpen = () => {
+      context.emit("open");
+    };
+
+    // onClose 事件回调
+    const handleClose = () => {
+      context.emit("close");
+    };
+
+    // onResize 事件回调
+    const handleResize = () => {
+      context.emit("resize");
+    };
 
     // 计算 class 样式
     const className = computed(() => getClassName(props.classNamePrefix, "tooltip"));
@@ -135,14 +158,6 @@ export default defineComponent({
       return style;
     });
 
-    // onChange 事件回调
-    const handleChange = (visible: boolean) => {
-      defaultVisible.value = visible;
-
-      context.emit("update:visible", visible);
-      context.emit("change", visible);
-    };
-
     // 渲染
     return () => {
       const slots = {
@@ -158,7 +173,7 @@ export default defineComponent({
           getPopupContainer={props.getPopupContainer}
           placement={props.placement}
           animation={props.animation}
-          offset={10}
+          offset={8}
           showArrow={true}
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
@@ -169,6 +184,9 @@ export default defineComponent({
           contentStyle={styles.elContent.value}
           arrowStyle={styles.elArrow.value}
           onChange={handleChange}
+          onOpen={handleOpen}
+          onClose={handleClose}
+          onResize={handleResize}
           v-slots={slots}
         >
           {context.slots.default?.()}

@@ -74,13 +74,13 @@
         </tr>
         <tr>
           <td>mouseEnterDelay</td>
-          <td>鼠标移入后延时多少毫秒打开气泡卡片，单位毫秒</td>
+          <td>鼠标移入后延时多少毫秒打开气泡卡片，仅在 <code>trigger</code> 为 <code>hover</code> 时生效</td>
           <td>Number</td>
           <td>100</td>
         </tr>
         <tr>
           <td>mouseLeaveDelay</td>
-          <td>鼠标移除后延时多少毫秒关闭气泡卡片，单位毫秒</td>
+          <td>鼠标移除后延时多少毫秒关闭气泡卡片，仅在 <code>trigger</code> 为 <code>hover</code> 时生效</td>
           <td>Number</td>
           <td>100</td>
         </tr>

@@ -49,6 +49,12 @@
           <td>false</td>
         </tr>
         <tr>
+          <td>selectable</td>
+          <td>是否允许选中</td>
+          <td>Boolean</td>
+          <td>true</td>
+        </tr>
+        <tr>
           <td>defaultCollapsed</td>
           <td>默认是否折叠收起菜单（非受控模式）</td>
           <td>Boolean</td>
@@ -56,7 +62,7 @@
         </tr>
         <tr>
           <td>collapsed</td>
-          <td>是否折叠收起菜单（受控模式），可以使用 v-model 双向绑定数据</td>
+          <td>是否折叠收起菜单（受控模式），可以使用 <code>v-model</code> 双向绑定数据</td>
           <td>Boolean</td>
           <td>--</td>
         </tr>
@@ -118,6 +124,12 @@
         <tr>
           <td>select</td>
           <td><code>MenuItem</code> 被选中时触发的事件回调函数</td>
+          <td>Function</td>
+          <td>key</td>
+        </tr>
+        <tr>
+          <td>click</td>
+          <td><code>MenuItem</code> 被点击时触发的事件回调函数</td>
           <td>Function</td>
           <td>key</td>
         </tr>

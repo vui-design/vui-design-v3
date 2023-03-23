@@ -75,13 +75,13 @@
         </tr>
         <tr>
           <td>mouseEnterDelay</td>
-          <td>鼠标移入后延时多少毫秒打开提示框，单位毫秒</td>
+          <td>鼠标移入后延时多少毫秒打开提示框，仅在 <code>trigger</code> 为 <code>hover</code> 时生效</td>
           <td>Number</td>
           <td>100</td>
         </tr>
         <tr>
           <td>mouseLeaveDelay</td>
-          <td>鼠标移除后延时多少毫秒关闭提示框，单位毫秒</td>
+          <td>鼠标移除后延时多少毫秒关闭提示框，仅在 <code>trigger</code> 为 <code>hover</code> 时生效</td>
           <td>Number</td>
           <td>100</td>
         </tr>
@@ -93,7 +93,7 @@
         </tr>
         <tr>
           <td>disabled</td>
-          <td>点击 Tooltip 子元素是否禁止弹出提示框</td>
+          <td>点击 <code>Tooltip</code> 子元素是否禁止弹出提示框</td>
           <td>Boolean</td>
           <td>false</td>
         </tr>

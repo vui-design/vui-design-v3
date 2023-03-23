@@ -1,39 +1,29 @@
-@vui-breadcrumb: ~"@{vui}-breadcrumb";
+@import "./token.less";
 
 .@{vui-breadcrumb} {
   display:block;
-  box-sizing:border-box;
   font-size:@breadcrumb-font-size;
   line-height:@breadcrumb-line-height;
-
   .clearfix;
 
   &-item {
     float:left;
     display:block;
-    box-sizing:border-box;
 
-    &-link {
-      float:left;
-      cursor:text;
-      display:flex;
-      box-sizing:border-box;
-      justify-content:flex-start;
-      align-items:center;
-      color:@breadcrumb-item-color;
-    }
-
-    &-link i {
+    .@{vui}-icon {
       margin-right:@breadcrumb-item-icon-margin-right;
       font-size:@breadcrumb-item-icon-size;
     }
 
-    & a {
+    a {
       cursor:pointer;
       outline:none;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
       color:@breadcrumb-item-color;
       text-decoration:none;
-      transition:color @transition-duration @transition-timing-function;
+      transition:all @transition-duration @transition-timing-function;
 
       &:hover {
         color:@breadcrumb-item-hover-color;
@@ -42,19 +32,6 @@
         color:@breadcrumb-item-active-color;
       }
     }
-
-    &-separator {
-      float:left;
-      display:block;
-      box-sizing:border-box;
-      margin:@breadcrumb-item-separator-margin;
-      color:@breadcrumb-item-separator-color;
-    }
-
-    &:last-child &-link {
-      color:@breadcrumb-last-item-color;
-    }
-
     &:last-child a {
       color:@breadcrumb-last-item-color;
 
@@ -66,6 +43,24 @@
       }
     }
 
+    &-link {
+      float:left;
+      cursor:text;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      color:@breadcrumb-item-color;
+    }
+    &:last-child &-link {
+      color:@breadcrumb-last-item-color;
+    }
+
+    &-separator {
+      float:left;
+      display:block;
+      margin:@breadcrumb-item-separator-margin;
+      color:@breadcrumb-item-separator-color;
+    }
     &:last-child &-separator {
       display:none;
     }

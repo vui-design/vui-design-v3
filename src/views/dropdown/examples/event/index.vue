@@ -1,40 +1,45 @@
 <template>
-  <example v-bind:code="code" id="example-dropdown-event">
-    <template slot="demo">
+  <vui-example id="example-dropdown-event" v-bind:code="code">
+    <template v-slot:demo>
       <vui-dropdown>
-        <a href="javascript:;">Hover me, and click menu item</a>
-        <vui-dropdown-menu slot="menu" v-on:click="handleClick">
-          <vui-dropdown-menu-item value="1" title="Menu Item 1" />
-          <vui-dropdown-menu-item value="2" title="Menu Item 2" />
-          <vui-dropdown-menu-item value="3" title="Menu Item 3" />
-          <vui-dropdown-menu-item value="4" title="Menu Item 4" />
-        </vui-dropdown-menu>
+        <vui-link type="primary">
+          Hover me, and click menu item<vui-icon type="chevron-down" />
+        </vui-link>
+        <template v-slot:menu>
+          <vui-menu v-on:click="handleClick">
+            <vui-menu-item key="1" title="Menu Item 1" />
+            <vui-menu-item key="2" title="Menu Item 2" />
+            <vui-menu-item key="3" title="Menu Item 3" />
+            <vui-menu-item key="4" title="Menu Item 4" />
+          </vui-menu>
+        </template>
       </vui-dropdown>
     </template>
-    <template slot="title">触发事件</template>
-    <template slot="description">
-      <p>分割线和不可用菜单项。</p>
+    <template v-slot:title>触发事件</template>
+    <template v-slot:description>
+      <p>点击菜单项后会触发事件，用户可以通过相应的菜单项 key 进行不同的操作。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
+    setup() {
+      const handleClick = (key: string) => {
+        console.log("Clicked in Menu Item " + key);
       };
-    },
-    methods: {
-      handleClick(value) {
-        this.$message.info("Click on menu item " + value);
-      }
+
+      return {
+        code,
+        handleClick
+      };
     }
-  };
+  });
 </script>

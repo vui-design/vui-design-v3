@@ -155,32 +155,32 @@ export default [
       },
       // 导航组件
       {
-        path: "/components/affix",
-        name: "affix",
+        path: "/components/anchor",
+        name: "anchor",
         meta: {
-          title: "Affix",
+          title: "Anchor",
           group: "navigation"
         },
-        component: () => import("src/views/affix/index.vue")
+        component: () => import("src/views/anchor/index.vue")
       },
-  //     {
-  //       path: "/components/breadcrumb",
-  //       name: "breadcrumb",
-  //       meta: {
-  //         title: "Breadcrumb",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/breadcrumb/index.vue")
-  //     },
-  //     {
-  //       path: "/components/dropdown",
-  //       name: "dropdown",
-  //       meta: {
-  //         title: "Dropdown",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/dropdown/index.vue")
-  //     },
+      {
+        path: "/components/breadcrumb",
+        name: "breadcrumb",
+        meta: {
+          title: "Breadcrumb",
+          group: "navigation"
+        },
+        component: () => import("src/views/breadcrumb/index.vue")
+      },
+      {
+        path: "/components/dropdown",
+        name: "dropdown",
+        meta: {
+          title: "Dropdown",
+          group: "navigation"
+        },
+        component: () => import("src/views/dropdown/index.vue")
+      },
       {
         path: "/components/menu",
         name: "menu",
@@ -628,13 +628,13 @@ export default [
       },
       // 其它
       {
-        path: "/components/anchor",
-        name: "anchor",
+        path: "/components/affix",
+        name: "affix",
         meta: {
-          title: "Anchor",
+          title: "Affix",
           group: "other"
         },
-        component: () => import("src/views/anchor/index.vue")
+        component: () => import("src/views/affix/index.vue")
       },
   //     {
   //       path: "/components/authorizer",

@@ -4,6 +4,7 @@ import useLevel from "./hooks/useLevel";
 import useIndent from "./hooks/useIndent";
 import getClassName from "../../utils/getClassName";
 import { getSlotProp } from "../../utils/vue";
+import { DropdownInjectionKey } from "../dropdown/context";
 import { SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -33,6 +34,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
     const vuiSubmenu = inject(SubmenuInjectionKey, undefined);
     const vuiMenuItemGroup = inject(MenuItemGroupInjectionKey, undefined);
 
@@ -50,7 +52,7 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "menu-item-group"));
+    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item-group" : "menu-item-group"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => `${className.value}`);

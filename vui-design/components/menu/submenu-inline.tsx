@@ -7,6 +7,7 @@ import useIndent from "./hooks/useIndent";
 import useRefs from "./hooks/useRefs";
 import getClassName from "../../utils/getClassName";
 import { getSlotProp } from "../../utils/vue";
+import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey, SubmenuInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -56,6 +57,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
     const vuiMenu = inject(MenuInjectionKey, undefined);
     const vuiSubmenu = inject(SubmenuInjectionKey, undefined);
 
@@ -135,7 +137,7 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "menu-submenu"));
+    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-submenu" : "menu-submenu"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
@@ -166,7 +168,7 @@ export default defineComponent({
     });
 
     // 计算内嵌菜单 class 样式
-    const mClassName = computed(() => getClassName(props.classNamePrefix, "menu"));
+    const mClassName = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu" : "menu"));
     let mClasses: Record<string, ComputedRef> = {};
 
     mClasses.el = computed(() => {

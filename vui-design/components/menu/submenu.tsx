@@ -7,6 +7,7 @@ import VuiSubmenuInline from "./submenu-inline";
 import useKey from "../../hooks/useKey";
 import useLevel from "./hooks/useLevel";
 import { triggers } from "../popup/constants";
+import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -45,7 +46,7 @@ export const createProps = () => {
     // 弹出动画
     animations: {
       type: Array as PropType<string[]>,
-      default: ["vui-menu-submenu-scale", "vui-menu-submenu-collapse"]
+      default: ["vui-menu-submenu-scale", "vui-menu-submenu-collapse", "vui-dropdown-menu-submenu-scale", "vui-dropdown-menu-submenu-collapse"]
     },
     // 是否禁用
     disabled: {
@@ -62,6 +63,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 注入祖先组件
+    const vuiDropdown = inject(DropdownInjectionKey, undefined);
     const vuiMenu = inject(MenuInjectionKey, undefined);
     const vuiSubmenu = inject(SubmenuInjectionKey, undefined);
     const vuiMenuItemGroup = inject(MenuItemGroupInjectionKey, undefined);
@@ -86,7 +88,7 @@ export default defineComponent({
             title={props.title}
             trigger={props.trigger}
             getPopupContainer={props.getPopupContainer}
-            animation={props.animations[0]}
+            animation={vuiDropdown ? props.animations[2] : props.animations[0]}
             disabled={disabled.value}
             v-slots={{...context.slots}}
           />
@@ -100,7 +102,7 @@ export default defineComponent({
             level={level.value}
             icon={props.icon}
             title={props.title}
-            animation={props.animations[1]}
+            animation={vuiDropdown ? props.animations[3] : props.animations[1]}
             disabled={disabled.value}
             v-slots={{...context.slots}}
           />
