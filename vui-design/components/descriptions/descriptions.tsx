@@ -33,6 +33,16 @@ export const createProps = () => {
       validator: (size: Size) => sizes.includes(size),
       default: "medium"
     },
+    // 描述列表的标题
+    title: {
+      type: String as PropType<string>,
+      default: undefined
+    },
+    // 描述列表的操作区
+    extra: {
+      type: String as PropType<string>,
+      default: undefined
+    },
     // 所占的列数
     columns: {
       type: [Number, Object] as PropType<number | ScreenSizes>,
@@ -67,16 +77,6 @@ export const createProps = () => {
     // 自定义内容区表格样式
     tableStyle: {
       type: Object as PropType<CSSProperties>,
-      default: undefined
-    },
-    // 描述列表的标题
-    title: {
-      type: String as PropType<string>,
-      default: undefined
-    },
-    // 描述列表的操作区
-    extra: {
-      type: String as PropType<string>,
       default: undefined
     }
   };
@@ -253,46 +253,42 @@ export default defineComponent({
           );
         }
         else {
+          let ths: JSX.Element[] = [];
+          let tds: JSX.Element[] = [];
+
+          row.forEach(column => {
+            const labelStyle = utils.getLabelStyle(props.labelStyle, column.labelStyle);
+            const contentStyle = utils.getContentStyle(props.contentStyle, column.contentStyle);
+
+            props.bordered ? ths.push(
+              <th class={classes.elItemLabel.value} style={labelStyle} colspan={column.span}>
+                {column.label}
+              </th>
+            ) : ths.push(
+              <th colspan={column.span}>
+                <span class={classes.elItemLabel.value} style={labelStyle}>
+                  {column.label}
+                </span>
+              </th>
+            );
+
+            props.bordered ? tds.push(
+              <td class={classes.elItemContent.value} style={contentStyle} colspan={column.span}>
+                {column.children}
+              </td>
+            ) : tds.push(
+              <td colspan={column.span}>
+                <span class={classes.elItemContent.value} style={contentStyle}>
+                  {column.children}
+                </span>
+              </td>
+            );
+          });
+
           return (
             <>
-              <tr>
-                {
-                  row.map(column => {
-                    const labelStyle = utils.getLabelStyle(props.labelStyle, column.labelStyle);
-
-                    return props.bordered ? (
-                      <th class={classes.elItemLabel.value} style={labelStyle} colspan={column.span}>
-                        {column.label}
-                      </th>
-                    ) : (
-                      <th colspan={column.span}>
-                        <span class={classes.elItemLabel.value} style={labelStyle}>
-                          {column.label}
-                        </span>
-                      </th>
-                    );
-                  })
-                }
-              </tr>
-              <tr>
-                {
-                  row.map(column => {
-                    const contentStyle = utils.getContentStyle(props.contentStyle, column.contentStyle);
-
-                    return props.bordered ? (
-                      <td class={classes.elItemContent.value} style={contentStyle} colspan={column.span}>
-                        {column.children}
-                      </td>
-                    ) : (
-                      <td colspan={column.span}>
-                        <span class={classes.elItemContent.value} style={contentStyle}>
-                          {column.children}
-                        </span>
-                      </td>
-                    );
-                  })
-                }
-              </tr>
+              <tr>{ths}</tr>
+              <tr>{tds}</tr>
             </>
           );
         }
