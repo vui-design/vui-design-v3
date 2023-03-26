@@ -1,12 +1,20 @@
 <template>
-  <example v-bind:code="code" id="example-descriptions-size">
-    <template slot="demo">
+  <vui-example id="example-descriptions-size" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-descriptions-size">
-        <vui-radio-group v-model="size">
+        <vui-radio-group v-model:value="size">
           <vui-radio value="small" label="Small" />
           <vui-radio value="medium" label="Medium" />
           <vui-radio value="large" label="Large" />
         </vui-radio-group>
+        <vui-descriptions v-bind:size="size" title="Custom Size">
+          <vui-description label="Product">Cloud Database</vui-description>
+          <vui-description label="Billing">Prepaid</vui-description>
+          <vui-description label="time">18:00:00</vui-description>
+          <vui-description label="Amount">$80.00</vui-description>
+          <vui-description label="Discount">$20.00</vui-description>
+          <vui-description label="Official">$60.00</vui-description>
+        </vui-descriptions>
         <vui-descriptions bordered v-bind:size="size" title="Custom Size">
           <vui-description label="Product">Cloud Database</vui-description>
           <vui-description label="Billing">Prepaid</vui-description>
@@ -23,40 +31,36 @@
             <p>Region: East China 1</p>
           </vui-description>
         </vui-descriptions>
-        <vui-descriptions v-bind:size="size" title="Custom Size">
-          <vui-description label="Product">Cloud Database</vui-description>
-          <vui-description label="Billing">Prepaid</vui-description>
-          <vui-description label="time">18:00:00</vui-description>
-          <vui-description label="Amount">$80.00</vui-description>
-          <vui-description label="Discount">$20.00</vui-description>
-          <vui-description label="Official">$60.00</vui-description>
-        </vui-descriptions>
       </div>
     </template>
-    <template slot="title">尺寸</template>
-    <template slot="description">
+    <template v-slot:title>尺寸</template>
+    <template v-slot:description>
       <p>不同尺寸，适应在各种容器中展示。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const size = ref<string>("small");
+
       return {
         code,
-        size: "small"
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>
   .example-descriptions-size .vui-descriptions { margin-top:24px; }
+  .example-descriptions-size .vui-descriptions p { margin:0; }
 </style>

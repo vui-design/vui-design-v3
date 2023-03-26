@@ -131,7 +131,7 @@ export default defineComponent({
     let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (withCustomColor.value) {
         style.backgroundColor = props.color;
@@ -140,7 +140,7 @@ export default defineComponent({
       return style;
     });
     styles.elContent = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (withCustomColor.value) {
         style.color = "#fff";
@@ -149,7 +149,7 @@ export default defineComponent({
       return style;
     });
     styles.elArrow = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (withCustomColor.value) {
         style.backgroundColor = props.color;

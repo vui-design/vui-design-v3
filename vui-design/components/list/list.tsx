@@ -7,7 +7,7 @@ import VuiRow from "../row";
 import VuiCol from "../col";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { getValidElements } from "../../utils/vue";
+import { flatten } from "../../utils/vue";
 import { layouts, sizes } from "./constants";
 import { ListInjectionKey } from "./context";
 
@@ -121,7 +121,7 @@ export default defineComponent({
       }
 
       // 内容区域
-      const data: any[] = context.slots.default ? getValidElements(context.slots.default()) : props.data;
+      const data: any[] = context.slots.default ? flatten(context.slots.default()) : props.data;
       let content;
 
       if (data && data.length > 0) {

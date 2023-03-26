@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
-import type { VNodeAtom } from "../../types";
+import type { VueNodeAtom } from "../../types";
 import type { Type, Direction, Orientation } from "./types";
 import { defineComponent, computed } from "vue";
 import is from "../../utils/is";
@@ -72,7 +72,7 @@ export default defineComponent({
     let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (props.size) {
         const size = is.string(props.size) ? props.size : `${props.size}px`;
@@ -101,7 +101,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      let children: VNodeAtom;
+      let children: VueNodeAtom;
 
       if (withText.value) {
         children = (

@@ -1,7 +1,7 @@
 import type { VNode, VNodeTypes, Component } from "vue";
 import type { Slots, Data } from "../types";
-import { Fragment, Comment, Text, cloneVNode } from "vue";
-import { isFunction, isArray } from "./is";
+import { Fragment, Comment, Text, isVNode, cloneVNode } from "vue";
+import { isFunction, isArray, isEffective } from "./is";
 
 export enum ShapeFlags {
   ELEMENT = 1,
@@ -43,6 +43,33 @@ export const getSlot = (slots: Slots, prop: string = "default") => {
 
 export const getSlotProp = (slots: Slots, props: Data, prop: string = "default") => {
   return slots[prop]?.() ?? props[prop];
+};
+
+export const flatten = (children: VNode | VNode[] = [], ignoreEmptyElement = true) => {
+  const kids = isArray(children) ? children : [children];
+  const result: VNode[] = [];
+
+  kids.forEach((kid: VNode | VNode[]) => {
+    if (isArray(kid)) {
+      result.push(...flatten(kid, ignoreEmptyElement));
+    }
+    else if (kid?.type === Fragment) {
+      result.push(...flatten(kid.children as VNode[], ignoreEmptyElement));
+    }
+    else if (isVNode(kid)) {
+      if (ignoreEmptyElement && !isEmptyElement(kid)) {
+        result.push(kid);
+      }
+      else if (!ignoreEmptyElement) {
+        result.push(kid);
+      }
+    }
+    else if (isEffective(kid)) {
+      result.push(kid);
+    }
+  });
+
+  return result;
 };
 
 export const getValidElements = (children: any[] = []) => {

@@ -129,7 +129,7 @@ export default defineComponent({
       const kids = children?.map(child => insertTextIntoSpan(child));
 
       // 
-      const attributes: Record<string, any> = {
+      const attributes = {
         ...context.attrs,
         href: props.href,
         target: props.target,

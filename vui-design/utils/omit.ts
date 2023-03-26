@@ -2,15 +2,17 @@ import type { Data } from "../types";
 
 export default function omit<T extends Data, K extends keyof any>(
   object: T,
-  path: Array<K>
+  keys: Array<K>
 ): Omit<T, K> {
-  const result = { ...object };
+  const result = {
+    ...object
+  };
 
-  for (const item of path) {
+  for (const key of keys) {
     // @ts-ignore
-    if (item in result) {
+    if (key in result) {
       // @ts-ignore
-      delete result[item];
+      delete result[key];
     }
   }
 

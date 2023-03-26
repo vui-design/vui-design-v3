@@ -1,33 +1,36 @@
 <template>
-  <example v-bind:code="code" id="example-descriptions-vertical">
-    <template slot="demo">
+  <vui-example id="example-descriptions-vertical" v-bind:code="code">
+    <template v-slot:demo>
       <vui-descriptions layout="vertical" title="User Info">
         <vui-description label="UserName">Zhang San</vui-description>
         <vui-description label="Telephone">18066668888</vui-description>
         <vui-description label="Live">Hangzhou, Zhejiang</vui-description>
-        <vui-description label="Address" v-bind:span="2">No. 1, Wenyi Road, Xihu District, Hangzhou, Zhejiang, China</vui-description>
+        <vui-description label="Address" v-bind:span="2">
+          No. 1, Wenyi Road, Xihu District, Hangzhou, Zhejiang, China
+        </vui-description>
         <vui-description label="Remark">Empty</vui-description>
       </vui-descriptions>
     </template>
-    <template slot="title">垂直</template>
-    <template slot="description">
+    <template v-slot:title>垂直</template>
+    <template v-slot:description>
       <p>垂直的描述列表。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

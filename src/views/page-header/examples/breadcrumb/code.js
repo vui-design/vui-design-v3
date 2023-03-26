@@ -5,20 +5,16 @@ const code =
     title="Title"
     subTitle="This is a subtitle"
   >
-    <vui-breadcrumb slot="breadcrumb">
+  <template v-slot:breadcrumb>
+    <vui-breadcrumb>
       <vui-breadcrumb-item>Home</vui-breadcrumb-item>
       <vui-breadcrumb-item>Components</vui-breadcrumb-item>
       <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
       <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
     </vui-breadcrumb>
+  </template>
   </vui-page-header>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

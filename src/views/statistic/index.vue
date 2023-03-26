@@ -88,31 +88,31 @@
         <tr>
           <td>footer</td>
           <td>底部内容</td>
-          <td>Slot</td>
+          <td>String | Slot</td>
           <td>--</td>
         </tr>
         <tr>
           <td>headerStyle</td>
-          <td>设置头部样式</td>
-          <td>String | Object</td>
+          <td>自定义头部样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>
           <td>bodyStyle</td>
-          <td>设置主体样式</td>
-          <td>String | Object</td>
+          <td>自定义内容样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>
           <td>footerStyle</td>
-          <td>设置底部样式</td>
-          <td>String | Object</td>
+          <td>自定义底部样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>
           <td>valueStyle</td>
-          <td>设置数值区域的样式</td>
-          <td>String | Object</td>
+          <td>自定义数值区域的样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
       </tbody>
@@ -167,25 +167,25 @@
         <tr>
           <td>footer</td>
           <td>底部内容</td>
-          <td>Slot</td>
+          <td>String | Slot</td>
           <td>--</td>
         </tr>
         <tr>
           <td>headerStyle</td>
-          <td>设置头部样式</td>
-          <td>String | Object</td>
+          <td>自定义头部样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>
           <td>bodyStyle</td>
-          <td>设置主体样式</td>
-          <td>String | Object</td>
+          <td>自定义内容样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>
           <td>footerStyle</td>
-          <td>设置底部样式</td>
-          <td>String | Object</td>
+          <td>自定义底部样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
       </tbody>

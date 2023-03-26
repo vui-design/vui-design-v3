@@ -300,7 +300,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const attributes: Record<string, any> = {
+      const attributes = {
         ...context.attrs,
         class: [classes.elWrapper.value, context.attrs.class],
         style: [styles.elWrapper.value, context.attrs.style]

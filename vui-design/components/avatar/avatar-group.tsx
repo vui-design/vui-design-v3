@@ -8,7 +8,7 @@ import VuiTooltip from "../tooltip";
 import VuiAvatar from "../avatar";
 import VuiSpace from "../space";
 import getClassName from "../../utils/getClassName";
-import { getValidElements } from "../../utils/vue";
+import { flatten } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
 import { colors } from "../tooltip/constants";
 import { shapes } from "./constants";
@@ -85,7 +85,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const avatars = getValidElements(context.slots.default?.());
+      const avatars = flatten(context.slots.default?.());
       const overflowedCount = avatars.length - maxCount.value;
       let children = [];
 

@@ -1,11 +1,19 @@
 const code =
 `<template>
   <div class="example-descriptions-size">
-    <vui-radio-group v-model="size">
+    <vui-radio-group v-model:value="size">
       <vui-radio value="small" label="Small" />
       <vui-radio value="medium" label="Medium" />
       <vui-radio value="large" label="Large" />
     </vui-radio-group>
+    <vui-descriptions v-bind:size="size" title="Custom Size">
+      <vui-description label="Product">Cloud Database</vui-description>
+      <vui-description label="Billing">Prepaid</vui-description>
+      <vui-description label="time">18:00:00</vui-description>
+      <vui-description label="Amount">$80.00</vui-description>
+      <vui-description label="Discount">$20.00</vui-description>
+      <vui-description label="Official">$60.00</vui-description>
+    </vui-descriptions>
     <vui-descriptions bordered v-bind:size="size" title="Custom Size">
       <vui-description label="Product">Cloud Database</vui-description>
       <vui-description label="Billing">Prepaid</vui-description>
@@ -22,29 +30,26 @@ const code =
         <p>Region: East China 1</p>
       </vui-description>
     </vui-descriptions>
-    <vui-descriptions v-bind:size="size" title="Custom Size">
-      <vui-description label="Product">Cloud Database</vui-description>
-      <vui-description label="Billing">Prepaid</vui-description>
-      <vui-description label="time">18:00:00</vui-description>
-      <vui-description label="Amount">$80.00</vui-description>
-      <vui-description label="Discount">$20.00</vui-description>
-      <vui-description label="Official">$60.00</vui-description>
-    </vui-descriptions>
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const size = ref<string>("small");
+
       return {
-        size: "small"
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>
   .example-descriptions-size .vui-descriptions { margin-top:24px; }
+  .example-descriptions-size .vui-descriptions p { margin:0; }
 </style>
 `;
 

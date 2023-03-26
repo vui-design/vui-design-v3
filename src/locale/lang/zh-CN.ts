@@ -428,6 +428,7 @@ export default {
       "example-descriptions-vertical": "垂直",
       "example-descriptions-vertical-bordered": "垂直带边框的",
       "example-descriptions-size": "尺寸",
+      "example-descriptions-responsive": "响应式",
 
       "example-empty-basic-usage": "基本用法",
       "example-empty-no-description": "无描述",

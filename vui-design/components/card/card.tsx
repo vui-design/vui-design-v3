@@ -5,7 +5,7 @@ import VuiIcon from "../icon";
 import VuiRow from "../row";
 import VuiCol from "../col";
 import getClassName from "../../utils/getClassName";
-import { getValidElements } from "../../utils/vue";
+import { flatten } from "../../utils/vue";
 import { shadows, gridCardLoadingBlocks } from "./constants";
 import { CardInjectionKey } from "./context";
 
@@ -201,7 +201,7 @@ export default defineComponent({
       let actions;
 
       if (context.slots.actions) {
-        const children = getValidElements(context.slots.actions?.());
+        const children = flatten(context.slots.actions?.());
         let kids: any[] = [];
 
         children.forEach((child: VNode, index: number) => {

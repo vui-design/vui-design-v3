@@ -59,8 +59,7 @@ import Badge from "./components/badge";
 import Card, { CardMeta, CardGrid } from "./components/card";
 import Collapse from "./components/collapse";
 import Panel from "./components/panel";
-import Descriptions from "./components/descriptions";
-import Description from "./components/description";
+import Descriptions, { Description } from "./components/descriptions";
 import Empty from "./components/empty";
 import Image from "./components/image";
 import List, { ListItem, ListItemMeta } from "./components/list";
@@ -94,6 +93,7 @@ import Authorizer from "./components/authorizer";
 import Backtop from "./components/backtop";
 import Collapser from "./components/collapser";
 import Fullscreen from "./components/fullscreen";
+import Popup from "./components/popup";
 import ResizeObserver from "./components/resize-observer";
 import Loading from "./components/loading";
 
@@ -207,6 +207,7 @@ const components = [
   Backtop,
   Collapser,
   Fullscreen,
+  Popup,
   ResizeObserver
 ];
 
@@ -334,6 +335,7 @@ export {
   Backtop,
   Collapser,
   Fullscreen,
+  Popup,
   ResizeObserver,
   Loading
 };

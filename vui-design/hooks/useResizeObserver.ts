@@ -24,6 +24,7 @@ export default function useResizeObserver({
           onResize(entry);
         }
       });
+
       resizeObserver.observe(element.value);
     },
     removeResizeObserver: () => {

@@ -1,6 +1,8 @@
 import type { PropType, Ref, VNode } from "vue";
 
-declare type VueNodeAtom = VNode | string | number | boolean | null | undefined | void;
+declare type VueNode = VNode | string | number | boolean | null | undefined | void;
+
+export type VueNodeAtom = VueNode | VueNode[] | JSX.Element;
 
 export type Key = string | number | symbol;
 
@@ -13,8 +15,6 @@ export type Data = Record<string, unknown>;
 export type DefaultFactory<T> = (props: Data) => T | null | undefined;
 
 export type MaybeRef<T> = T | Ref<T>;
-
-export type VNodeAtom = VueNodeAtom | VueNodeAtom[] | JSX.Element;
 
 export interface Slots {
   value?: VNode[];

@@ -1,6 +1,6 @@
 import type { PropType, CSSProperties } from "vue";
 import type { VueTypeValidableDef, VueTypesInterface } from "vue-types";
-import type { VNodeAtom } from "../types";
+import type { VueNodeAtom } from "../types";
 import { createTypes } from "vue-types";
 
 const PropTypes = createTypes({
@@ -29,7 +29,7 @@ PropTypes.extend([
   {
     name: "vnode",
     getter: true,
-    type: Object as PropType<VNodeAtom>,
+    type: Object as PropType<VueNodeAtom>,
     default: undefined
   },
   {
@@ -49,6 +49,6 @@ export function withUndefined<T extends { default?: any }>(type: T): T {
 export default PropTypes as VueTypesInterface & {
   readonly loosebool: VueTypeValidableDef<boolean>;
   readonly style: VueTypeValidableDef<CSSProperties>;
-  readonly vnode: VueTypeValidableDef<VNodeAtom>;
+  readonly vnode: VueTypeValidableDef<VueNodeAtom>;
   readonly element: VueTypeValidableDef<HTMLElement>;
 };

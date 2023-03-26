@@ -1,12 +1,12 @@
-@vui-descriptions: ~"@{vui}-descriptions";
+@import "./token.less";
 
 .@{vui-descriptions} {
-  box-sizing:border-box;
+  display:block;
+  font-size:@descriptions-font-size;
   line-height:@descriptions-line-height;
 
   &-header {
       display:flex;
-      box-sizing:border-box;
       justify-content:flex-start;
       align-items:center;
       transition:all @transition-duration @transition-timing-function;
@@ -15,7 +15,6 @@
   &-title {
     flex:1;
     display:block;
-    box-sizing:border-box;
     color:@descriptions-title-font-color;
     font-size:@descriptions-title-font-size;
     font-weight:@descriptions-title-font-weight;
@@ -23,26 +22,33 @@
   }
 
   &-extra {
+    display:block;
     margin-left:@descriptions-extra-margin-left;
   }
 
   &-body {
     display:block;
-    box-sizing:border-box;
     width:100%;
     border-radius:@descriptions-body-border-radius;
     overflow:hidden;
 
     & > table {
-      width:100%;
-      border-collapse:collapse;
-      border-spacing:0;
+      width:100% !important;
+      border-collapse:collapse !important;
+      border-spacing:0 !important;
+      margin:0 !important;
+      padding:0 !important;
 
       & > tbody {
         & > tr {
           & > th,
           & > td {
+            border:none;
+            background-color:transparent;
+            padding:0;
             vertical-align:top;
+            font-size:inherit;
+            font-weight:inherit;
             text-align:left;
             transition:all @transition-duration @transition-timing-function;
           }

@@ -136,7 +136,7 @@ export default defineComponent({
     };
 
     // onChange 事件回调
-    const handleChange = (e: MouseEvent) => {
+    const handleChange = (e: Event) => {
       const { checked: newChecked } = e.target as HTMLInputElement;
 
       if (disabled.value) {
@@ -198,7 +198,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const label = context.slots.default?.() ?? props.label;
-      const attributes: Record<string, any> = {
+      const attributes = {
         ...context.attrs,
         name: name.value,
         value: props.value,

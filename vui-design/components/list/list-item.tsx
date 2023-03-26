@@ -1,7 +1,7 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, inject, computed } from "vue";
 import getClassName from "../../utils/getClassName";
-import { getValidElements } from "../../utils/vue";
+import { flatten } from "../../utils/vue";
 import { ListInjectionKey } from "./context";
 
 export const createProps = () => {
@@ -39,7 +39,7 @@ export default defineComponent({
       let children = [];
 
       // 操作组
-      const elements = getValidElements(context.slots.actions?.());
+      const elements = flatten(context.slots.actions?.());
       let actions: any[] = [];
 
       elements.forEach((element: VNode, index: number) => {

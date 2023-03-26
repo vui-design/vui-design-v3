@@ -190,15 +190,15 @@ export default [
         },
         component: () => import("src/views/menu/index.vue")
       },
-  //     {
-  //       path: "/components/page-header",
-  //       name: "page-header",
-  //       meta: {
-  //         title: "PageHeader",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/page-header/index.vue")
-  //     },
+      {
+        path: "/components/page-header",
+        name: "page-header",
+        meta: {
+          title: "PageHeader",
+          group: "navigation"
+        },
+        component: () => import("src/views/page-header/index.vue")
+      },
   //     {
   //       path: "/components/pagination",
   //       name: "pagination",
@@ -400,15 +400,15 @@ export default [
   //       },
   //       component: () => import("src/views/collapse/index.vue")
   //     },
-  //     {
-  //       path: "/components/descriptions",
-  //       name: "descriptions",
-  //       meta: {
-  //         title: "Descriptions",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/descriptions/index.vue")
-  //     },
+      {
+        path: "/components/descriptions",
+        name: "descriptions",
+        meta: {
+          title: "Descriptions",
+          group: "data-display"
+        },
+        component: () => import("src/views/descriptions/index.vue")
+      },
       {
         path: "/components/empty",
         name: "empty",

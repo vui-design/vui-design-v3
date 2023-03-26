@@ -3,7 +3,7 @@ import type { Direction, Justify, Align, Gutter } from "./types";
 import { defineComponent, computed } from "vue";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { getValidElements } from "../../utils/vue";
+import { flatten } from "../../utils/vue";
 import { directions, justifys, aligns, gutters } from "./constants";
 
 export const createProps = () => {
@@ -89,7 +89,7 @@ export default defineComponent({
     let styles: Record<string, ComputedRef> = {};
 
     styles.elItem = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (!props.divider && withCustomGutter) {
         const property = props.direction === "horizontal" ? "marginLeft" : "marginTop";
@@ -101,7 +101,7 @@ export default defineComponent({
     });
 
     styles.elDivider = computed(() => {
-      const style: CSSProperties = {};
+      let style: CSSProperties = {};
 
       if (props.direction === "horizontal" && props.divider) {
         if (is.string(props.divider) || is.number(props.divider)) {
@@ -118,7 +118,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const elements = getValidElements(context.slots.default?.());
+      const elements = flatten(context.slots.default?.());
 
       if (elements.length === 0) {
         return null;

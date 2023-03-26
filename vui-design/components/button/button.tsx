@@ -178,7 +178,7 @@ export default defineComponent({
       const kids = children?.map(child => insertTextIntoSpan(child));
 
       // 
-      const attributes: Record<string, any> = {
+      const attributes = {
         ...context.attrs,
         class: [classes.el.value, context.attrs.class],
         onClick: handleClick

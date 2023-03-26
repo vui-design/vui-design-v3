@@ -16,9 +16,9 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 图片样式
+    // 自定义图片样式
     imageStyle: {
-      type: [String, Object] as PropType<string | CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 自定义描述内容

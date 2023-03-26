@@ -10,12 +10,6 @@ const code =
     <vui-description label="Remark">Empty</vui-description>
   </vui-descriptions>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

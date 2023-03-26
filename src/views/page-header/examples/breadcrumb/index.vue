@@ -1,38 +1,41 @@
 <template>
-  <example v-bind:code="code" id="example-page-header-breadcrumb">
-    <template slot="demo">
+  <vui-example id="example-page-header-breadcrumb" v-bind:code="code">
+    <template v-slot:demo>
       <vui-page-header
         style="border: 1px solid #f0f0f0;"
         title="Title"
         subTitle="This is a subtitle"
       >
-        <vui-breadcrumb slot="breadcrumb">
-          <vui-breadcrumb-item>Home</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Components</vui-breadcrumb-item>
-          <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-          <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
-        </vui-breadcrumb>
+        <template v-slot:breadcrumb>
+          <vui-breadcrumb>
+            <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+            <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+            <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+            <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
+          </vui-breadcrumb>
+        </template>
       </vui-page-header>
     </template>
-    <template slot="title">含面包屑</template>
-    <template slot="description">
+    <template v-slot:title>含面包屑</template>
+    <template v-slot:description>
       <p>含面包屑的页头，适合层级比较深的页面，让用户可以快速导航。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

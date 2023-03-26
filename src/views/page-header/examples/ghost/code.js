@@ -2,16 +2,16 @@ const code =
 `<template>
   <div class="example-page-header-ghost">
     <vui-page-header title="Title" subTitle="This is a subtitle" v-bind:ghost="false" v-on:back="handleBack">
-      <vui-space slot="extra" v-bind:size="10">
+      <template v-slot:extra>
         <vui-button>Action 1</vui-button>
         <vui-button>Action 2</vui-button>
         <vui-button type="primary">Action 3</vui-button>
-      </vui-space>
+      </template>
       <vui-descriptions>
         <vui-description label="UserName">Chillyme</vui-description>
         <vui-description label="Telephone">18012341234</vui-description>
         <vui-description label="Live">Hangzhou, Zhejiang</vui-description>
-        <vui-description label="Address" :span="2">
+        <vui-description label="Address" v-bind:span="2">
           No. 01, Wenyi Road, Xihu District, Hangzhou, Zhejiang, China
         </vui-description>
         <vui-description label="Remark">Empty</vui-description>
@@ -20,18 +20,24 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      handleBack() {
-        this.$router.back();
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { useRouter } from "vue-router";
+
+  export default defineComponent({
+    setup() {
+      const router = useRouter();
+      const handleBack = () => router.back();
+
+      return {
+        handleBack
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-page-header-ghost { background-color:#fafafa; padding:20px; }
+  .example-page-header-ghost { background-color:#f6f6f6; padding:24px; }
 </style>
 `;
 

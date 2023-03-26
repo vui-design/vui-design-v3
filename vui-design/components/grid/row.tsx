@@ -126,10 +126,10 @@ export default defineComponent({
     let styles: Record<string, ComputedRef> = {};
 
     styles.el = computed(() => {
-      const style: CSSProperties = {};
       const g = gutter.value;
       const horizontalGutter = g[0] > 0 ? `${g[0] / -2}px` : undefined;
       const verticalGutter = g[1] > 0 ? `${g[1] / -2}px` : undefined;
+      let style: CSSProperties = {};
 
       if (horizontalGutter) {
         style.marginLeft = horizontalGutter;

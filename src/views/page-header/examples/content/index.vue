@@ -1,27 +1,29 @@
 <template>
-  <example v-bind:code="code" id="example-page-header-content">
-    <template slot="demo">
-      <browser>
+  <vui-example id="example-page-header-content" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-browser>
         <vui-page-header
           avatar="https://dummyimage.com/32x32/2d8cf0/fff"
           title="Title"
           subTitle="This is a subtitle"
         >
-          <vui-breadcrumb slot="breadcrumb">
-            <vui-breadcrumb-item>Home</vui-breadcrumb-item>
-            <vui-breadcrumb-item>Components</vui-breadcrumb-item>
-            <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-            <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
-          </vui-breadcrumb>
-          <template slot="tags">
+          <template v-slot:breadcrumb>
+            <vui-breadcrumb>
+              <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+              <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+              <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+              <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
+            </vui-breadcrumb>
+          </template>
+          <template v-slot:tags>
             <vui-tag color="red">Red Tag</vui-tag>
             <vui-tag color="blue">Blue Tag</vui-tag>
           </template>
-          <vui-space slot="extra" v-bind:size="10">
+          <template v-slot:extra>
             <vui-button>Action 1</vui-button>
             <vui-button>Action 2</vui-button>
             <vui-button type="primary">Action 3</vui-button>
-          </vui-space>
+          </template>
           <vui-descriptions>
             <vui-description label="UserName">Chillyme</vui-description>
             <vui-description label="Telephone">18012341234</vui-description>
@@ -31,34 +33,37 @@
             </vui-description>
             <vui-description label="Remark">Empty</vui-description>
           </vui-descriptions>
-          <vui-menu slot="footer" mode="horizontal" selectedName="1">
-            <vui-menu-item name="1" title="Navigation 1" />
-            <vui-menu-item name="2" title="Navigation 2" />
-          </vui-menu>
+          <template v-slot:footer>
+            <vui-menu mode="horizontal" defaultSelectedKey="1">
+              <vui-menu-item key="1" title="Navigation 1" />
+              <vui-menu-item key="2" title="Navigation 2" />
+            </vui-menu>
+          </template>
         </vui-page-header>
-      </browser>
+      </vui-browser>
     </template>
-    <template slot="title">组合示例</template>
-    <template slot="description">
+    <template v-slot:title>组合示例</template>
+    <template v-slot:description>
       <p>使用了 <code>PageHeader</code> 提供的所有能力。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
-  import Browser from "src/components/browser";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import VuiBrowser from "src/components/browser";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example,
-      Browser
+      VuiExample,
+      VuiBrowser
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

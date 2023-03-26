@@ -31,8 +31,14 @@
       <tbody>
         <tr>
           <td>image</td>
-          <td>设置显示图片，为 <code>String</code> 类型时表示自定义图片地址</td>
+          <td>显示图片，为 <code>String</code> 类型时表示自定义图片地址</td>
           <td>String | Slot</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>imageStyle</td>
+          <td>自定义图片样式</td>
+          <td>CSSProperties</td>
           <td>--</td>
         </tr>
         <tr>

@@ -2,17 +2,19 @@ const code =
 `<template>
   <div class="example-page-header-more">
     <vui-page-header title="Title" subTitle="This is a subtitle" v-bind:ghost="false">
-      <vui-breadcrumb slot="breadcrumb">
-        <vui-breadcrumb-item>Home</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Components</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
-      </vui-breadcrumb>
-      <vui-space slot="extra" v-bind:size="10">
+      <template v-slot:breadcrumb>
+        <vui-breadcrumb>
+          <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+          <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+          <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+          <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
+        </vui-breadcrumb>
+      </template>
+      <template v-slot:extra>
         <vui-button>Action 1</vui-button>
         <vui-button>Action 2</vui-button>
         <vui-button type="primary">Action 3</vui-button>
-      </vui-space>
+      </template>
       <vui-descriptions>
         <vui-description label="UserName">Chillyme</vui-description>
         <vui-description label="Telephone">18012341234</vui-description>
@@ -24,20 +26,22 @@ const code =
       </vui-descriptions>
     </vui-page-header>
     <vui-page-header title="Title" subTitle="This is a subtitle" v-bind:ghost="false">
-      <vui-breadcrumb slot="breadcrumb">
-        <vui-breadcrumb-item>Home</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Components</vui-breadcrumb-item>
-        <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
-        <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
-      </vui-breadcrumb>
-      <template slot="tags">
+      <template v-slot:breadcrumb>
+        <vui-breadcrumb>
+          <vui-breadcrumb-item>Home</vui-breadcrumb-item>
+          <vui-breadcrumb-item>Components</vui-breadcrumb-item>
+          <vui-breadcrumb-item>Navigation</vui-breadcrumb-item>
+          <vui-breadcrumb-item>PageHeader</vui-breadcrumb-item>
+        </vui-breadcrumb>
+      </template>
+      <template v-slot:tags>
         <vui-tag color="blue">Blue Tag</vui-tag>
       </template>
-      <vui-space slot="extra" v-bind:size="10">
+      <template v-slot:extra>
         <vui-button>Action 1</vui-button>
         <vui-button>Action 2</vui-button>
         <vui-button type="primary">Action 3</vui-button>
-      </vui-space>
+      </template>
       <vui-row v-bind:gutter="16">
         <vui-col v-bind:span="4">
           <vui-statistic value="Pending" title="Status" />
@@ -53,15 +57,9 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-page-header-more { background-color:#f6f6f6; padding:20px; }
-  .example-page-header-more .vui-page-header + .vui-page-header { margin-top:20px; }
+  .example-page-header-more { background-color:#f6f6f6; padding:24px; }
+  .example-page-header-more .vui-page-header + .vui-page-header { margin-top:24px; }
 </style>
 `;
 

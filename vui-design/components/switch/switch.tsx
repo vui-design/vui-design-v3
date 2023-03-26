@@ -197,7 +197,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const label = checked.value ? (context.slots.checkedText?.() ?? props.checkedText) : (context.slots.uncheckedText?.() ?? props.uncheckedText);
-      const attributes: Record<string, any> = {
+      const attributes = {
         ...context.attrs,
         class: [classes.el.value, context.attrs.class],
         style: [styles.el.value, context.attrs.style],
