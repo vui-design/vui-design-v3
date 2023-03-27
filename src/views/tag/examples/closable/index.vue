@@ -1,39 +1,46 @@
 <template>
-  <example v-bind:code="code" id="example-tag-closable">
-    <template slot="demo">
+  <vui-example id="example-tag-closable" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-tag-closable">
-        <vui-tag v-if="showTag1" closable v-on:close="showTag1 = false">Tag 1</vui-tag>
-        <vui-tag v-if="showTag2" closable v-on:close="showTag2 = false">Tag 2</vui-tag>
-        <vui-tag v-if="showTag3" closable v-on:close="showTag3 = false">Tag 3</vui-tag>
+        <vui-tag v-model:visible="visible1" closable>Tag 1</vui-tag>
+        <vui-tag v-model:visible="visible2" closable v-on:close="handleClose">Tag 2</vui-tag>
       </div>
     </template>
-    <template slot="title">可关闭</template>
-    <template slot="description">
-      <p>通过设置 <code>closable</code> 属性来定义一个标签是否可以关闭，点击关闭按钮将会触发 <code>onClose</code> 事件，需要自行实现关闭逻辑。</p>
+    <template v-slot:title>可关闭</template>
+    <template v-slot:description>
+      <p>通过添加 <code>closable</code> 属性来定义一个可关闭的标签，可关闭标签具有 <code>onClose</code> 事件。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const visible1 = ref<boolean>(true);
+      const visible2 = ref<boolean>(true);
+
+      const handleClose = (e: MouseEvent) => {
+        console.log(e);
+      };
+
       return {
         code,
-        showTag1: true,
-        showTag2: true,
-        showTag3: true
+        visible1,
+        visible2,
+        handleClose
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-closable { display:flex; }
-  .example-tag-closable .vui-tag { margin-right:8px; }
+  .example-tag-closable { display:flex; justify-content:flex-start; align-items:flex-start; }
+  .example-tag-closable .vui-tag + .vui-tag { margin-left:8px; }
 </style>

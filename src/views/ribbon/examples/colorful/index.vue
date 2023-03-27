@@ -97,7 +97,7 @@
     </template>
     <template slot="title">多彩缎带</template>
     <template slot="description">
-      <p>我们添加了多种预设色彩的缎带样式，用作不同场景使用。如果预设值不能满足你的需求，可以设置为具体的色值。</p>
+      <p>我们添加了多种预设色彩的缎带样式，用作不同场景使用。如果预设值不能满足你的需求，可以设置为具体的颜色值。</p>
     </template>
   </example>
 </template>

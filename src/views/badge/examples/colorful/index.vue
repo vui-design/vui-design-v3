@@ -27,7 +27,7 @@
     </template>
     <template v-slot:title>多彩徽标</template>
     <template v-slot:description>
-      <p>多种预设颜色的徽标样式，用作不同场景使用；如果预设值不能满足你的需求，可以设置为具体的色值。</p>
+      <p>多种预设颜色的徽标样式，用作不同场景使用；如果预设值不能满足你的需求，可以设置为具体的颜色值。</p>
     </template>
   </vui-example>
 </template>

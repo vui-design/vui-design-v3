@@ -1,11 +1,13 @@
-@vui-tag: ~"@{vui}-tag";
+@import "./token.less";
 
 .@{vui-tag} {
   cursor:default;
   display:inline-flex;
   align-items:center;
   box-sizing:border-box;
-  border:@tag-border-width solid transparent;
+  border-width:@tag-border-width;
+  border-style:solid;
+  border-color:transparent;
   border-radius:@tag-border-radius;
   vertical-align:middle;
   white-space:nowrap;

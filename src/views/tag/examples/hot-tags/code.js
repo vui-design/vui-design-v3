@@ -8,38 +8,39 @@ const code =
       checkable
       v-bind:key="tag"
       v-bind:checked="selectedTags.indexOf(tag) > -1"
-      v-on:change="checked => handleChange(checked, tag)"
+      v-on:check="checked => handleCheck(checked, tag)"
     >
       {{tag}}
     </vui-tag>
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        tags: ["Movies", "Books", "Music", "Sports"],
-        selectedTags: ["Movies"]
-      };
-    },
-    methods: {
-      handleChange(checked, tag) {
-        let selectedTags = this.selectedTags;
-        let nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(item => item !== tag);
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
 
-        this.selectedTags = nextSelectedTags;
-      }
+  export default defineComponent({
+    setup() {
+      const tags = ref<string[]>(["Movies", "Books", "Music", "Sports"]);
+      const selectedTags = ref<string[]>(["Movies"]);
+
+      const handleCheck = (checked, tag) => {
+        selectedTags.value = checked ? [...selectedTags.value, tag] : selectedTags.value.filter(item => item !== tag);
+      };
+
+      return {
+        tags,
+        selectedTags,
+        handleCheck
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-hot-tags:before,
-  .example-tag-hot-tags:after { content:""; display:block; width:100%; height:0; visibility:hidden; clear:both; }
-  .example-tag-hot-tags > h4,
-  .example-tag-hot-tags > .vui-tag { float:left; margin-right:8px; }
-  .example-tag-hot-tags > h4 { height:24px; color:#333; font-size:14px; line-height:24px; }
+  .example-tag-hot-tags { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
+  .example-tag-hot-tags h4 { height:24px; color:#333; font-size:14px; font-weight:600; line-height:24px; }
+  .example-tag-hot-tags h4,
+  .example-tag-hot-tags .vui-tag { margin-right:8px; }
 </style>
 `;
 

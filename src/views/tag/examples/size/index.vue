@@ -1,36 +1,37 @@
 <template>
-  <example v-bind:code="code" id="example-tag-size">
-    <template slot="demo">
+  <vui-example id="example-tag-size" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-tag-size">
         <vui-tag size="small">Small</vui-tag>
         <vui-tag>Medium</vui-tag>
         <vui-tag size="large">Large</vui-tag>
       </div>
     </template>
-    <template slot="title">尺寸</template>
-    <template slot="description">
+    <template v-slot:title>尺寸</template>
+    <template v-slot:description>
       <p>设置 <code>size</code> 属性可以显示不同尺寸的标签，默认为中等尺寸。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-size { display:flex; align-items:center; }
-  .example-tag-size .vui-tag { margin-right:8px; }
+  .example-tag-size { display:flex; justify-content:flex-start; align-items:center; }
+  .example-tag-size .vui-tag + .vui-tag { margin-left:8px; }
 </style>

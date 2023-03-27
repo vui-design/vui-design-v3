@@ -1,72 +1,90 @@
 <template>
-  <example v-bind:code="code" id="example-tag-control">
-    <template slot="demo">
+  <vui-example id="example-tag-control" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-tag-control">
-        <vui-tag v-for="tag in tags" v-bind:key="tag" closable v-on:close="handleRemove(tag)">{{tag}}</vui-tag>
+        <template v-for="(tag, tagIndex) in tags" v-bind:key="tag">
+          <vui-tooltip v-if="tag.length > 20" v-bind:content="tag">
+            <vui-tag v-bind:closable="tagIndex !== 0" v-on:close="handleRemove(tag)">
+              {{tag.slice(0, 20)}}...
+            </vui-tag>
+          </vui-tooltip>
+          <vui-tag v-else v-bind:closable="tagIndex !== 0" v-on:close="handleRemove(tag)">
+            {{tag}}
+          </vui-tag>
+        </template>
         <vui-input
           v-if="showInput"
-          v-model="value"
-          ref="input"
+          v-model:value="text"
+          ref="inputRef"
           size="small"
           style="width: 100px;"
           v-bind:value="value"
           v-on:keyup.enter="handleConfirm"
           v-on:blur="handleCancel"
         />
-        <vui-button v-else type="primary" size="small" v-on:click="handleAdd">New Tag</vui-button>
+        <vui-button v-else type="dashed" size="small" v-on:click="handleAdd">Add Tag</vui-button>
       </div>
     </template>
-    <template slot="title">动态添加和删除</template>
-    <template slot="description">
+    <template v-slot:title>动态添加和删除</template>
+    <template v-slot:description>
       <p>用数组生成一组标签，可以动态添加和删除。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref, nextTick } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code,
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        showInput: false,
-        value: ""
+    setup() {
+      const inputRef = ref<HTMLInputElement>();
+      const tags = ref<string[]>(["Unremovable", "Tag 1", "Tag 2, this label is very long"]);
+      const showInput = ref<boolean>(false);
+      const text = ref<string>("");
+
+      const handleAdd = () => {
+        showInput.value = true;
+        nextTick(() => inputRef.value.focus());
       };
-    },
-    methods: {
-      handleAdd() {
-        this.showInput = true;
-        this.$nextTick(() => this.$refs.input.focus());
-      },
-      handleConfirm() {
-        if (this.value && this.tags.indexOf(this.value) === -1) {
-          this.tags.push(this.value);
+      const handleRemove = (tag: string) => {
+        tags.value.splice(tags.value.indexOf(tag), 1);
+      };
+      const handleConfirm = () => {
+        if (text.value && tags.value.indexOf(text.value) === -1) {
+          tags.value.push(text.value);
         }
 
-        this.showInput = false;
-        this.value = "";
-      },
-      handleCancel() {
-        this.showInput = false;
-        this.value = "";
-      },
-      handleRemove(tag) {
-        this.tags.splice(this.tags.indexOf(tag), 1);
-      }
+        showInput.value = false;
+        text.value = "";
+      };
+      const handleCancel = () => {
+        showInput.value = false;
+        text.value = "";
+      };
+
+      return {
+        code,
+        inputRef,
+        tags,
+        showInput,
+        text,
+        handleAdd,
+        handleRemove,
+        handleConfirm,
+        handleCancel
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-control:before,
-  .example-tag-control:after { content:""; display:block; width:100%; height:0; visibility:hidden; clear:both; }
-  .example-tag-control > .vui-tag,
-  .example-tag-control > .vui-input,
-  .example-tag-control > .vui-button { float:left; margin-right:10px; margin-bottom:10px; }
+  .example-tag-control { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
+  .example-tag-control .vui-tag,
+  .example-tag-control .vui-input,
+  .example-tag-control .vui-button { margin-right:8px; }
 </style>

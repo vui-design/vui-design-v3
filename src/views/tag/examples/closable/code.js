@@ -1,27 +1,35 @@
 const code =
 `<template>
   <div class="example-tag-closable">
-    <vui-tag v-if="showTag1" closable v-on:close="showTag1 = false">Tag 1</vui-tag>
-    <vui-tag v-if="showTag2" closable v-on:close="showTag2 = false">Tag 2</vui-tag>
-    <vui-tag v-if="showTag3" closable v-on:close="showTag3 = false">Tag 3</vui-tag>
+    <vui-tag v-model:visible="visible1" closable>Tag 1</vui-tag>
+    <vui-tag v-model:visible="visible2" closable v-on:close="handleClose">Tag 2</vui-tag>
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const visible1 = ref<boolean>(true);
+      const visible2 = ref<boolean>(true);
+
+      const handleClose = (e: MouseEvent) => {
+        console.log(e);
+      };
+
       return {
-        showTag1: true,
-        showTag2: true,
-        showTag3: true
+        visible1,
+        visible2,
+        handleClose
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-closable { display:flex; }
-  .example-tag-closable .vui-tag { margin-right:8px; }
+  .example-tag-closable { display:flex; justify-content:flex-start; align-items:flex-start; }
+  .example-tag-closable .vui-tag + .vui-tag { margin-left:8px; }
 </style>
 `;
 

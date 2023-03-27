@@ -57,7 +57,7 @@
         </tr>
         <tr>
           <td>minWidth</td>
-          <td>该属性仅在 <code>type</code> 为 <code>button</code> 时有效，用于指定多选按钮的最小宽度</td>
+          <td>仅在 <code>type</code> 为 <code>button</code> 时有效，用于指定多选按钮的最小宽度</td>
           <td>String | Number</td>
           <td>--</td>
         </tr>
@@ -69,7 +69,7 @@
         </tr>
         <tr>
           <td>value</td>
-          <td>该属性仅在多选组合中有效，用于指定多选框的 <code>value</code> 值，组合会自动判断是否选中</td>
+          <td>仅在多选组合中有效，用于指定多选框的 <code>value</code> 值，组合会自动判断是否选中</td>
           <td>String | Number</td>
           <td>--</td>
         </tr>
@@ -81,13 +81,13 @@
         </tr>
         <tr>
           <td>defaultChecked</td>
-          <td>默认是否选中（非受控模式），该属性仅在单独使用时有效</td>
+          <td>默认是否选中（非受控模式），仅在单独使用时有效</td>
           <td>Boolean | String | Number</td>
           <td>false</td>
         </tr>
         <tr>
           <td>checked</td>
-          <td>是否选中（受控模式），该属性仅在单独使用时有效，可以使用 <code>v-model</code> 双向绑定数据</td>
+          <td>是否选中（受控模式），仅在单独使用时有效，可以使用 <code>v-model</code> 双向绑定数据</td>
           <td>Boolean | String | Number</td>
           <td>--</td>
         </tr>
@@ -99,13 +99,13 @@
         </tr>
         <tr>
           <td>checkedValue</td>
-          <td>该属性仅在单独使用时有效，用于设置选中时的值，例如使用 <code>1</code> 来标记选中状态</td>
+          <td>仅在单独使用时有效，用于设置选中时的值，例如使用 <code>1</code> 来标记选中状态</td>
           <td>Boolean | String | Number</td>
           <td>true</td>
         </tr>
         <tr>
           <td>uncheckedValue</td>
-          <td>该属性仅在单独使用时有效，用于设置未选中时的值，例如使用 <code>0</code> 来标记未选中状态</td>
+          <td>仅在单独使用时有效，用于设置未选中时的值，例如使用 <code>0</code> 来标记未选中状态</td>
           <td>Boolean | String | Number</td>
           <td>false</td>
         </tr>
@@ -130,13 +130,13 @@
       <tbody>
         <tr>
           <td>update:checked</td>
-          <td>在选中状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
+          <td>选中状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
         <tr>
           <td>change</td>
-          <td>在选中状态发生变化时触发的事件回调函数</td>
+          <td>选中状态发生变化时触发的事件回调函数</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
@@ -179,7 +179,7 @@
         </tr>
         <tr>
           <td>minWidth</td>
-          <td>该属性仅在 <code>type</code> 为 <code>button</code> 时有效，用于指定多选按钮的最小宽度</td>
+          <td>仅在 <code>type</code> 为 <code>button</code> 时有效，用于指定多选按钮的最小宽度</td>
           <td>String | Number</td>
           <td>--</td>
         </tr>
@@ -228,13 +228,13 @@
       <tbody>
         <tr>
           <td>update:value</td>
-          <td>在选项状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
+          <td>选中值发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
           <td>Function</td>
           <td>value</td>
         </tr>
         <tr>
           <td>change</td>
-          <td>在选项状态发生变化时触发的事件回调函数</td>
+          <td>选中值发生变化时触发的事件回调函数</td>
           <td>Function</td>
           <td>value</td>
         </tr>

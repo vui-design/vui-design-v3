@@ -30,7 +30,7 @@ const code =
 
 <style>
   .example-list-loading-title { display:flex; justify-content:flex-start; align-items:center; margin-bottom:16px; }
-  .example-list-loading-title label { margin-right:8px;; }
+  .example-list-loading-title label { margin-right:8px; }
 </style>
 `;
 

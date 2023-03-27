@@ -7,15 +7,9 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-tag-size { display:flex; align-items:center; }
-  .example-tag-size .vui-tag { margin-right:8px; }
+  .example-tag-size { display:flex; justify-content:flex-start; align-items:center; }
+  .example-tag-size .vui-tag + .vui-tag { margin-left:8px; }
 </style>
 `;
 

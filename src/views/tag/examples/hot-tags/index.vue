@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-tag-hot-tags">
-    <template slot="demo">
+  <vui-example id="example-tag-hot-tags" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-tag-hot-tags">
         <h4>Categories:</h4>
         <vui-tag
@@ -9,49 +9,49 @@
           checkable
           v-bind:key="tag"
           v-bind:checked="selectedTags.indexOf(tag) > -1"
-          v-on:change="checked => handleChange(checked, tag)"
+          v-on:check="checked => handleCheck(checked, tag)"
         >
           {{tag}}
         </vui-tag>
       </div>
     </template>
-    <template slot="title">热门标签</template>
-    <template slot="description">
+    <template v-slot:title>热门标签</template>
+    <template v-slot:description>
       <p>选择你感兴趣的话题。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const tags = ref<string[]>(["Movies", "Books", "Music", "Sports"]);
+      const selectedTags = ref<string[]>([]);
+
+      const handleCheck = (checked, tag) => {
+        selectedTags.value = checked ? [...selectedTags.value, tag] : selectedTags.value.filter(item => item !== tag);
+      };
+
       return {
         code,
-        tags: ["Movies", "Books", "Music", "Sports"],
-        selectedTags: ["Movies"]
+        tags,
+        selectedTags,
+        handleCheck
       };
-    },
-    methods: {
-      handleChange(checked, tag) {
-        let selectedTags = this.selectedTags;
-        let nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(item => item !== tag);
-
-        this.selectedTags = nextSelectedTags;
-      }
     }
-  };
+  });
 </script>
 
 <style>
-  .example-tag-hot-tags:before,
-  .example-tag-hot-tags:after { content:""; display:block; width:100%; height:0; visibility:hidden; clear:both; }
-  .example-tag-hot-tags > h4,
-  .example-tag-hot-tags > .vui-tag { float:left; margin-right:8px; }
-  .example-tag-hot-tags > h4 { height:24px; color:#333; font-size:14px; line-height:24px; }
+  .example-tag-hot-tags { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
+  .example-tag-hot-tags h4 { height:24px; color:#333; font-size:14px; font-weight:600; line-height:24px; }
+  .example-tag-hot-tags h4,
+  .example-tag-hot-tags .vui-tag { margin-right:8px; }
 </style>

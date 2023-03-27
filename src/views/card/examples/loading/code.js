@@ -1,7 +1,10 @@
 const code =
 `<template>
   <div class="example-card-loading">
-    <vui-switch v-model:checked="loading" />
+    <div class="example-card-loading-title">
+      <label>Loading State:</label>
+      <vui-switch type="line" v-model:checked="loading" />
+    </div>
     <vui-card v-bind:loading="loading">
       <vui-card-meta title="Card title">
         <template v-slot:avatar>
@@ -33,7 +36,7 @@ const code =
 
   export default defineComponent({
     setup() {
-      const loading = ref(true);
+      const loading = ref<boolean>(true);
 
       return {
         loading
@@ -43,6 +46,8 @@ const code =
 </script>
 
 <style>
+  .example-card-loading .example-card-loading-title { display:flex; justify-content:flex-start; align-items:center; }
+  .example-card-loading .example-card-loading-title label { margin-right:8px; }
   .example-card-loading .vui-card { margin-top:24px; }
   .example-card-loading p { margin:0; }
   .example-card-loading p + p { margin-top:8px; }

@@ -481,15 +481,15 @@ export default [
   //       },
   //       component: () => import("src/views/table/index.vue")
   //     },
-  //     {
-  //       path: "/components/tag",
-  //       name: "tag",
-  //       meta: {
-  //         title: "Tag",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/tag/index.vue")
-  //     },
+      {
+        path: "/components/tag",
+        name: "tag",
+        meta: {
+          title: "Tag",
+          group: "data-display"
+        },
+        component: () => import("src/views/tag/index.vue")
+      },
   //     {
   //       path: "/components/time",
   //       name: "time",

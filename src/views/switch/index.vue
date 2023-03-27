@@ -72,38 +72,38 @@
         </tr>
         <tr>
           <td>checkedValue</td>
-          <td>用于设置开关打开时的值，例如使用 <code>1</code> 来标记打开状态</td>
+          <td>自定义开关打开时的值，例如使用 <code>1</code> 来标记打开状态</td>
           <td>Boolean | String | Number</td>
           <td>true</td>
         </tr>
         <tr>
           <td>uncheckedValue</td>
-          <td>用于设置开关关闭时的值，例如使用 <code>0</code> 来标记关闭状态</td>
+          <td>自定义开关关闭时的值，例如使用 <code>0</code> 来标记关闭状态</td>
           <td>Boolean | String | Number</td>
           <td>false</td>
         </tr>
         <tr>
           <td>checkedColor</td>
-          <td>用于设置开关打开时的 <code>16</code> 进制颜色值</td>
+          <td>自定义开关打开时的 <code>16</code> 进制颜色值</td>
           <td>String</td>
           <td>--</td>
         </tr>
         <tr>
           <td>uncheckedColor</td>
-          <td>用于设置开关关闭时的 <code>16</code> 进制颜色值</td>
+          <td>自定义开关关闭时的 <code>16</code> 进制颜色值</td>
           <td>String</td>
           <td>--</td>
         </tr>
         <tr>
           <td>checkedText</td>
-          <td>用于设置开关打开时的显示内容</td>
-          <td>Slot | String | Number</td>
+          <td>自定义开关打开时的显示内容</td>
+          <td>String | Number | Slot</td>
           <td>--</td>
         </tr>
         <tr>
           <td>uncheckedText</td>
-          <td>用于设置开关关闭时的显示内容</td>
-          <td>Slot | String | Number</td>
+          <td>自定义开关关闭时的显示内容</td>
+          <td>String | Number | Slot</td>
           <td>--</td>
         </tr>
         <tr>
@@ -127,13 +127,13 @@
       <tbody>
         <tr>
           <td>update:checked</td>
-          <td>在开关状态发生变化时触发的事件回调函数，可以使用<code>v-model</code>双向绑定数据</td>
+          <td>开关状态发生变化时触发的事件回调函数，可以使用<code>v-model</code>双向绑定数据</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
         <tr>
           <td>change</td>
-          <td>在开关状态发生变化时触发的事件回调函数</td>
+          <td>开关状态发生变化时触发的事件回调函数</td>
           <td>Function</td>
           <td>checkedValue | uncheckedValue</td>
         </tr>
