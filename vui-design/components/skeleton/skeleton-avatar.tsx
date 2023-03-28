@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Shape, Size } from "../avatar/types";
 import { defineComponent, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { shapes, sizes } from "../avatar/constants";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Type } from "./types";
 import { Transition, defineComponent, ref, computed } from "vue";
+import { types } from "./constants";
 import VuiIcon from "../icon";
 import getClassName from "../../utils/getClassName";
-import { types } from "./constants";
 
 const iconTypes = {
   info: "info",

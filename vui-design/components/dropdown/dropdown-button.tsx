@@ -2,12 +2,12 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import type { Type, Shape, Size } from "../button/types";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
+import { types, shapes, sizes } from "../button/constants";
+import { triggers, placements } from "../popup/constants";
 import VuiIcon from "../icon";
 import VuiButton, { ButtonGroup as VuiButtonGroup } from "../button";
 import VuiDropdown from "./dropdown";
 import getClassName from "../../utils/getClassName";
-import { types, shapes, sizes } from "../button/constants";
-import { triggers, placements } from "../popup/constants";
 
 export const createProps = () => {
   return {

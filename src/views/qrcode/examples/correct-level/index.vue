@@ -1,45 +1,46 @@
 <template>
-  <example v-bind:code="code" id="example-qrcode-correct-level">
-    <template slot="demo">
+  <vui-example id="example-qrcode-correct-level" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-qrcode-correct-level">
+        <vui-radio-group type="button" v-model:value="correctLevel">
+          <vui-radio v-bind:value="0">0</vui-radio>
+          <vui-radio v-bind:value="1">1</vui-radio>
+          <vui-radio v-bind:value="2">2</vui-radio>
+          <vui-radio v-bind:value="3">3</vui-radio>
+        </vui-radio-group>
         <vui-qrcode
-          v-bind:correctLevel="0"
-          value="https://vui-design.github.io/vui-design-doc/"
-        />
-        <vui-qrcode
-          v-bind:correctLevel="1"
-          value="https://vui-design.github.io/vui-design-doc/"
-        />
-        <vui-qrcode
-          v-bind:correctLevel="2"
+          v-bind:correctLevel="correctLevel"
           value="https://vui-design.github.io/vui-design-doc/"
         />
       </div>
     </template>
-    <template slot="title">纠错级别</template>
-    <template slot="description">
-      <p>纠错级别，可取 <code>0</code>、<code>1</code>、<code>2</code>、<code>3</code>，默认为 <code>3</code>，数字越大说明所需纠错级别越大。</p>
+    <template v-slot:title>纠错级别</template>
+    <template v-slot:description>
+      <p>纠错级别，可选值为 <code>0</code>、<code>1</code>、<code>2</code>、<code>3</code>，默认为 <code>3</code>，数字越大说明所需纠错级别越大。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const correctLevel = ref<number>(3);
+
       return {
-        code
+        code,
+        correctLevel
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-qrcode-correct-level { display:flex; justify-content:flex-start; align-items:flex-start; }
-  .example-qrcode-correct-level .vui-qrcode + .vui-qrcode { margin-left:24px; }
+  .example-qrcode-correct-level .vui-qrcode { margin-top:24px; }
 </style>

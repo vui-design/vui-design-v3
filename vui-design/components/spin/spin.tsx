@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Size, Indicator } from "./types";
 import { Transition, defineComponent, ref, computed, watch, onBeforeUnmount } from "vue";
+import { sizes } from "./constants";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { sizes } from "./constants";
 
 export const createProps = () => {
   return {

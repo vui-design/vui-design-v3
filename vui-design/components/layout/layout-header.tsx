@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Color } from "./types";
 import { defineComponent, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { colors } from "./constants";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
@@ -53,7 +53,9 @@ export default defineComponent({
     // 渲染
     return () => {
       return (
-        <header class={classes.el.value} style={styles.el.value}>{context.slots.default?.()}</header>
+        <header class={classes.el.value} style={styles.el.value}>
+          {context.slots.default?.()}
+        </header>
       );
     };
   }

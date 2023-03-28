@@ -1,11 +1,11 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { HTMLType, Type, Shape, Size } from "./types";
 import { Text, defineComponent, inject, ref, computed, onMounted, onBeforeUnmount } from "vue";
-import VuiIcon from "../icon";
-import getClassName from "../../utils/getClassName";
 import { types, shapes, sizes } from "./constants";
 import { FormInjectionKey } from "../form/context";
 import { ButtonGroupInjectionKey, InputGroupInjectionKey } from "./context";
+import VuiIcon from "../icon";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

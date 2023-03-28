@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Status, Color } from "./types";
 import { defineComponent, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { statuses, colors } from "./constants";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

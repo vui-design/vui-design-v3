@@ -1,10 +1,10 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes, CSSProperties, ComputedRef } from "vue";
 import type { Direction, Justify, Align, Gutter } from "./types";
 import { defineComponent, computed } from "vue";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import { flatten } from "../../utils/vue";
 import { directions, justifys, aligns, gutters } from "./constants";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
@@ -61,8 +61,8 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 判断间距大小为预设值，还是自定义值
-    const withPresetGutter = computed(() => props.gutter && gutters.includes(props.gutter as string));
-    const withCustomGutter = computed(() => props.gutter && gutters.indexOf(props.gutter as string) === -1);
+    const withPresetGutter = computed(() => props.gutter && gutters.includes(props.gutter as Gutter));
+    const withCustomGutter = computed(() => props.gutter && gutters.indexOf(props.gutter as Gutter) === -1);
 
     // 计算间距大小
     const gutter = computed(() => is.string(props.gutter) ? props.gutter : `${props.gutter}px`);
@@ -136,12 +136,16 @@ export default defineComponent({
         }
 
         children.push(
-          <div class={classes.elItem.value} style={notFirst ? styles.elItem.value : undefined}>{element}</div>
+          <div class={classes.elItem.value} style={notFirst ? styles.elItem.value : undefined}>
+            {element}
+          </div>
         );
       });
 
       return (
-        <div class={classes.el.value}>{children}</div>
+        <div class={classes.el.value}>
+          {children}
+        </div>
       );
     };
   }

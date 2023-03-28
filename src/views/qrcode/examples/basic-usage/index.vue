@@ -1,29 +1,28 @@
 <template>
-  <example v-bind:code="code" id="example-qrcode-basic-usage">
-    <template slot="demo">
-      <div class="example-qrcode-basic-usage">
-        <vui-qrcode value="https://vui-design.github.io/vui-design-doc/" />
-      </div>
+  <vui-example id="example-qrcode-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-qrcode value="https://vui-design.github.io/vui-design-doc/" />
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>最简单的用法。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

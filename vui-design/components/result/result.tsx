@@ -1,10 +1,10 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Status } from "./types";
 import { defineComponent, computed } from "vue";
+import { statuses } from "./constants";
 import VuiIcon from "../icon";
 import VuiResultException from "./result-exception";
 import getClassName from "../../utils/getClassName";
-import { statuses } from "./constants";
 
 const iconTypes = {
   info: "info-filled",

@@ -445,24 +445,24 @@ export default [
         },
         component: () => import("src/views/popover/index.vue")
       },
-  //     {
-  //       path: "/components/qrcode",
-  //       name: "qrcode",
-  //       meta: {
-  //         title: "Qrcode",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/qrcode/index.vue")
-  //     },
-  //     {
-  //       path: "/components/ribbon",
-  //       name: "ribbon",
-  //       meta: {
-  //         title: "Ribbon",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/ribbon/index.vue")
-  //     },
+      {
+        path: "/components/qrcode",
+        name: "qrcode",
+        meta: {
+          title: "Qrcode",
+          group: "data-display"
+        },
+        component: () => import("src/views/qrcode/index.vue")
+      },
+      {
+        path: "/components/ribbon",
+        name: "ribbon",
+        meta: {
+          title: "Ribbon",
+          group: "data-display"
+        },
+        component: () => import("src/views/ribbon/index.vue")
+      },
       {
         path: "/components/statistic",
         name: "statistic",

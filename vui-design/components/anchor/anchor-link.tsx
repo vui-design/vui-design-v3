@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, inject, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import { getSlotProp } from "../../utils/vue";
 import { AnchorInjectionKey } from "./context";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

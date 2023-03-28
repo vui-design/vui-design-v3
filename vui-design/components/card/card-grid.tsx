@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, inject, computed, onBeforeMount, onBeforeUnmount } from "vue";
+import { CardInjectionKey } from "./context";
 import guid from "../../utils/guid";
 import getClassName from "../../utils/getClassName";
-import { CardInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

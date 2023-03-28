@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, provide, ref, reactive, computed } from "vue";
+import { LayoutInjectionKey } from "./context";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { LayoutInjectionKey } from "./context";
 
 export const createProps = () => {
   return {
@@ -49,7 +49,9 @@ export default defineComponent({
     // 渲染
     return () => {
       return (
-        <section class={classes.el.value}>{context.slots.default?.()}</section>
+        <section class={classes.el.value}>
+          {context.slots.default?.()}
+        </section>
       );
     };
   }

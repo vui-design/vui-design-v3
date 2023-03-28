@@ -1,17 +1,11 @@
 const code =
 `<template>
   <vui-ribbon placement="start" text="Hippies">
-    <vui-card title="Pushes open the window">
-      <p>and raises the spyglass.</p>
+    <vui-card title="What is Vue?">
+      Vue is a JavaScript framework for building user interfaces.
     </vui-card>
   </vui-ribbon>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

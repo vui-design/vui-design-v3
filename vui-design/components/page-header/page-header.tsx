@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Breadcrumb, Tag } from "./types";
 import { defineComponent, computed } from "vue";
+import { getSlotProp } from "../../utils/vue";
 import VuiAvatar from "../avatar";
 import VuiBreadcrumb, { BreadcrumbItem as VuiBreadcrumbItem } from "../breadcrumb";
 import VuiIcon from "../icon";
 import VuiTag from "../tag";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { getSlotProp } from "../../utils/vue";
 
 export const createProps = () => {
   return {

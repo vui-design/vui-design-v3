@@ -2,16 +2,16 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Key } from "../../types";
 import type { Trigger } from "../popup/types";
 import { defineComponent, provide, inject, toRefs, reactive, computed, onBeforeMount, onBeforeUnmount } from "vue";
+import { getSlotProp } from "../../utils/vue";
+import { triggers } from "../popup/constants";
+import { DropdownInjectionKey } from "../dropdown/context";
+import { MenuInjectionKey, SubmenuInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiPopup from "../popup";
 import useKey from "../../hooks/useKey";
 import useIndent from "./hooks/useIndent";
 import useRefs from "./hooks/useRefs";
 import getClassName from "../../utils/getClassName";
-import { getSlotProp } from "../../utils/vue";
-import { triggers } from "../popup/constants";
-import { DropdownInjectionKey } from "../dropdown/context";
-import { MenuInjectionKey, SubmenuInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

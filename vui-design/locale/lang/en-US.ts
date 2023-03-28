@@ -107,6 +107,10 @@ export default {
     goto: "Goto",
     page: ""
   },
+  qrcode: {
+    expired: "QR code expired",
+    refresh: "Refresh"
+  },
   table: {
     confirm: "Confirm",
     clear: "Clear",

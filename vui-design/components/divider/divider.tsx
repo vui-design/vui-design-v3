@@ -2,9 +2,9 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { VueNodeAtom } from "../../types";
 import type { Type, Direction, Orientation } from "./types";
 import { defineComponent, computed } from "vue";
+import { types, directions, orientations } from "./constants";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { types, directions, orientations } from "./constants";
 
 export const createProps = () => {
   return {

@@ -2,12 +2,12 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Breakpoint, Screens } from "../../utils/responsive-observer";
 import type { Justify, Align, Gutter } from "./types";
 import { defineComponent, provide, ref, reactive, computed, onMounted, onBeforeUnmount } from "vue";
-import useSupportRowGap from "../../hooks/useSupportRowGap";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
-import responsiveObserver, { breakpoints } from "../../utils/responsive-observer";
 import { justifys, aligns } from "./constants";
 import { RowInjectionKey } from "./context";
+import useSupportRowGap from "../../hooks/useSupportRowGap";
+import responsiveObserver, { breakpoints } from "../../utils/responsive-observer";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

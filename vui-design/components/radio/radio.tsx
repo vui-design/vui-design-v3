@@ -1,11 +1,11 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Type, Size } from "./types";
 import { defineComponent, inject, ref, computed, watch, nextTick } from "vue";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import { types, sizes } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { RadioGroupInjectionKey } from "./context";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

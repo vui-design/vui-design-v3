@@ -1,15 +1,15 @@
-import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
+import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Type } from "../button/types";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
+import { useI18n } from "../../locale";
+import { types } from "../button/constants";
+import { triggers, placements } from "../popup/constants";
 import VuiIcon from "../icon";
 import VuiButton from "../button";
 import VuiPopup from "../popup";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { useI18n } from "../../locale";
-import { types } from "../button/constants";
-import { triggers, placements } from "../popup/constants";
 
 export const createProps = () => {
   return {
@@ -96,6 +96,36 @@ export const createProps = () => {
     destroyOnClose: {
       type: Boolean as PropType<boolean>,
       default: false
+    },
+    // 气泡确认框标题的样式类名
+    titleClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡确认框标题的样式
+    titleStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 气泡确认框内容的样式类名
+    contentClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡确认框内容的样式
+    contentStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 气泡确认框箭头的样式类名
+    arrowClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡确认框箭头的样式
+    arrowStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
     },
     // 是否禁用
     disabled: {
@@ -241,6 +271,12 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
+          titleClassName={props.titleClassName}
+          titleStyle={props.titleStyle}
+          contentClassName={props.contentClassName}
+          contentStyle={props.contentStyle}
+          arrowClassName={props.arrowClassName}
+          arrowStyle={props.arrowStyle}
           disabled={props.disabled}
           onChange={handleChange}
           onOpen={handleOpen}

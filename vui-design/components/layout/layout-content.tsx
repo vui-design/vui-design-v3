@@ -31,7 +31,9 @@ export default defineComponent({
     // 渲染
     return () => {
       return (
-        <main class={classes.el.value}>{context.slots.default?.()}</main>
+        <main class={classes.el.value}>
+          {context.slots.default?.()}
+        </main>
       );
     };
   }

@@ -2,15 +2,15 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Breakpoint } from "../../utils/responsive-observer";
 import type { Color } from "./types";
 import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, onBeforeMount, onBeforeUnmount } from "vue";
+import { breakpoints } from "../../utils/responsive-observer";
+import { colors } from "./constants";
+import { LayoutInjectionKey, LayoutSiderInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import is from "../../utils/is";
 import guid from "../../utils/guid";
 import getScrollbarSize from "../../utils/getScrollbarSize";
 import getClassName from "../../utils/getClassName";
-import { breakpoints } from "../../utils/responsive-observer";
-import { colors } from "./constants";
-import { LayoutInjectionKey, LayoutSiderInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

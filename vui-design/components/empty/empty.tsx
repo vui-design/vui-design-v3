@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import { defineComponent, computed } from "vue";
+import { useI18n } from "../../locale";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { useI18n } from "../../locale";
 
 export const createProps = () => {
   return {

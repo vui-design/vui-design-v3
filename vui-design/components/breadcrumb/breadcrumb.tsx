@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { BreadcrumbInjectionKey } from "./context";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

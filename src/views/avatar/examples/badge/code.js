@@ -15,4 +15,4 @@ const code = `
 </style>
 `;
 
-export default code.trim();
+export default code;

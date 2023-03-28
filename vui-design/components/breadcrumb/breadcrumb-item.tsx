@@ -1,12 +1,12 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, inject, ref, computed } from "vue";
-import VuiIcon from "../icon";
-import VuiDropdown from "../dropdown";
-import getClassName from "../../utils/getClassName";
 import { getSlotProp } from "../..//utils/vue";
 import { triggers, placements } from "../popup/constants";
 import { BreadcrumbInjectionKey } from "./context";
+import VuiIcon from "../icon";
+import VuiDropdown from "../dropdown";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

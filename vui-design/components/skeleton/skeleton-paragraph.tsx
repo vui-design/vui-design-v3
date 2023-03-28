@@ -66,14 +66,14 @@ export default defineComponent({
       return (
         <div class={classes.el.value}>
           {
-            rows.map((row: number, index: number) => {
-              const width = getRowWidth(index);
+            rows.map((row: number, rowIndex: number) => {
+              const width = getRowWidth(rowIndex);
               const style: CSSProperties = {
                 width: is.number(width) ? `${width}px` : width
               };
 
               return (
-                <div key={index} style={style}></div>
+                <div key={rowIndex} style={style}></div>
               );
             })
           }

@@ -1,4 +1,4 @@
-@vui-ribbon: ~"@{vui}-ribbon";
+@import "./token.less";
 
 .@{vui-ribbon} {
   position:absolute;
@@ -18,6 +18,8 @@
   }
 
   &-text {
+    display:block;
+    box-sizing:border-box;
     white-space:nowrap;
   }
 
@@ -35,19 +37,19 @@
     filter:brightness(0.65);
   }
 
-  &-placement-start {
+  &-placement-left {
     left:-@ribbon-offset;
     border-bottom-left-radius:0;
   }
-  &-placement-start &-corner {
+  &-placement-left &-corner {
     left:0;
     border-color:currentColor currentColor transparent transparent;
   }
-  &-placement-end {
+  &-placement-right {
     right:-@ribbon-offset;
     border-bottom-right-radius:0;
   }
-  &-placement-end &-corner {
+  &-placement-right &-corner {
     right:0;
     border-color:currentColor transparent transparent currentColor;
   }
@@ -95,95 +97,95 @@
     color:@ribbon-error-color;
   }
 
-  &-color-blue {
-    background-color:@ribbon-color-blue-color;
+  &-blue {
+    background-color:@ribbon-blue-color;
     color:@font-reverse-color;
   }
-  &-color-blue &-corner {
-    color:@ribbon-color-blue-color;
+  &-blue &-corner {
+    color:@ribbon-blue-color;
   }
-  &-color-cyan {
-    background-color:@ribbon-color-cyan-color;
+  &-cyan {
+    background-color:@ribbon-cyan-color;
     color:@font-reverse-color;
   }
-  &-color-cyan &-corner {
-    color:@ribbon-color-cyan-color;
+  &-cyan &-corner {
+    color:@ribbon-cyan-color;
   }
-  &-color-geekblue {
-    background-color:@ribbon-color-geekblue-color;
+  &-geekblue {
+    background-color:@ribbon-geekblue-color;
     color:@font-reverse-color;
   }
-  &-color-geekblue &-corner {
-    color:@ribbon-color-geekblue-color;
+  &-geekblue &-corner {
+    color:@ribbon-geekblue-color;
   }
-  &-color-gold {
-    background-color:@ribbon-color-gold-color;
+  &-gold {
+    background-color:@ribbon-gold-color;
     color:@font-reverse-color;
   }
-  &-color-gold &-corner {
-    color:@ribbon-color-gold-color;
+  &-gold &-corner {
+    color:@ribbon-gold-color;
   }
-  &-color-green {
-    background-color:@ribbon-color-green-color;
+  &-green {
+    background-color:@ribbon-green-color;
     color:@font-reverse-color;
   }
-  &-color-green &-corner {
-    color:@ribbon-color-green-color;
+  &-green &-corner {
+    color:@ribbon-green-color;
   }
-  &-color-lime {
-    background-color:@ribbon-color-lime-color;
+  &-lime {
+    background-color:@ribbon-lime-color;
     color:@font-reverse-color;
   }
-  &-color-lime &-corner {
-    color:@ribbon-color-lime-color;
+  &-lime &-corner {
+    color:@ribbon-lime-color;
   }
-  &-color-magenta {
-    background-color:@ribbon-color-magenta-color;
+  &-magenta {
+    background-color:@ribbon-magenta-color;
     color:@font-reverse-color;
   }
-  &-color-magenta &-corner {
-    color:@ribbon-color-magenta-color;
+  &-magenta &-corner {
+    color:@ribbon-magenta-color;
   }
-  &-color-orange {
-    background-color:@ribbon-color-orange-color;
+  &-orange {
+    background-color:@ribbon-orange-color;
     color:@font-reverse-color;
   }
-  &-color-orange &-corner {
-    color:@ribbon-color-orange-color;
+  &-orange &-corner {
+    color:@ribbon-orange-color;
   }
-  &-color-pink {
-    background-color:@ribbon-color-pink-color;
+  &-pink {
+    background-color:@ribbon-pink-color;
     color:@font-reverse-color;
   }
-  &-color-pink &-corner {
-    color:@ribbon-color-pink-color;
+  &-pink &-corner {
+    color:@ribbon-pink-color;
   }
-  &-color-purple {
-    background-color:@ribbon-color-purple-color;
+  &-purple {
+    background-color:@ribbon-purple-color;
     color:@font-reverse-color;
   }
-  &-color-purple &-corner {
-    color:@ribbon-color-purple-color;
+  &-purple &-corner {
+    color:@ribbon-purple-color;
   }
-  &-color-red {
-    background-color:@ribbon-color-red-color;
+  &-red {
+    background-color:@ribbon-red-color;
     color:@font-reverse-color;
   }
-  &-color-red &-corner {
-    color:@ribbon-color-red-color;
+  &-red &-corner {
+    color:@ribbon-red-color;
   }
-  &-color-volcano {
-    background-color:@ribbon-color-volcano-color;
+  &-volcano {
+    background-color:@ribbon-volcano-color;
     color:@font-reverse-color;
   }
-  &-color-volcano &-corner {
-    color:@ribbon-color-volcano-color;
+  &-volcano &-corner {
+    color:@ribbon-volcano-color;
   }
-  &-color-yellow {
-    background-color:@ribbon-color-yellow-color;
+  &-yellow {
+    background-color:@ribbon-yellow-color;
     color:@font-reverse-color;
   }
-  &-color-yellow &-corner {
-    color:@ribbon-color-yellow-color;
+  &-yellow &-corner {
+    color:@ribbon-yellow-color;
   }
 }

@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import { defineComponent, computed } from "vue";
 import type { Shape, Size } from "../button/types";
-import getClassName from "../../utils/getClassName";
+import { defineComponent, computed } from "vue";
 import { shapes, sizes } from "../button/constants";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

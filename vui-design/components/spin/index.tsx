@@ -1,10 +1,10 @@
 import type { App, AppContext, Plugin, PropType } from "vue";
 import type { SpinWrapperProps, Size, Indicator } from "./types";
 import { createVNode, render, defineComponent, ref } from 'vue';
+import { sizes } from "./constants";
 import Spin from "./spin";
 import usePopupManager from "../../hooks/usePopupManager";
 import is from "../../utils/is";
-import { sizes } from "./constants";
 
 const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContext) => {
   const { getPopupContainer, ...props } = properties;

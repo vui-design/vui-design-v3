@@ -1,9 +1,9 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Type, Size } from "./types";
 import { Text, defineComponent, computed } from "vue";
+import { types, sizes } from "./constants";
 import VuiIcon from "../icon";
 import getClassName from "../../utils/getClassName";
-import { types, sizes } from "./constants";
 
 export const createProps = () => {
   return {

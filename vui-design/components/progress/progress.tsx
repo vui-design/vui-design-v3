@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Type, Size, Success, Status, StrokeLinecap, Formatter } from "./types";
 import { defineComponent, computed } from "vue";
+import { types, sizes, statuses, widths, strokeLinecaps, strokeWidths } from "./constants";
 import VuiIcon from "../icon";
 import VuiProgressLine from "./progress-line";
 import VuiProgressCircle from "./progress-circle";
@@ -8,7 +9,6 @@ import VuiProgressSteps from "./progress-steps";
 import is from "../../utils/is";
 import clamp from "../../utils/clamp";
 import getClassName from "../../utils/getClassName";
-import { types, sizes, statuses, widths, strokeLinecaps, strokeWidths } from "./constants";
 
 export const createProps = () => {
   return {

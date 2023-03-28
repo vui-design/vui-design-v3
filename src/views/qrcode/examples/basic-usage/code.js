@@ -1,15 +1,7 @@
 const code = `
 <template>
-  <div class="example-qrcode-basic-usage">
-    <vui-qrcode value="https://vui-design.github.io/vui-design-doc/" />
-  </div>
+  <vui-qrcode value="https://vui-design.github.io/vui-design-doc/" />
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
-export default code.trim();
+export default code;

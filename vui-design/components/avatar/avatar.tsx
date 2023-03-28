@@ -2,13 +2,13 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Breakpoint, ScreenSizes } from "../../utils/responsive-observer";
 import type { Shape, Size, CrossOrigin } from "./types";
 import { defineComponent, inject, ref, computed, nextTick, onMounted, onUpdated } from "vue";
+import { breakpoints } from "../../utils/responsive-observer";
+import { shapes, sizes, crossOrigins } from "./constants";
+import { AvatarGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useResponsive from "../../hooks/useResponsive";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { breakpoints } from "../../utils/responsive-observer";
-import { shapes, sizes, crossOrigins } from "./constants";
-import { AvatarGroupInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

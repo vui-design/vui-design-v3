@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Formatter } from "./types";
 import { defineComponent, computed } from "vue";
+import { getSlotProp } from "../../utils/vue";
 import VuiNumber from "./number";
 import getClassName from "../../utils/getClassName";
-import { getSlotProp } from "../../utils/vue";
 
 export const createProps = () => {
   return {

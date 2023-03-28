@@ -1,14 +1,14 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Key } from "../../types";
 import { defineComponent, inject, computed, onBeforeMount, onBeforeUnmount } from "vue";
+import { DropdownInjectionKey } from "../dropdown/context";
+import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiTooltip from "../tooltip";
 import useKey from "../../hooks/useKey";
 import useLevel from "./hooks/useLevel";
 import useIndent from "./hooks/useIndent";
 import getClassName from "../../utils/getClassName";
-import { DropdownInjectionKey } from "../dropdown/context";
-import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

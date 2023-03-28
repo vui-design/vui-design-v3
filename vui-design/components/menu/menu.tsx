@@ -2,12 +2,12 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import type { Key } from "../../types";
 import type { Mode, Color } from "./types";
 import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
-import useRefs from "./hooks/useRefs";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import { modes, colors } from "./constants";
 import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey } from "./context";
+import useRefs from "./hooks/useRefs";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

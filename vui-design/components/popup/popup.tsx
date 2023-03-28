@@ -1,20 +1,21 @@
 import type { ExtractPropTypes, PropType, Ref, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement, Position } from "./types";
 import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick, onMounted, onUpdated, onBeforeUnmount, onDeactivated } from "vue";
+import { on, off } from "../../utils/dom";
+import { getValidElements, mergeFirstChild } from "../../utils/vue";
+import { triggers, placements, listeners } from "./constants";
+import { PopupInjectionKey } from "./context";
+import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollElements } from "./utils";
 import VuiResizeObserver from "../resize-observer";
 import VuiLazyRender from "../lazy-render";
 import useFirstElement from "../../hooks/useFirstElement";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import usePopupManager from "../../hooks/usePopupManager";
 import useResizeObserver from "../../hooks/useResizeObserver";
+import is from "../../utils/is";
 import omit from "../../utils/omit";
 import throttleByRaf from "../../utils/throttleByRaf";
 import getClassName from "../../utils/getClassName";
-import { on, off } from "../../utils/dom";
-import { mergeFirstChild } from "../../utils/vue";
-import { triggers, placements, listeners } from "./constants";
-import { PopupInjectionKey } from "./context";
-import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollElements } from "./utils";
 
 export const createProps = () => {
   return {
@@ -122,32 +123,32 @@ export const createProps = () => {
     },
     // 弹出框标题的样式类名
     titleClassName: {
-      type: [String, Array, Object] as PropType<string | Array<string | object> | object>,
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 弹出框标题的样式
     titleStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 弹出框内容的样式类名
     contentClassName: {
-      type: [String, Array, Object] as PropType<string | Array<string | object> | object>,
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 弹出框内容的样式
     contentStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 弹出框箭头的样式类名
     arrowClassName: {
-      type: [String, Array, Object] as PropType<string | Array<string | object> | object>,
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 弹出框箭头的样式
     arrowStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 是否禁用
@@ -611,8 +612,8 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const title = context.slots.title?.();
-      const content = context.slots.content?.();
+      const title = getValidElements(context.slots.title?.());
+      const content = getValidElements(context.slots.content?.());
 
       children.value = context.slots.default?.() ?? [];
 
@@ -638,7 +639,7 @@ export default defineComponent({
                     <Transition appear name={props.animation} onBeforeEnter={handleBeforeOpen} onAfterEnter={handleOpen} onBeforeLeave={handleBeforeClose} onAfterLeave={handleClose}>
                       <div ref={popup} data-placement={placement.value} v-show={visible.value} class={classes.el.value} style={styles.el.value} {...attributes.value} onMouseenter={handleMouseenter} onMouseleave={handleMouseleave} onMousedown={handleMousedown}>
                         {
-                          !title ? null : (
+                          !(is.array(title) ? title.length : title) ? null : (
                             <div class={classes.elTitle.value} style={styles.elTitle.value}>{title}</div>
                           )
                         }

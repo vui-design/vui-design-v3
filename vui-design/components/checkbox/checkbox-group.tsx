@@ -1,12 +1,12 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Checkbox, Layout, Type, Size } from "./types";
 import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
-import VuiCheckbox from "../checkbox";
-import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import { layouts, types, sizes } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
 import { CheckboxGroupInjectionKey } from "./context";
+import VuiCheckbox from "../checkbox";
+import is from "../../utils/is";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

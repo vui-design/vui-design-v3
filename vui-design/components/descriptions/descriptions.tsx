@@ -2,11 +2,11 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { ScreenSizes } from "../../utils/responsive-observer";
 import type { Layout, Size, LabelAlign } from "./types";
 import { defineComponent, computed } from "vue";
+import { getSlotProp } from "../../utils/vue";
+import { layouts, sizes, labelAligns } from "./constants";
 import useResponsive from "../../hooks/useResponsive";
 import range from "../../utils/range";
 import getClassName from "../../utils/getClassName";
-import { getSlotProp } from "../../utils/vue";
-import { layouts, sizes, labelAligns } from "./constants";
 import utils from "./utils";
 
 export const createProps = () => {
@@ -66,17 +66,17 @@ export const createProps = () => {
     },
     // 自定义描述标签样式
     labelStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 自定义内容区样式
     contentStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 自定义内容区表格样式
     tableStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     }
   };

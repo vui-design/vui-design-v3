@@ -60,7 +60,9 @@ export default defineComponent({
 
       if (avatar) {
         avatar = (
-          <div class={classes.elAvatar.value}>{avatar}</div>
+          <div class={classes.elAvatar.value}>
+            {avatar}
+          </div>
         );
       }
 

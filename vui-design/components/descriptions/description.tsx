@@ -20,12 +20,12 @@ export const createProps = () => {
     },
     // 自定义描述标签样式
     labelStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 自定义内容区样式
     contentStyle: {
-      type: Object as PropType<CSSProperties>,
+      type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     }
   };

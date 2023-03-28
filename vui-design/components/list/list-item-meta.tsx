@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, computed } from "vue";
+import { getSlotProp } from "../../utils/vue";
 import VuiAvatar from "../avatar";
 import getClassName from "../../utils/getClassName";
 
@@ -62,15 +63,21 @@ export default defineComponent({
 
       if (avatar) {
         children.push(
-          <div class={classes.elAvatar.value}>{avatar}</div>
+          <div class={classes.elAvatar.value}>
+            {avatar}
+          </div>
         );
       }
 
       // 内容
       children.push(
         <div class={classes.elContent.value}>
-          <div class={classes.elTitle.value}>{context.slots.title?.() ?? props.title}</div>
-          <div class={classes.elDescription.value}>{context.slots.description?.() ?? props.description}</div>
+          <div class={classes.elTitle.value}>
+            {getSlotProp(context.slots, props, "title")}
+          </div>
+          <div class={classes.elDescription.value}>
+            {getSlotProp(context.slots, props, "description")}
+          </div>
         </div>
       );
 

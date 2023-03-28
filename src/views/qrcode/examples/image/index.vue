@@ -1,30 +1,34 @@
 <template>
-  <example v-bind:code="code" id="example-qrcode-image">
-    <template slot="demo">
-      <div class="example-qrcode-image">
-        <vui-qrcode v-bind:image="image" value="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML5" />
-      </div>
+  <vui-example id="example-qrcode-image" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-qrcode
+        value="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML5"
+        v-bind:image="image"
+        v-bind:imageSize="40"
+      />
     </template>
-    <template slot="title">图片</template>
-    <template slot="description">
-      <p>为二维码添加 LGOO 图片。</p>
+    <template v-slot:title>图片</template>
+    <template v-slot:description>
+      <p>为二维码添加 Logo 图片。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
+  import image from "../../../../assets/images/html5.png";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code,
-        image: require("src/assets/images/html5.png")
+        image
       };
     }
-  };
+  });
 </script>

@@ -453,11 +453,14 @@ export default {
       "example-popover-placement": "位置",
 
       "example-qrcode-basic-usage": "基本用法",
-      "example-qrcode-tag": "渲染元素",
+      "example-qrcode-no-border": "无边框",
       "example-qrcode-size": "尺寸",
+      "example-qrcode-image": "图片",
       "example-qrcode-correct-level": "纠错级别",
       "example-qrcode-color": "自定义颜色",
-      "example-qrcode-image": "图片",
+      "example-qrcode-status": "不同的状态",
+      "example-qrcode-download": "下载",
+      "example-qrcode-popover": "高级用法",
 
       "example-ribbon-basic-usage": "基本用法",
       "example-ribbon-placement": "位置",

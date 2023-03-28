@@ -32,4 +32,4 @@ const code = `
 </script>
 `;
 
-export default code.trim();
+export default code;

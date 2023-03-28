@@ -2,13 +2,13 @@ import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
 import type { Key } from "../../types";
 import type { Trigger } from "../popup/types";
 import { defineComponent, inject, computed } from "vue";
+import { triggers } from "../popup/constants";
+import { DropdownInjectionKey } from "../dropdown/context";
+import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 import VuiSubmenuPopup from "./submenu-popup";
 import VuiSubmenuInline from "./submenu-inline";
 import useKey from "../../hooks/useKey";
 import useLevel from "./hooks/useLevel";
-import { triggers } from "../popup/constants";
-import { DropdownInjectionKey } from "../dropdown/context";
-import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 
 export const createProps = () => {
   return {

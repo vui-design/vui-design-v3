@@ -4,15 +4,15 @@ import type { Color } from "../tooltip/types";
 import type { ScreenSizes } from "../../utils/responsive-observer";
 import type { Shape, Size } from "./types";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
-import VuiTooltip from "../tooltip";
-import VuiAvatar from "../avatar";
-import VuiSpace from "../space";
-import getClassName from "../../utils/getClassName";
 import { flatten } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
 import { colors } from "../tooltip/constants";
 import { shapes } from "./constants";
 import { AvatarGroupInjectionKey } from "./context";
+import VuiTooltip from "../tooltip";
+import VuiAvatar from "../avatar";
+import VuiSpace from "../space";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

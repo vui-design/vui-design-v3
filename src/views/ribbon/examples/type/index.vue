@@ -1,60 +1,61 @@
 <template>
-  <example v-bind:code="code" id="example-ribbon-type">
-    <template slot="demo">
+  <vui-example id="example-ribbon-type" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-ribbon-type">
         <vui-ribbon type="default" text="Default">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
         <vui-ribbon text="Primary">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
         <vui-ribbon type="info" text="Info">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
         <vui-ribbon type="warning" text="Warning">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
         <vui-ribbon type="success" text="Success">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
         <vui-ribbon type="error" text="Error">
-          <vui-card title="Pushes open the window">
-            <p>and raises the spyglass.</p>
+          <vui-card title="What is Vue?">
+            Vue is a JavaScript framework for building user interfaces.
           </vui-card>
         </vui-ribbon>
       </div>
     </template>
-    <template slot="title">预设类型</template>
-    <template slot="description">
+    <template v-slot:title>预设类型</template>
+    <template v-slot:description>
       <p>使用 <code>type</code> 属性，可以创建不同类型的缎带。默认情况下使用 <code>primary</code> 类型。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

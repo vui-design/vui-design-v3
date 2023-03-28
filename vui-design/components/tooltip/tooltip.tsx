@@ -2,10 +2,10 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Trigger, Placement } from "../popup/types";
 import type { Color } from "./types";
 import { defineComponent, ref, computed } from "vue";
-import VuiPopup from "../popup";
-import getClassName from "../../utils/getClassName";
 import { triggers, placements } from "../popup/constants";
 import { colors } from "./constants";
+import VuiPopup from "../popup";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
@@ -70,6 +70,26 @@ export const createProps = () => {
     destroyOnClose: {
       type: Boolean as PropType<boolean>,
       default: false
+    },
+    // 提示框内容的样式类名
+    contentClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 提示框内容的样式
+    contentStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 提示框箭头的样式类名
+    arrowClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 提示框箭头的样式
+    arrowStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
     },
     // 是否禁用
     disabled: {
@@ -146,7 +166,7 @@ export default defineComponent({
         style.color = "#fff";
       }
 
-      return style;
+      return [props.contentStyle, style];
     });
     styles.elArrow = computed(() => {
       let style: CSSProperties = {};
@@ -155,7 +175,7 @@ export default defineComponent({
         style.backgroundColor = props.color;
       }
 
-      return style;
+      return [props.arrowStyle, style];
     });
 
     // 渲染
@@ -168,6 +188,8 @@ export default defineComponent({
         <VuiPopup
           classNamePrefix={props.classNamePrefix}
           name="tooltip"
+          class={classes.el.value}
+          style={styles.el.value}
           visible={visible.value}
           trigger={props.trigger}
           getPopupContainer={props.getPopupContainer}
@@ -178,11 +200,11 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
-          disabled={props.disabled}
-          class={classes.el.value}
-          style={styles.el.value}
+          contentClassName={props.contentClassName}
           contentStyle={styles.elContent.value}
+          arrowClassName={props.arrowClassName}
           arrowStyle={styles.elArrow.value}
+          disabled={props.disabled}
           onChange={handleChange}
           onOpen={handleOpen}
           onClose={handleClose}

@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Flex, ColResponsive } from "./types";
 import { defineComponent, inject, computed } from "vue";
+import { RowInjectionKey } from "./context";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { RowInjectionKey } from "./context";
 
 const parseFlex = function(flex: Flex): string {
   if (is.number(flex)) {

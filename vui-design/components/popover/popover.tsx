@@ -1,8 +1,9 @@
-import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
+import type { ExtractPropTypes, PropType, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
-import VuiPopup from "../popup";
+import { getSlotProp } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
+import VuiPopup from "../popup";
 
 export const createProps = () => {
   return {
@@ -68,6 +69,36 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
+    // 气泡卡片标题的样式类名
+    titleClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡卡片标题的样式
+    titleStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 气泡卡片内容的样式类名
+    contentClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡卡片内容的样式
+    contentStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 气泡卡片箭头的样式类名
+    arrowClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡卡片箭头的样式
+    arrowStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
     // 是否禁用
     disabled: {
       type: Boolean as PropType<boolean>,
@@ -113,8 +144,8 @@ export default defineComponent({
     // 渲染
     return () => {
       const slots = {
-        title: () => context.slots.title?.() ?? props.title,
-        content: () => context.slots.content?.() ?? props.content
+        title: () => getSlotProp(context.slots, props, "title"),
+        content: () => getSlotProp(context.slots, props, "content")
       };
 
       return (
@@ -131,6 +162,12 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
+          titleClassName={props.titleClassName}
+          titleStyle={props.titleStyle}
+          contentClassName={props.contentClassName}
+          contentStyle={props.contentStyle}
+          arrowClassName={props.arrowClassName}
+          arrowStyle={props.arrowStyle}
           disabled={props.disabled}
           onChange={handleChange}
           onOpen={handleOpen}

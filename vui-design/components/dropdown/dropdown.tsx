@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, provide, ref, reactive, computed } from "vue";
-import VuiPopup from "../popup";
 import { triggers, placements } from "../popup/constants";
 import { DropdownInjectionKey } from "./context";
+import VuiPopup from "../popup";
 
 export const createProps = () => {
   return {

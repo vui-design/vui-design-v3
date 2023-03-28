@@ -1,19 +1,23 @@
 const code = `
 <template>
-  <div class="example-qrcode-image">
-    <vui-qrcode v-bind:image="image" value="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML5" />
-  </div>
+  <vui-qrcode
+    value="https://developer.mozilla.org/zh-CN/docs/Glossary/HTML5"
+    v-bind:image="image"
+  />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import image from "../../../../assets/images/html5.png";
+
+  export default defineComponent({
+    setup() {
       return {
-        image: require("src/assets/images/html5.png")
+        image
       };
     }
-  };
+  });
 </script>
 `;
 
-export default code.trim();
+export default code;

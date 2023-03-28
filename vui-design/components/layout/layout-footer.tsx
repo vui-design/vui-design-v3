@@ -31,7 +31,9 @@ export default defineComponent({
     // 渲染
     return () => {
       return (
-        <footer class={classes.el.value}>{context.slots.default?.()}</footer>
+        <footer class={classes.el.value}>
+          {context.slots.default?.()}
+        </footer>
       );
     };
   }

@@ -1,30 +1,46 @@
 <template>
-  <example v-bind:code="code" id="example-qrcode-size">
-    <template slot="demo">
+  <vui-example id="example-qrcode-size" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-qrcode-size">
-        <vui-qrcode v-bind:size="256" value="https://vui-design.github.io/vui-design-doc/" />
+        <vui-button-group>
+          <vui-button icon="minus" v-on:click="handleSmaller">Smaller</vui-button>
+          <vui-button icon="plus" v-on:click="handleLarger">Larger</vui-button>
+        </vui-button-group>
+        <vui-qrcode v-bind:size="size" value="https://vui-design.github.io/vui-design-doc/" />
       </div>
     </template>
-    <template slot="title">尺寸</template>
-    <template slot="description">
-      <p>自定义二维码的宽和高，单位为 <code>px</code>，只允许生成正方形二维码。</p>
-      <p>需要注意的是，当使用 <code>table</code> 绘制二维码时，会适当缩小，使得能够整除二维码矩阵的维度，因此不建议将 <code>tag</code> 设置为 <code>table</code>。</p>
+    <template v-slot:title>尺寸</template>
+    <template v-slot:description>
+      <p>自定义二维码的尺寸，单位为 <code>px</code>，只允许生成正方形二维码。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const size = ref<number>(160);
+
+      const handleSmaller = () => size.value = size.value - 10;
+      const handleLarger = () => size.value = size.value + 10;
+
       return {
-        code
+        code,
+        size,
+        handleSmaller,
+        handleLarger
       };
     }
-  };
+  });
 </script>
+
+<style>
+  .example-qrcode-size .vui-qrcode { margin-top:24px; }
+</style>

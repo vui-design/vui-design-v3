@@ -2,9 +2,9 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { StrokeLinecapProperty } from "csstype";
 import type { Size, Success, Status, StrokeLinecap } from "./types";
 import { defineComponent, computed } from "vue";
+import { sizes, statuses, strokeLinecaps } from "./constants";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { sizes, statuses, strokeLinecaps } from "./constants";
 
 export const createProps = () => {
   return {

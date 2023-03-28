@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Formatter } from "./types";
 import { defineComponent, ref, computed, onMounted, onUpdated, onBeforeUnmount } from "vue";
+import { getSlotProp } from "../../utils/vue";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { getSlotProp } from "../../utils/vue";
 import utils from "./utils";
 
 export const createProps = () => {

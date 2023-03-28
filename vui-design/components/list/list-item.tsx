@@ -1,8 +1,8 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, inject, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { flatten } from "../../utils/vue";
 import { ListInjectionKey } from "./context";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
@@ -50,7 +50,9 @@ export default defineComponent({
         }
 
         actions.push(
-          <div class={classes.elAction.value}>{element}</div>
+          <div class={classes.elAction.value}>
+            {element}
+          </div>
         );
       });
 
@@ -61,7 +63,9 @@ export default defineComponent({
             {context.slots.default?.()}
             {
               actions.length === 0 ? null : (
-                <div class={classes.elActions.value}>{actions}</div>
+                <div class={classes.elActions.value}>
+                  {actions}
+                </div>
               )
             }
           </div>
@@ -72,7 +76,9 @@ export default defineComponent({
 
         if (actions.length > 0) {
           children.push(
-            <div class={classes.elActions.value}>{actions}</div>
+            <div class={classes.elActions.value}>
+              {actions}
+            </div>
           );
         }
       }
@@ -80,7 +86,9 @@ export default defineComponent({
       // 额外内容
       if (context.slots.extra) {
         children.push(
-          <div class={classes.elExtra.value}>{context.slots.extra?.()}</div>
+          <div class={classes.elExtra.value}>
+            {context.slots.extra?.()}
+          </div>
         );
       }
 

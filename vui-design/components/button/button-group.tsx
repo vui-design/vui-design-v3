@@ -1,9 +1,9 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Type, Shape, Size } from "./types";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
-import getClassName from "../../utils/getClassName";
 import { types, shapes, sizes } from "./constants";
 import { ButtonGroupInjectionKey } from "./context";
+import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {

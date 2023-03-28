@@ -2,6 +2,7 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import type { EventListener } from "../../utils/addEventListener";
 import type { GetScrollContainer, Section, AnchorLink } from "./types";
 import { defineComponent, provide, ref, reactive, computed, nextTick, onMounted, onUpdated, onBeforeUnmount } from "vue";
+import { AnchorInjectionKey } from "./context";
 import VuiAffix from "../affix";
 import is from "../../utils/is";
 import getScroll from "../../utils/getScroll";
@@ -9,7 +10,6 @@ import getOffsetTop from "../../utils/getOffsetTop";
 import scrollTo from "../../utils/scrollTo";
 import addEventListener from "../../utils/addEventListener";
 import getClassName from "../../utils/getClassName";
-import { AnchorInjectionKey } from "./context";
 
 const sharpMatcherRegx = /#([^#]+)$/;
 

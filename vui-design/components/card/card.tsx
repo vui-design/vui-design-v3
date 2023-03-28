@@ -1,13 +1,13 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Shadow } from "./types";
 import { defineComponent, provide, ref, reactive, computed } from "vue";
+import { flatten } from "../../utils/vue";
+import { shadows, gridCardLoadingBlocks } from "./constants";
+import { CardInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiRow from "../row";
 import VuiCol from "../col";
 import getClassName from "../../utils/getClassName";
-import { flatten } from "../../utils/vue";
-import { shadows, gridCardLoadingBlocks } from "./constants";
-import { CardInjectionKey } from "./context";
 
 export const createProps = () => {
   return {
@@ -164,7 +164,9 @@ export default defineComponent({
 
       if (cover) {
         cover = (
-          <div class={classes.elCover.value}>{cover}</div>
+          <div class={classes.elCover.value}>
+            {cover}
+          </div>
         );
       }
 

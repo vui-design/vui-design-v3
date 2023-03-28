@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import { defineComponent, inject, computed } from "vue";
+import { DropdownInjectionKey } from "../dropdown/context";
 import is from "../../utils/is";
 import getClassName from "../../utils/getClassName";
-import { DropdownInjectionKey } from "../dropdown/context";
 
 export const createProps = () => {
   return {

@@ -1,9 +1,4 @@
-/**
-* 获取 HTMLElement 元素的指定样式
-* @param {HTMLElement} element
-* @param {String} property
-*/
-export default function getStyle(element, property) {
+export default (element: HTMLElement, property: string) => {
   let value = "";
 
   if (!element || !property) {
@@ -21,7 +16,7 @@ export default function getStyle(element, property) {
       return value;
     }
 
-    const computedStyle = document.defaultView.getComputedStyle(element, "");
+    const computedStyle = document.defaultView?.getComputedStyle(element, "");
 
     if (computedStyle) {
       return computedStyle[property] || value;

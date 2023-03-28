@@ -107,6 +107,10 @@ export default {
     goto: "跳至",
     page: "页"
   },
+  qrcode: {
+    expired: "二维码已过期",
+    refresh: "点击刷新"
+  },
   table: {
     confirm: "确认",
     clear: "清空",

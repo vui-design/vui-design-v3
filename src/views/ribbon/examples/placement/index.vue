@@ -1,31 +1,32 @@
 <template>
-  <example v-bind:code="code" id="example-ribbon-placement">
-    <template slot="demo">
-      <vui-ribbon placement="start" text="Hippies">
-        <vui-card title="Pushes open the window">
-          <p>and raises the spyglass.</p>
+  <vui-example id="example-ribbon-placement" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-ribbon placement="left" text="Hippies">
+        <vui-card title="What is Vue?">
+          Vue is a JavaScript framework for building user interfaces.
         </vui-card>
       </vui-ribbon>
     </template>
-    <template slot="title">位置</template>
-    <template slot="description">
+    <template v-slot:title>位置</template>
+    <template v-slot:description>
       <p>使用 <code>placement</code> 属性来指定缎带的位置。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

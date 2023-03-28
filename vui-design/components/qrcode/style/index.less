@@ -1,0 +1,51 @@
+@import "./token.less";
+
+.@{vui-qrcode} {
+  position:relative;
+  display:block;
+  box-sizing:border-box;
+  color:@qrcode-font-color;
+  font-size:@qrcode-font-size;
+  line-height:@qrcode-line-height;
+
+  &-bordered {
+    border:@qrcode-border-width @qrcode-border-style @qrcode-border-color;
+    border-radius:@qrcode-border-radius;
+    background-color:@qrcode-background-color;
+    padding:@qrcode-padding;
+  }
+
+  canvas {
+    display:block;
+  }
+
+  &-mask {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    background-color:rgba(255, 255, 255, 0.95);
+    text-align:center;
+
+    p {
+      margin:0;
+      padding:0;
+    }
+    p + .@{vui}-link {
+      margin-top:@margin-xs;
+    }
+
+    &-fade-enter-from,
+    &-fade-leave-to { opacity:0; }
+    &-fade-enter-to,
+    &-fade-leave-from { opacity:1; }
+    &-fade-enter-active,
+    &-fade-leave-active { transition:opacity @transition-duration @transition-timing-function; }
+  }
+}
