@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
-import type { MessageProps } from "./message";
+import type { NotificationProps } from "./notification";
 import { TransitionGroup, defineComponent } from "vue";
-import VuiMessage from "./message";
+import VuiNotification from "./notification";
 
 export const createProps = () => {
   return {
@@ -10,15 +10,15 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 消息提示队列
-    messages: {
-      type: Array as PropType<MessageProps[]>,
+    // 通知提醒队列
+    notifications: {
+      type: Array as PropType<NotificationProps[]>,
       default: []
     },
     // 动画
     animation: {
       type: String as PropType<string>,
-      default: "vui-message-fade"
+      default: "vui-notification-fade"
     },
     // 关闭前事件回调
     onBeforeClose: {
@@ -38,10 +38,10 @@ export const createProps = () => {
   };
 };
 
-export type MessageListProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export type NotificationListProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-message-list",
+  name: "vui-notification-list",
   props: createProps(),
   setup(props, context) {
     // 
@@ -55,18 +55,18 @@ export default defineComponent({
         <>
           <TransitionGroup name={props.animation} onBeforeLeave={handleBeforeClose} onAfterLeave={handleAfterClose}>
             {
-              props.messages.map((message: MessageProps) => {
+              props.notifications.map((notification: NotificationProps) => {
                 return (
-                  <VuiMessage
-                    key={message.id}
-                    id={message.id}
-                    type={message.type}
-                    icon={message.icon}
-                    content={message.content}
-                    closable={message.closable}
-                    closeText={message.closeText}
-                    duration={message.duration}
-                    background={message.background}
+                  <VuiNotification
+                    key={notification.id}
+                    id={notification.id}
+                    type={notification.type}
+                    icon={notification.icon}
+                    title={notification.title}
+                    description={notification.description}
+                    closable={notification.closable}
+                    closeText={notification.closeText}
+                    duration={notification.duration}
                     onClose={handleClose}
                   />
                 );

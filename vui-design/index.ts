@@ -81,7 +81,7 @@ import Alert from "./components/alert";
 import Drawer from "./components/drawer";
 import Message from "./components/message";
 import Modal from "./components/modal";
-import Notice from "./components/notice";
+import Notification from "./components/notification";
 import Popconfirm from "./components/popconfirm";
 import Progress from "./components/progress";
 import Result from "./components/result";
@@ -189,7 +189,7 @@ const components = [
   Drawer,
   Message,
   Modal,
-  Notice,
+  Notification,
   Popconfirm,
   Progress,
   Result,
@@ -311,7 +311,7 @@ export {
   Drawer,
   Message,
   Modal,
-  Notice,
+  Notification,
   Popconfirm,
   Progress,
   Result,

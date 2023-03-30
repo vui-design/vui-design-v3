@@ -1,0 +1,202 @@
+@import "./token.less";
+
+@keyframes vuiNotificationFadeInLeft {
+  0% { opacity:0; transform:translate(-100%, 0); }
+  100% { opacity:1; transform:translate(0,0); }
+}
+
+@keyframes vuiNotificationFadeOutLeft {
+  0% { max-height:160px; opacity:1; }
+  100% { max-height:0; margin-top:0; margin-bottom:0; padding-top:0; padding-bottom:0; opacity:0; }
+}
+
+@keyframes vuiNotificationFadeInRight {
+  0% { opacity:0; transform:translate(100%, 0); }
+  100% { opacity:1; transform:translate(0,0); }
+}
+
+@keyframes vuiNotificationFadeOutRight {
+  0% { max-height:160px; opacity:1; }
+  100% { max-height:0; margin-top:0; margin-bottom:0; padding-top:0; padding-bottom:0; opacity:0; }
+}
+
+.@{vui-notification} {
+  position:relative;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:flex-start;
+  box-sizing:border-box;
+  max-width:@notification-max-width;
+  border-radius:@notification-border-radius;
+  background-color:@notification-background-color;
+  box-shadow:@notification-box-shadow;
+  padding:@notification-padding;
+  line-height:@notification-line-height;
+  pointer-events:auto;
+
+  &-icon {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    height:floor(@notification-title-font-size * @notification-line-height);
+    margin-right:@notification-icon-margin-right;
+    color:@notification-icon-color;
+    font-size:@notification-icon-size;
+  }
+
+  &-title {
+    display:block;
+    box-sizing:border-box;
+    color:@notification-title-font-color;
+    font-size:@notification-title-font-size;
+    .writeBreak;
+  }
+
+  &-description {
+    display:block;
+    box-sizing:border-box;
+    margin-top:@notification-description-margin-top;
+    color:@notification-description-font-color;
+    font-size:@notification-description-font-size;
+    .writeBreak;
+  }
+
+  &-btn-close {
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    height:floor(@notification-title-font-size * @notification-line-height);
+    margin-left:@notification-btn-close-margin-left;
+    color:@notification-btn-close-font-color;
+    font-size:@notification-btn-close-font-size;
+    transition:all @transition-duration @transition-timing-function;
+
+    .@{vui}-icon {
+      transform:scale(0.85);
+    }
+
+    &:hover {
+      color:@notification-btn-close-hover-font-color;
+    }
+  }
+
+  &-info &-icon {
+    color:@notification-info-icon-color;
+  }
+  &-warning &-icon {
+    color:@notification-warning-icon-color;
+  }
+  &-success &-icon {
+    color:@notification-success-icon-color;
+  }
+  &-error &-icon {
+    color:@notification-error-icon-color;
+  }
+
+  &-with-description {
+    padding:@notification-with-description-padding;
+  }
+  &-with-description &-icon {
+    height:floor(@notification-with-description-title-font-size * @notification-line-height);
+    margin-right:@notification-with-description-icon-margin-right;
+    font-size:@notification-with-description-icon-size;
+  }
+  &-with-description &-title {
+    color:@notification-with-description-title-font-color;
+    font-size:@notification-with-description-title-font-size;
+  }
+  &-with-description &-btn-close {
+    height:floor(@notification-with-description-title-font-size * @notification-line-height);
+    margin-left:@notification-with-description-btn-close-margin-left;
+  }
+
+  &-fade-enter-active {
+    animation-duration:@animation-in-duration;
+    animation-timing-function:@animation-in-timing-function;
+    animation-fill-mode:both;
+  }
+  &-fade-leave-active {
+    animation-duration:@animation-out-duration;
+    animation-timing-function:@animation-out-timing-function;
+    animation-fill-mode:both;
+  }
+
+  &-list {
+    position:fixed;
+    z-index:2000;
+    display:flex;
+    pointer-events:none;
+  }
+
+  &-list-top-left {
+    top:16px;
+    left:16px;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-start;
+  }
+  &-list-top-left &:not(:last-child) {
+    margin-bottom:@notification-margin-bottom;
+  }
+  &-list-top-left &-fade-enter-active {
+    animation-name:vuiNotificationFadeInLeft;
+  }
+  &-list-top-left &-fade-leave-active {
+    animation-name:vuiNotificationFadeOutLeft;
+  }
+
+  &-list-top-right {
+    top:16px;
+    right:16px;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:flex-end;
+  }
+  &-list-top-right &:not(:last-child) {
+    margin-bottom:@notification-margin-bottom;
+  }
+  &-list-top-right &-fade-enter-active {
+    animation-name:vuiNotificationFadeInRight;
+  }
+  &-list-top-right &-fade-leave-active {
+    animation-name:vuiNotificationFadeOutRight;
+  }
+
+  &-list-bottom-left {
+    bottom:16px;
+    left:16px;
+    flex-direction:column-reverse;
+    justify-content:flex-start;
+    align-items:flex-start;
+  }
+  &-list-bottom-left &:not(:last-child) {
+    margin-top:@notification-margin-top;
+  }
+  &-list-bottom-left &-fade-enter-active {
+    animation-name:vuiNotificationFadeInLeft;
+  }
+  &-list-bottom-left &-fade-leave-active {
+    animation-name:vuiNotificationFadeOutLeft;
+  }
+
+  &-list-bottom-right {
+    bottom:16px;
+    right:16px;
+    flex-direction:column-reverse;
+    justify-content:flex-start;
+    align-items:flex-end;
+  }
+  &-list-bottom-right &:not(:last-child) {
+    margin-top:@notification-margin-top;
+  }
+  &-list-bottom-right &-fade-enter-active {
+    animation-name:vuiNotificationFadeInRight;
+  }
+  &-list-bottom-right &-fade-leave-active {
+    animation-name:vuiNotificationFadeOutRight;
+  }
+}

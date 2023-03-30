@@ -6,6 +6,7 @@ import MessageList from "./message-list";
 import Message from "./message";
 import is from "../../utils/is";
 import getElement from "../../utils/getElement";
+import getTeleport from "../../utils/getTeleport";
 
 let MessageMangerInstance: MessageManger | undefined;
 
@@ -16,12 +17,17 @@ class MessageManger {
 
   private container: HTMLElement | null | undefined;
 
+  private teleport: HTMLElement | null | undefined;
+
   private count = 0;
 
   constructor(config: MessageConfig, appContext?: AppContext) {
+    const { getPopupContainer = "body" } = config;
+
     this.messageIds = new Set();
     this.messages = ref([]);
-    this.container = getElement(config.getPopupContainer) ?? document.body;
+    this.container = getElement(getPopupContainer) ?? document.body;
+    this.teleport = getTeleport(Message.name);
 
     const vm = createVNode(MessageList, {
       messages: this.messages.value,
@@ -33,7 +39,9 @@ class MessageManger {
       vm.appContext = appContext ?? Message._context;
     }
 
-    render(vm, this.container as HTMLElement);
+    render(vm, this.teleport as HTMLElement);
+  
+    this.container.appendChild(this.teleport);
   }
 
   add = (config: MessageConfig) => {
@@ -107,10 +115,13 @@ class MessageManger {
   };
 
   destroy = () => {
-    if (this.messages.value.length === 0 && this.container) {
-      render(null, this.container);
+    if (this.messages.value.length === 0 && this.container && this.teleport) {
+      render(null, this.teleport);
 
+      this.container.removeChild(this.teleport);
       this.container = null;
+      this.teleport = null;
+
       MessageMangerInstance = undefined;
     }
   };

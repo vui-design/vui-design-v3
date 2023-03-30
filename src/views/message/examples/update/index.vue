@@ -8,7 +8,7 @@
     </template>
     <template v-slot:title>更新消息内容</template>
     <template v-slot:description>
-      <p>可以通过消息实例的 <code>update</code> 方法更新内容，也可以在打开消息提示时指定唯一 <code>id</code> 标识来实现此操作。</p>
+      <p>可以使用当前消息提示引用的 <code>update</code> 方法更新内容等，也可以在打开消息提示时指定唯一 <code>id</code> 标识来实现此操作。</p>
     </template>
   </vui-example>
 </template>

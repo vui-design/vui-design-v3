@@ -1,41 +1,40 @@
 <template>
   <vui-article>
-    <h1>Message 消息提示</h1>
-    <p>全局展示操作反馈信息。</p>
+    <h1>Notification 通知提醒</h1>
+    <p>全局展示通知提醒信息。</p>
     <h2>何时使用</h2>
+    <p>在系统四个角显示通知提醒信息。经常用于以下情况：</p>
     <ul>
-    <li>可提供信息、警告、成功和失败等反馈信息。</li>
-    <li>顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。</li>
+      <li>较为复杂的通知内容。</li>
+      <li>带有交互的通知，给出用户下一步的行动点。</li>
+      <li>系统主动推送。</li>
     </ul>
     <h2>代码演示</h2>
     <vui-row v-bind:gutter="16">
       <vui-col v-bind:span="12">
         <vui-example-basic-usage />
         <vui-example-type />
-        <vui-example-loading />
-        <vui-example-closable />
+        <vui-example-duration />
       </vui-col>
       <vui-col v-bind:span="12">
-        <vui-example-duration />
-        <vui-example-background />
+        <vui-example-placement />
         <vui-example-update />
         <vui-example-more />
       </vui-col>
     </vui-row>
     <h2 id="example-api">API</h2>
-    <p><code>Message</code> 组件提供了一些静态方法，可以通过以下三种方式使用：</p>
+    <p><code>Notification</code> 组件提供了一些静态方法，可以通过以下三种方式使用：</p>
     <ul>
-      <li>通过 <code>this.$message</code> 调用</li>
-      <li>在 <code>Composition API</code> 中，通过 <code>getCurrentInstance().appContext.config.globalProperties.$message</code> 调用</li>
-      <li>导入 <code>Message</code>，通过 <code>Message</code> 本身调用，如上示例</li>
+      <li>通过 <code>this.$notification</code> 调用</li>
+      <li>在 <code>Composition API</code> 中，通过 <code>getCurrentInstance().appContext.config.globalProperties.$notification</code> 调用</li>
+      <li>导入 <code>Notification</code>，通过 <code>Notification</code> 本身调用，如上示例</li>
     </ul>
     <p>静态方法及其参数如下所示：</p>
     <ul>
-      <li><code>Message.info(content, [duration], onClose)</code></li>
-      <li><code>Message.warning(content, [duration], onClose)</code></li>
-      <li><code>Message.success(content, [duration], onClose)</code></li>
-      <li><code>Message.error(content, [duration], onClose)</code></li>
-      <li><code>Message.loading(content, [duration], onClose)</code></li>
+      <li><code>Notification.info(title, [duration], onClose)</code></li>
+      <li><code>Notification.warning(title, [duration], onClose)</code></li>
+      <li><code>Notification.success(title, [duration], onClose)</code></li>
+      <li><code>Notification.error(title, [duration], onClose)</code></li>
     </ul>
     <table class="example-api-props">
       <thead>
@@ -48,8 +47,8 @@
       </thead>
       <tbody>
         <tr>
-          <td>content</td>
-          <td>提示内容</td>
+          <td>title</td>
+          <td>通知提醒的标题</td>
           <td>String | Number | RenderFunction</td>
           <td>--</td>
         </tr>
@@ -57,7 +56,7 @@
           <td>duration</td>
           <td>自动关闭的延时时长，单位毫秒；设为 <code>0</code> 时不会自动关闭</td>
           <td>Number</td>
-          <td>3000</td>
+          <td>5000</td>
         </tr>
         <tr>
           <td>onClose</td>
@@ -69,11 +68,10 @@
     </table>
     <p>也可以使用对象的形式传递参数：</p>
     <ul>
-      <li><code>Message.info(config)</code></li>
-      <li><code>Message.warning(config)</code></li>
-      <li><code>Message.success(config)</code></li>
-      <li><code>Message.error(config)</code></li>
-      <li><code>Message.loading(config)</code></li>
+      <li><code>Notification.info(config)</code></li>
+      <li><code>Notification.warning(config)</code></li>
+      <li><code>Notification.success(config)</code></li>
+      <li><code>Notification.error(config)</code></li>
     </ul>
     <p>其中 <code>config</code> 对象的属性如下所示：</p>
     <table class="example-api-props">
@@ -88,7 +86,7 @@
       <tbody>
         <tr>
           <td>id</td>
-          <td>当前消息提示的唯一标识</td>
+          <td>当前通知提醒的唯一标识</td>
           <td>String | Number</td>
           <td>--</td>
         </tr>
@@ -99,8 +97,14 @@
           <td>--</td>
         </tr>
         <tr>
-          <td>content</td>
-          <td>消息提示的内容</td>
+          <td>title</td>
+          <td>通知提醒的标题</td>
+          <td>String | Number | RenderFunction</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>通知提醒的描述内容</td>
           <td>String | Number | RenderFunction</td>
           <td>--</td>
         </tr>
@@ -108,7 +112,7 @@
           <td>closable</td>
           <td>是否显示手动关闭按钮</td>
           <td>Boolean</td>
-          <td>false</td>
+          <td>true</td>
         </tr>
         <tr>
           <td>closeText</td>
@@ -120,19 +124,19 @@
           <td>duration</td>
           <td>自动关闭的延时时长，单位毫秒；设为 <code>0</code> 时不会自动关闭</td>
           <td>Number</td>
-          <td>3000</td>
-        </tr>
-        <tr>
-          <td>background</td>
-          <td>是否显示背景色</td>
-          <td>Boolean</td>
-          <td>false</td>
+          <td>5000</td>
         </tr>
         <tr>
           <td>getPopupContainer</td>
-          <td>消息提示挂载的 HTML 节点，默认渲染到 <code>document.body</code> 上</td>
+          <td>通知提醒挂载的 HTML 节点，默认渲染到 <code>document.body</code> 上</td>
           <td>String | HTMLElement</td>
           <td>body</td>
+        </tr>
+        <tr>
+          <td>placement</td>
+          <td>弹出位置，可选值为 <code>topLeft</code>、<code>topRight</code>、<code>bottomLeft</code>、<code>bottomRight</code> 或者不设</td>
+          <td>String</td>
+          <td>topRight</td>
         </tr>
         <tr>
           <td>onClose</td>
@@ -142,12 +146,12 @@
         </tr>
       </tbody>
     </table>
-    <p>调用静态方法将会返回当前消息提示的引用，可以通过该引用更新和关闭消息提示：</p>
+    <p>调用静态方法将会返回当前通知提醒的引用，可以通过该引用更新和关闭通知提醒：</p>
     <ul>
-      <li><code>message.update(content)</code> / <code>message.update(config)</code></li>
-      <li><code>message.close()</code></li>
+      <li><code>notification.update(title)</code> / <code>notification.update(config)</code></li>
+      <li><code>notification.close()</code></li>
     </ul>
-    <p>更新消息提示时，若内容或自动关闭的延时时长发生变更，则会重置自动关闭定时器。</p>
+    <p>更新通知提醒时，若标题、描述内容或自动关闭的延时时长发生变更，则会重置自动关闭定时器。</p>
   </vui-article>
 </template>
 
@@ -155,10 +159,8 @@
   import VuiArticle from "../../components/article/index.vue";
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleType from "./examples/type/index.vue";
-  import VuiExampleLoading from "./examples/loading/index.vue";
-  import VuiExampleClosable from "./examples/closable/index.vue";
   import VuiExampleDuration from "./examples/duration/index.vue";
-  import VuiExampleBackground from "./examples/background/index.vue";
+  import VuiExamplePlacement from "./examples/placement/index.vue";
   import VuiExampleUpdate from "./examples/update/index.vue";
   import VuiExampleMore from "./examples/more/index.vue";
 </script>

@@ -18,7 +18,7 @@ export const createProps = () => {
       type: [String, Number] as PropType<string | number>,
       default: undefined
     },
-    // 提示类型
+    // 通知提醒的类型
     type: {
       type: String as PropType<Type>,
       validator: (type: Type) => types.includes(type),
@@ -29,15 +29,20 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 提示内容
-    content: {
+    // 通知提醒的标题
+    title: {
+      type: [String, Number, Function] as PropType<string | number | RenderFunction>,
+      default: false
+    },
+    // 通知提醒的描述内容
+    description: {
       type: [String, Number, Function] as PropType<string | number | RenderFunction>,
       default: false
     },
     // 是否显示手动关闭按钮
     closable: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: true
     },
     // 关闭按钮文本
     closeText: {
@@ -47,12 +52,7 @@ export const createProps = () => {
     // 自动关闭的延时时长
     duration: {
       type: Number as PropType<number>,
-      default: 3000
-    },
-    // 是否显示背景色
-    background: {
-      type: Boolean as PropType<boolean>,
-      default: false
+      default: 5000
     },
     // 关闭事件回调
     onClose: {
@@ -62,10 +62,10 @@ export const createProps = () => {
   };
 };
 
-export type MessageProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export type NotificationProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-message",
+  name: "vui-notification",
   props: createProps(),
   setup(props, context) {
     // 自动关闭定时器
@@ -84,8 +84,8 @@ export default defineComponent({
       }
     };
 
-    // 消息内容或自动关闭的延时时长发生变更时，重置自动关闭定时器
-    watch(() => [props.content, props.duration], () => {
+    // 提醒标题、内容或自动关闭的延时时长发生变更时，重置自动关闭定时器
+    watch(() => [props.title, props.description, props.duration], () => {
       countdown.stop();
       countdown.start();
     });
@@ -98,18 +98,20 @@ export default defineComponent({
     onBeforeUnmount(() => countdown.stop());
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "message"));
+    const className = computed(() => getClassName(props.classNamePrefix, "notification"));
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
         [`${className.value}`]: true,
         [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-with-background`]: props.background
+        [`${className.value}-with-description`]: context.slots.description || props.description
       };
     });
     classes.elIcon = computed(() => `${className.value}-icon`);
     classes.elContent = computed(() => `${className.value}-content`);
+    classes.elTitle = computed(() => `${className.value}-title`);
+    classes.elDescription = computed(() => `${className.value}-description`);
     classes.elBtnClose = computed(() => `${className.value}-btn-close`);
 
     // 渲染
@@ -129,14 +131,27 @@ export default defineComponent({
         );
       }
 
-      // 内容
-      let content = (
-        <div class={classes.elContent.value}>
+      // 标题
+      let title = (
+        <div class={classes.elTitle.value}>
           {
-            context.slots.default ? context.slots.default() : (is.function(props.content) ? props.content() : props.content)
+            context.slots.default ? context.slots.default() : (is.function(props.title) ? props.title() : props.title)
           }
         </div>
       );
+
+      // 描述内容
+      let description;
+
+      if (context.slots.description || props.description) {
+        description = (
+          <div class={classes.elDescription.value}>
+            {
+              context.slots.description ? context.slots.description() : (is.function(props.description) ? props.description() : props.description)
+            }
+          </div>
+        );
+      }
 
       // 关闭按钮
       let btnClose;
@@ -157,7 +172,10 @@ export default defineComponent({
       return (
         <div class={classes.el.value}>
           {icon}
-          {content}
+          <div class={classes.elContent.value}>
+            {title}
+            {description}
+          </div>
           {btnClose}
         </div>
       );

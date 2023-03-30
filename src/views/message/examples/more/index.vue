@@ -32,7 +32,3 @@
     }
   });
 </script>
-
-<style>
-  .example-message-more .vui-button + .vui-button { margin-left:10px; }
-</style>

@@ -572,15 +572,15 @@ export default [
   //       },
   //       component: () => import("src/views/modal/index.vue")
   //     },
-  //     {
-  //       path: "/components/notice",
-  //       name: "notice",
-  //       meta: {
-  //         title: "Notice",
-  //         group: "feedback"
-  //       },
-  //       component: () => import("src/views/notice/index.vue")
-  //     },
+      {
+        path: "/components/notification",
+        name: "notification",
+        meta: {
+          title: "Notification",
+          group: "feedback"
+        },
+        component: () => import("src/views/notification/index.vue")
+      },
       {
         path: "/components/popconfirm",
         name: "popconfirm",

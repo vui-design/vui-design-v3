@@ -22,15 +22,17 @@
   box-shadow:@message-box-shadow;
   margin-top:@message-margin-top;
   padding:@message-padding;
-  transition:margin-top @transition-duration @transition-timing-function;
+  line-height:@message-line-height;
 
   &-icon {
-    display:block;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     box-sizing:border-box;
+    height:floor(@message-content-font-size * @message-line-height);
     margin-right:@message-icon-margin-right;
     color:@message-icon-color;
     font-size:@message-icon-size;
-    line-height:round(@message-content-font-size * @message-content-line-height);
   }
 
   &-content {
@@ -38,21 +40,19 @@
     box-sizing:border-box;
     color:@message-content-font-color;
     font-size:@message-content-font-size;
-    text-align:left;
-    line-height:@message-content-line-height;
-    white-space:normal;
-    word-break:break-all;
-    word-wrap:break-word; 
+    .writeBreak;
   }
 
   &-btn-close {
     cursor:pointer;
-    display:block;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     box-sizing:border-box;
+    height:floor(@message-content-font-size * @message-line-height);
     margin-left:@message-btn-close-margin-left;
     color:@message-btn-close-font-color;
     font-size:@message-btn-close-font-size;
-    line-height:round(@message-content-font-size * @message-content-line-height);
     transition:all @transition-duration @transition-timing-function;
 
     .@{vui}-icon {
