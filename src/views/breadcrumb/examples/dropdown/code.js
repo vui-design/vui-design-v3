@@ -4,10 +4,7 @@ const code =
     <vui-breadcrumb-item>Home</vui-breadcrumb-item>
     <vui-breadcrumb-item>Components</vui-breadcrumb-item>
     <vui-breadcrumb-item>
-      <vui-link>
-        Navigation
-        <vui-icon type="chevron-down" />
-      </vui-link>
+      Navigation
       <template v-slot:menu>
         <vui-menu>
           <vui-menu-item key="anchor" title="Anchor" />

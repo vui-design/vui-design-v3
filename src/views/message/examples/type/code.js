@@ -8,24 +8,38 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showInfoMessage() {
-        this.$message.info("This is a info message");
-      },
-      showWarningMessage() {
-        this.$message.warning("This is a warning message");
-      },
-      showSuccessMessage() {
-        this.$message.success("This is a success message");
-      },
-      showErrorMessage() {
-        this.$message.error("This is a error message");
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showInfoMessage = () => {
+        Message.info("This is a info message");
+      };
+      const showWarningMessage = () => {
+        Message.warning("This is a warning message");
+      };
+      const showSuccessMessage = () => {
+        Message.success("This is a success message");
+      };
+      const showErrorMessage = () => {
+        Message.error("This is a error message");
+      };
+
+      return {
+        showInfoMessage,
+        showWarningMessage,
+        showSuccessMessage,
+        showErrorMessage
+      };
     }
-  };
+  });
 </script>
+
+<style>
+  .example-message-type .vui-button + .vui-button { margin-left:16px; }
+</style>
 `;
 
 export default code;

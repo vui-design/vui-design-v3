@@ -46,6 +46,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { Message } from "vui-design";
   import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
@@ -55,10 +56,10 @@
     },
     setup() {
       const handleClick = (e: MouseEvent) => {
-        console.log("Clicked on button");
+        Message.info("Clicked on button");
       };
       const handleMenuClick = (key: string) => {
-        console.log("Clicked on Menu Item " + key);
+        Message.info("Clicked on Menu Item " + key);
       };
 
       return {

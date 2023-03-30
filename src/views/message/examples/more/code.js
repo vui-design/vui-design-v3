@@ -1,20 +1,16 @@
 const code =
 `<template>
-  <vui-button type="primary" v-on:click="showClosableMessage">Closable</vui-button>
+  <vui-button type="primary" v-on:click="showMessage">Render Function</vui-button>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent, h } from "vue";
   import { Message } from "vui-design";
 
   export default defineComponent({
     setup() {
       const showMessage = () => {
-        Message.info({
-          content: "This is a message that can be closed manually",
-          closable: true,
-          duration: 10000
-        });
+        Message.info(() => h("div", null, "I was returned by a function."));
       };
 
       return {

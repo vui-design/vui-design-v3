@@ -8,36 +8,50 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showInfoMessage() {
-        this.$message.info({
-          background: true,
-          content: "This is a info message"
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showInfoMessage = () => {
+        Message.info({
+          content: "This is a info message",
+          background: true
         });
-      },
-      showWarningMessage() {
-        this.$message.warning({
-          background: true,
-          content: "This is a warning message"
+      };
+      const showWarningMessage = () => {
+        Message.warning({
+          content: "This is a warning message",
+          background: true
         });
-      },
-      showSuccessMessage() {
-        this.$message.success({
-          background: true,
-          content: "This is a success message"
+      };
+      const showSuccessMessage = () => {
+        Message.success({
+          content: "This is a success message",
+          background: true
         });
-      },
-      showErrorMessage() {
-        this.$message.error({
-          background: true,
-          content: "This is a error message"
+      };
+      const showErrorMessage = () => {
+        Message.error({
+          content: "This is a error message",
+          background: true
         });
-      }
+      };
+
+      return {
+        showInfoMessage,
+        showWarningMessage,
+        showSuccessMessage,
+        showErrorMessage
+      };
     }
-  };
+  });
 </script>
+
+<style>
+  .example-message-background .vui-button + .vui-button { margin-left:16px; }
+</style>
 `;
 
 export default code;

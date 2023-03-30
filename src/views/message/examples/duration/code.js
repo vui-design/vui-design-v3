@@ -1,19 +1,23 @@
 const code =
 `<template>
-  <vui-button type="primary" v-on:click="showDurationMessage">Customized duration</vui-button>
+  <vui-button type="primary" v-on:click="showDurationMessage">Customized display duration</vui-button>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showDurationMessage() {
-        this.$message.info({
-          content: "I'll be gone in 10 seconds..",
-          duration: 10
-        });
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showMessage = () => {
+        Message.info("I will disappear in 10 seconds...", 10000);
+      };
+
+      return {
+        showMessage
+      };
     }
-  };
+  });
 </script>
 `;
 

@@ -1,32 +1,41 @@
-@vui-message: ~"@{vui}-message";
+@import "./token.less";
+
+@keyframes vuiMessageFadeIn {
+  0% { opacity:0; transform:translate(0%, -100%); }
+  100% { opacity:1; transform:translate(0%, 0%); }
+}
+
+@keyframes vuiMessageFadeOut {
+  0% { max-height:160px; opacity:1; }
+  100% { max-height:0; margin-top:0; padding-top:0; padding-bottom:0; opacity:0; }
+}
 
 .@{vui-message} {
-  position:fixed;
-  top:24px;
-  left:50%;
-  display:block;
+  position:relative;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-start;
+  align-items:flex-start;
   box-sizing:border-box;
   border-radius:@message-border-radius;
   background-color:@message-background-color;
   box-shadow:@message-box-shadow;
-  padding:@message-padding-vertical @message-padding-horizontal;
-  transform:translate(-50%, 0);
-  transition:top @transition-duration @transition-timing-function;
+  margin-top:@message-margin-top;
+  padding:@message-padding;
+  transition:margin-top @transition-duration @transition-timing-function;
 
   &-icon {
-    position:absolute;
-    top:@message-padding-vertical + round(@message-content-font-size * @message-content-line-height - @message-icon-size) / 2;
-    left:@message-padding-horizontal;
+    display:block;
+    box-sizing:border-box;
+    margin-right:@message-icon-margin-right;
     color:@message-icon-color;
     font-size:@message-icon-size;
-    line-height:1;
-
-    .@{vui}-icon {
-      display:block;
-    }
+    line-height:round(@message-content-font-size * @message-content-line-height);
   }
 
   &-content {
+    display:block;
+    box-sizing:border-box;
     color:@message-content-font-color;
     font-size:@message-content-font-size;
     text-align:left;
@@ -37,17 +46,16 @@
   }
 
   &-btn-close {
-    position:absolute;
-    top:@message-padding-vertical + round(@message-content-font-size * @message-content-line-height - @message-btn-close-font-size) / 2;
-    right:@message-padding-horizontal;
     cursor:pointer;
+    display:block;
+    box-sizing:border-box;
+    margin-left:@message-btn-close-margin-left;
     color:@message-btn-close-font-color;
     font-size:@message-btn-close-font-size;
-    line-height:1;
+    line-height:round(@message-content-font-size * @message-content-line-height);
     transition:all @transition-duration @transition-timing-function;
 
     .@{vui}-icon {
-      display:block;
       transform:scale(0.85);
     }
 
@@ -87,28 +95,23 @@
     color:@message-loading-icon-color;
   }
 
-  &&-with-icon {
-    padding-left:@message-padding-horizontal + @message-icon-size + @padding-xs;
-  }
-  &&-closable {
-    padding-right:@message-padding-horizontal + @message-btn-close-font-size + @padding-xs;
-  }
-
   &-fade-enter-active {
     animation:vuiMessageFadeIn @animation-in-duration @animation-in-timing-function both;
   }
   &-fade-leave-active {
     animation:vuiMessageFadeOut @animation-out-duration @animation-out-timing-function both;
   }
-}
 
-@keyframes vuiMessageFadeIn {
-  0% { opacity:0; transform:translate(-50%, -100%); }
-  100% { opacity:1; transform:translate(-50%, 0); }
-}
-
-@keyframes vuiMessageFadeOut {
-  0% { opacity:1; }
-  30% { opacity:1; }
-  100% { opacity:0; }
+  &-list {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:0;
+    z-index:2000;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+  }
 }

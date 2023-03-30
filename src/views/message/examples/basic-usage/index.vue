@@ -1,32 +1,34 @@
 <template>
-	<example v-bind:code="code" id="example-message-basic-usage">
-		<template slot="demo">
-			<vui-button type="primary" v-on:click="showNormalMessage">Normal</vui-button>
-		</template>
-		<template slot="title">基本用法</template>
-		<template slot="description">
-			<p>基本用法，适用于简短的警告提示。</p>
-		</template>
-	</example>
+  <vui-example id="example-message-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-button type="primary" v-on:click="showMessage">Normal message</vui-button>
+    </template>
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
+      <p>基本用法，适用于简短的消息提示。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code
-			};
-		},
-		methods: {
-			showNormalMessage() {
-				this.$message.open("This is a normal message");
-			}
-		}
-	};
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      const showMessage = () => {
+        Message.info("This is a normal message");
+      };
+
+      return {
+        code,
+        showMessage
+      };
+    }
+  });
 </script>

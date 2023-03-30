@@ -1,40 +1,39 @@
 <template>
-	<example v-bind:code="code" id="example-message-loading">
-		<template slot="demo">
-			<vui-button type="primary" v-on:click="showLoadingMessage">Loading</vui-button>
-		</template>
-		<template slot="title">加载中</template>
-		<template slot="description">
-			<p>进行全局 loading，异步自行移除。</p>
-		</template>
-	</example>
+  <vui-example id="example-message-loading" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-button type="primary" v-on:click="showLoadingMessage">Loading</vui-button>
+    </template>
+    <template v-slot:title>加载中</template>
+    <template v-slot:description>
+      <p>进行全局 loading，异步自行移除。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code
-			};
-		},
-		methods: {
-			showLoadingMessage() {
-				const loading = this.$message.loading({
-					content: "Action in progress..",
-					duration: 0
-				});
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      const showLoadingMessage = () => {
+        const loading = Message.loading("Action in progress...", 0);
 
-				setTimeout(() => {
-					loading.close();
-					this.$message.success("Action succeeded");
-				}, 3000);
-			}
-		}
-	};
+        setTimeout(() => {
+          loading.close();
+          Message.success("Action succeeded");
+        }, 3000);
+      };
+
+      return {
+        code,
+        showLoadingMessage
+      };
+    }
+  });
 </script>

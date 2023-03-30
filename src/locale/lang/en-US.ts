@@ -546,11 +546,12 @@ export default {
 
       "example-message-basic-usage": "基本用法",
       "example-message-type": "提示类型",
-      "example-message-background": "带背景色",
       "example-message-loading": "加载中",
-      "example-message-duration": "修改延时",
       "example-message-closable": "可关闭",
-      "example-message-more-content": "更多内容",
+      "example-message-duration": "修改延时",
+      "example-message-background": "带背景色",
+      "example-message-update": "更新消息内容",
+      "example-message-more": "更多内容",
 
       "example-modal-basic-usage": "基本用法",
       "example-modal-headless-and-footless": "隐藏页头页脚",

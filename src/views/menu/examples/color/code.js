@@ -36,19 +36,13 @@ const code =
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
-  import VuiExample from "../../../../components/example/index.vue";
-  import code from "./code";
 
   export default defineComponent({
-    components: {
-      VuiExample
-    },
     setup() {
       const color = ref<string>("light");
       const selectedKey = ref<string>("1");
 
       return {
-        code,
         color,
         selectedKey
       };

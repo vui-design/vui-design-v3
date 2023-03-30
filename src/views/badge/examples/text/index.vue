@@ -36,5 +36,5 @@
 
 <style>
   .example-badge-text .vui-badge + .vui-badge { margin-left:16px; }
-  .example-badge-text .vui-badge img { width:48px; height:48px; border-radius:5px; }
+  .example-badge-text .vui-badge img { display:block; width:48px; height:48px; border-radius:5px; }
 </style>

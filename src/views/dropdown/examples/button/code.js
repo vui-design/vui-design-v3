@@ -39,14 +39,15 @@ const code =
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { Message } from "vui-design";
 
   export default defineComponent({
     setup() {
       const handleClick = (e: MouseEvent) => {
-        console.log("Clicked on button");
+        Message.info("Clicked on button");
       };
       const handleMenuClick = (key: string) => {
-        console.log("Clicked on Menu Item " + key);
+        Message.info("Clicked on Menu Item " + key);
       };
 
       return {

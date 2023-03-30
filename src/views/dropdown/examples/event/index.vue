@@ -24,6 +24,7 @@
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { Message } from "vui-design";
   import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
@@ -33,7 +34,7 @@
     },
     setup() {
       const handleClick = (key: string) => {
-        console.log("Clicked in Menu Item " + key);
+        Message.info("Clicked in Menu Item " + key);
       };
 
       return {

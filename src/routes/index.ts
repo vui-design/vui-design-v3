@@ -554,15 +554,15 @@ export default [
   //       },
   //       component: () => import("src/views/drawer/index.vue")
   //     },
-  //     {
-  //       path: "/components/message",
-  //       name: "message",
-  //       meta: {
-  //         title: "Message",
-  //         group: "feedback"
-  //       },
-  //       component: () => import("src/views/message/index.vue")
-  //     },
+      {
+        path: "/components/message",
+        name: "message",
+        meta: {
+          title: "Message",
+          group: "feedback"
+        },
+        component: () => import("src/views/message/index.vue")
+      },
   //     {
   //       path: "/components/modal",
   //       name: "modal",

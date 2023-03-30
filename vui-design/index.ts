@@ -217,12 +217,6 @@ const install = function(app: App, options = {}) {
       app.use(component);
     }
   });
-
-  app.config.globalProperties.$notice = Notice;
-  app.config.globalProperties.$message = Message;
-  app.config.globalProperties.$modal = Modal;
-  app.config.globalProperties.$spin = Spin;
-  app.config.globalProperties.$loading = Loading;
 };
 
 export {

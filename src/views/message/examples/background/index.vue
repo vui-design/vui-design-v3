@@ -1,62 +1,67 @@
 <template>
-	<example v-bind:code="code" id="example-message-background">
-		<template slot="demo">
-			<div class="example-message-background">
-				<vui-button type="info" v-on:click="showInfoMessage">Info</vui-button>
-				<vui-button type="warning" v-on:click="showWarningMessage">Warning</vui-button>
-				<vui-button type="success" v-on:click="showSuccessMessage">Success</vui-button>
-				<vui-button type="danger" v-on:click="showErrorMessage">Error</vui-button>
-			</div>
-		</template>
-		<template slot="title">带背景色</template>
-		<template slot="description">
-			<p>带背景色的消息提示。</p>
-		</template>
-	</example>
+  <vui-example id="example-message-background" v-bind:code="code">
+    <template v-slot:demo>
+      <div class="example-message-background">
+        <vui-button type="info" v-on:click="showInfoMessage">Info</vui-button>
+        <vui-button type="warning" v-on:click="showWarningMessage">Warning</vui-button>
+        <vui-button type="success" v-on:click="showSuccessMessage">Success</vui-button>
+        <vui-button type="danger" v-on:click="showErrorMessage">Error</vui-button>
+      </div>
+    </template>
+    <template v-slot:title>带背景色</template>
+    <template v-slot:description>
+      <p>带背景色的消息提示。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code
-			};
-		},
-		methods: {
-			showInfoMessage() {
-				this.$message.info({
-					background: true,
-					content: "This is a info message"
-				});
-			},
-			showWarningMessage() {
-				this.$message.warning({
-					background: true,
-					content: "This is a warning message"
-				});
-			},
-			showSuccessMessage() {
-				this.$message.success({
-					background: true,
-					content: "This is a success message"
-				});
-			},
-			showErrorMessage() {
-				this.$message.error({
-					background: true,
-					content: "This is a error message"
-				});
-			}
-		}
-	};
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      const showInfoMessage = () => {
+        Message.info({
+          content: "This is a info message",
+          background: true
+        });
+      };
+      const showWarningMessage = () => {
+        Message.warning({
+          content: "This is a warning message",
+          background: true
+        });
+      };
+      const showSuccessMessage = () => {
+        Message.success({
+          content: "This is a success message",
+          background: true
+        });
+      };
+      const showErrorMessage = () => {
+        Message.error({
+          content: "This is a error message",
+          background: true
+        });
+      };
+
+      return {
+        code,
+        showInfoMessage,
+        showWarningMessage,
+        showSuccessMessage,
+        showErrorMessage
+      };
+    }
+  });
 </script>
 
 <style>
-	.example-message-background .vui-button + .vui-button { margin-left:10px; }
+  .example-message-background .vui-button + .vui-button { margin-left:16px; }
 </style>

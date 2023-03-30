@@ -1,4 +1,4 @@
-import type { App, AppContext, Plugin, PropType } from "vue";
+import type { App, Plugin, PropType } from "vue";
 import type { SpinWrapperProps, Size, Indicator } from "./types";
 import { createVNode, render, defineComponent, ref } from 'vue';
 import { sizes } from "./constants";
@@ -6,7 +6,7 @@ import Spin from "./spin";
 import usePopupManager from "../../hooks/usePopupManager";
 import is from "../../utils/is";
 
-const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContext) => {
+const createSpin = (properties: SpinWrapperProps) => {
   const { getPopupContainer, ...props } = properties;
   const container = is.function(getPopupContainer) ? getPopupContainer() : document.body;
   const component = defineComponent({
@@ -136,14 +136,12 @@ const createSpinInstance = (properties: SpinWrapperProps, appContext?: AppContex
 
   const vm = createVNode(component, props);
 
-  vm.appContext = appContext ?? vm.appContext;
-
   render(vm, container);
 
   return vm.component?.exposed;
 };
 
-Spin.spinning = function(config: string | SpinWrapperProps = "", appContext?: AppContext) {
+Spin.spinning = function(config: string | SpinWrapperProps = "") {
   if (is.server) {
     return;
   }
@@ -158,7 +156,7 @@ Spin.spinning = function(config: string | SpinWrapperProps = "", appContext?: Ap
     };
   }
 
-  return createSpinInstance(config, appContext);
+  return createSpin(config);
 };
 
 Spin.install = function(app: App) {

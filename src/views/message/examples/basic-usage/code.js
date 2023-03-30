@@ -1,16 +1,23 @@
 const code =
 `<template>
-  <vui-button type="primary" v-on:click="showNormalMessage">Normal</vui-button>
+  <vui-button type="primary" v-on:click="showMessage">Normal message</vui-button>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showNormalMessage() {
-        this.$message.open("This is a normal message");
-      }
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showMessage = () => {
+        Message.info("This is a normal message");
+      };
+
+      return {
+        showMessage
+      };
     }
-  };
+  });
 </script>
 `;
 

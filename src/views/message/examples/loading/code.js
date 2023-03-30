@@ -3,22 +3,26 @@ const code =
   <vui-button type="primary" v-on:click="showLoadingMessage">Loading</vui-button>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showLoadingMessage() {
-        const loading = this.$message.loading({
-          content: "Action in progress..",
-          duration: 0
-        });
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Message } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showLoadingMessage = () => {
+        const loading = Message.loading("Action in progress...", 0);
 
         setTimeout(() => {
           loading.close();
-          this.$message.success("Action succeeded");
+          Message.success("Action succeeded");
         }, 3000);
-      }
+      };
+
+      return {
+        showLoadingMessage
+      };
     }
-  };
+  });
 </script>
 `;
 
