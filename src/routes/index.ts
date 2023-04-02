@@ -563,15 +563,15 @@ export default [
         },
         component: () => import("src/views/message/index.vue")
       },
-  //     {
-  //       path: "/components/modal",
-  //       name: "modal",
-  //       meta: {
-  //         title: "Modal",
-  //         group: "feedback"
-  //       },
-  //       component: () => import("src/views/modal/index.vue")
-  //     },
+      {
+        path: "/components/modal",
+        name: "modal",
+        meta: {
+          title: "Modal",
+          group: "feedback"
+        },
+        component: () => import("src/views/modal/index.vue")
+      },
       {
         path: "/components/notification",
         name: "notification",

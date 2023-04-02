@@ -1,57 +1,60 @@
 <template>
-  <example v-bind:code="code" id="example-modal-customized-footer">
-    <template slot="demo">
+  <vui-example id="example-modal-customized-footer" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-modal-customized-footer">
-        <vui-button type="primary" v-on:click="showModal">Open modal with customized footer</vui-button>
-        <vui-modal v-model="visible" title="Modal Title">
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <vui-space slot="footer">
+        <vui-button type="primary" v-on:click="showModal">Open Modal with customized footer</vui-button>
+        <vui-modal
+          title="Modal Title"
+          v-model:visible="visible"
+        >
+          <h4>What is Vue?</h4>
+          <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
+          <template v-slot:footer>
             <vui-button v-on:click="handleCancel">Cancel</vui-button>
             <vui-button type="primary" v-bind:loading="loading" v-on:click="handleSubmit">Submit</vui-button>
-          </vui-space>
+          </template>
         </vui-modal>
       </div>
     </template>
-    <template slot="title">自定义页脚</template>
-    <template slot="description">
-      <p>利用 <code>footer</code> 插槽自定义对话框底部内容。点击提交后进入 <code>loading</code> 状态，完成后关闭。</p>
+    <template v-slot:title>自定义页脚</template>
+    <template v-slot:description>
+      <p>利用 <code>footer</code> 插槽自定义对话框底部内容；点击提交后进入 <code>loading</code> 状态，完成后关闭。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code,
-        visible: false,
-        loading: false
-      };
-    },
-    methods: {
-      showModal() {
-        this.visible = true;
-      },
-      handleCancel() {
-        this.visible = false;
-      },
-      handleSubmit() {
-        this.loading = true;
+    setup() {
+      const visible = ref<boolean>(false);
+      const loading = ref<boolean>(false);
+
+      const showModal = () => visible.value = true;
+      const handleCancel = () => visible.value = false;
+      const handleSubmit = () => {
+        loading.value = true;
 
         setTimeout(() => {
-          this.visible = false;
-          this.loading = false;
-        }, 3000);
-      }
+          visible.value = false;
+          loading.value = false;
+        }, 1500);
+      };
+
+      return {
+        code,
+        visible,
+        loading,
+        showModal,
+        handleCancel,
+        handleSubmit
+      };
     }
-  };
+  });
 </script>

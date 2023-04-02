@@ -1,33 +1,30 @@
 <template>
-  <example v-bind:code="code" id="example-modal-update-and-close">
-    <template slot="demo">
-      <vui-button type="primary" v-on:click="showSuccessNotice">Close automatically after 5s</vui-button>
+  <vui-example id="example-modal-update-and-close" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-button type="primary" v-on:click="showModal">Close automatically after 5s</vui-button>
     </template>
-    <template slot="title">更新和关闭</template>
-    <template slot="description">
-      <p>手动更新和关闭通过 <code>this.$modal[type]</code> 方式创建的对话框。</p>
+    <template v-slot:title>更新和关闭</template>
+    <template v-slot:description>
+      <p>手动更新和关闭通过 <code>Modal[type]()</code> 方式创建的对话框。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Modal } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
-      };
-    },
-    methods: {
-      showSuccessNotice() {
+    setup() {
+      const showModal = () => {
         let seconds = 5;
-        let modal = this.$modal.success({
-          title: "Friendly Tips",
+        let modal = Modal.success({
+          title: "This is a success message",
           description: "This modal will be closed after " + seconds + " second!"
         });
         let interval = setInterval(() => {
@@ -43,7 +40,12 @@
 
           modal.close();
         }, seconds * 1000);
-      }
+      };
+
+      return {
+        code,
+        showModal
+      };
     }
-  };
+  });
 </script>

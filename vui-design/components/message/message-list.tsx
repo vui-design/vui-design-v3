@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
-import type { MessageProps } from "./message";
+import type { MessageConfig } from "./types";
 import { TransitionGroup, defineComponent } from "vue";
 import VuiMessage from "./message";
 
@@ -12,7 +12,7 @@ export const createProps = () => {
     },
     // 消息提示队列
     messages: {
-      type: Array as PropType<MessageProps[]>,
+      type: Array as PropType<MessageConfig[]>,
       default: []
     },
     // 动画
@@ -52,28 +52,26 @@ export default defineComponent({
     // 渲染
     return () => {
       return (
-        <>
-          <TransitionGroup name={props.animation} onBeforeLeave={handleBeforeClose} onAfterLeave={handleAfterClose}>
-            {
-              props.messages.map((message: MessageProps) => {
-                return (
-                  <VuiMessage
-                    key={message.id}
-                    id={message.id}
-                    type={message.type}
-                    icon={message.icon}
-                    content={message.content}
-                    closable={message.closable}
-                    closeText={message.closeText}
-                    duration={message.duration}
-                    background={message.background}
-                    onClose={handleClose}
-                  />
-                );
-              })
-            }
-          </TransitionGroup>
-        </>
+        <TransitionGroup name={props.animation} onBeforeLeave={handleBeforeClose} onAfterLeave={handleAfterClose}>
+          {
+            props.messages.map((message: MessageConfig) => {
+              return (
+                <VuiMessage
+                  key={message.id}
+                  id={message.id}
+                  type={message.type}
+                  icon={message.icon}
+                  content={message.content}
+                  closable={message.closable}
+                  closeText={message.closeText}
+                  duration={message.duration}
+                  background={message.background}
+                  onClose={handleClose}
+                />
+              );
+            })
+          }
+        </TransitionGroup>
       )
     };
   }

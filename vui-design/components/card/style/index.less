@@ -7,12 +7,10 @@
 
 .@{vui-card} {
   display:block;
+  box-sizing:border-box;
   border-radius:@card-border-radius;
   background-color:@card-background-color;
   overflow:hidden;
-  color:@card-font-color;
-  font-size:@card-font-size;
-  line-height:@card-line-height;
   transition:all @transition-duration @transition-timing-function;
 
   &-bordered {
@@ -32,33 +30,41 @@
     display:flex;
     justify-content:flex-start;
     align-items:center;
+    box-sizing:border-box;
     border-bottom:@card-border-width solid @card-border-color;
     padding:@card-header-padding;
-    color:@card-header-font-color;
-    font-size:@card-header-font-size;
-    font-weight:@card-header-font-weight;
     transition:all @transition-duration @transition-timing-function;
   }
 
   &-body {
     display:block;
+    box-sizing:border-box;
     padding:@card-body-padding;
+    color:@modal-body-font-color;
+    font-size:@modal-body-font-size;
+    text-align:left;
+    line-height:@modal-body-line-height;
     transition:all @transition-duration @transition-timing-function;
+
     .clearfix;
   }
 
   &-footer {
     display:block;
+    box-sizing:border-box;
     border-top:@card-border-width solid @card-border-color;
     padding:@card-footer-padding;
     transition:all @transition-duration @transition-timing-function;
+
     .clearfix;
   }
 
   &-icon {
     display:block;
+    box-sizing:border-box;
     margin-right:@card-icon-margin-right;
-    font-size:@card-header-font-size - 2px;
+    color:@card-icon-color;
+    font-size:@card-icon-size;
 
     .@{vui}-icon {
       display:block;
@@ -68,11 +74,19 @@
   &-title {
     flex:1;
     display:block;
+    box-sizing:border-box;
+    color:@card-title-font-color;
+    font-size:@card-title-font-size;
+    font-weight:@card-title-font-weight;
+    text-align:left;
+    line-height:@card-title-line-height;
+
     .writeEllipsis;
   }
 
   &-extra {
     display:block;
+    box-sizing:border-box;
     margin-left:@card-extra-margin-left;
     color:@card-extra-font-color;
     font-size:@card-extra-font-size;
@@ -88,6 +102,7 @@
   &-with-grid > &-body > &-grid {
     float:left;
     display:block;
+    box-sizing:border-box;
     width:25%;
     box-shadow:1px 0 0 0 @card-border-color, 0 1px 0 0 @card-border-color;
     padding:@card-body-padding;
@@ -95,10 +110,12 @@
 
   &-cover {
     display:block;
+    box-sizing:border-box;
     overflow:hidden;
 
     img {
       display:block;
+      box-sizing:border-box;
       width:100%;
     }
   }
@@ -110,16 +127,23 @@
     display:flex;
     justify-content:flex-start;
     align-items:flex-start;
+    box-sizing:border-box;
 
     &-avatar {
+      display:block;
+      box-sizing:border-box;
       margin-right:@card-meta-avatar-margin-right;
     }
 
     &-detail {
       flex:1;
+      display:block;
+      box-sizing:border-box;
       overflow:hidden;
     }
     &-detail &-title {
+      display:block;
+      box-sizing:border-box;
       color:@card-meta-title-font-color;
       font-size:@card-meta-title-font-size;
 
@@ -127,6 +151,7 @@
     }
     &-detail &-description {
       display:-webkit-box;
+      box-sizing:border-box;
       margin-top:@card-meta-description-margin-top;
       overflow:hidden;
       color:@card-meta-description-font-color;
@@ -144,6 +169,7 @@
     display:flex;
     justify-content:center;
     align-items:center;
+    box-sizing:border-box;
     border-top:1px solid @card-border-color;
   }
 
@@ -153,6 +179,7 @@
     display:flex;
     justify-content:center;
     align-items:center;
+    box-sizing:border-box;
     padding:@card-action-padding;
     overflow:hidden;
     color:@card-action-font-color;
@@ -170,6 +197,7 @@
 
     &-divider {
       display:block;
+      box-sizing:border-box;
       width:1px;
       height:@card-action-divider-size;
       background-color:shade(@card-border-color, 10%);
@@ -184,6 +212,7 @@
 
     &-block {
       display:block;
+      box-sizing:border-box;
       height:@card-loading-block-height;
       border-radius:@card-loading-block-border-radius;
       background-image:linear-gradient(90deg, @card-loading-block-from-color 25%, @card-loading-block-to-color 50%, @card-loading-block-from-color 75%);

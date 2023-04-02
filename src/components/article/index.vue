@@ -104,6 +104,8 @@
 	.vui-article-content pre { margin:16px 0; }
 	.vui-article-content code { border-radius:2px; border:1px solid #f0f0f0; background-color:#fafafa; margin:0; padding:2px 4px; color:rgba(0,0,0,0.65); font-size:13px; }
 	.vui-article-content pre code { padding:12px 16px; }
+	.vui-article-content > .vui-row + h2 { margin-top:0.5em; }
+	.vui-article-content > .vui-row + p { margin-top:1em; }
 
 	.vui-article-anchors { width:120px; margin-left:32px; }
 	.vui-article-anchors .vui-anchor { font-size:12px; }

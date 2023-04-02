@@ -10,7 +10,7 @@ import Popup from "../../../libs/popup";
 import PropTypes from "../../../utils/prop-types";
 import is from "../../../utils/is";
 import clone from "../../../utils/clone";
-import getElementByEvent from "../../../utils/getElementByEvent";
+import getEventTarget from "../../../utils/getEventTarget";
 
 const VuiTableFilter = {
   name: "vui-table-filter",
@@ -107,7 +107,7 @@ const VuiTableFilter = {
     },
     handleClose(e) {
       const { $el: el, $refs: references, $props: props } = this;
-      const target = getElementByEvent(e);
+      const target = getEventTarget(e);
 
       if (!target || !references.dropdown) {
         return;

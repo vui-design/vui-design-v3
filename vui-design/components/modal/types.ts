@@ -1,0 +1,43 @@
+import type { RenderFunction, CSSProperties } from "vue";
+import type { ButtonProps } from "../button";
+import type { types, autofocusButtons } from "./constants";
+
+export type Type = typeof types[number];
+export type AutofocusButton = typeof autofocusButtons[number];
+
+export interface ModalConfig {
+  id?: string | number;
+  type?: Type;
+  defaultVisible?: boolean;
+  icon?: string | RenderFunction;
+  title?: string | RenderFunction;
+  description?: string | RenderFunction;
+  showCancelButton?: boolean;
+  cancelButtonProps?: ButtonProps;
+  cancelText?: string;
+  showOkButton?: boolean;
+  okButtonProps?: ButtonProps;
+  okText?: string;
+  autofocusButton?: AutofocusButton;
+  width?: string | number;
+  top?: string | number;
+  centered?: boolean;
+  backdrop?: boolean;
+  clickBackdropToClose?: boolean;
+  destroyOnClose?: boolean;
+  getPopupContainer?: string | HTMLElement;
+  class?: string;
+  style?: CSSProperties;
+  bodyStyle?: CSSProperties;
+  footerStyle?: CSSProperties;
+  backdropClassName?: string;
+  backdropStyle?: CSSProperties;
+  onCancel?: () => any;
+  onOk?: () => any;
+  onBeforeOpen?: () => void;
+  onOpen?: () => void;
+  onAfterOpen?: () => void;
+  onBeforeClose?: () => void;
+  onClose?: () => void;
+  onAfterClose?: () => void;
+};

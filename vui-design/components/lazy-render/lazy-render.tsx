@@ -19,8 +19,8 @@ export default defineComponent({
   setup(props, context) {
     const maybeRender = ref(props.render);
 
-    watch(() => props.render, value => {
-      if (!value || maybeRender.value) {
+    watch(() => props.render, newValue => {
+      if (!newValue || maybeRender.value) {
         return;
       }
 

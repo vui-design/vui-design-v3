@@ -11,7 +11,7 @@ import styleToObject from "../../../utils/styleToObject";
 import addScrollbarEffect from "../../../utils/addScrollbarEffect";
 import getStyle from "../../../utils/getStyle";
 import setStyle from "../../../utils/setStyle";
-import getElementByEvent from "../../../utils/getElementByEvent";
+import getEventTarget from "../../../utils/getEventTarget";
 import getClassNamePrefix from "../../../utils/getClassName";
 
 const VuiDrawer = {
@@ -147,7 +147,7 @@ const VuiDrawer = {
     },
     handleWrapperClick(e) {
       const { $refs: references } = this;
-      const target = getElementByEvent(e);
+      const target = getEventTarget(e);
 
       if (!target || !references.wrapper || target !== references.wrapper) {
         return;

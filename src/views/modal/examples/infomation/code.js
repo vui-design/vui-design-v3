@@ -1,42 +1,52 @@
 const code =
 `<template>
-      <vui-space>
-        <vui-button type="primary" v-on:click="showInfoNotice">消息</vui-button>
-        <vui-button type="warning" v-on:click="showWarningNotice">警告</vui-button>
-        <vui-button type="success" v-on:click="showSuccessNotice">成功</vui-button>
-        <vui-button type="danger" v-on:click="showErrorNotice">失败</vui-button>
-      </vui-space>
+  <vui-space>
+    <vui-button type="primary" v-on:click="showInfo">消息</vui-button>
+    <vui-button type="warning" v-on:click="showWarning">警告</vui-button>
+    <vui-button type="success" v-on:click="showSuccess">成功</vui-button>
+    <vui-button type="danger" v-on:click="showError">失败</vui-button>
+  </vui-space>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showInfoNotice() {
-        this.$modal.info({
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Modal } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showInfo = () => {
+        Modal.info({
           title: "This is a info message",
-          description: "Some descriptions..."
+          description: "Some descriptions...Some descriptions..."
         });
-      },
-      showWarningNotice() {
-        this.$modal.warning({
+      };
+      const showWarning = () => {
+        Modal.warning({
           title: "This is a warning message",
-          description: "Some descriptions..."
+          description: "Some descriptions...Some descriptions..."
         });
-      },
-      showSuccessNotice() {
-        this.$modal.success({
+      };
+      const showSuccess = () => {
+        Modal.success({
           title: "This is a success message",
-          description: "Some descriptions..."
+          description: "Some descriptions...Some descriptions..."
         });
-      },
-      showErrorNotice() {
-        this.$modal.error({
+      };
+      const showError = () => {
+        Modal.error({
           title: "This is a error message",
-          description: "Some descriptions..."
+          description: "Some descriptions...Some descriptions..."
         });
-      }
+      };
+
+      return {
+        showInfo,
+        showWarning,
+        showSuccess,
+        showError
+      };
     }
-  };
+  });
 </script>
 `;
 

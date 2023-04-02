@@ -11,6 +11,7 @@ const code =
 
 <script lang="ts">
   import { defineComponent } from "vue";
+  import { Message } from "vui-design";
 
   export default defineComponent({
     setup() {
@@ -27,10 +28,10 @@ const code =
 
             // 提示执行结果
             if (bool) {
-              console.log("Task deleted successfully!");
+              Message.success("Task deleted successfully!");
             }
             else {
-              console.log("Task deleted failed!");
+              Message.error("Task deleted failed!");
             }
 
             // 告知 Popconfirm 执行结果，resolve 时确认框关闭，reject 时确认框保持显示状态

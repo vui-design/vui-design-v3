@@ -1,15 +1,18 @@
 const code =
 `<template>
-  <vui-button type="primary" v-on:click="showSuccessNotice">Close automatically after 5s</vui-button>
+  <vui-button type="primary" v-on:click="showModal">Close automatically after 5s</vui-button>
 </template>
 
-<script>
-  export default {
-    methods: {
-      showSuccessNotice() {
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Modal } from "vui-design";
+
+  export default defineComponent({
+    setup() {
+      const showModal = () => {
         let seconds = 5;
-        let modal = this.$modal.success({
-          title: "Friendly Tips",
+        let modal = Modal.success({
+          title: "This is a success message",
           description: "This modal will be closed after " + seconds + " second!"
         });
         let interval = setInterval(() => {
@@ -25,9 +28,13 @@ const code =
 
           modal.close();
         }, seconds * 1000);
-      }
+      };
+
+      return {
+        showModal
+      };
     }
-  };
+  });
 </script>
 `;
 

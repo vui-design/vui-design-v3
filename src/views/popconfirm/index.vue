@@ -42,7 +42,7 @@
           <td>visible</td>
           <td>是否可见（受控模式），可以使用 <code>v-model</code> 双向绑定</td>
           <td>Boolean</td>
-          <td>false</td>
+          <td>--</td>
         </tr>
         <tr>
           <td>icon</td>

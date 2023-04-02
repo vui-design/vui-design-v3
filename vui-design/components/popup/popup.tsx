@@ -171,7 +171,7 @@ export default defineComponent({
     const attributes = computed(() => omit(context.attrs, listeners));
     let scrollElements: HTMLElement[] | undefined;
 
-    // 显示状态相关变量（defaultVisible 非受控模式，visible 受控模式）
+    // 可见状态相关变量（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
     const visible = computed(() => props.visible ?? defaultVisible.value);
     const toggling = ref(false);
@@ -238,7 +238,7 @@ export default defineComponent({
       elStyle.value = style;
     };
 
-    // 更新显示状态
+    // 更新可见状态
     let delayer = 0;
 
     const cleanDelayer = () => {
@@ -450,7 +450,7 @@ export default defineComponent({
       }
     };
 
-    // 监听 popup 显示状态
+    // 监听 popup 可见状态
     watch(visible, value => {
       // 修改外部点击事件监听
       if (props.clickOutsideToClose) {

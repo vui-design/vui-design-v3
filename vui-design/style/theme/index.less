@@ -85,7 +85,7 @@
 @component-dark-background-color: #1a2035;
 
 // 遮罩背景色
-@backdrop-background-color: rgba(0,0,0,0.4);
+@backdrop-background-color: rgba(0, 0, 0, 0.4);
 
 // 链接颜色
 @link-color: @primary-color;
@@ -98,14 +98,29 @@
 
 // 属性过度
 @transition-duration: 0.2s;
-@transition-timing-function: cubic-bezier(0.23,1,0.32,1);
+@transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 
 // 动画
 @animation-in-duration: 0.2s;
-@animation-in-timing-function: cubic-bezier(0.23,1,0.32,1);
+@animation-in-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 
 @animation-out-duration: 0.2s;
-@animation-out-timing-function: cubic-bezier(0.23,1,0.32,1);
+@animation-out-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+// 动画时长
+@transition-duration-1: 0.1s;
+@transition-duration-2: 0.2s;
+@transition-duration-3: 0.3s;
+@transition-duration-4: 0.4s;
+@transition-duration-5: 0.5s;
+@transition-duration-loading: 1s;
+
+// 动画曲线
+@transition-timing-function-linear: cubic-bezier(0, 0, 1, 1);
+@transition-timing-function-standard: cubic-bezier(0.34, 0.69, 0.1, 1);
+@transition-timing-function-overshoot: cubic-bezier(0.3, 1.3, 0.3, 1);
+@transition-timing-function-decelerate: cubic-bezier(0.4, 0.8, 0.74, 1);
+@transition-timing-function-accelerate: cubic-bezier(0.26, 0, 0.6, 0.2);
 
 // 媒体查询
 @screen-xs: 480px;
@@ -764,30 +779,6 @@
 @drawer-btn-close-color: @font-secondary-color;
 @drawer-btn-close-hover-color: @font-color;
 @drawer-btn-close-size: @font-size-sm;
-
-// Modal
-@modal-border-radius: @border-radius;
-@modal-background-color: @component-background-color;
-@modal-box-shadow: @box-shadow;
-
-@modal-header-border-bottom: @border-width @border-style #f0f0f0;
-@modal-header-padding: @padding-lg;
-
-@modal-title-font-color: @font-primary-color;
-@modal-title-font-size: @font-size-lg;
-@modal-title-line-height: @line-height;
-
-@modal-body-padding: @padding-lg;
-@modal-body-font-color: @font-color;
-@modal-body-font-size: @font-size;
-@modal-body-line-height: @line-height;
-
-@modal-footer-border-top: @border-width @border-style #f0f0f0;
-@modal-footer-padding: @padding-lg;
-
-@modal-btn-close-color: @font-secondary-color;
-@modal-btn-close-hover-color: @font-color;
-@modal-btn-close-size: @font-size-sm;
 
 // 其它组件 --------------------------------------------------------------------------------
 

@@ -155,14 +155,14 @@ export default defineComponent({
     // 国际化
     const { translate } = useI18n();
 
-    // 显示状态（defaultVisible 非受控模式，visible 受控模式）
+    // 可见状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
     const visible = computed(() => props.visible ?? defaultVisible.value);
 
     // 确认按钮 loading 状态
     const okLoading = ref(false);
 
-    // 切换显示状态
+    // 切换可见状态
     const toggle = (visible: boolean) => {
       defaultVisible.value = visible;
 

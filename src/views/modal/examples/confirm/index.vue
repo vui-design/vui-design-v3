@@ -1,91 +1,92 @@
 <template>
-  <example v-bind:code="code" id="example-modal-confirm">
-    <template slot="demo">
+  <vui-example id="example-modal-confirm" v-bind:code="code">
+    <template v-slot:demo>
       <vui-space>
         <vui-button type="primary" v-on:click="showConfirm">Confirm</vui-button>
+        <vui-button v-on:click="showPromiseConfirm">With promise</vui-button>
         <vui-button type="danger" ghost v-on:click="showDeleteConfirm">Delete</vui-button>
-        <vui-button v-on:click="showAsynchronouslyCloseConfirm">Asynchronously close</vui-button>
       </vui-space>
     </template>
-    <template slot="title">确认对话框</template>
-    <template slot="description">
-      <p>使用 <code>confirm()</code> 可以快捷地弹出确认框。</p>
+    <template v-slot:title>确认对话框</template>
+    <template v-slot:description>
+      <p>使用静态方法 <code>confirm()</code> 可以快捷地弹出确认框。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import { Modal, Message } from "vui-design";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
-      return {
-        code
-      };
-    },
-    methods: {
-      showConfirm() {
-        this.$modal.confirm({
+    setup() {
+      const showConfirm = () => {
+        Modal.confirm({
           title: "Do you want to delete these items?",
           description: "Some descriptions...",
-          cancel: () => console.log("Cancel"),
-          ok: () => console.log("OK")
+          onCancel: () => console.log("Cancel"),
+          onOk: () => console.log("OK")
         });
-      },
-      showDeleteConfirm() {
-        this.$modal.confirm({
+      };
+
+      const showPromiseConfirm = () => {
+        Modal.confirm({
+          title: "Do you want to delete these items?",
+          description: "When clicked the OK button, this dialog will be closed after 1 second...",
+          cancelText: "Cancel",
+          okText: "OK",
+          onCancel: () => console.log("Cancel"),
+          onOk: async function() {
+            return new Promise((resolve, reject) => {
+              // 模拟异步任务的执行
+              const task = () => {
+                // bool 为 true 表示异步任务执行成功
+                // bool 为 false 表示异步任务执行失败
+                const bool = Math.random() > 0.5;
+
+                // 提示执行结果
+                if (!bool) {
+                  Message.error("Oops errors!");
+                }
+
+                // 告知 Modal 执行结果，resolve 时确认框关闭，reject 时确认框保持显示状态
+                bool ? resolve() : reject();
+              };
+
+              setTimeout(task, 1000);
+            });
+          }
+        });
+      };
+
+      const showDeleteConfirm = () => {
+        Modal.confirm({
           title: "Are you sure delete this task?",
           description: "Some descriptions...",
           cancelText: "No",
           okText: "Yes",
+          cancelButtonProps: {
+            type: "text"
+          },
           okButtonProps: {
-            props: {
-              type: "danger"
-            }
+            type: "danger"
           },
           cancel: () => console.log("No"),
           ok: () => console.log("Yes")
         });
-      },
-      showAsynchronouslyCloseConfirm() {
-        this.$modal.confirm({
-          title: "Friendly Tips",
-          description: "The current operation will permanently delete the task. Do you want to continue?",
-          cancelText: "Cancel",
-          okText: "Continue",
-          okAsync: true,
-          cancel: () => {
-            console.log("Cancel");
-          },
-          ok: done => {
-            // 模拟异步任务的执行
-            const task = () => {
-              // bool 为 true 表示异步任务执行成功
-              // bool 为 false 表示异步任务执行失败
-              const bool = Math.random() > 0.5;
+      };
 
-              // 提示执行结果
-              if (bool) {
-                this.$message.success("Delete successfully!");
-              }
-              else {
-                this.$message.error("Delete failed, please try again later!");
-              }
-
-              // 调用 done 函数，告知对话框 ok 事件回调函数内部的异步任务执行完成，取消按钮的 loading 状态
-              // 给 done 函数传入 true，或者不传入参数，对话框均会关闭
-              // 传入 false 阻止对话框关闭
-              done && done(bool);
-            };
-
-            setTimeout(task, 3000);
-          }
-        });
-      }
+      return {
+        code,
+        showConfirm,
+        showDeleteConfirm,
+        showPromiseConfirm
+      };
     }
-  };
+  });
 </script>

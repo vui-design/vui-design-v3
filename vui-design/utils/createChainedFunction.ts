@@ -1,16 +1,14 @@
-export default function createChainedFunction() {
-  const args = [].slice.call(arguments, 0);
-
-  if (args.length === 1) {
-    return args[0];
+export default function createChainedFunction(...callbacks: any) {
+  if (callbacks.length === 1) {
+    return callbacks[0];
   }
 
-  return function chainedFunction() {
-    for (let i = 0; i < args.length; i++) {
-      const arg: any = args[i];
+  return function chainedFunction(this: any) {
+    for (let i = 0; i < callbacks.length; i++) {
+      const callback: any = callbacks[i];
 
-      if (arg && arg.apply) {
-        arg.apply(this, arguments);
+      if (callback && callback.apply) {
+        callback.apply(this, arguments);
       }
     }
   };

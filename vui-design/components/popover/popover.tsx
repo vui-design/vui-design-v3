@@ -114,7 +114,7 @@ export default defineComponent({
   props: createProps(),
   emits: ["update:visible", "change", "open", "close", "resize"],
   setup(props, context) {
-    // 显示状态（defaultVisible 非受控模式，visible 受控模式）
+    // 可见状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
     const visible = computed(() => props.visible ?? defaultVisible.value);
 

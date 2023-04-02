@@ -1,59 +1,47 @@
 <template>
-  <example v-bind:code="code" id="example-modal-button-props">
-    <template slot="demo">
+  <vui-example id="example-modal-button-props" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-modal-button-props">
-        <vui-button type="primary" v-on:click="showModal">Open modal with customized button props</vui-button>
+        <vui-button type="primary" v-on:click="showModal">Open Modal with customized button props</vui-button>
         <vui-modal
-          v-model="visible"
           title="Modal Title"
           cancelText="Cancel"
           okText="Delete"
-          v-bind:cancelButtonProps="cancelButtonProps"
-          v-bind:okButtonProps="okButtonProps"
+          v-model:visible="visible"
+          v-bind:cancelButtonProps="{ type: 'text' }"
+          v-bind:okButtonProps="{ type: 'danger' }"
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <h4>What is Vue?</h4>
+          <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
         </vui-modal>
       </div>
     </template>
-    <template slot="title">按钮属性</template>
-    <template slot="description">
-      <p>通过 <code>cancelText</code> 和 <code>okText</code> 属性来设置按钮的显示文字。</p>
-      <p>设置 <code>cancelButtonProps</code> 和 <code>okButtonProps</code> 分别定义取消按钮和确定按钮的属性，详见 <router-link to="/components/button">Button</router-link> 组件。</p>
+    <template v-slot:title>按钮属性</template>
+    <template v-slot:description>
+      <p>使用 <code>cancelText</code> 和 <code>okText</code> 属性设置按钮的显示文字。</p>
+      <p>设置 <code>cancelButtonProps</code> 和 <code>okButtonProps</code> 可分别定义取消按钮和确定按钮的属性，详见 <router-link to="/components/button">Button</router-link> 组件。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const visible = ref<boolean>(false);
+      const showModal = () => visible.value = true;
+
       return {
         code,
-        visible: false,
-        cancelButtonProps: {
-          props: {
-            type: "text"
-          }
-        },
-        okButtonProps: {
-          props: {
-            type: "danger"
-          }
-        }
+        visible,
+        showModal
       };
-    },
-    methods: {
-      showModal() {
-        this.visible = true;
-      }
     }
-  };
+  });
 </script>

@@ -60,10 +60,10 @@ export default defineComponent({
     });
 
     // 
-    watch(() => props.href, (value, oldValue) => {
+    watch(() => props.href, (newValue, oldValue) => {
       nextTick(() => {
         vuiAnchor?.removeLink(oldValue as string);
-        vuiAnchor?.addLink(value as string);
+        vuiAnchor?.addLink(newValue as string);
       });
     });
 

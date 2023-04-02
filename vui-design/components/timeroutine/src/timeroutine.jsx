@@ -5,7 +5,7 @@ import is from "../../../utils/is";
 import range from "../../../utils/range";
 import padStart from "../../../utils/padStart";
 import addEventListener from "../../../utils/addEventListener";
-import getElementByEvent from "../../../utils/getElementByEvent";
+import getEventTarget from "../../../utils/getEventTarget";
 import getOffsetRect from "../../../utils/getOffsetRect";
 import getClassNamePrefix from "../../../utils/getClassName";
 
@@ -138,7 +138,7 @@ const VuiTimeroutine = {
 			}
 
 			const { $refs: references } = this;
-			const element = getElementByEvent(e);
+			const element = getEventTarget(e);
 
 			// 判断事件源元素是否存在且为时间单元格
 			if (!references.container || !element || !references.container.contains(element) || element.getAttribute("data-role") !== "time") {
@@ -177,7 +177,7 @@ const VuiTimeroutine = {
 			}
 
 			const { $refs: references } = this;
-			const element = getElementByEvent(e);
+			const element = getEventTarget(e);
 
 			// 判断事件源元素是否存在且为时间单元格
 			if (!references.container || !element || !references.container.contains(element) || element.getAttribute("data-role") !== "time") {

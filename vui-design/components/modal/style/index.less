@@ -1,0 +1,287 @@
+@import "./token.less";
+
+@keyframes vuiModalBackdropFadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes vuiModalBackdropFadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+
+@keyframes vuiModalZoomIn {
+  0% { transform:scale(0.6); }
+  100% { transform:scale(1); }
+}
+@keyframes vuiModalZoomOut {
+  0% { transform:scale(1); }
+  100% { transform:scale(0.6); }
+}
+
+.@{vui-modal} {
+  // 对话框默认样式
+  position:relative;
+  display:block;
+  box-sizing:border-box;
+  border-radius:@modal-border-radius;
+  background-color:@modal-background-color;
+  box-shadow:@modal-box-shadow;
+  margin:0 auto;
+
+  &-header {
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    box-sizing:border-box;
+    border-bottom:@modal-header-border-bottom;
+    padding:@modal-header-padding;
+  }
+
+  &-icon {
+    display:block;
+    box-sizing:border-box;
+    margin-right:@modal-icon-margin-right;
+    color:@modal-icon-color;
+    font-size:@modal-icon-size;
+
+    .@{vui}-icon {
+      display:block;
+    }
+  }
+
+  &-title {
+    flex:1;
+    display:block;
+    box-sizing:border-box;
+    padding-right:@modal-btn-close-size + @padding-lg;
+    color:@modal-title-font-color;
+    font-size:@modal-title-font-size;
+    font-weight:@modal-title-font-weight;
+    text-align:left;
+    line-height:@modal-title-line-height;
+
+    .writeBreak;
+  }
+
+  &-body {
+    display:block;
+    box-sizing:border-box;
+    padding:@modal-body-padding;
+    color:@modal-body-font-color;
+    font-size:@modal-body-font-size;
+    text-align:left;
+    line-height:@modal-body-line-height;
+
+    .writeBreak;
+  }
+
+  &-footer {
+    display:block;
+    box-sizing:border-box;
+    border-top:@modal-footer-border-top;
+    padding:@modal-footer-padding;
+    text-align:right;
+  }
+  &-footer button + button {
+    margin-left:@margin-md;
+  }
+
+  &-btn-close {
+    position:absolute;
+    top:0;
+    right:0;
+    z-index:2000;
+    cursor:pointer;
+    display:block;
+    box-sizing:border-box;
+    padding:@modal-header-padding;
+    color:@modal-btn-close-color;
+    font-size:@modal-btn-close-size;
+    transition:color @transition-duration @transition-timing-function;
+
+    .@{vui}-icon {
+      display:block;
+      transform:scale(0.85);
+    }
+
+    &:hover {
+      color:@modal-btn-close-hover-color;
+    }
+  }
+  &-with-header &-btn-close {
+    line-height:floor(@modal-title-font-size * @modal-title-line-height);
+
+    .@{vui}-icon {
+      display:inline-block;
+    }
+  }
+
+  // 简洁模式
+  &-simple &-body {
+    padding:@modal-body-padding + 12px @modal-body-padding + 12px @modal-body-padding + 4px @modal-body-padding + 12px;
+  }
+  &-simple &-footer {
+    border-top:none;
+    padding:@modal-footer-padding + 12px;
+    padding-top:0;
+  }
+
+  // 可拖动
+  &-draggable &-header {
+    cursor:move;
+  }
+
+  // 对话框遮罩
+  &-backdrop {
+    position:fixed;
+    z-index:2000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:block;
+    box-sizing:border-box;
+    width:100%;
+    height:100%;
+    background-color:@backdrop-background-color;
+  }
+
+  // 对话框容器
+  &-wrapper {
+    position:fixed;
+    z-index:2000;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:block;
+    box-sizing:border-box;
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+  }
+
+  // 垂直居中
+  &-wrapper-centered {
+    text-align:center;
+
+    &:before,
+    &:after {
+      content:"";
+      display:inline-block;
+      box-sizing:border-box;
+      width:0;
+      height:100%;
+      overflow:hidden;
+      vertical-align:middle;
+    }
+  }
+  &-wrapper-centered & {
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  // 全屏显示
+  &-wrapper-fullscreen & {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+  }
+  &-wrapper-fullscreen &-body {
+    flex:1;
+    overflow:auto;
+  }
+
+  // 对话框拖动容器
+  &-dragger {
+    position:relative;
+    display:block;
+    box-sizing:border-box;
+    margin:0 auto;
+  }
+  &-wrapper-centered &-dragger {
+    display:inline-block;
+    vertical-align:middle;
+  }
+  &-wrapper-dragged &-dragger {
+    display:inline-block;
+  }
+
+  // 屏幕宽度小于 768px 时，宽度强制设为 auto
+  @media (max-width: @screen-sm-max) {
+    & {
+      width:auto !important;
+      margin-left:@margin-md;
+      margin-right:@margin-md;
+    }
+  }
+
+  // 打开 & 关闭动画
+  &-backdrop-fade-enter-active {
+    animation:vuiModalBackdropFadeIn @transition-duration-3 @transition-timing-function-overshoot both;
+  }
+  &-backdrop-fade-leave-active {
+    animation:vuiModalBackdropFadeOut @transition-duration-3 @transition-timing-function-overshoot both;
+  }
+
+  &-zoom-enter-active {
+    animation:vuiModalZoomIn @transition-duration-3 @transition-timing-function-overshoot both;
+  }
+  &-zoom-leave-active { 
+    animation:vuiModalZoomOut @transition-duration-3 @transition-timing-function-overshoot both;
+  }
+
+  // 信息提示
+  &-notice {
+    position:relative;
+    display:block;
+    box-sizing:border-box;
+    padding-left:floor(@font-size-lg * @line-height) + @padding-xs;
+    color:@font-color;
+    font-size:@font-size;
+    line-height:@line-height;
+
+    &-icon {
+      position:absolute;
+      top:0;
+      left:0;
+      display:block;
+      box-sizing:border-box;
+      font-size:floor(@font-size-lg * @line-height);
+
+      .@{vui}-icon {
+        display:block;
+      }
+    }
+    &-info &-icon {
+      color:@primary-color;
+    }
+    &-warning &-icon {
+      color:@warning-color;
+    }
+    &-success &-icon {
+      color:@success-color;
+    }
+    &-error &-icon {
+      color:@error-color;
+    }
+    &-confirm &-icon {
+      color:@warning-color;
+    }
+
+    &-title {
+      display:block;
+      box-sizing:border-box;
+      color:@font-primary-color;
+      font-size:@font-size-lg;
+    }
+
+    &-description {
+      display:block;
+      box-sizing:border-box;
+      margin-top:@margin-xs;
+    }
+  }
+}
