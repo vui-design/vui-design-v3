@@ -28,14 +28,14 @@ export const createProps = () => {
     // Affix 所属滚动容器，值为一个返回对应 DOM 元素的函数
     getScrollContainer: {
       type: Function as PropType<GetScrollContainer>,
-      default: () => typeof window === "undefined" ? null : window
+      default: () => typeof window === "undefined" ? undefined : window
     },
     // 滚动容器的外层滚动元素，默认是 window
     // Affix 将会监听该元素的滚动事件，并实时更新位置
     // 主要是为了解决 getScrollContainer 属性返回非 window 元素时，如果外层元素滚动，可能会导致固钉跑出其所属滚动容器的问题
     getUpperScrollContainer: {
       type: Function as PropType<GetScrollContainer>,
-      default: () => typeof window === "undefined" ? null : window
+      default: () => typeof window === "undefined" ? undefined : window
     }
   };
 };

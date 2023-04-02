@@ -5,12 +5,6 @@ const code =
     <vui-backtop />
   </div>
 </template>
-
-<script>
-  export default {
-
-  };
-</script>
 `;
 
 export default code;

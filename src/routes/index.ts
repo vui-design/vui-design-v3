@@ -645,15 +645,15 @@ export default [
   //       },
   //       component: () => import("src/views/authorizer/index.vue")
   //     },
-  //     {
-  //       path: "/components/backtop",
-  //       name: "backtop",
-  //       meta: {
-  //         title: "Backtop",
-  //         group: "other"
-  //       },
-  //       component: () => import("src/views/backtop/index.vue")
-  //     },
+      {
+        path: "/components/backtop",
+        name: "backtop",
+        meta: {
+          title: "Backtop",
+          group: "other"
+        },
+        component: () => import("src/views/backtop/index.vue")
+      },
   //     {
   //       path: "/components/fullscreen",
   //       name: "fullscreen",

@@ -43,7 +43,7 @@ export const createProps = () => {
     // 指定滚动容器
     getScrollContainer: {
       type: Function as PropType<GetScrollContainer>,
-      default: () => typeof window === "undefined" ? null : window
+      default: () => typeof window === "undefined" ? undefined : window
     },
     // 距离窗口顶部达到指定偏移量后触发
     offsetTop: {
@@ -295,6 +295,9 @@ export default defineComponent({
     onBeforeUnmount(() => {
       if (scrollEvent.value) {
         scrollEvent.value.remove();
+  
+        scrollContainerRef.value = undefined;
+        scrollEvent.value = undefined;
       }
     });
 

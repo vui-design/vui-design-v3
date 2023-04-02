@@ -1,0 +1,1 @@
+export type GetScrollContainer = () => Window | HTMLElement;

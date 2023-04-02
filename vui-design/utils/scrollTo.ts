@@ -12,7 +12,7 @@ export default function scrollTo(
   scrollContainer: Window | Document | HTMLElement,
   to: number,
   duration: number = 450,
-  complete: () => void
+  complete?: () => void
 ) {
   let raf = window.requestAnimationFrame;
 
