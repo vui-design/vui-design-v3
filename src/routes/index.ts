@@ -535,7 +535,7 @@ export default [
   //       },
   //       component: () => import("src/views/watermark/index.vue")
   //     },
-  //     // 反馈
+      // 反馈
       {
         path: "/components/alert",
         name: "alert",
@@ -545,15 +545,15 @@ export default [
         },
         component: () => import("src/views/alert/index.vue")
       },
-  //     {
-  //       path: "/components/drawer",
-  //       name: "drawer",
-  //       meta: {
-  //         title: "Drawer",
-  //         group: "feedback"
-  //       },
-  //       component: () => import("src/views/drawer/index.vue")
-  //     },
+      {
+        path: "/components/drawer",
+        name: "drawer",
+        meta: {
+          title: "Drawer",
+          group: "feedback"
+        },
+        component: () => import("src/views/drawer/index.vue")
+      },
       {
         path: "/components/message",
         name: "message",

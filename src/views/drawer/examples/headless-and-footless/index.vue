@@ -1,57 +1,56 @@
 <template>
-  <example v-bind:code="code" id="example-drawer-headless-and-footless">
-    <template slot="demo">
+  <vui-example id="example-drawer-headless-and-footless" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-drawer-headless-and-footless">
-        <vui-button type="primary" v-on:click="showDrawer1">No header</vui-button>
-        <vui-drawer v-model="visible1">
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+        <vui-space>
+          <vui-button type="primary" v-on:click="showDrawer1">No Header</vui-button>
+          <vui-button type="primary" v-on:click="showDrawer2">No Footer</vui-button>
+        </vui-space>
+        <vui-drawer v-model:visible="visible1">
+          <h4>What is Vue?</h4>
+          <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
         </vui-drawer>
-        <vui-button type="primary" v-on:click="showDrawer2">No footer</vui-button>
-        <vui-drawer v-model="visible2" v-bind:showFooter="false" title="Drawer Title">
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+        <vui-drawer
+          title="Drawer Title"
+          v-model:visible="visible2"
+          v-bind:footer="false"
+        >
+          <h4>What is Vue?</h4>
+          <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
         </vui-drawer>
       </div>
     </template>
-    <template slot="title">隐藏页头页脚</template>
-    <template slot="description">
+    <template v-slot:title>隐藏页头页脚</template>
+    <template v-slot:description>
       <p>未设置 <code>title</code> 标题时，头部将自动隐藏。</p>
-      <p>将 <code>showFooter</code> 属性设置为 <code>false</code> 来隐藏抽屉的底部内容。</p>
+      <p>显式的将 <code>footer</code> 设为 <code>false</code> ，可以隐藏抽屉的底部内容。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const visible1 = ref<boolean>(false);
+      const visible2 = ref<boolean>(false);
+
+      const showDrawer1 = () => visible1.value = true;
+      const showDrawer2 = () => visible2.value = true;
+
       return {
         code,
-        visible1: false,
-        visible2: false
+        visible1,
+        visible2,
+        showDrawer1,
+        showDrawer2
       };
-    },
-    methods: {
-      showDrawer1() {
-        this.visible1 = true;
-      },
-      showDrawer2() {
-        this.visible2 = true;
-      }
     }
-  };
+  });
 </script>
-
-<style>
-  .example-drawer-headless-and-footless > .vui-button { margin-right:16px; }
-</style>

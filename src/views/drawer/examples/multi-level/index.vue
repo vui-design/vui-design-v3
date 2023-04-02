@@ -1,45 +1,63 @@
 <template>
-  <example v-bind:code="code" id="example-drawer-multi-level">
-    <template slot="demo">
+  <vui-example id="example-drawer-multi-level" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-drawer-multi-level">
-        <vui-button type="primary" v-on:click="showDrawer">Open drawer</vui-button>
-        <vui-drawer v-model="visible" title="Drawer Title">
-          <vui-button type="primary" v-on:click="showChildrenDrawer">Open children drawer</vui-button>
-          <vui-drawer v-model="childrenVisible" title="Children Drawer Title">
-            <p>This is children drawer</p>
+        <vui-button type="primary" v-on:click="showDrawer1">Open First Drawer</vui-button>
+        <vui-drawer
+          title="First Drawer Title"
+          v-model:visible="visible1"
+        >
+          <vui-button type="primary" v-on:click="showDrawer2">Open Second Drawer</vui-button>
+          <vui-drawer
+            title="Second Drawer Title"
+            v-model:visible="visible2"
+          >
+            <vui-button type="primary" v-on:click="showDrawer3">Open Third Drawer</vui-button>
+            <vui-drawer
+              title="Third Drawer Title"
+              v-model:visible="visible3"
+            >
+              <p>This is third drawer</p>
+            </vui-drawer>
           </vui-drawer>
         </vui-drawer>
       </div>
     </template>
-    <template slot="title">多层抽屉</template>
-    <template slot="description">
+    <template v-slot:title>多层抽屉</template>
+    <template v-slot:description>
       <p>在抽屉内打开新的抽屉，用以解决多分支任务的复杂状况。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const visible1 = ref<boolean>(false);
+      const showDrawer1 = () => visible1.value = true;
+
+      const visible2 = ref<boolean>(false);
+      const showDrawer2 = () => visible2.value = true;
+
+      const visible3 = ref<boolean>(false);
+      const showDrawer3 = () => visible3.value = true;
+
       return {
         code,
-        visible: false,
-        childrenVisible: false
+        visible1,
+        showDrawer1,
+        visible2,
+        showDrawer2,
+        visible3,
+        showDrawer3
       };
-    },
-    methods: {
-      showDrawer() {
-        this.visible = true;
-      },
-      showChildrenDrawer() {
-        this.childrenVisible = true;
-      }
     }
-  };
+  });
 </script>

@@ -1,41 +1,43 @@
 <template>
-  <example v-bind:code="code" id="example-drawer-hide-close-button">
-    <template slot="demo">
+  <vui-example id="example-drawer-hide-close-button" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-drawer-hide-close-button">
-        <vui-button type="primary" v-on:click="showDrawer">Hide close button</vui-button>
-        <vui-drawer v-model="visible" v-bind:closable="false" title="Drawer Title">
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+        <vui-button type="primary" v-on:click="showDrawer">Hide Close Button</vui-button>
+        <vui-drawer
+          title="Drawer Title"
+          v-model:visible="visible"
+          v-bind:closable="false"
+        >
+          <h4>What is Vue?</h4>
+          <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
         </vui-drawer>
       </div>
     </template>
-    <template slot="title">隐藏关闭按钮</template>
-    <template slot="description">
-      <p>将 <code>closable</code> 属性设置为 <code>false</code>，可以隐藏抽屉右上角的关闭按钮。</p>
+    <template v-slot:title>隐藏关闭按钮</template>
+    <template v-slot:description>
+      <p>将属性 <code>closable</code> 设置为 <code>false</code>，可以隐藏抽屉右上角的关闭按钮。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const visible = ref<boolean>(false);
+      const showDrawer = () => visible.value = true;
+
       return {
         code,
-        visible: false
+        visible,
+        showDrawer
       };
-    },
-    methods: {
-      showDrawer() {
-        this.visible = true;
-      }
     }
-  };
+  });
 </script>

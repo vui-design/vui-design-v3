@@ -1,7 +1,7 @@
 const code =
 `<template>
-  <div class="example-drawer-basic-usage">
-    <vui-button type="primary" v-on:click="showDrawer">Open Drawer</vui-button>
+  <div class="example-drawer-promise">
+    <vui-button type="primary" v-on:click="showDrawer">Open Drawer with async logic</vui-button>
     <vui-drawer
       title="Drawer Title"
       v-model:visible="visible"
@@ -16,17 +16,33 @@ const code =
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import { Message } from "vui-design";
 
   export default defineComponent({
     setup() {
       const visible = ref<boolean>(false);
       const showDrawer = () => visible.value = true;
 
-      const handleCancel = () => {
-        console.log("Clicked cancel");
-      };
+      const handleCancel = () => console.log("Cancel");;
       const handleOk = () => {
-        console.log("Clicked ok");
+        return new Promise((resolve, reject) => {
+          // 模拟异步任务的执行
+          const task = () => {
+            // bool 为 true 表示异步任务执行成功
+            // bool 为 false 表示异步任务执行失败
+            const bool = Math.random() > 0.5;
+
+            // 提示执行结果
+            if (!bool) {
+              Message.error("Oops errors!");
+            }
+
+            // 告知 Drawer 执行结果，resolve 时对话框关闭，reject 时对话框保持显示状态
+            bool ? resolve() : reject();
+          };
+
+          setTimeout(task, 1000);
+        });
       };
 
       return {

@@ -1,46 +1,35 @@
 const code =
 `<template>
   <div class="example-drawer-button-props">
-    <vui-button type="primary" v-on:click="showDrawer">Open drawer with customized button props</vui-button>
+    <vui-button type="primary" v-on:click="showDrawer">Open Drawer with customized button props</vui-button>
     <vui-drawer
-      v-model="visible"
-      v-bind:cancelButtonProps="cancelButtonProps"
-      v-bind:okButtonProps="okButtonProps"
+      title="Drawer Title"
       cancelText="Cancel"
       okText="Delete"
-      title="Drawer Title"
+      v-model:visible="visible"
+      v-bind:cancelButtonProps="{ type: 'text' }"
+      v-bind:okButtonProps="{ type: 'danger' }"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <h4>What is Vue?</h4>
+      <p style="margin: 0;">Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.</p>
     </vui-drawer>
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const visible = ref<boolean>(false);
+      const showDrawer = () => visible.value = true;
+
       return {
-        visible: false,
-        cancelButtonProps: {
-          props: {
-            type: "text"
-          }
-        },
-        okButtonProps: {
-          props: {
-            type: "danger"
-          }
-        }
+        visible,
+        showDrawer
       };
-    },
-    methods: {
-      showDrawer() {
-        this.visible = true;
-      }
     }
-  };
+  });
 </script>
 `;
 
