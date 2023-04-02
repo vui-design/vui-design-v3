@@ -97,6 +97,7 @@ export default defineComponent({
                 centered: modal.centered,
                 backdrop: modal.backdrop,
                 clickBackdropToClose: modal.clickBackdropToClose ?? false,
+                escToClose: modal.escToClose ?? false,
                 destroyOnClose: modal.destroyOnClose,
                 getPopupContainer: null,
                 class: modal.class,

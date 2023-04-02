@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, RenderFunction, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { ButtonProps } from "../button";
 import type { AutofocusButton, Placement } from "./types";
-import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
+import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick } from "vue";
 import { useI18n } from "../../locale";
 import { autofocusButtons, placements } from "./constants";
 import { DrawerInjectionKey } from "./context";
@@ -11,6 +11,7 @@ import VuiButton from "../button";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import is from "../../utils/is";
 import guid from "../../utils/guid";
+import keyCodes from "../../utils/keyCodes";
 import addScrollbarEffect from "../../utils/addScrollbarEffect";
 import getClassName from "../../utils/getClassName";
 
@@ -120,6 +121,11 @@ export const createProps = () => {
     },
     // 点击背景遮罩是否关闭抽屉
     clickBackdropToClose: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    // 按下 ESC 键关闭对话框
+    escToClose: {
       type: Boolean as PropType<boolean>,
       default: true
     },
@@ -239,6 +245,13 @@ export default defineComponent({
       }
     });
 
+    // 监听 visible 属性变化
+    watch(visible, newValue => {
+      if (is.boolean(newValue) && newValue && props.escToClose) {
+        nextTick(() => wrapperRef.value?.focus());
+      }
+    });
+
     // 挂载容器相关变量
     const { getPopupContainer } = toRefs(props);
     const { teleport } = useTeleportContainer({
@@ -279,6 +292,16 @@ export default defineComponent({
         return;
       }
 
+      handleCancel();
+    };
+
+    // 按下 ESC 键时的事件回调
+    const handleWrapperKeydown = (e: KeyboardEvent) => {
+      if (!props.escToClose || e.keyCode !== keyCodes.esc) {
+        return;
+      }
+
+      e.stopPropagation();
       handleCancel();
     };
 
@@ -483,7 +506,7 @@ export default defineComponent({
 
       return (
         <Transition appear name={props.animations[0]}>
-          <div ref={wrapperRef} v-show={visible.value} class={classes.elWrapper.value} style={styles.elWrapper.value} onClick={handleWrapperClick}>
+          <div ref={wrapperRef} v-show={visible.value} tabindex={-1} class={classes.elWrapper.value} style={styles.elWrapper.value} onClick={handleWrapperClick} onKeydown={handleWrapperKeydown}>
             <Transition appear name={props.animations[1]} onBeforeEnter={handleBeforeOpen} onEnter={handleOpen} onAfterEnter={handleAfterOpen} onBeforeLeave={handleBeforeClose} onLeave={handleClose} onAfterLeave={handleAfterClose}>
               <div v-show={visible.value} {...attributes}>
                 {header}

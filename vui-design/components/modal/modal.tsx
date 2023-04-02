@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, RenderFunction, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { ButtonProps } from "../button";
 import type { AutofocusButton } from "./types";
-import { Teleport, Transition, defineComponent, toRefs, ref, computed, watch } from "vue";
+import { Teleport, Transition, defineComponent, toRefs, ref, computed, watch, nextTick } from "vue";
 import { useI18n } from "../../locale";
 import { autofocusButtons } from "./constants";
 import VuiLazyRender from "../lazy-render";
@@ -10,6 +10,7 @@ import VuiButton from "../button";
 import useDraggable from "../../hooks/useDraggable";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import is from "../../utils/is";
+import keyCodes from "../../utils/keyCodes";
 import addScrollbarEffect from "../../utils/addScrollbarEffect";
 import getClassName from "../../utils/getClassName";
 
@@ -136,6 +137,11 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: true
     },
+    // 按下 ESC 键关闭对话框
+    escToClose: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
     // 关闭时销毁对话框内容（对话框里的子元素）
     destroyOnClose: {
       type: Boolean as PropType<boolean>,
@@ -225,6 +231,13 @@ export default defineComponent({
       }
     });
 
+    // 监听 visible 属性变化
+    watch(visible, newValue => {
+      if (is.boolean(newValue) && newValue && props.escToClose) {
+        nextTick(() => wrapperRef.value?.focus());
+      }
+    });
+
     // 是否支持拖动
     const draggable = computed(() => !props.fullscreen && props.draggable);
     const { handleMovedown, dragged, dragX, dragY } = useDraggable({
@@ -289,6 +302,16 @@ export default defineComponent({
         return;
       }
 
+      handleCancel();
+    };
+
+    // 按下 ESC 键时的事件回调
+    const handleWrapperKeydown = (e: KeyboardEvent) => {
+      if (!props.escToClose || e.keyCode !== keyCodes.esc) {
+        return;
+      }
+
+      e.stopPropagation();
       handleCancel();
     };
 
@@ -491,7 +514,7 @@ export default defineComponent({
 
       return (
         <Transition appear name={props.animations[0]}>
-          <div ref={wrapperRef} v-show={visible.value} class={classes.elWrapper.value} style={styles.elWrapper.value} onClick={handleWrapperClick}>
+          <div ref={wrapperRef} v-show={visible.value} tabindex={-1} class={classes.elWrapper.value} style={styles.elWrapper.value} onClick={handleWrapperClick} onKeydown={handleWrapperKeydown}>
             {
               !draggable.value ? modal : (
                 <div class={classes.elDragger.value} style={styles.elDragger.value}>{modal}</div>

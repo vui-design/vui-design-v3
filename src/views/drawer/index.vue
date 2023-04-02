@@ -157,6 +157,12 @@
           <td>true</td>
         </tr>
         <tr>
+          <td>escToClose</td>
+          <td>按下 ESC 键关闭对话框</td>
+          <td>Boolean</td>
+          <td>true</td>
+        </tr>
+        <tr>
           <td>destroyOnClose</td>
           <td>关闭时销毁抽屉内容（抽屉里的子元素）</td>
           <td>Boolean</td>

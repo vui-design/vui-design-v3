@@ -24,6 +24,7 @@ export interface ModalConfig {
   centered?: boolean;
   backdrop?: boolean;
   clickBackdropToClose?: boolean;
+  escToClose?: boolean;
   destroyOnClose?: boolean;
   getPopupContainer?: string | HTMLElement;
   class?: string;
