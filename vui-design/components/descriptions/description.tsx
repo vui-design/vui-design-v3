@@ -4,7 +4,7 @@ import { defineComponent } from "vue";
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },

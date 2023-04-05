@@ -1,8 +1,7 @@
 import type { Gutter } from "../grid/types";
-import type { layouts, sizes } from "./constants";
+import type { layouts } from "./constants";
 
 export type Layout = typeof layouts[number];
-export type Size = typeof sizes[number];
 
 export interface Grid {
   gutter?: number | Gutter | [number | Gutter, number | Gutter];

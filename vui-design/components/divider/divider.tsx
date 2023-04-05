@@ -3,13 +3,13 @@ import type { VueNodeAtom } from "../../types";
 import type { Type, Direction, Orientation } from "./types";
 import { defineComponent, computed } from "vue";
 import { types, directions, orientations } from "./constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -54,19 +54,19 @@ export default defineComponent({
     const withText = computed(() => props.direction === "horizontal" && context.slots.default);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "divider"));
+    const classPrefix = useClassPrefix("divider", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-${props.direction}`]: props.direction,
-        [`${className.value}-with-text`]: withText.value,
-        [`${className.value}-with-text-${props.orientation}`]: withText.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type,
+        [`${classPrefix.value}-${props.direction}`]: props.direction,
+        [`${classPrefix.value}-with-text`]: withText.value,
+        [`${classPrefix.value}-with-text-${props.orientation}`]: withText.value
       };
     });
-    classes.elText = computed(() => `${className.value}-text`);
+    classes.elText = computed(() => `${classPrefix.value}-text`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

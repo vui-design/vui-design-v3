@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import { defineComponent, computed } from "vue";
 import { useI18n } from "../../locale";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -39,13 +39,13 @@ export default defineComponent({
     const { translate } = useI18n();
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "empty"));
+    const classPrefix = useClassPrefix("empty", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elImage = computed(() => `${className.value}-image`);
-    classes.elDescription = computed(() => `${className.value}-description`);
-    classes.elContent = computed(() => `${className.value}-content`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elImage = computed(() => `${classPrefix.value}-image`);
+    classes.elDescription = computed(() => `${classPrefix.value}-description`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
 
     // 渲染
     return () => {

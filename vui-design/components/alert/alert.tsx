@@ -3,7 +3,7 @@ import type { Type } from "./types";
 import { Transition, defineComponent, ref, computed } from "vue";
 import { types } from "./constants";
 import VuiIcon from "../icon";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 const iconTypes = {
   info: "info",
@@ -15,7 +15,7 @@ const iconTypes = {
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -110,24 +110,24 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "alert"));
+    const classPrefix = useClassPrefix("alert", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-banner`]: props.banner,
-        [`${className.value}-with-icon`]: withIcon.value,
-        [`${className.value}-with-description`]: withDescription.value,
-        [`${className.value}-closable`]: props.closable,
-        [`${className.value}-closing`]: closing.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type,
+        [`${classPrefix.value}-banner`]: props.banner,
+        [`${classPrefix.value}-with-icon`]: withIcon.value,
+        [`${classPrefix.value}-with-description`]: withDescription.value,
+        [`${classPrefix.value}-closable`]: props.closable,
+        [`${classPrefix.value}-closing`]: closing.value
       };
     });
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elMessage = computed(() => `${className.value}-message`);
-    classes.elDescription = computed(() => `${className.value}-description`);
-    classes.elBtnClose = computed(() => `${className.value}-btn-close`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elMessage = computed(() => `${classPrefix.value}-message`);
+    classes.elDescription = computed(() => `${classPrefix.value}-description`);
+    classes.elBtnClose = computed(() => `${classPrefix.value}-btn-close`);
 
     // 渲染
     return () => {

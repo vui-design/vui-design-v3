@@ -1,5 +1,3 @@
-export type GetScrollContainer = () => Window | HTMLElement;
-
 export interface Section {
   top: number;
   link: string;

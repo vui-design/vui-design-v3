@@ -2,12 +2,12 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Status, Color } from "./types";
 import { defineComponent, computed } from "vue";
 import { statuses, colors } from "./constants";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -68,25 +68,25 @@ export default defineComponent({
     const isStatus = computed(() => props.status || props.color);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "badge"));
+    const classPrefix = useClassPrefix("badge", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-alone`]: isAlone.value && !isStatus.value,
-        [`${className.value}-status`]: isStatus.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-alone`]: isAlone.value && !isStatus.value,
+        [`${classPrefix.value}-status`]: isStatus.value
       };
     });
     classes.elDot = computed(() => {
       return {
-        [`${className.value}-dot`]: true,
-        [`${className.value}-dot-${props.status}`]: props.status,
-        [`${className.value}-dot-${props.color}`]: props.color && colors.includes(props.color)
+        [`${classPrefix.value}-dot`]: true,
+        [`${classPrefix.value}-dot-${props.status}`]: props.status,
+        [`${classPrefix.value}-dot-${props.color}`]: props.color && colors.includes(props.color)
       };
     });
-    classes.elCount = computed(() => `${className.value}-count`);
-    classes.elText = computed(() => `${className.value}-text`);
+    classes.elCount = computed(() => `${classPrefix.value}-count`);
+    classes.elText = computed(() => `${classPrefix.value}-text`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

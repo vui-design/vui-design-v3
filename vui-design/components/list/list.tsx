@@ -1,20 +1,22 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Layout, Size, Grid } from "./types";
+import type { Size } from "../../types";
+import type { Layout, Grid } from "./types";
 import { defineComponent, provide, toRefs, reactive, computed, isVNode } from "vue";
+import { flatten } from "../../utils/vue";
+import { sizes } from "../../constants";
+import { layouts } from "./constants";
+import { ListInjectionKey } from "./context";
 import VuiSpin from "../spin";
 import VuiEmpty from "../empty";
 import VuiRow from "../row";
 import VuiCol from "../col";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
-import { flatten } from "../../utils/vue";
-import { layouts, sizes } from "./constants";
-import { ListInjectionKey } from "./context";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -88,24 +90,24 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "list"));
+    const classPrefix = useClassPrefix("list", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.layout}`]: props.layout,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-bordered`]: props.bordered && !props.grid,
-        [`${className.value}-split`]: props.split,
-        [`${className.value}-grid`]: props.grid
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.layout}`]: props.layout,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-bordered`]: props.bordered && !props.grid,
+        [`${classPrefix.value}-split`]: props.split,
+        [`${classPrefix.value}-grid`]: props.grid
       };
     });
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elEmpty = computed(() => `${className.value}-empty`);
-    classes.elMore = computed(() => `${className.value}-more`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elEmpty = computed(() => `${classPrefix.value}-empty`);
+    classes.elMore = computed(() => `${classPrefix.value}-more`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
 
     // 渲染
     return () => {
@@ -121,7 +123,7 @@ export default defineComponent({
       }
 
       // 内容区域
-      const data: any[] = context.slots.default ? flatten(context.slots.default()) : props.data;
+      const data: any[] = context.slots.default ? flatten(context.slots.default()) : props.data as any[];
       let content;
 
       if (data && data.length > 0) {

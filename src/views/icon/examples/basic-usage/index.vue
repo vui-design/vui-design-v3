@@ -1,5 +1,5 @@
 <template>
-  <example v-bind:code="code" id="example-icon-basic-usage">
+  <vui-example id="example-icon-basic-usage" v-bind:code="code">
     <template v-slot:demo>
       <div class="example-icon-basic-usage">
         <vui-icon type="apps" />
@@ -16,25 +16,26 @@
     <template v-slot:description>
       <p>使用 Icon 组件，指定图标对应的 <code>type</code> 属性。可以通过设置 <code>spin</code> 属性来实现动画旋转效果。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-icon-basic-usage .vui-icon { margin-right:8px; }
+  .example-icon-basic-usage .vui-icon { margin-right:16px; }
 </style>

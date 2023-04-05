@@ -6,13 +6,13 @@ import { defineComponent, computed } from "vue";
 import VuiSkeletonAvatar from "./skeleton-avatar";
 import VuiSkeletonTitle from "./skeleton-title";
 import VuiSkeletonParagraph from "./skeleton-paragraph";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -114,12 +114,12 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "skeleton"));
+    const classPrefix = useClassPrefix("skeleton", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
 
     // 渲染
     return () => {
@@ -135,7 +135,7 @@ export default defineComponent({
         children.push(
           <div class={classes.elHeader.value}>
             <VuiSkeletonAvatar {...{
-              classNamePrefix: props.classNamePrefix,
+              classPrefix: props.classPrefix,
               animated: props.animated,
               ...getAvatarProps(props.title, props.paragraph),
               ...getCustomizedProps(props.avatar)
@@ -150,7 +150,7 @@ export default defineComponent({
         if (props.title) {
           title = (
             <VuiSkeletonTitle {...{
-              classNamePrefix: props.classNamePrefix,
+              classPrefix: props.classPrefix,
               animated: props.animated,
               ...getTitleProps(props.avatar, props.paragraph),
               ...getCustomizedProps(props.title)
@@ -163,7 +163,7 @@ export default defineComponent({
         if (props.paragraph) {
           paragraph = (
             <VuiSkeletonParagraph {...{
-              classNamePrefix: props.classNamePrefix,
+              classPrefix: props.classPrefix,
               animated: props.animated,
               ...getParagraphProps(props.avatar, props.title),
               ...getCustomizedProps(props.paragraph)

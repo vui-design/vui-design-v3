@@ -1,13 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Shape, Size } from "../button/types";
+import type { Size } from "../../types";
+import type { Shape } from "../button/types";
 import { defineComponent, computed } from "vue";
-import { shapes, sizes } from "../button/constants";
-import getClassName from "../../utils/getClassName";
+import { sizes } from "../../constants";
+import { shapes } from "../button/constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -43,16 +45,16 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "skeleton-button"));
+    const classPrefix = useClassPrefix("skeleton-button", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-animated`]: props.animated,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-${props.shape}`]: props.shape,
-        [`${className.value}-${props.size}`]: props.size
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-animated`]: props.animated,
+        [`${classPrefix.value}-block`]: props.block,
+        [`${classPrefix.value}-${props.shape}`]: props.shape,
+        [`${classPrefix.value}-${props.size}`]: props.size
       };
     });
 

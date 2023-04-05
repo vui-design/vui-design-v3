@@ -3,12 +3,12 @@ import type { Formatter } from "./types";
 import { defineComponent, computed } from "vue";
 import { getSlotProp } from "../../utils/vue";
 import VuiNumber from "./number";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -97,15 +97,15 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "statistic"));
+    const classPrefix = useClassPrefix("statistic", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
 
     // 
     const getHeader = () => {
@@ -146,7 +146,7 @@ export default defineComponent({
       return (
         <div class={classes.elBody.value} style={props.bodyStyle}>
           <VuiNumber
-            classNamePrefix={className.value}
+            classPrefix={classPrefix.value}
             value={props.value}
             precision={props.precision}
             placeholder={props.placeholder}

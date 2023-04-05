@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, inject, computed, onBeforeMount, onBeforeUnmount } from "vue";
 import { CardInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import guid from "../../utils/guid";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     }
@@ -37,10 +37,10 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "card-grid"));
+    const classPrefix = useClassPrefix("card-grid", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
+    classes.el = computed(() => `${classPrefix.value}`);
 
     // 渲染
     return () => {

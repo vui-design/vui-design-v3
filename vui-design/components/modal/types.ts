@@ -6,6 +6,7 @@ export type Type = typeof types[number];
 export type AutofocusButton = typeof autofocusButtons[number];
 
 export interface ModalConfig {
+  classPrefix?: string;
   id?: string | number;
   type?: Type;
   defaultVisible?: boolean;

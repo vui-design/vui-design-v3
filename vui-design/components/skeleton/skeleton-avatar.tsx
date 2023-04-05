@@ -1,13 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
-import type { Shape, Size } from "../avatar/types";
+import type { Size } from "../../types";
+import type { Shape } from "../avatar/types";
 import { defineComponent, computed } from "vue";
-import { shapes, sizes } from "../avatar/constants";
-import getClassName from "../../utils/getClassName";
+import { sizes } from "../../constants";
+import { shapes } from "../avatar/constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -40,15 +42,15 @@ export default defineComponent({
     const isPresetSize = computed(() => sizes.includes(props.size as string));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "skeleton-avatar"));
+    const classPrefix = useClassPrefix("skeleton-avatar", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-animated`]: props.animated,
-        [`${className.value}-${props.shape}`]: props.shape,
-        [`${className.value}-${props.size}`]: isPresetSize.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-animated`]: props.animated,
+        [`${classPrefix.value}-${props.shape}`]: props.shape,
+        [`${classPrefix.value}-${props.size}`]: isPresetSize.value
       };
     });
 

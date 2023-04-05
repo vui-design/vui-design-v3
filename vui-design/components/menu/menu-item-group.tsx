@@ -3,14 +3,14 @@ import { defineComponent, provide, inject, reactive, computed } from "vue";
 import { getSlotProp } from "../../utils/vue";
 import { DropdownInjectionKey } from "../dropdown/context";
 import { SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useLevel from "./hooks/useLevel";
 import useIndent from "./hooks/useIndent";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -52,12 +52,12 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item-group" : "menu-item-group"));
+    const classPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu-item-group" : "menu-item-group", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

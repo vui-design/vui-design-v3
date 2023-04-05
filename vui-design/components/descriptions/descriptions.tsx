@@ -1,18 +1,20 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { ScreenSizes } from "../../utils/responsive-observer";
-import type { Layout, Size, LabelAlign } from "./types";
+import type { Size } from "../../types";
+import type { Layout, LabelAlign } from "./types";
 import { defineComponent, computed } from "vue";
 import { getSlotProp } from "../../utils/vue";
-import { layouts, sizes, labelAligns } from "./constants";
+import { sizes } from "../../constants";
+import { layouts, labelAligns } from "./constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useResponsive from "../../hooks/useResponsive";
 import range from "../../utils/range";
-import getClassName from "../../utils/getClassName";
 import utils from "./utils";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -97,27 +99,27 @@ export default defineComponent({
     const tableLayout = computed(() => props.bordered ? "auto" : "fixed");
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "descriptions"));
+    const classPrefix = useClassPrefix("descriptions", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-bordered`]: props.bordered,
-        [`${className.value}-${props.size}`]: props.size
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-bordered`]: props.bordered,
+        [`${classPrefix.value}-${props.size}`]: props.size
       };
     });
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
     classes.elItemLabel = computed(() => {
       return {
-        [`${className.value}-item-label`]: true,
-        [`${className.value}-item-label-colon`]: colon.value
+        [`${classPrefix.value}-item-label`]: true,
+        [`${classPrefix.value}-item-label-colon`]: colon.value
       };
     });
-    classes.elItemContent = computed(() => `${className.value}-item-content`);
+    classes.elItemContent = computed(() => `${classPrefix.value}-item-content`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

@@ -3,13 +3,13 @@ import type { Direction, Justify, Align, Gutter } from "./types";
 import { defineComponent, computed } from "vue";
 import { flatten } from "../../utils/vue";
 import { directions, justifys, aligns, gutters } from "./constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -68,22 +68,22 @@ export default defineComponent({
     const gutter = computed(() => is.string(props.gutter) ? props.gutter : `${props.gutter}px`);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "space"));
+    const classPrefix = useClassPrefix("space", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-${props.direction}`]: props.direction,
-        [`${className.value}-justify-${props.justify}`]: props.direction === "horizontal" && props.justify,
-        [`${className.value}-align-${props.align}`]: props.direction === "horizontal" && props.align,
-        [`${className.value}-with-divider`]: props.direction === "horizontal" && props.divider,
-        [`${className.value}-${props.gutter}`]: withPresetGutter.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-block`]: props.block,
+        [`${classPrefix.value}-${props.direction}`]: props.direction,
+        [`${classPrefix.value}-justify-${props.justify}`]: props.direction === "horizontal" && props.justify,
+        [`${classPrefix.value}-align-${props.align}`]: props.direction === "horizontal" && props.align,
+        [`${classPrefix.value}-with-divider`]: props.direction === "horizontal" && props.divider,
+        [`${classPrefix.value}-${props.gutter}`]: withPresetGutter.value
       };
     });
-    classes.elItem = computed(() => `${className.value}-item`);
-    classes.elDivider = computed(() => `${className.value}-divider`);
+    classes.elItem = computed(() => `${classPrefix.value}-item`);
+    classes.elDivider = computed(() => `${classPrefix.value}-divider`);
 
     // 计算项目和分割线的 style 样式
     let styles: Record<string, ComputedRef> = {};

@@ -1,14 +1,16 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Type, Size } from "./types";
+import type { Size } from "../../types";
+import type { Type } from "./types";
 import { Text, defineComponent, computed } from "vue";
-import { types, sizes } from "./constants";
+import { sizes } from "../../constants";
+import { types } from "./constants";
 import VuiIcon from "../icon";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -98,18 +100,18 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "link"));
+    const classPrefix = useClassPrefix("link", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-underline`]: props.underline,
-        [`${className.value}-loading`]: props.loading,
-        [`${className.value}-disabled`]: props.disabled
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-block`]: props.block,
+        [`${classPrefix.value}-underline`]: props.underline,
+        [`${classPrefix.value}-loading`]: props.loading,
+        [`${classPrefix.value}-disabled`]: props.disabled
       };
     });
 

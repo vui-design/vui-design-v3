@@ -1,17 +1,18 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { GetScrollContainer, AffixState } from "./types";
+import type { GetScrollContainer } from "../../types";
+import type { AffixState } from "./types";
 import { defineComponent, ref, computed, watch, watchEffect, onMounted } from "vue";
 import VuiResizeObserver from "../resize-observer";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import throttleByRaf from "../../utils/throttleByRaf";
 import addEventListener from "../../utils/addEventListener";
-import getClassName from "../../utils/getClassName";
 import utils from "./utils";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -156,12 +157,12 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "affix"));
+    const classPrefix = useClassPrefix("affix", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: affixed.value
+        [`${classPrefix.value}`]: affixed.value
       };
     });
 

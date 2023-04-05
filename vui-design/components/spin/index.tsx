@@ -1,7 +1,8 @@
 import type { App, Plugin, PropType } from "vue";
-import type { SpinWrapperProps, Size, Indicator } from "./types";
+import type { Size } from "../../types";
+import type { SpinWrapperProps, Indicator } from "./types";
 import { createVNode, render, defineComponent, ref } from 'vue';
-import { sizes } from "./constants";
+import { sizes } from "../../constants";
 import Spin from "./spin";
 import usePopupManager from "../../hooks/usePopupManager";
 import is from "../../utils/is";

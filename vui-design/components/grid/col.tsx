@@ -2,8 +2,8 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Flex, ColResponsive } from "./types";
 import { defineComponent, inject, computed } from "vue";
 import { RowInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 const parseFlex = function(flex: Flex): string {
   if (is.number(flex)) {
@@ -20,7 +20,7 @@ const parseFlex = function(flex: Flex): string {
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -102,19 +102,19 @@ export default defineComponent({
     const vuiRow = inject(RowInjectionKey, undefined);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "col"));
+    const classPrefix = useClassPrefix("col", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       let classNames: string[] = [];
 
-      classNames.push(`${className.value}`);
+      classNames.push(`${classPrefix.value}`);
 
       ["span", "offset", "push", "pull", "order"].forEach(key => {
         const value = props[key];
 
         if (is.string(value) || is.number(value)) {
-          classNames.push(key === "span" ? `${className.value}-${value}` : `${className.value}-${key}-${value}`);
+          classNames.push(key === "span" ? `${classPrefix.value}-${value}` : `${classPrefix.value}-${key}-${value}`);
         }
       });
 
@@ -122,11 +122,11 @@ export default defineComponent({
         let size = props[breakpoint];
 
         if (is.string(size) || is.number(size)) {
-          classNames.push(`${className.value}-${breakpoint}-${size}`);
+          classNames.push(`${classPrefix.value}-${breakpoint}-${size}`);
         }
         else if (is.object(size)) {
           Object.keys(size).forEach(key => {
-            classNames.push(key === "span" ? `${className.value}-${breakpoint}-${size[key]}` : `${className.value}-${breakpoint}-${key}-${size[key]}`);
+            classNames.push(key === "span" ? `${classPrefix.value}-${breakpoint}-${size[key]}` : `${classPrefix.value}-${breakpoint}-${key}-${size[key]}`);
           });
         }
       });

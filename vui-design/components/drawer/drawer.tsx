@@ -3,22 +3,22 @@ import type { ButtonProps } from "../button";
 import type { AutofocusButton, Placement } from "./types";
 import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick } from "vue";
 import { useI18n } from "../../locale";
+import { keyCodes } from "../../constants";
 import { autofocusButtons, placements } from "./constants";
 import { DrawerInjectionKey } from "./context";
 import VuiLazyRender from "../lazy-render";
 import VuiIcon from "../icon";
 import VuiButton from "../button";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import is from "../../utils/is";
 import guid from "../../utils/guid";
-import keyCodes from "../../utils/keyCodes";
 import addScrollbarEffect from "../../utils/addScrollbarEffect";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -399,25 +399,25 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "drawer"));
+    const classPrefix = useClassPrefix("drawer", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.elBackdrop = computed(() => `${className.value}-backdrop`);
-    classes.elWrapper = computed(() => `${className.value}-wrapper`);
+    classes.elBackdrop = computed(() => `${classPrefix.value}-backdrop`);
+    classes.elWrapper = computed(() => `${classPrefix.value}-wrapper`);
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-with-header`]: context.slots.icon || props.icon || context.slots.title || props.title,
-        [`${className.value}-with-footer`]: props.footer !== false,
-        [`${className.value}-${props.placement}`]: props.placement
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-with-header`]: context.slots.icon || props.icon || context.slots.title || props.title,
+        [`${classPrefix.value}-with-footer`]: props.footer !== false,
+        [`${classPrefix.value}-${props.placement}`]: props.placement
       };
     });
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elBtnClose = computed(() => `${className.value}-btn-close`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elBtnClose = computed(() => `${classPrefix.value}-btn-close`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

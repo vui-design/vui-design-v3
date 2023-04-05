@@ -1,5 +1,4 @@
 export const types: string[] = ["line", "circle", "dashboard", "steps"];
-export const sizes: string[] = ["small", "medium", "large"];
 export const statuses: string[] = ["normal", "active", "exception", "success"];
 export const strokeLinecaps: string[] = ["round", "square"];
 

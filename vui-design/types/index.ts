@@ -1,6 +1,7 @@
-import type { PropType, Ref, VNode } from "vue";
+import type { SetupContext, Ref, VNode } from "vue";
+import type { sizes } from "../constants";
 
-declare type VueNode = VNode | string | number | boolean | null | undefined | void;
+export type VueNode = VNode | string | number | boolean | null | undefined | void;
 
 export type VueNodeAtom = VueNode | VueNode[] | JSX.Element;
 
@@ -20,9 +21,10 @@ export interface Slots {
   value?: VNode[];
 };
 
-export interface PropOptions<T = any, D = T> {
-  type?: PropType<T> | true | null;
-  required?: boolean;
-  default?: D | DefaultFactory<D> | null | undefined | object;
-  validator?(value: unknown): boolean;
-};
+export type Size = typeof sizes[number];
+
+export type GetPopupContainer = string | HTMLElement;
+
+export type GetScrollContainer = () => Window | HTMLElement;
+
+export type Authorize = (value: string | Array<string>, attrs?: SetupContext["attrs"]) => boolean;

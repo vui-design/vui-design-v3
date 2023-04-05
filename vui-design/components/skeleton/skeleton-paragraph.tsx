@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import { defineComponent, computed } from "vue";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import range from "../../utils/range";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -49,13 +49,13 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "skeleton-paragraph"));
+    const classPrefix = useClassPrefix("skeleton-paragraph", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-animated`]: props.animated
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-animated`]: props.animated
       };
     });
 

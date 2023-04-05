@@ -3,12 +3,12 @@ import type { Type, Color, Placement } from "./types";
 import { defineComponent, computed } from "vue";
 import { getSlotProp } from "../..//utils/vue";
 import { types, colors, placements } from "./constants";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -44,20 +44,20 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "ribbon"));
+    const classPrefix = useClassPrefix("ribbon", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type && !props.color,
-        [`${className.value}-${props.color}`]: props.color && colors.includes(props.color),
-        [`${className.value}-placement-${props.placement}`]: true
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type && !props.color,
+        [`${classPrefix.value}-${props.color}`]: props.color && colors.includes(props.color),
+        [`${classPrefix.value}-placement-${props.placement}`]: true
       };
     });
-    classes.elText = computed(() => `${className.value}-text`);
-    classes.elCorner = computed(() => `${className.value}-corner`);
-    classes.elWrapper = computed(() => `${className.value}-wrapper`);
+    classes.elText = computed(() => `${classPrefix.value}-text`);
+    classes.elCorner = computed(() => `${classPrefix.value}-corner`);
+    classes.elWrapper = computed(() => `${classPrefix.value}-wrapper`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

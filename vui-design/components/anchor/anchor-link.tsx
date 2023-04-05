@@ -2,13 +2,13 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import { defineComponent, inject, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { getSlotProp } from "../../utils/vue";
 import { AnchorInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -42,23 +42,6 @@ export default defineComponent({
     // 状态
     const active = computed(() => vuiAnchor?.link === props.href);
 
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "anchor-link"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-active`]: active.value
-      };
-    });
-    classes.elTitle = computed(() => {
-      return {
-        [`${className.value}-title`]: true,
-        [`${className.value}-title-active`]: active.value
-      };
-    });
-
     // 
     watch(() => props.href, (newValue, oldValue) => {
       nextTick(() => {
@@ -85,6 +68,23 @@ export default defineComponent({
     // 
     onBeforeUnmount(() => {
       vuiAnchor?.removeLink(props.href as string);
+    });
+
+    // 计算 class 样式
+    const classPrefix = useClassPrefix("anchor-link", props);
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-active`]: active.value
+      };
+    });
+    classes.elTitle = computed(() => {
+      return {
+        [`${classPrefix.value}-title`]: true,
+        [`${classPrefix.value}-title-active`]: active.value
+      };
     });
 
     // 渲染

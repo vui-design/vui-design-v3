@@ -7,7 +7,7 @@ export type Prefix = string | Slot;
 export type Suffix = string | Slot;
 
 export interface NumberProps {
-  classNamePrefix?: string;
+  classPrefix?: string;
   value: Value;
   precision?: number;
   placeholder?: string;

@@ -2,12 +2,12 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vu
 import { defineComponent, computed } from "vue";
 import { getSlotProp } from "../../utils/vue";
 import VuiAvatar from "../avatar";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -36,14 +36,14 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "list-item-meta"));
+    const classPrefix = useClassPrefix("list-item-meta", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elAvatar = computed(() => `${className.value}-avatar`);
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elDescription = computed(() => `${className.value}-description`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elAvatar = computed(() => `${classPrefix.value}-avatar`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elDescription = computed(() => `${classPrefix.value}-description`);
 
     // 渲染
     return () => {

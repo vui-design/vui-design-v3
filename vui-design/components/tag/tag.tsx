@@ -1,14 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Size, Color } from "./types";
 import { defineComponent, ref, computed } from "vue";
-import { sizes, colors } from "./constants";
+import { sizes } from "../../constants";
+import { colors } from "./constants";
 import VuiIcon from "../icon";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -107,21 +108,21 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "tag"));
+    const classPrefix = useClassPrefix("tag", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       const checkedStatus = checked.value ? "checked" : "unchecked";
 
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-${props.color}`]: props.color && colors.includes(props.color),
-        [`${className.value}-${checkedStatus}`]: props.checkable
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-${props.color}`]: props.color && colors.includes(props.color),
+        [`${classPrefix.value}-${checkedStatus}`]: props.checkable
       };
     });
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elBtnClose = computed(() => `${className.value}-btn-close`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elBtnClose = computed(() => `${classPrefix.value}-btn-close`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

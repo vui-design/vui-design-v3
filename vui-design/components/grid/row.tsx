@@ -4,15 +4,15 @@ import type { Justify, Align, Gutter } from "./types";
 import { defineComponent, provide, ref, reactive, computed, onMounted, onBeforeUnmount } from "vue";
 import { justifys, aligns } from "./constants";
 import { RowInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useSupportRowGap from "../../hooks/useSupportRowGap";
 import responsiveObserver, { breakpoints } from "../../utils/responsive-observer";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -110,15 +110,15 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "row"));
+    const classPrefix = useClassPrefix("row", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-justify-${props.justify}`]: props.justify,
-        [`${className.value}-align-${props.align}`]: props.align,
-        [`${className.value}-nowrap`]: props.wrap === false
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-justify-${props.justify}`]: props.justify,
+        [`${classPrefix.value}-align-${props.align}`]: props.align,
+        [`${classPrefix.value}-nowrap`]: props.wrap === false
       };
     });
 

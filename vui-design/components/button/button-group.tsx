@@ -1,14 +1,16 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Type, Shape, Size } from "./types";
+import type { Size } from "../../types";
+import type { Type, Shape } from "./types";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
-import { types, shapes, sizes } from "./constants";
+import { sizes } from "../../constants";
+import { types, shapes } from "./constants";
 import { ButtonGroupInjectionKey } from "./context";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -62,10 +64,10 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "button-group"));
+    const classPrefix = useClassPrefix("button-group", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
+    classes.el = computed(() => `${classPrefix.value}`);
 
     // 渲染
     return () => {

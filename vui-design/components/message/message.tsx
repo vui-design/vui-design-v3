@@ -3,13 +3,13 @@ import type { Type } from "./types";
 import { defineComponent, ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import { types } from "./constants";
 import VuiIcon from "../icon";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -98,19 +98,19 @@ export default defineComponent({
     onBeforeUnmount(() => countdown.stop());
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "message"));
+    const classPrefix = useClassPrefix("message", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type,
-        [`${className.value}-with-background`]: props.background
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type,
+        [`${classPrefix.value}-with-background`]: props.background
       };
     });
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elBtnClose = computed(() => `${className.value}-btn-close`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
+    classes.elBtnClose = computed(() => `${classPrefix.value}-btn-close`);
 
     // 渲染
     return () => {

@@ -624,9 +624,6 @@ export default {
       "example-affix-change": "监听状态变化",
       "example-affix-container": "滚动容器",
 
-      "example-authorizer-basic-usage": "基本用法",
-      "example-authorizer-toggle": "切换访问权限",
-
       "example-backtop-basic-usage": "基本用法",
       "example-backtop-custom": "自定义样式",
 

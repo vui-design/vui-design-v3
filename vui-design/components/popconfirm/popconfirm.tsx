@@ -8,13 +8,13 @@ import { triggers, placements } from "../popup/constants";
 import VuiIcon from "../icon";
 import VuiButton from "../button";
 import VuiPopup from "../popup";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -218,10 +218,10 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "popconfirm"));
+    const classPrefix = useClassPrefix("popconfirm", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.elIcon = computed(() => `${className.value}-icon`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
 
     // 渲染
     return () => {
@@ -259,7 +259,7 @@ export default defineComponent({
       // 
       return (
         <VuiPopup
-          classNamePrefix={props.classNamePrefix}
+          classPrefix={props.classPrefix}
           name="popconfirm"
           visible={visible.value}
           trigger={props.trigger}

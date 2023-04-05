@@ -6,12 +6,12 @@ import { triggers, placements } from "../popup/constants";
 import { BreadcrumbInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiDropdown from "../dropdown";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -143,18 +143,18 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "breadcrumb-item"));
+    const classPrefix = useClassPrefix("breadcrumb-item", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-with-menu`]: context.slots.menu
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-with-menu`]: context.slots.menu
       };
     });
-    classes.elLink = computed(() => `${className.value}-link`);
-    classes.elArrow = computed(() => `${className.value}-arrow`);
-    classes.elSeparator = computed(() => `${className.value}-separator`);
+    classes.elLink = computed(() => `${classPrefix.value}-link`);
+    classes.elArrow = computed(() => `${classPrefix.value}-arrow`);
+    classes.elSeparator = computed(() => `${classPrefix.value}-separator`);
 
     // 渲染
     return () => {
@@ -217,7 +217,7 @@ export default defineComponent({
           {
             context.slots.menu ? (
               <VuiDropdown
-                classNamePrefix={props.classNamePrefix}
+                classPrefix={props.classPrefix}
                 visible={visible.value}
                 trigger={props.trigger}
                 getPopupContainer={props.getPopupContainer}

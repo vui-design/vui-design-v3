@@ -5,12 +5,12 @@ import { defineComponent, ref, computed } from "vue";
 import { triggers, placements } from "../popup/constants";
 import { colors } from "./constants";
 import VuiPopup from "../popup";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -138,12 +138,12 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "tooltip"));
+    const classPrefix = useClassPrefix("tooltip", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}-${props.color}`]: withPresetColor.value
+        [`${classPrefix.value}-${props.color}`]: withPresetColor.value
       };
     });
 
@@ -186,7 +186,7 @@ export default defineComponent({
 
       return (
         <VuiPopup
-          classNamePrefix={props.classNamePrefix}
+          classPrefix={props.classPrefix}
           name="tooltip"
           class={classes.el.value}
           style={styles.el.value}

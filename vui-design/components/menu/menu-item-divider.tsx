@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import { defineComponent, inject, computed } from "vue";
 import { DropdownInjectionKey } from "../dropdown/context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -34,13 +34,13 @@ export default defineComponent({
     const vuiDropdown = inject(DropdownInjectionKey, undefined);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item-divider" : "menu-item-divider"));
+    const classPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu-item-divider" : "menu-item-divider", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-dashed`]: props.dashed
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-dashed`]: props.dashed
       };
     });
 

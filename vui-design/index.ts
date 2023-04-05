@@ -13,6 +13,7 @@ import pkg from "../package.json";
 import locale from "./locale";
 
 // General
+import ConfigProvider from "./components/config-provider";
 import Icon from "./components/icon";
 import Button, { ButtonGroup } from "./components/button";
 import Link from "./components/link";
@@ -89,7 +90,6 @@ import Skeleton, { SkeletonAvatar, SkeletonTitle, SkeletonParagraph, SkeletonInp
 import Spin from "./components/spin";
 // Other
 import Affix from "./components/affix";
-import Authorizer from "./components/authorizer";
 import Backtop from "./components/backtop";
 import Collapser from "./components/collapser";
 import Fullscreen from "./components/fullscreen";
@@ -99,6 +99,7 @@ import Loading from "./components/loading";
 
 const components = [
   // General
+  ConfigProvider,
   Icon,
   Button,
   ButtonGroup,
@@ -203,7 +204,6 @@ const components = [
   Spin,
   // Other
   Affix,
-  Authorizer,
   Backtop,
   Collapser,
   Fullscreen,
@@ -211,7 +211,7 @@ const components = [
   ResizeObserver
 ];
 
-const install = function(app: App, options = {}) {
+const install = function(app: App) {
   components.forEach(component => {
     if (component.install) {
       app.use(component);
@@ -221,6 +221,7 @@ const install = function(app: App, options = {}) {
 
 export {
   // General
+  ConfigProvider,
   Icon,
   Button,
   ButtonGroup,
@@ -325,7 +326,6 @@ export {
   Spin,
   // Other
   Affix,
-  Authorizer,
   Backtop,
   Collapser,
   Fullscreen,

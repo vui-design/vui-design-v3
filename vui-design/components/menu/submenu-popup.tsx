@@ -8,15 +8,15 @@ import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey, SubmenuInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiPopup from "../popup";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useKey from "../../hooks/useKey";
 import useIndent from "./hooks/useIndent";
 import useRefs from "./hooks/useRefs";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -121,21 +121,21 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-submenu" : "menu-submenu"));
+    const classPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu-submenu" : "menu-submenu", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-open`]: open.value,
-        [`${className.value}-selected`]: selected.value,
-        [`${className.value}-disabled`]: props.disabled
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-open`]: open.value,
+        [`${classPrefix.value}-selected`]: selected.value,
+        [`${classPrefix.value}-disabled`]: props.disabled
       };
     });
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elArraw = computed(() => vuiMenu?.mode === "horizontal" && props.level === 1 ? `${className.value}-arrow-vertical` : `${className.value}-arrow-horizontal`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elArraw = computed(() => vuiMenu?.mode === "horizontal" && props.level === 1 ? `${classPrefix.value}-arrow-vertical` : `${classPrefix.value}-arrow-horizontal`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};
@@ -151,15 +151,15 @@ export default defineComponent({
     });
 
     // 计算内嵌菜单 class 样式
-    const mClassName = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu" : "menu"));
-    let mClasses: Record<string, ComputedRef> = {};
+    const menuClassPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu" : "menu", props);
+    let menuClasses: Record<string, ComputedRef> = {};
 
-    mClasses.el = computed(() => {
+    menuClasses.el = computed(() => {
       return {
-        [`${mClassName.value}`]: true,
-        [`${mClassName.value}-popup`]: true,
-        [`${mClassName.value}-vertical`]: true,
-        [`${mClassName.value}-${vuiMenu?.color}`]: vuiMenu?.color
+        [`${menuClassPrefix.value}`]: true,
+        [`${menuClassPrefix.value}-popup`]: true,
+        [`${menuClassPrefix.value}-vertical`]: true,
+        [`${menuClassPrefix.value}-${vuiMenu?.color}`]: vuiMenu?.color
       };
     });
 
@@ -198,7 +198,7 @@ export default defineComponent({
       // 
       const slots = {
         content: () => (
-          <div class={mClasses.el.value}>
+          <div class={menuClasses.el.value}>
             {context.slots.default?.()}
           </div>
         )
@@ -208,7 +208,7 @@ export default defineComponent({
       return (
         <div class={classes.el.value}>
           <VuiPopup
-            classNamePrefix={props.classNamePrefix}
+            classPrefix={props.classPrefix}
             name={vuiDropdown ? "dropdown-menu-submenu-body" : "menu-submenu-body"}
             visible={open.value}
             trigger={props.trigger}

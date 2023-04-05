@@ -5,15 +5,15 @@ import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey, SubmenuInjectionKey, MenuItemGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiTooltip from "../tooltip";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useKey from "../../hooks/useKey";
 import useLevel from "./hooks/useLevel";
 import useIndent from "./hooks/useIndent";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -101,19 +101,19 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu-item" : "menu-item"));
+    const classPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu-item" : "menu-item", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-danger`]: props.danger,
-        [`${className.value}-selected`]: selected.value,
-        [`${className.value}-disabled`]: disabled.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-danger`]: props.danger,
+        [`${classPrefix.value}-selected`]: selected.value,
+        [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

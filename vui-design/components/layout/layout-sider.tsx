@@ -6,16 +6,16 @@ import { breakpoints } from "../../utils/responsive-observer";
 import { colors } from "./constants";
 import { LayoutInjectionKey, LayoutSiderInjectionKey } from "./context";
 import VuiIcon from "../icon";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import is from "../../utils/is";
 import guid from "../../utils/guid";
 import getScrollbarSize from "../../utils/getScrollbarSize";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -149,19 +149,19 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "layout-sider"));
+    const classPrefix = useClassPrefix("layout-sider", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${color.value}`]: color.value && colors.includes(color.value)
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${color.value}`]: color.value && colors.includes(color.value)
       }
     });
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elBodyScroller = computed(() => `${className.value}-body-scroller`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
-    classes.elTrigger = computed(() => `${className.value}-trigger`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elBodyScroller = computed(() => `${classPrefix.value}-body-scroller`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
+    classes.elTrigger = computed(() => `${classPrefix.value}-trigger`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

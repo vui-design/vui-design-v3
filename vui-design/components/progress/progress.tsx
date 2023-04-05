@@ -1,19 +1,21 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Type, Size, Success, Status, StrokeLinecap, Formatter } from "./types";
+import type { Size } from "../../types";
+import type { Type, Success, Status, StrokeLinecap, Formatter } from "./types";
 import { defineComponent, computed } from "vue";
-import { types, sizes, statuses, widths, strokeLinecaps, strokeWidths } from "./constants";
+import { sizes } from "../../constants";
+import { types, statuses, widths, strokeLinecaps, strokeWidths } from "./constants";
 import VuiIcon from "../icon";
 import VuiProgressLine from "./progress-line";
 import VuiProgressCircle from "./progress-circle";
 import VuiProgressSteps from "./progress-steps";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import clamp from "../../utils/clamp";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -124,10 +126,10 @@ export default defineComponent({
     const gapDegree = computed(() => props.type === "dashboard" ? clamp(props.gapDegree, 0, 295) : 0);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "progress"));
+    const classPrefix = useClassPrefix("progress", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.elInfo = computed(() => `${className.value}-info`);
+    classes.elInfo = computed(() => `${classPrefix.value}-info`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};
@@ -175,7 +177,7 @@ export default defineComponent({
     return () => {
       const info = getProgressInfo();
       const attributes = {
-        classNamePrefix: props.classNamePrefix,
+        classPrefix: props.classPrefix,
         size: props.size,
         percentage: percentage.value,
         success: props.success,

@@ -1,22 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Status } from "./types";
 import { defineComponent, computed } from "vue";
-import { statuses } from "./constants";
+import { statuses, iconTypes } from "./constants";
 import VuiIcon from "../icon";
 import VuiResultException from "./result-exception";
-import getClassName from "../../utils/getClassName";
-
-const iconTypes = {
-  info: "info-filled",
-  warning: "warning-filled",
-  success: "checkmark-circle-filled",
-  error: "crossmark-circle-filled"
-};
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -56,20 +49,20 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "result"));
+    const classPrefix = useClassPrefix("result", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.status}`]: props.status
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.status}`]: props.status
       };
     });
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elDescription = computed(() => `${className.value}-description`);
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elDescription = computed(() => `${classPrefix.value}-description`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
 
     // 渲染
     return () => {

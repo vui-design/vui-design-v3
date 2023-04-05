@@ -12,14 +12,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-icon-basic-usage .vui-icon { margin-right:8px; }
+  .example-icon-basic-usage .vui-icon { margin-right:16px; }
 </style>
 `;
 

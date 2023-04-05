@@ -13,7 +13,7 @@ import useLevel from "./hooks/useLevel";
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -81,7 +81,7 @@ export default defineComponent({
       if (vuiMenu?.mode === "horizontal" || vuiMenu?.mode === "vertical" || (vuiMenu?.mode === "inline" && vuiMenu?.collapsed)) {
         return (
           <VuiSubmenuPopup
-            classNamePrefix={props.classNamePrefix}
+            classPrefix={props.classPrefix}
             key={key.value}
             level={level.value}
             icon={props.icon}
@@ -97,7 +97,7 @@ export default defineComponent({
       else {
         return (
           <VuiSubmenuInline
-            classNamePrefix={props.classNamePrefix}
+            classPrefix={props.classPrefix}
             key={key.value}
             level={level.value}
             icon={props.icon}

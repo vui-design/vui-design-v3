@@ -1,15 +1,17 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Size, Status } from "./types";
+import type { Size } from "../../types";
+import type { Status } from "./types";
 import { defineComponent, computed } from "vue";
-import { sizes, statuses } from "./constants";
+import { sizes } from "../../constants";
+import { statuses } from "./constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import range from "../../utils/range";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -59,21 +61,21 @@ export default defineComponent({
     const activeStep = computed(() => Math.round(props.steps * ((props.percentage ?? 0) / 100)));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "progress"));
+    const classPrefix = useClassPrefix("progress", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-steps`]: true,
-        [`${className.value}-with-info`]: context.slots.default,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-status-${props.status}`]: props.status
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-steps`]: true,
+        [`${classPrefix.value}-with-info`]: context.slots.default,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-status-${props.status}`]: props.status
       };
     });
-    classes.elBar = computed(() => `${className.value}-bar`);
-    classes.elBarStep = computed(() => `${className.value}-bar-step`);
-    classes.elInfo = computed(() => `${className.value}-info`);
+    classes.elBar = computed(() => `${classPrefix.value}-bar`);
+    classes.elBarStep = computed(() => `${classPrefix.value}-bar-step`);
+    classes.elInfo = computed(() => `${classPrefix.value}-info`);
 
     // 渲染
     return () => {
@@ -88,7 +90,7 @@ export default defineComponent({
                 };
 
                 if (stepIndex <= (activeStep.value - 1)) {
-                  stepClassName = `${className.value}-bar-step-active`;
+                  stepClassName = `${classPrefix.value}-bar-step-active`;
 
                   if (is.string(props.strokeColor)) {
                     stepStylle.backgroundColor = props.strokeColor;

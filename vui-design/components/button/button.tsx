@@ -1,16 +1,18 @@
 import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { HTMLType, Type, Shape, Size } from "./types";
+import type { Size } from "../../types";
+import type { HTMLType, Type, Shape } from "./types";
 import { Text, defineComponent, inject, ref, computed, onMounted, onBeforeUnmount } from "vue";
-import { types, shapes, sizes } from "./constants";
+import { sizes } from "../../constants";
+import { types, shapes } from "./constants";
 import { FormInjectionKey } from "../form/context";
 import { ButtonGroupInjectionKey, InputGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -146,19 +148,19 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "button"));
+    const classPrefix = useClassPrefix("button", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${type.value}`]: type.value,
-        [`${className.value}-block`]: props.block,
-        [`${className.value}-ghost`]: ghost.value,
-        [`${className.value}-${shape.value}`]: shape.value,
-        [`${className.value}-${size.value}`]: size.value,
-        [`${className.value}-loading`]: props.loading,
-        [`${className.value}-disabled`]: disabled.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${type.value}`]: type.value,
+        [`${classPrefix.value}-block`]: props.block,
+        [`${classPrefix.value}-ghost`]: ghost.value,
+        [`${classPrefix.value}-${shape.value}`]: shape.value,
+        [`${classPrefix.value}-${size.value}`]: size.value,
+        [`${classPrefix.value}-loading`]: props.loading,
+        [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
 

@@ -5,12 +5,12 @@ import is from "../../utils/is";
 import padEnd from "../../utils/padEnd";
 
 const Number: FunctionalComponent<NumberProps> = props => {
-  const { classNamePrefix, value, precision, placeholder, decimalSeparator = "", groupSeparator = "", formatter } = props;
+  const { classPrefix, value, precision, placeholder, decimalSeparator = "", groupSeparator = "", formatter } = props;
   let children: VueNodeAtom[] = [];
 
   if (is.null(value) || is.undefined(value)) {
     children.push(
-      <div class={`${classNamePrefix}-placeholder`}>
+      <div class={`${classPrefix}-placeholder`}>
         {placeholder}
       </div>
     );
@@ -21,7 +21,7 @@ const Number: FunctionalComponent<NumberProps> = props => {
 
     if (prefix) {
       children.push(
-        <div class={`${classNamePrefix}-value-prefix`}>{prefix}</div>
+        <div class={`${classPrefix}-value-prefix`}>{prefix}</div>
       );
     }
 
@@ -48,7 +48,7 @@ const Number: FunctionalComponent<NumberProps> = props => {
         }
 
         children.push(
-          <div key="int" class={`${classNamePrefix}-value-int`}>
+          <div key="int" class={`${classPrefix}-value-int`}>
             {negative}
             {int}
           </div>
@@ -56,7 +56,7 @@ const Number: FunctionalComponent<NumberProps> = props => {
 
         if (decimal) {
           children.push(
-            <div key="decimal" class={`${classNamePrefix}-value-decimal`}>
+            <div key="decimal" class={`${classPrefix}-value-decimal`}>
               {decimal}
             </div>
           );
@@ -69,13 +69,13 @@ const Number: FunctionalComponent<NumberProps> = props => {
 
     if (suffix) {
       children.push(
-        <div class={`${classNamePrefix}-value-suffix`}>{suffix}</div>
+        <div class={`${classPrefix}-value-suffix`}>{suffix}</div>
       );
     }
   }
 
   return (
-    <div class={`${classNamePrefix}-value`} style={props.style}>{children}</div>
+    <div class={`${classPrefix}-value`} style={props.style}>{children}</div>
   );
 };
 

@@ -6,13 +6,13 @@ import VuiAvatar from "../avatar";
 import VuiBreadcrumb, { BreadcrumbItem as VuiBreadcrumbItem } from "../breadcrumb";
 import VuiIcon from "../icon";
 import VuiTag from "../tag";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -76,27 +76,27 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "page-header"));
+    const classPrefix = useClassPrefix("page-header", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-with-footer`]: context.slots.footer,
-        [`${className.value}-ghost`]: props.ghost
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-with-footer`]: context.slots.footer,
+        [`${classPrefix.value}-ghost`]: props.ghost
       };
     });
-    classes.elBreadcrumb = computed(() => `${className.value}-breadcrumb`);
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elHeaderMain = computed(() => `${className.value}-header-main`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
-    classes.elBack = computed(() => `${className.value}-back`);
-    classes.elAvatar = computed(() => `${className.value}-avatar`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elSubTitle = computed(() => `${className.value}-sub-title`);
-    classes.elTags = computed(() => `${className.value}-tags`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
+    classes.elBreadcrumb = computed(() => `${classPrefix.value}-breadcrumb`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elHeaderMain = computed(() => `${classPrefix.value}-header-main`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
+    classes.elBack = computed(() => `${classPrefix.value}-back`);
+    classes.elAvatar = computed(() => `${classPrefix.value}-avatar`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elSubTitle = computed(() => `${classPrefix.value}-sub-title`);
+    classes.elTags = computed(() => `${classPrefix.value}-tags`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
 
     // 后退按钮点击事件回调
     const handleBack = (e: MouseEvent) => {

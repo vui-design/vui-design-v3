@@ -2,7 +2,8 @@ import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } f
 import type { Trigger, Placement } from "../popup/types";
 import type { Color } from "../tooltip/types";
 import type { ScreenSizes } from "../../utils/responsive-observer";
-import type { Shape, Size } from "./types";
+import type { Size } from "../../types";
+import type { Shape } from "./types";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
 import { flatten } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
@@ -12,12 +13,12 @@ import { AvatarGroupInjectionKey } from "./context";
 import VuiTooltip from "../tooltip";
 import VuiAvatar from "../avatar";
 import VuiSpace from "../space";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -77,11 +78,11 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "avatar-group"));
+    const classPrefix = useClassPrefix("avatar-group", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elPlaceholder = computed(() => `${className.value}-placeholder`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elPlaceholder = computed(() => `${classPrefix.value}-placeholder`);
 
     // 渲染
     return () => {

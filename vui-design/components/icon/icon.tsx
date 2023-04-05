@@ -1,13 +1,13 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes, ComputedRef } from "vue";
 import { defineComponent, computed } from "vue";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import "../../icons";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -42,13 +42,13 @@ export default defineComponent({
     const fontSize = computed(() => is.string(props.size) ? props.size : `${props.size}px`);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "icon"));
+    const classPrefix = useClassPrefix("icon", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.type}`]: props.type
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.type}`]: props.type
       };
     });
 

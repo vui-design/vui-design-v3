@@ -1,19 +1,21 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Breakpoint, ScreenSizes } from "../../utils/responsive-observer";
-import type { Shape, Size, CrossOrigin } from "./types";
+import type { Size } from "../../types";
+import type { Shape, CrossOrigin } from "./types";
 import { defineComponent, inject, ref, computed, nextTick, onMounted, onUpdated } from "vue";
 import { breakpoints } from "../../utils/responsive-observer";
-import { shapes, sizes, crossOrigins } from "./constants";
+import { sizes } from "../../constants";
+import { shapes, crossOrigins } from "./constants";
 import { AvatarGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useResponsive from "../../hooks/useResponsive";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -123,18 +125,18 @@ export default defineComponent({
     onUpdated(() => nextTick(() => response()));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "avatar"));
+    const classPrefix = useClassPrefix("avatar", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-with-${type.value}`]: type.value,
-        [`${className.value}-${shape.value}`]: shape.value,
-        [`${className.value}-${size.value}`]: isPresetSize.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-with-${type.value}`]: type.value,
+        [`${classPrefix.value}-${shape.value}`]: shape.value,
+        [`${classPrefix.value}-${size.value}`]: isPresetSize.value
       };
     });
-    classes.elChildren = computed(() => `${className.value}-${type.value}`);
+    classes.elChildren = computed(() => `${classPrefix.value}-${type.value}`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

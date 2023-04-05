@@ -6,13 +6,13 @@ import { statuses, correctLevels } from "./constants";
 import QRCode from "arale-qrcode";
 import VuiSpin from "../spin";
 import VuiLink from "../link";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import getStyle from "../../utils/getStyle";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -156,17 +156,17 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "qrcode"));
+    const classPrefix = useClassPrefix("qrcode", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-bordered`]: props.bordered,
-        [`${className.value}-${props.status}`]: props.status
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-bordered`]: props.bordered,
+        [`${classPrefix.value}-${props.status}`]: props.status
       };
     });
-    classes.elMask = computed(() => `${className.value}-mask`);
+    classes.elMask = computed(() => `${classPrefix.value}-mask`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

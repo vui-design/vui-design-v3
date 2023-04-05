@@ -7,12 +7,12 @@ import { CardInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import VuiRow from "../row";
 import VuiCol from "../col";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -87,29 +87,29 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "card"));
+    const classPrefix = useClassPrefix("card", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-bordered`]: props.bordered,
-        [`${className.value}-shadow-${props.shadow}`]: props.shadow,
-        [`${className.value}-with-grid`]: gridRefs.value.length > 0
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-bordered`]: props.bordered,
+        [`${classPrefix.value}-shadow-${props.shadow}`]: props.shadow,
+        [`${classPrefix.value}-with-grid`]: gridRefs.value.length > 0
       };
     });
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elIcon = computed(() => `${className.value}-icon`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
-    classes.elCover = computed(() => `${className.value}-cover`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elLoading = computed(() => `${className.value}-loading`);
-    classes.elLoadingBlock = computed(() => `${className.value}-loading-block`);
-    classes.elActions = computed(() => `${className.value}-actions`);
-    classes.elAction = computed(() => `${className.value}-action`);
-    classes.elActionDivider = computed(() => `${className.value}-action-divider`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
+    classes.elCover = computed(() => `${classPrefix.value}-cover`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elLoading = computed(() => `${classPrefix.value}-loading`);
+    classes.elLoadingBlock = computed(() => `${classPrefix.value}-loading-block`);
+    classes.elActions = computed(() => `${classPrefix.value}-actions`);
+    classes.elAction = computed(() => `${classPrefix.value}-action`);
+    classes.elActionDivider = computed(() => `${classPrefix.value}-action-divider`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
 
     // 渲染
     return () => {

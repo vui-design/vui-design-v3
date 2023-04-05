@@ -1,15 +1,17 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { StrokeLinecapProperty } from "csstype";
-import type { Size, Success, Status, StrokeLinecap } from "./types";
+import type { Size } from "../../types";
+import type { Success, Status, StrokeLinecap } from "./types";
 import { defineComponent, computed } from "vue";
-import { sizes, statuses, strokeLinecaps } from "./constants";
+import { sizes } from "../../constants";
+import { statuses, strokeLinecaps } from "./constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -81,22 +83,22 @@ export default defineComponent({
     const perimeter = computed(() => 2 * Math.PI * radius.value);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "progress"));
+    const classPrefix = useClassPrefix("progress", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-circle`]: true,
-        [`${className.value}-with-info`]: context.slots.default,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-status-${props.status}`]: props.status
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-circle`]: true,
+        [`${classPrefix.value}-with-info`]: context.slots.default,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-status-${props.status}`]: props.status
       };
     });
-    classes.elBar = computed(() => `${className.value}-bar`);
-    classes.elBarTrail = computed(() => `${className.value}-bar-trail`);
-    classes.elBarStroke = computed(() => `${className.value}-bar-stroke`);
-    classes.elBarStrokeSuccess = computed(() => `${className.value}-bar-stroke-success`);
+    classes.elBar = computed(() => `${classPrefix.value}-bar`);
+    classes.elBarTrail = computed(() => `${classPrefix.value}-bar-trail`);
+    classes.elBarStroke = computed(() => `${classPrefix.value}-bar-stroke`);
+    classes.elBarStrokeSuccess = computed(() => `${classPrefix.value}-bar-stroke-success`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

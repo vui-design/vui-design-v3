@@ -1,14 +1,15 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Size, Indicator } from "./types";
+import type { Size } from "../../types";
+import type { Indicator } from "./types";
 import { Transition, defineComponent, ref, computed, watch, onBeforeUnmount } from "vue";
-import { sizes } from "./constants";
+import { sizes } from "../../constants";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -125,23 +126,23 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "spin"));
+    const classPrefix = useClassPrefix("spin", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-fullscreen`]: props.fullscreen,
-        [`${className.value}-with-content`]: context.slots.default,
-        [`${className.value}-${props.size}`]: props.size,
-        [`${className.value}-spinning`]: spinning.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-fullscreen`]: props.fullscreen,
+        [`${classPrefix.value}-with-content`]: context.slots.default,
+        [`${classPrefix.value}-${props.size}`]: props.size,
+        [`${classPrefix.value}-spinning`]: spinning.value
       };
     });
-    classes.elContent = computed(() => `${className.value}-content`);
-    classes.elSpinner = computed(() => `${className.value}-spinner`);
-    classes.elDot = computed(() => `${className.value}-dot`);
-    classes.elDotItem = computed(() => `${className.value}-dot-item`);
-    classes.elMessage = computed(() => `${className.value}-message`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
+    classes.elSpinner = computed(() => `${classPrefix.value}-spinner`);
+    classes.elDot = computed(() => `${classPrefix.value}-dot`);
+    classes.elDotItem = computed(() => `${classPrefix.value}-dot-item`);
+    classes.elMessage = computed(() => `${classPrefix.value}-message`);
 
     // 渲染
     return () => {

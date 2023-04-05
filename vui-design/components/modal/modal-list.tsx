@@ -4,13 +4,13 @@ import { defineComponent } from "vue";
 import is from "../../utils/is";
 import VuiModal from "./modal";
 import VuiIcon from "../icon";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import createChainedFunction from "../../utils/createChainedFunction";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -66,6 +66,9 @@ export default defineComponent({
     const handleClose = (id: string | number) => props.onClose?.(id);
     const handleAfterClose = (id: string | number) => props.onAfterClose?.(id);
 
+    // 
+    const classPrefix = useClassPrefix("modal-notice", props);
+
     // 渲染
     return () => {
       return (
@@ -116,16 +119,15 @@ export default defineComponent({
                 onAfterClose
               };
 
-              const classNamePrefix = getClassName(props.classNamePrefix, "modal-notice");
               let classes: Record<string, any> = {};
 
               classes.elNotice = {
-                [`${classNamePrefix}`]: true,
-                [`${classNamePrefix}-${modal.type}`]: modal.type
+                [`${classPrefix.value}`]: true,
+                [`${classPrefix.value}-${modal.type}`]: modal.type
               };
-              classes.elNoticeTitle = `${classNamePrefix}-title`;
-              classes.elNoticeDescription = `${classNamePrefix}-description`;
-              classes.elNoticeIcon = `${classNamePrefix}-icon`;
+              classes.elNoticeTitle = `${classPrefix.value}-title`;
+              classes.elNoticeDescription = `${classPrefix.value}-description`;
+              classes.elNoticeIcon = `${classPrefix.value}-icon`;
 
               return (
                 <VuiModal {...attributes}>

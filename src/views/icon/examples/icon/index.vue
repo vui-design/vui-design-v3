@@ -2,14 +2,15 @@
   <highlightjs language="xml" v-bind:code="code" />
 </template>
 
-<script>
+<script lang="ts">
+  import { defineComponent } from "vue";
   import code from "./code";
 
-  export default {
-    data() {
+  export default defineComponent({
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>

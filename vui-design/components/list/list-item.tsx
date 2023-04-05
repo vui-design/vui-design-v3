@@ -2,12 +2,12 @@ import type { VNode, ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } f
 import { defineComponent, inject, computed } from "vue";
 import { flatten } from "../../utils/vue";
 import { ListInjectionKey } from "./context";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     }
@@ -24,15 +24,15 @@ export default defineComponent({
     const vuiList = inject(ListInjectionKey, undefined);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "list-item"));
+    const classPrefix = useClassPrefix("list-item", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elMain = computed(() => `${className.value}-main`);
-    classes.elActions = computed(() => `${className.value}-actions`);
-    classes.elAction = computed(() => `${className.value}-action`);
-    classes.elActionDivider = computed(() => `${className.value}-action-divider`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elMain = computed(() => `${classPrefix.value}-main`);
+    classes.elActions = computed(() => `${classPrefix.value}-actions`);
+    classes.elAction = computed(() => `${classPrefix.value}-action`);
+    classes.elActionDivider = computed(() => `${classPrefix.value}-action-divider`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
 
     // 渲染
     return () => {

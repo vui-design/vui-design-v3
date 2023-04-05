@@ -5,11 +5,6 @@ import VuiMessage from "./message";
 
 export const createProps = () => {
   return {
-    // 样式前缀
-    classNamePrefix: {
-      type: String as PropType<string>,
-      default: undefined
-    },
     // 消息提示队列
     messages: {
       type: Array as PropType<MessageConfig[]>,

@@ -1,22 +1,23 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { EventListener } from "../../utils/addEventListener";
-import type { GetScrollContainer, Section, AnchorLink } from "./types";
+import type { GetScrollContainer } from "../../types";
+import type { Section, AnchorLink } from "./types";
 import { defineComponent, provide, ref, reactive, computed, nextTick, onMounted, onUpdated, onBeforeUnmount } from "vue";
 import { AnchorInjectionKey } from "./context";
 import VuiAffix from "../affix";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import getScroll from "../../utils/getScroll";
 import getOffsetTop from "../../utils/getOffsetTop";
 import scrollTo from "../../utils/scrollTo";
 import addEventListener from "../../utils/addEventListener";
-import getClassName from "../../utils/getClassName";
 
 const sharpMatcherRegx = /#([^#]+)$/;
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -86,41 +87,6 @@ export default defineComponent({
     const link = ref<string>("");
     const scrollEvent = ref<EventListener>();
     const scrolling = ref<boolean>(false);
-
-    // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "anchor"));
-    let classes: Record<string, ComputedRef> = {};
-
-    classes.el = computed(() => {
-      return {
-        [`${className.value}`]: true,
-        [`${className.value}-affixed`]: props.affix
-      };
-    });
-    classes.elWrapper = computed(() => `${className.value}-wrapper`);
-    classes.elInk = computed(() => {
-      return {
-        [`${className.value}-ink`]: true,
-        [`${className.value}-ink-active`]: link.value
-      };
-    });
-    classes.elInkThumb = computed(() => `${className.value}-ink-thumb`);
-
-    // 计算 style 样式
-    let styles: Record<string, ComputedRef> = {};
-
-    styles.elWrapper = computed(() => {
-      const offset = props.offsetTop ?? props.offsetBottom;
-
-      return {
-        maxHeight: offset ? `calc(100vh - ${offset}px)` : `100vh`
-      };
-    });
-    styles.elInkThumb = computed(() => {
-      return {
-        display: !props.affix && !props.showInkInStatic ? "none" : ""
-      };
-    });
 
     // 
     const addLink = (link: string) => links.value.push(link);
@@ -194,7 +160,7 @@ export default defineComponent({
         return;
       }
 
-      const target = anchorRef.value.querySelector(`.${className.value}-link-title-active`);
+      const target = anchorRef.value.querySelector(`.${classPrefix.value}-link-title-active`);
 
       if (target) {
         anchorInkThumbRef.value.style.top = `${(target as HTMLElement).offsetTop + (target.clientHeight / 2) - (anchorInkThumbRef.value.offsetHeight / 2)}px`;
@@ -299,6 +265,41 @@ export default defineComponent({
         scrollContainerRef.value = undefined;
         scrollEvent.value = undefined;
       }
+    });
+
+    // 计算 class 样式
+    const classPrefix = useClassPrefix("anchor", props);
+    let classes: Record<string, ComputedRef> = {};
+
+    classes.el = computed(() => {
+      return {
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-affixed`]: props.affix
+      };
+    });
+    classes.elWrapper = computed(() => `${classPrefix.value}-wrapper`);
+    classes.elInk = computed(() => {
+      return {
+        [`${classPrefix.value}-ink`]: true,
+        [`${classPrefix.value}-ink-active`]: link.value
+      };
+    });
+    classes.elInkThumb = computed(() => `${classPrefix.value}-ink-thumb`);
+
+    // 计算 style 样式
+    let styles: Record<string, ComputedRef> = {};
+
+    styles.elWrapper = computed(() => {
+      const offset = props.offsetTop ?? props.offsetBottom;
+
+      return {
+        maxHeight: offset ? `calc(100vh - ${offset}px)` : `100vh`
+      };
+    });
+    styles.elInkThumb = computed(() => {
+      return {
+        display: !props.affix && !props.showInkInStatic ? "none" : ""
+      };
     });
 
     // 渲染

@@ -1,18 +1,20 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Type, Shape, Size } from "../button/types";
+import type { Size } from "../../types";
+import type { Type, Shape } from "../button/types";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
-import { types, shapes, sizes } from "../button/constants";
+import { sizes } from "../../constants";
+import { types, shapes } from "../button/constants";
 import { triggers, placements } from "../popup/constants";
 import VuiIcon from "../icon";
 import VuiButton, { ButtonGroup as VuiButtonGroup } from "../button";
 import VuiDropdown from "./dropdown";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -154,10 +156,10 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "dropdown-button"));
+    const classPrefix = useClassPrefix("dropdown-button", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
+    classes.el = computed(() => `${classPrefix.value}`);
 
     // 渲染
     return () => {
@@ -192,7 +194,7 @@ export default defineComponent({
             {context.slots.default?.()}
           </VuiButton>
           <VuiDropdown
-            classNamePrefix={props.classNamePrefix}
+            classPrefix={props.classPrefix}
             visible={visible.value}
             trigger={props.trigger}
             getPopupContainer={props.getPopupContainer}

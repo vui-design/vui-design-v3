@@ -1,9 +1,9 @@
 import type { RenderFunction } from "vue";
-import type { layouts, types, sizes } from "./constants";
+import type { Size } from "../../types";
+import type { layouts, types } from "./constants";
 
 export type Layout = typeof layouts[number];
 export type Type = typeof types[number];
-export type Size = typeof sizes[number];
 
 export interface RadioGroup {
   name: string;

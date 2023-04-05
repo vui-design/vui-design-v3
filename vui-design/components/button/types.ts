@@ -1,9 +1,9 @@
-import type { types, shapes, sizes } from "./constants";
+import type { Size } from "../../types";
+import type { types, shapes } from "./constants";
 
 export type HTMLType = "submit" | "button" | "reset";
 export type Type = typeof types[number];
 export type Shape = typeof shapes[number];
-export type Size = typeof sizes[number];
 
 export interface ButtonGroup {
   type: Type | undefined;

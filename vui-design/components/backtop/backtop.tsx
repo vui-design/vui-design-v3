@@ -1,17 +1,17 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { EventListener } from "../../utils/addEventListener";
-import type { GetScrollContainer } from "./types";
+import type { GetScrollContainer } from "../../types";
 import { Transition, defineComponent, ref, computed, nextTick, onMounted, onUpdated, onBeforeUnmount } from "vue";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 import throttleByRaf from "../../utils/throttleByRaf";
 import scrollTo from "../../utils/scrollTo";
 import addEventListener from "../../utils/addEventListener";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -133,11 +133,11 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "backtop"));
+    const classPrefix = useClassPrefix("backtop", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elContent = computed(() => `${className.value}-content`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elContent = computed(() => `${classPrefix.value}-content`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

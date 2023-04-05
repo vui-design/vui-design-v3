@@ -8,6 +8,7 @@ import { PopupInjectionKey } from "./context";
 import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollElements } from "./utils";
 import VuiResizeObserver from "../resize-observer";
 import VuiLazyRender from "../lazy-render";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useFirstElement from "../../hooks/useFirstElement";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import usePopupManager from "../../hooks/usePopupManager";
@@ -15,12 +16,11 @@ import useResizeObserver from "../../hooks/useResizeObserver";
 import is from "../../utils/is";
 import omit from "../../utils/omit";
 import throttleByRaf from "../../utils/throttleByRaf";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -567,30 +567,30 @@ export default defineComponent({
     vuiPopup?.addChildRef?.(popup);
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, props.name));
+    const classPrefix = useClassPrefix(props.name, props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-placement-${placement.value}`]: true
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-placement-${placement.value}`]: true
       };
     });
     classes.elTitle = computed(() => {
       return {
-        [`${className.value}-title`]: true,
+        [`${classPrefix.value}-title`]: true,
         [`${props.titleClassName}`]: props.titleClassName
       };
     });
     classes.elContent = computed(() => {
       return {
-        [`${className.value}-content`]: true,
+        [`${classPrefix.value}-content`]: true,
         [`${props.contentClassName}`]: props.contentClassName
       };
     });
     classes.elArrow = computed(() => {
       return {
-        [`${className.value}-arrow`]: true,
+        [`${classPrefix.value}-arrow`]: true,
         [`${props.arrowClassName}`]: props.arrowClassName
       };
     });

@@ -1,17 +1,19 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
-import type { Checkbox, Layout, Type, Size } from "./types";
+import type { Size } from "../../types";
+import type { Checkbox, Layout, Type } from "./types";
 import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
-import { layouts, types, sizes } from "./constants";
+import { sizes } from "../../constants";
+import { layouts, types } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
 import { CheckboxGroupInjectionKey } from "./context";
 import VuiCheckbox from "../checkbox";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -131,13 +133,13 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "checkbox-group"));
+    const classPrefix = useClassPrefix("checkbox-group", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${props.layout}`]: true
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${props.layout}`]: true
       };
     });
 

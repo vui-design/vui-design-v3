@@ -1,12 +1,12 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import { defineComponent, provide, toRefs, reactive, computed } from "vue";
 import { BreadcrumbInjectionKey } from "./context";
-import getClassName from "../../utils/getClassName";
+import useClassPrefix from "../../hooks/useClassPrefix";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -33,10 +33,10 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "breadcrumb"));
+    const classPrefix = useClassPrefix("breadcrumb", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
+    classes.el = computed(() => `${classPrefix.value}`);
 
     // 渲染
     return () => {

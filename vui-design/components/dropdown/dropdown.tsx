@@ -8,7 +8,7 @@ import VuiPopup from "../popup";
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -126,7 +126,7 @@ export default defineComponent({
       // 
       return (
         <VuiPopup
-          classNamePrefix={props.classNamePrefix}
+          classPrefix={props.classPrefix}
           name="dropdown"
           visible={visible.value}
           trigger={props.trigger}

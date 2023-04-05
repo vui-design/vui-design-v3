@@ -1,16 +1,18 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
-import type { Type, Size } from "./types";
+import type { Size } from "../../types";
+import type { Type } from "./types";
 import { defineComponent, inject, ref, computed, watch, nextTick } from "vue";
-import { types, sizes } from "./constants";
+import { sizes } from "../../constants";
+import { types } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { CheckboxGroupInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -172,21 +174,21 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, type.value === "button" ? "checkbox-button" : "checkbox"));
+    const classPrefix = useClassPrefix(type.value === "button" ? "checkbox-button" : "checkbox", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-${size.value}`]: size.value,
-        [`${className.value}-focused`]: focused.value,
-        [`${className.value}-indeterminate`]: props.indeterminate,
-        [`${className.value}-checked`]: checked.value,
-        [`${className.value}-disabled`]: disabled.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-${size.value}`]: size.value,
+        [`${classPrefix.value}-focused`]: focused.value,
+        [`${classPrefix.value}-indeterminate`]: props.indeterminate,
+        [`${classPrefix.value}-checked`]: checked.value,
+        [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
-    classes.elInput = computed(() => `${className.value}-input`);
-    classes.elLabel = computed(() => `${className.value}-label`);
+    classes.elInput = computed(() => `${classPrefix.value}-input`);
+    classes.elLabel = computed(() => `${classPrefix.value}-label`);
 
     // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};

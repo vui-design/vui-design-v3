@@ -1,7 +1,6 @@
 import type { VueNodeAtom } from "../../types";
-import type { sizes } from "./constants";
+import type { Size } from "../../types";
 
-export type Size = typeof sizes[number];
 export type Indicator = () => VueNodeAtom;
 
 export interface SpinWrapperProps {

@@ -1,6 +1,6 @@
 import type { App, AppContext, Plugin, Ref } from "vue";
 import type { ModalConfig, Type } from "./types";
-import { createVNode, render, ref, reactive } from 'vue';
+import { createVNode, render, ref } from 'vue';
 import { types, icons } from "./constants";
 import ModalList from "./modal-list";
 import Modal from "./modal";
@@ -23,7 +23,7 @@ class ModalManger {
   private count = 0;
 
   constructor(config: ModalConfig, appContext?: AppContext) {
-    const { getPopupContainer = "body" } = config;
+    const { classPrefix, getPopupContainer = "body" } = config;
 
     this.modalIds = new Set();
     this.modals = ref([]);
@@ -31,6 +31,7 @@ class ModalManger {
     this.teleport = getTeleport(Modal.name);
 
     const vm = createVNode(ModalList, {
+      classPrefix,
       modals: this.modals.value,
       onBeforeOpen: noop,
       onOpen: noop,

@@ -2,14 +2,14 @@ import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProper
 import type { Formatter } from "./types";
 import { defineComponent, ref, computed, onMounted, onUpdated, onBeforeUnmount } from "vue";
 import { getSlotProp } from "../../utils/vue";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 import utils from "./utils";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -137,18 +137,18 @@ export default defineComponent({
     onBeforeUnmount(() => stop());
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, "countdown"));
+    const classPrefix = useClassPrefix("countdown", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => `${className.value}`);
-    classes.elHeader = computed(() => `${className.value}-header`);
-    classes.elBody = computed(() => `${className.value}-body`);
-    classes.elFooter = computed(() => `${className.value}-footer`);
-    classes.elTitle = computed(() => `${className.value}-title`);
-    classes.elExtra = computed(() => `${className.value}-extra`);
-    classes.elValue = computed(() => `${className.value}-value`);
-    classes.elValuePrefix = computed(() => `${className.value}-value-prefix`);
-    classes.elValueSuffix = computed(() => `${className.value}-value*suffix`);
+    classes.el = computed(() => `${classPrefix.value}`);
+    classes.elHeader = computed(() => `${classPrefix.value}-header`);
+    classes.elBody = computed(() => `${classPrefix.value}-body`);
+    classes.elFooter = computed(() => `${classPrefix.value}-footer`);
+    classes.elTitle = computed(() => `${classPrefix.value}-title`);
+    classes.elExtra = computed(() => `${classPrefix.value}-extra`);
+    classes.elValue = computed(() => `${classPrefix.value}-value`);
+    classes.elValuePrefix = computed(() => `${classPrefix.value}-value-prefix`);
+    classes.elValueSuffix = computed(() => `${classPrefix.value}-value*suffix`);
 
     // 
     const getHeader = () => {

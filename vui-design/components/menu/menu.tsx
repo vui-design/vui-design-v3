@@ -5,14 +5,14 @@ import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watc
 import { modes, colors } from "./constants";
 import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey } from "./context";
+import useClassPrefix from "../../hooks/useClassPrefix";
 import useRefs from "./hooks/useRefs";
 import is from "../../utils/is";
-import getClassName from "../../utils/getClassName";
 
 export const createProps = () => {
   return {
     // 样式前缀
-    classNamePrefix: {
+    classPrefix: {
       type: String as PropType<string>,
       default: undefined
     },
@@ -212,18 +212,18 @@ export default defineComponent({
     }));
 
     // 计算 class 样式
-    const className = computed(() => getClassName(props.classNamePrefix, vuiDropdown ? "dropdown-menu" : "menu"));
+    const classPrefix = useClassPrefix(vuiDropdown ? "dropdown-menu" : "menu", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
       const direction = mode.value === "horizontal" ? "horizontal" : "vertical";
 
       return {
-        [`${className.value}`]: true,
-        [`${className.value}-root`]: true,
-        [`${className.value}-${direction}`]: true,
-        [`${className.value}-${color.value}`]: color.value,
-        [`${className.value}-collapsed`]: (mode.value === "vertical" || mode.value === "inline") && collapsed.value
+        [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-root`]: true,
+        [`${classPrefix.value}-${direction}`]: true,
+        [`${classPrefix.value}-${color.value}`]: color.value,
+        [`${classPrefix.value}-collapsed`]: (mode.value === "vertical" || mode.value === "inline") && collapsed.value
       };
     });
 
