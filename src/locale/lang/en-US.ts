@@ -320,6 +320,7 @@ export default {
       "example-input-bordered": "无边框",
       "example-input-clearable": "可清空",
       "example-input-disabled": "禁用状态",
+      "example-input-tooltip": "输入时格式化展示",
       "example-input-group": "复合型输入框",
 
       "example-input-number-basic-usage": "基本用法",

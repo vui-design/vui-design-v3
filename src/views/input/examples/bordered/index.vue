@@ -1,28 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-input-bordered">
-    <template slot="demo">
-      <vui-input v-model="value" v-bind:bordered="false" placeholder="Borderless" />
+  <vui-example id="example-input-bordered" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-input v-model:value="value" v-bind:bordered="false" placeholder="Borderless" />
     </template>
-    <template slot="title">无边框</template>
-    <template slot="description">
+    <template v-slot:title>无边框</template>
+    <template v-slot:description>
       <p>无边框的输入框。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string>("");
+
       return {
         code,
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>

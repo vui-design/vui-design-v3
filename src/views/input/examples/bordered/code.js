@@ -1,16 +1,20 @@
 const code =
 `<template>
-  <vui-input v-model="value" v-bind:bordered="false" placeholder="Borderless" />
+  <vui-input v-model:value="value" v-bind:bordered="false" placeholder="Borderless" />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<string>("");
+
       return {
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>
 `;
 

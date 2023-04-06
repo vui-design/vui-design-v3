@@ -1,28 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-input-password">
-    <template slot="demo">
-      <vui-input v-model="value" type="password" placeholder="Please enter password..." />
+  <vui-example id="example-input-password" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-input v-model:value="value" type="password" placeholder="Please enter password..." />
     </template>
-    <template slot="title">密码框</template>
-    <template slot="description">
+    <template v-slot:title>密码框</template>
+    <template v-slot:description>
       <p>密码框，可以切换显示隐藏密码。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string>("");
+
       return {
         code,
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>

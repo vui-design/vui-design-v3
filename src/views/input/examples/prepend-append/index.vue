@@ -1,36 +1,37 @@
 <template>
-  <example v-bind:code="code" id="example-input-prepend-append">
-    <template slot="demo">
+  <vui-example id="example-input-prepend-append" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-input-prepend-append">
         <vui-input prepend="https://github.com/u/" placeholder="Enter something..." />
         <vui-input append="@qq.com" placeholder="Enter something..." />
         <vui-input placeholder="Enter something...">
-          <template slot="prepend">https://</template>
-          <template slot="append">.com</template>
+          <template v-slot:prepend>https://</template>
+          <template v-slot:append>.com</template>
         </vui-input>
       </div>
     </template>
-    <template slot="title">前置/后置标签</template>
-    <template slot="description">
-      <p>通过设置 <code>prepend</code> 和 <code>append</code> 或同名插槽设置前置/后置标签。</p>
+    <template v-slot:title>前置/后置标签</template>
+    <template v-slot:description>
+      <p>用于配置一些固定组合。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
       return {
         code
       };
     }
-  };
+  });
 </script>
 
 <style>

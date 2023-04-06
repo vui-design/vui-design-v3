@@ -7,14 +7,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-input-disabled .vui-input:not(:first-child) { margin-top:24px; }
+  .example-input-disabled .vui-input + .vui-input { margin-top:24px; }
 </style>
 `;
 

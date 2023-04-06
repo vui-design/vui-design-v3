@@ -20,14 +20,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-input-group .vui-input-group:not(:first-child) { margin-top:24px; }
+  .example-input-group .vui-input-group + .vui-input-group { margin-top:24px; }
 </style>
 `;
 

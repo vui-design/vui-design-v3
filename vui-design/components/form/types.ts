@@ -9,4 +9,5 @@ export interface Form {
 
 export interface FormItem {
   onChange: (value: any) => void;
+  onBlur: (value: any) => void;
 };

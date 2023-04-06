@@ -1,28 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-input-clearable">
-    <template slot="demo">
-      <vui-input v-model="value" clearable placeholder="Enter something..." />
+  <vui-example id="example-input-clearable" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-input v-model:value="value" clearable placeholder="Enter something..." />
     </template>
-    <template slot="title">可清空</template>
-    <template slot="description">
+    <template v-slot:title>可清空</template>
+    <template v-slot:description>
     <p>含有清空图标的输入框，点击图标清空所有内容。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string>("");
+
       return {
         code,
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>

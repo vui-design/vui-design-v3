@@ -273,15 +273,15 @@ export default [
   //       },
   //       component: () => import("src/views/form/index.vue")
   //     },
-  //     {
-  //       path: "/components/input",
-  //       name: "input",
-  //       meta: {
-  //         title: "Input",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/input/index.vue")
-  //     },
+      {
+        path: "/components/input",
+        name: "input",
+        meta: {
+          title: "Input",
+          group: "data-entry"
+        },
+        component: () => import("src/views/input/index.vue")
+      },
   //     {
   //       path: "/components/input-number",
   //       name: "input-number",

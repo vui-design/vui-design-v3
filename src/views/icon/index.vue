@@ -89,7 +89,7 @@
 
   const category = ref<number>(1);
   const keyword = ref<string>("");
-  const types = computed(() => keyword.value ? icons.includes(keyword.value) : icons);
+  const types = computed(() => keyword.value ? icons.filter(icon => icon.includes(keyword.value)) : icons);
 
   const handleCopy = (type: string) => {
     // 创建隐藏的 Textarea 标签，并将组件代码放入其中

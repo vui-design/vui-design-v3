@@ -1,16 +1,20 @@
 const code =
 `<template>
-  <vui-input v-model="value" type="password" placeholder="Please enter password..." />
+  <vui-input v-model:value="value" type="password" placeholder="Please enter password..." />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<string>("");
+
       return {
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>
 `;
 

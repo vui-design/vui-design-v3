@@ -127,12 +127,20 @@ export default defineComponent({
 
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
+      if (disabled.value) {
+        return;
+      }
+
       focused.value = true;
       context.emit("focus", e);
     };
 
     // onBlur 事件回调
     const handleBlur = (e: FocusEvent) => {
+      if (disabled.value) {
+        return;
+      }
+
       focused.value = false;
       context.emit("blur", e);
     };

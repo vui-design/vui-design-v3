@@ -1,9 +1,9 @@
 <template>
-  <example v-bind:code="code" id="example-input-size">
-    <template slot="demo">
+  <vui-example id="example-input-size" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-input-size">
         <section>
-          <vui-radio-group type="button" v-model="size">
+          <vui-radio-group type="button" v-model:value="size">
             <vui-radio label="Small" value="small" />
             <vui-radio label="Medium" value="medium" />
             <vui-radio label="Large" value="large" />
@@ -16,31 +16,34 @@
         </section>
       </div>
     </template>
-    <template slot="title">尺寸</template>
-    <template slot="description">
+    <template v-slot:title>尺寸</template>
+    <template v-slot:description>
       <p>提供三种尺寸：大、中（默认）、小。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const size = ref<string>("medium");
+
       return {
         code,
-        size: "medium"
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-input-size section + section{ margin-top:24px; }
+  .example-input-size section + section { margin-top:24px; }
   .example-input-size .vui-input + .vui-input { margin-top:24px; }
 </style>

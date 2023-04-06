@@ -1,28 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-input-basic-usage">
-    <template slot="demo">
-      <vui-input v-model="value" placeholder="Basic usage" />
+  <vui-example id="example-input-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-input v-model:value="value" placeholder="Basic usage" />
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>最简单的用法，可以使用 <code>v-model</code> 双向绑定数据。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string>("");
+
       return {
         code,
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>

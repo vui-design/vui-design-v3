@@ -2,7 +2,7 @@ const code =
 `<template>
   <div class="example-input-size">
     <section>
-      <vui-radio-group type="button" v-model="size">
+      <vui-radio-group type="button" v-model:value="size">
         <vui-radio label="Small" value="small" />
         <vui-radio label="Medium" value="medium" />
         <vui-radio label="Large" value="large" />
@@ -16,14 +16,18 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const size = ref<string>("medium");
+
       return {
-        size: "medium"
+        size
       };
     }
-  };
+  });
 </script>
 
 <style>
