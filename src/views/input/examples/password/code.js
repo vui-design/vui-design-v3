@@ -1,6 +1,6 @@
 const code =
 `<template>
-  <vui-input v-model:value="value" type="password" placeholder="Please enter password..." />
+  <vui-input-password v-model:value="value" placeholder="Please enter password..." />
 </template>
 
 <script lang="ts">

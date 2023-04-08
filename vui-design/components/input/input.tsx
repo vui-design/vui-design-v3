@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Size } from "../../types";
-import { defineComponent, inject, ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { defineComponent, inject, ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { getSlotProp } from "../../utils/vue";
 import { sizes, keyCodes } from "../../constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
@@ -37,10 +37,46 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
+    // 是否含有边框
+    bordered: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    // 输入框尺寸
+    size: {
+      type: String as PropType<Size>,
+      validator: (size: Size) => sizes.includes(size),
+      default: undefined
+    },
     // 最大输入长度
     maxLength: {
       type: [String, Number] as PropType<string | number>,
       default: undefined
+    },
+    // 是否自动获得焦点
+    autofocus: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    // 是否允许清空
+    clearable: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    // 输入框是否为只读状态
+    readonly: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    // 输入框是否为禁用状态
+    disabled: {
+      type: Boolean as PropType<boolean>,
+      default: undefined
+    },
+    // 值变化时是否触发父级表单验证
+    validator: {
+      type: Boolean as PropType<boolean>,
+      default: true
     },
     // 前置标签
     prepend: {
@@ -61,42 +97,6 @@ export const createProps = () => {
     suffix: {
       type: String as PropType<string>,
       default: undefined
-    },
-    // 输入框尺寸
-    size: {
-      type: String as PropType<Size>,
-      validator: (size: Size) => sizes.includes(size),
-      default: undefined
-    },
-    // 是否含有边框
-    bordered: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    // 是否自动获得焦点
-    autofocus: {
-      type: Boolean as PropType<boolean>,
-      default: false
-    },
-    // 是否允许清空
-    clearable: {
-      type: Boolean as PropType<boolean>,
-      default: true
-    },
-    // 文本框是否为只读状态
-    readonly: {
-      type: Boolean as PropType<boolean>,
-      default: false
-    },
-    // 文本框是否为禁用状态
-    disabled: {
-      type: Boolean as PropType<boolean>,
-      default: undefined
-    },
-    // 值变化时是否触发父级表单验证
-    validator: {
-      type: Boolean as PropType<boolean>,
-      default: true
     }
   };
 };
@@ -107,7 +107,7 @@ export default defineComponent({
   name: "vui-input",
   inheritAttrs: false,
   props: createProps(),
-  emits: ["update:value", "change", "mouseenter", "mouseleave", "focus", "blur", "keydown", "keyup", "enter", "clear"],
+  emits: ["update:value", "change", "focus", "blur", "keydown", "keyup", "enter", "clear"],
   setup(props, context) {
     // 注入祖先组件
     const vuiForm = inject(FormInjectionKey, undefined);
@@ -115,6 +115,7 @@ export default defineComponent({
     const vuiInputGroup = inject(InputGroupInjectionKey, undefined);
 
     // DOM 引用
+    const containerRef = ref<HTMLDivElement>();
     const inputRef = ref<HTMLInputElement>();
 
     // 定时器，用于自动聚焦
@@ -123,13 +124,8 @@ export default defineComponent({
     // 输入法输入状态
     const composing = ref(false);
 
-    // 密码加密状态
-    const encrypted = ref(true);
-
     // 基础属性
-    const type = computed(() => props.type === "password" && !encrypted.value ? "text" : props.type);
     const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
-    const hovered = ref(false);
     const focused = ref(false);
     const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? props.disabled ?? false);
 
@@ -137,9 +133,8 @@ export default defineComponent({
     const defaultValue = ref(props.defaultValue);
     const value = computed(() => props.value ?? defaultValue.value);
 
-    // 清空按钮 & 密码切换按钮显示状态
-    const showBtnClear = computed(() => props.clearable && hovered.value && !props.readonly && !disabled.value && is.effective(value.value));
-    const showBtnToggle = computed(() => props.type === "password" && !props.readonly && !disabled.value);
+    // 清空按钮显示状态
+    const showBtnClear = computed(() => props.clearable && !props.readonly && !disabled.value && is.effective(value.value));
 
     // 
     const setValue = (newValue: string | number, callback?: Function) => {
@@ -153,6 +148,10 @@ export default defineComponent({
 
       context.emit("update:value", newValue);
       context.emit("change", newValue);
+
+      if (props.validator) {
+        vuiFormItem?.onChange(newValue);
+      }
 
       nextTick(() => {
         if (inputRef.value && inputRef.value.value !== value.value) {
@@ -184,24 +183,14 @@ export default defineComponent({
       setSelectionRange
     });
 
-    // onMouseenter 事件回调
-    const handleMouseenter = (e: MouseEvent) => {
-      if (disabled.value) {
-        return;
+    // 
+    const handleMousedown = (e: MouseEvent) => {
+      const target = e.target as Element;
+
+      if (target === containerRef.value || (target !== inputRef.value && containerRef.value?.contains(target))) {
+        e.preventDefault();
+        focus();
       }
-
-      hovered.value = true;
-      context.emit("mouseenter", e);
-    };
-
-    // onMouseleave 事件回调
-    const handleMouseleave = (e: MouseEvent) => {
-      if (disabled.value) {
-        return;
-      }
-
-      hovered.value = false;
-      context.emit("mouseleave", e);
     };
 
     // onFocus 事件回调
@@ -258,7 +247,7 @@ export default defineComponent({
 
       if (e.type === "compositionend") {
         composing.value = false;
-        handleInput(e);
+        handleChange(e);
       }
       else {
         composing.value = true;
@@ -266,7 +255,7 @@ export default defineComponent({
     };
 
     // onInput 事件回调
-    const handleInput = (e: Event) => {
+    const handleChange = (e: Event) => {
       if (composing.value || disabled.value) {
         return;
       }
@@ -274,15 +263,6 @@ export default defineComponent({
       const { value } = e.target as HTMLInputElement;
 
       setValue(value);
-
-      if (props.validator) {
-        vuiFormItem?.onChange(value);
-      }
-    };
-
-    // 切换密码可见状态
-    const handleToggle = () => {
-      encrypted.value = !encrypted.value;
     };
 
     // 清空输入框值
@@ -295,10 +275,6 @@ export default defineComponent({
 
       context.emit("clear");
       setValue(value, () => focus());
-
-      if (props.validator) {
-        vuiFormItem?.onChange(value);
-      }
     };
 
     // 组件挂载完成之后执行
@@ -320,21 +296,17 @@ export default defineComponent({
     classes.el = computed(() => {
       return {
         [`${classPrefix.value}`]: true,
-        [`${classPrefix.value}-with-prefix`]: context.slots.prefix || props.prefix,
-        [`${classPrefix.value}-with-suffix`]: showBtnClear.value || showBtnToggle.value || context.slots.suffix || props.suffix,
         [`${classPrefix.value}-bordered`]: props.bordered,
         [`${classPrefix.value}-${size.value}`]: size.value,
-        [`${classPrefix.value}-hovered`]: hovered.value,
         [`${classPrefix.value}-focused`]: focused.value,
         [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
+    classes.elInput = computed(() => `${classPrefix.value}-input`);
     classes.elPrepend = computed(() => `${classPrefix.value}-prepend`);
     classes.elAppend = computed(() => `${classPrefix.value}-append`);
     classes.elPrefix = computed(() => `${classPrefix.value}-prefix`);
     classes.elSuffix = computed(() => `${classPrefix.value}-suffix`);
-    classes.elInput = computed(() => `${classPrefix.value}-input`);
-    classes.elBtnToggle = computed(() => `${classPrefix.value}-btn-toggle`);
     classes.elBtnClear = computed(() => `${classPrefix.value}-btn-clear`);
 
     // 
@@ -368,58 +340,40 @@ export default defineComponent({
 
       let suffix;
 
-      if (showBtnClear.value || showBtnToggle.value || context.slots.suffix || props.suffix) {
-        let btnClear;
-
-        if (showBtnClear.value) {
-          const btnClearAttributes = {
-            type: "crossmark-circle-filled",
-            class: classes.elBtnClear.value,
-            onMousedown: (e: MouseEvent) => e.preventDefault(),
-            onClick: handleClear
-          };
-
-          btnClear = (
-            <VuiIcon {...btnClearAttributes} />
-          );
-        }
-
-        let btnToggle;
-
-        if (showBtnToggle.value) {
-          const btnToggleAttributes = {
-            type: encrypted.value ? "eye" : "eye-off",
-            class: classes.elBtnToggle.value,
-            onMousedown: (e: MouseEvent) => e.preventDefault(),
-            onClick: handleToggle
-          };
-  
-          btnToggle = (
-            <VuiIcon {...btnToggleAttributes} />
-          );
-        }
-
+      if (context.slots.suffix || props.suffix) {
         suffix = (
           <div class={classes.elSuffix.value}>
             {
-              btnClear
-            }
-            {
-              btnToggle ? btnToggle : (
-                context.slots.suffix ? context.slots.suffix() : (
-                  props.suffix ? (
-                    <VuiIcon type={props.suffix} />
-                  ) : null
-                )
+              context.slots.suffix ? context.slots.suffix() : (
+                <VuiIcon type={props.suffix} />
               )
             }
           </div>
         );
       }
 
+      let btnClear;
+
+      if (showBtnClear.value) {
+        const btnClearAttributes = {
+          class: classes.elBtnClear.value,
+          onMousedown: (e: MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          onClick: handleClear
+        };
+
+        btnClear = (
+          <div {...btnClearAttributes}>
+            <VuiIcon type="crossmark-circle-filled" />
+          </div>
+        );
+      }
+
       const attributes = {
         ...omit(context.attrs, ["clsss", "style"]),
-        type: type.value,
+        type: props.type,
         value: value.value,
         placeholder: props.placeholder,
         maxLength: props.maxLength,
@@ -434,13 +388,14 @@ export default defineComponent({
         onCompositionstart: handleComposition,
         onCompositionupdate: handleComposition,
         onCompositionend: handleComposition,
-        onInput: handleInput
+        onInput: handleChange
       };
 
       return (
-        <div class={classes.elInput.value} onMouseenter={handleMouseenter} onMouseleave={handleMouseleave}>
+        <div ref={containerRef} class={classes.elInput.value} onMousedown={handleMousedown}>
           {prefix}
           <input ref={inputRef} {...attributes} />
+          {btnClear}
           {suffix}
         </div>
       );

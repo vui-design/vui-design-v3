@@ -4,8 +4,9 @@ import type { HTMLType, Type, Shape } from "./types";
 import { Text, defineComponent, inject, ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { sizes } from "../../constants";
 import { types, shapes } from "./constants";
+import { ButtonGroupInjectionKey } from "./context";
+import { InputGroupInjectionKey } from "../input/context";
 import { FormInjectionKey } from "../form/context";
-import { ButtonGroupInjectionKey, InputGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
 
@@ -91,9 +92,9 @@ export default defineComponent({
   emits: ["click"],
   setup(props, context) {
     // 注入祖先组件
-    const vuiForm = inject(FormInjectionKey, undefined);
     const vuiButtonGroup = inject(ButtonGroupInjectionKey, undefined);
     const vuiInputGroup = inject(InputGroupInjectionKey, undefined);
+    const vuiForm = inject(FormInjectionKey, undefined);
 
     // DOM 引用
     const buttonRef = ref<HTMLLinkElement | HTMLButtonElement>();

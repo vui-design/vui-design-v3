@@ -1,7 +1,9 @@
 @import "./token.less";
 
 .@{vui-input} {
-  display:inline-table;
+  display:inline-flex;
+  justify-content:flex-start;
+  align-items:center;
   box-sizing:border-box;
   border-collapse:separate;
   border-spacing:0;
@@ -9,19 +11,52 @@
   vertical-align:middle;
   line-height:normal;
 
+  // 输入框
+  &-input {
+    flex:1;
+    position:relative;
+    cursor:text;
+    display:inline-flex;
+    justify-content:flex-start;
+    align-items:center;
+    box-sizing:border-box;
+    width:100%;
+    border:0 solid @input-border-color;
+    background-color:@input-background-color;
+    margin:0;
+    padding:0;
+    color:@input-font-color;
+    font-family:@input-font-family;
+    transition:all @transition-duration @transition-timing-function;
+
+    input {
+      appearance:none;
+      outline:none;
+      cursor:inherit;
+      display:block;
+      box-sizing:border-box;
+      width:100%;
+      height:100%;
+      border:none;
+      background-color:transparent;
+      margin:0;
+      padding:0;
+      color:inherit;
+      font-size:inherit;
+      font-family:inherit;
+    }
+  }
+
+  // 前置标签 & 后置标签
   &-prepend,
   &-append {
-    display:table-cell;
+    display:block;
     box-sizing:border-box;
-    width:0;
-    border:1px solid @input-border-color;
+    border:@input-border-width solid @input-border-color;
     background-color:@input-addon-background-color;
-    vertical-align:middle;
     color:@input-font-color;
     font-family:@input-font-family;
     margin:0;
-    text-align:center;
-    line-height:normal;
     white-space:nowrap;
     transition:all @transition-duration @transition-timing-function;
   }
@@ -38,64 +73,32 @@
     border-bottom-right-radius:@input-border-radius;
   }
 
+  // 前缀 & 后缀
   &-prefix,
   &-suffix {
-    position:absolute;
-    top:50%;
-    z-index:3;
     display:flex;
     justify-content:center;
     align-items:center;
     box-sizing:border-box;
     color:@input-affix-color;
     line-height:1;
-    transform:translate(0, -50%);
     transition:all @transition-duration @transition-timing-function;
-
-    > :not(:first-child) {
-      margin-left:@margin-xs;
-    }
   }
 
-  &-input {
-    position:relative;
-    display:table-cell;
-    box-sizing:border-box;
-    width:100%;
-
-    input {
-      appearance:none;
-      outline:none;
-      display:block;
-      box-sizing:border-box;
-      width:100%;
-      border-style:solid;
-      border-color:@input-border-color;
-      border-radius:@input-border-radius;
-      background-color:@input-background-color;
-      margin:0;
-      color:@input-font-color;
-      font-family:@input-font-family;
-      transition:all @transition-duration @transition-timing-function;
-    }
-
-    &:not(:first-child) input {
-      border-top-left-radius:0;
-      border-bottom-left-radius:0;
-    }
-    &:not(:last-child) input {
-      border-top-right-radius:0;
-      border-bottom-right-radius:0;
-    }
-  }
-
+  // 清空按钮 & 密码框明文切换按钮
   &-btn-clear,
   &-btn-toggle {
     cursor:pointer;
-    transition:color @transition-duration @transition-timing-function, font-size @transition-duration @transition-timing-function;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    line-height:1;
+    transition:all @transition-duration @transition-timing-function;
   }
 
   &-btn-clear {
+    display:none;
     color:@input-btn-clear-color;
 
     &:hover {
@@ -111,169 +114,206 @@
     }
   }
 
+  // 边框
+  &-bordered &-input {
+    border-width:@input-border-width;
+    border-radius:@input-border-radius;
+  }
+  &-bordered &-input:not(:first-child) {
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+  }
+  &-bordered &-input:not(:last-child)  {
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+  }
+
+  // 尺寸
+  &-small &-input {
+    height:@input-size-sm;
+    padding:0 @input-padding-sm;
+    font-size:@input-font-size-sm;
+
+    input {
+      height:@input-size-sm;
+      line-height:@input-size-sm;
+    }
+  }
   &-small &-prepend,
   &-small &-append {
     height:@input-size-sm;
     padding:0 @input-padding-sm;
     font-size:@input-font-size-sm;
-  }
-  &-small &-prefix,
-  &-small &-suffix {
-    font-size:@input-font-size-sm;
+    line-height:@input-size-sm - @input-border-width * 2;
   }
   &-small &-prefix {
-    left:@input-padding-sm;
+    margin-right:@input-padding-sm;
   }
   &-small &-suffix {
-    right:@input-padding-sm;
+    margin-left:@input-padding-sm;
   }
-  &-small &-input {
-    input {
-      border-width:0;
-      height:@input-size-sm;
-      padding:0 @input-padding-sm;
-      font-size:@input-font-size-sm;
-      line-height:@input-size-sm;
-    }
-  }
-  &-with-prefix&-small &-input {
-    input {
-      padding-left:@input-padding-sm * 2 + @input-font-size-sm;
-    }
-  }
-  &-with-suffix&-small &-input {
-    input {
-      padding-right:@input-padding-sm * 2 + @input-font-size-sm;
-    }
-  }
-  &-bordered&-small &-prefix {
-    left:@input-padding-sm + 1px;
-  }
-  &-bordered&-small &-suffix {
-    right:@input-padding-sm + 1px;
+  &-small &-btn-clear {
+    margin-left:@input-padding-sm;
   }
   &-bordered&-small &-input {
     input {
-      border-width:1px;
+      height:@input-size-sm - @input-border-width * 2;
+      line-height:@input-size-sm - @input-border-width * 2;
     }
   }
 
+  &-medium &-input {
+    height:@input-size-md;
+    padding:0 @input-padding-md;
+    font-size:@input-font-size-md;
+
+    input {
+      height:@input-size-md;
+      line-height:@input-size-md;
+    }
+  }
   &-medium &-prepend,
   &-medium &-append {
     height:@input-size-md;
     padding:0 @input-padding-md;
     font-size:@input-font-size-md;
-  }
-  &-medium &-prefix,
-  &-medium &-suffix {
-    font-size:@input-font-size-md;
+    line-height:@input-size-md - @input-border-width * 2;
   }
   &-medium &-prefix {
-    left:@input-padding-md;
+    margin-right:@input-padding-md;
   }
   &-medium &-suffix {
-    right:@input-padding-md;
+    margin-left:@input-padding-md;
   }
-  &-medium &-input {
-    input {
-      border-width:0;
-      height:@input-size-md;
-      padding:0 @input-padding-md;
-      font-size:@input-font-size-md;
-      line-height:@input-size-md;
-    }
-  }
-  &-with-prefix&-medium &-input {
-    input {
-      padding-left:@input-padding-md * 2 + @input-font-size-md;
-    }
-  }
-  &-with-suffix&-medium &-input {
-    input {
-      padding-right:@input-padding-md * 2 + @input-font-size-md;
-    }
-  }
-  &-bordered&-medium &-prefix {
-    left:@input-padding-md + 1px;
-  }
-  &-bordered&-medium &-suffix {
-    right:@input-padding-md + 1px;
+  &-medium &-btn-clear {
+    margin-left:@input-padding-md;
   }
   &-bordered&-medium &-input {
     input {
-      border-width:1px;
+      height:@input-size-md - @input-border-width * 2;
+      line-height:@input-size-md - @input-border-width * 2;
     }
   }
 
+  &-large &-input {
+    height:@input-size-lg;
+    padding:0 @input-padding-lg;
+    font-size:@input-font-size-lg;
+
+    input {
+      height:@input-size-lg;
+      line-height:@input-size-lg;
+    }
+  }
   &-large &-prepend,
   &-large &-append {
     height:@input-size-lg;
     padding:0 @input-padding-lg;
     font-size:@input-font-size-lg;
-  }
-  &-large &-prefix,
-  &-large &-suffix {
-    font-size:@input-font-size-lg;
+    line-height:@input-size-lg - @input-border-width * 2;
   }
   &-large &-prefix {
-    left:@input-padding-lg;
+    margin-right:@input-padding-lg;
   }
   &-large &-suffix {
-    right:@input-padding-lg;
+    margin-left:@input-padding-lg;
   }
-  &-large &-input {
-    input {
-      border-width:0;
-      height:@input-size-lg;
-      padding:0 @input-padding-lg;
-      font-size:@input-font-size-lg;
-      line-height:@input-size-lg;
-    }
-  }
-  &-with-prefix&-large &-input {
-    input {
-      padding-left:@input-padding-lg * 2 + @input-font-size-lg;
-    }
-  }
-  &-with-suffix&-large &-input {
-    input {
-      padding-right:@input-padding-lg * 2 + @input-font-size-lg;
-    }
-  }
-  &-bordered&-large &-prefix {
-    left:@input-padding-lg + 1px;
-  }
-  &-bordered&-large &-suffix {
-    right:@input-padding-lg + 1px;
+  &-large &-btn-clear {
+    margin-left:@input-padding-lg;
   }
   &-bordered&-large &-input {
     input {
-      border-width:1px;
+      height:@input-size-lg - @input-border-width * 2;
+      line-height:@input-size-lg - @input-border-width * 2;
     }
   }
 
-  &-hovered &-input {
+  // 状态
+  &-input:hover {
     z-index:1;
-
-    input {
-      border-color:@input-hover-border-color;
-    }
+    border-color:@input-hover-border-color;
+  }
+  &-input:hover &-btn-clear {
+    display:block;
   }
 
   &-focused &-input {
     z-index:2;
-
-    input {
-      border-color:@input-focus-border-color;
-    }
+    border-color:@input-focus-border-color;
   }
 
   &-disabled &-input {
-    input {
-      cursor:not-allowed;
-      border-color:@input-disabled-border-color;
-      background-color:@input-disabled-background-color;
-      color:@input-disabled-font-color;
+    cursor:not-allowed;
+    border-color:@input-disabled-border-color;
+    background-color:@input-disabled-background-color;
+    color:@input-disabled-font-color;
+  }
+
+  // 搜素框
+  &-search &-append {
+    border:none;
+    padding:0;
+
+    .@{vui}-button {
+      display:block;
+      border-top-left-radius:0;
+      border-bottom-left-radius:0;
+    }
+    .@{vui}-button-primary {
+      z-index:2;
+    }
+  }
+  &-search&-bordered &-append {
+    margin-left:-1px;
+  }
+
+  // 输入框组合
+  &-group {
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+
+    .@{vui}-button:not(:first-child) {
+      margin-left:@margin-md;
+    }
+
+    .@{vui}-input {
+      width:auto;
+    }
+    .@{vui}-input:not(:first-child) {
+      margin-left:@margin-md;
+    }
+  }
+
+  &-group-compact {
+    .@{vui}-button:not(:first-child) {
+      margin-left:-1px;
+    }
+    .@{vui}-button:first-child {
+      border-top-right-radius:0;
+      border-bottom-right-radius:0;
+    }
+    .@{vui}-button:last-child {
+      border-top-left-radius:0;
+      border-bottom-left-radius:0;
+    }
+    .@{vui}-button:not(:first-child):not(:last-child) {
+      border-radius:0;
+    }
+
+    .@{vui}-input:not(:first-child) {
+      margin-left:-1px;
+    }
+    .@{vui}-input:first-child .@{vui}-input-input {
+      border-top-right-radius:0;
+      border-bottom-right-radius:0;
+    }
+    .@{vui}-input:last-child .@{vui}-input-input {
+      border-top-left-radius:0;
+      border-bottom-left-radius:0;
+    }
+    .@{vui}-input:not(:first-child):not(:last-child) .@{vui}-input-input {
+      border-radius:0;
     }
   }
 }
