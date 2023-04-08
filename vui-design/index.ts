@@ -39,7 +39,7 @@ import Checkbox, { CheckboxGroup } from "./components/checkbox";
 // import Form from "./components/form";
 // import FormGroup from "./components/form-group";
 // import FormItem from "./components/form-item";
-import Input, { InputGroup } from "./components/input";
+import Input, { InputPassword, InputSearch, InputGroup } from "./components/input";
 import InputNumber from "./components/input-number";
 import Radio, { RadioGroup } from "./components/radio";
 import Rate from "./components/rate";
@@ -139,6 +139,8 @@ const components = [
   // FormGroup,
   // FormItem,
   Input,
+  InputPassword,
+  InputSearch,
   InputGroup,
   InputNumber,
   Radio,
@@ -261,6 +263,8 @@ export {
   // FormGroup,
   // FormItem,
   Input,
+  InputPassword,
+  InputSearch,
   InputGroup,
   InputNumber,
   Radio,
