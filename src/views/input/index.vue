@@ -13,12 +13,13 @@
         <vui-example-basic-usage />
         <vui-example-bordered />
         <vui-example-size />
+        <vui-example-show-count />
         <vui-example-clearable />
-        <vui-example-disabled />
         <vui-example-prepend-append />
       </vui-col>
       <vui-col v-bind:span="12">
         <vui-example-prefix-suffix />
+        <vui-example-disabled />
         <vui-example-tooltip />
         <vui-example-password />
         <vui-example-search />
@@ -30,9 +31,9 @@
     <table class="example-api-props">
       <thead>
         <tr>
-          <th width="140">属性</th>
+          <th width="160">属性</th>
           <th>说明</th>
-          <th width="180">类型</th>
+          <th width="220">类型</th>
           <th width="140">默认值</th>
         </tr>
       </thead>
@@ -68,8 +69,20 @@
           <td>medium</td>
         </tr>
         <tr>
+          <td>showCount</td>
+          <td>是否显示输入字数</td>
+          <td>Boolean</td>
+          <td>false</td>
+        </tr>
+        <tr>
+          <td>bytes</td>
+          <td>自定义字符长度计算方法，如中文占两个字节</td>
+          <td>(value: string) => number</td>
+          <td>--</td>
+        </tr>
+        <tr>
           <td>maxLength</td>
-          <td>最大输入长度</td>
+          <td>允许输入的最大字符数量</td>
           <td>Number</td>
           <td>--</td>
         </tr>
@@ -133,9 +146,9 @@
     <table class="example-api-events">
       <thead>
         <tr>
-          <th width="140">事件名</th>
+          <th width="160">事件名</th>
           <th>说明</th>
-          <th width="180">类型</th>
+          <th width="220">类型</th>
           <th width="140">回调参数</th>
         </tr>
       </thead>
@@ -194,9 +207,9 @@
     <table class="example-api-methods">
       <thead>
         <tr>
-          <th width="140">方法名</th>
+          <th width="160">方法名</th>
           <th>说明</th>
-          <th width="180">参数</th>
+          <th width="220">参数</th>
           <th width="140">参数说明</th>
         </tr>
       </thead>
@@ -222,7 +235,7 @@
         <tr>
           <td>setSelectionRange</td>
           <td><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange" target="_blank">设置密码框当前选中文本的起始和结束位置</a></td>
-          <td>--</td>
+          <td>start, end, [direction]</td>
           <td>--</td>
         </tr>
       </tbody>
@@ -231,9 +244,9 @@
     <table class="example-api-props">
       <thead>
         <tr>
-          <th width="140">属性</th>
+          <th width="160">属性</th>
           <th>说明</th>
-          <th width="180">类型</th>
+          <th width="220">类型</th>
           <th width="140">默认值</th>
         </tr>
       </thead>
@@ -258,8 +271,8 @@
         </tr>
         <tr>
           <td>icon</td>
-          <td>按钮图标类型</td>
-          <td>IconType</td>
+          <td>按钮图标类型；当不需要图标时，可以设为 <code>false</code></td>
+          <td>IconType | Boolean</td>
           <td>search</td>
         </tr>
         <tr>
@@ -316,9 +329,9 @@
     <table class="example-api-events">
       <thead>
         <tr>
-          <th width="140">事件名</th>
+          <th width="160">事件名</th>
           <th>说明</th>
-          <th width="180">类型</th>
+          <th width="220">类型</th>
           <th width="140">回调参数</th>
         </tr>
       </thead>
@@ -347,9 +360,9 @@
     <table class="example-api-props">
       <thead>
         <tr>
-          <th width="140">属性</th>
+          <th width="160">属性</th>
           <th>说明</th>
-          <th width="180">类型</th>
+          <th width="220">类型</th>
           <th width="140">默认值</th>
         </tr>
       </thead>
@@ -382,10 +395,11 @@
   import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
   import VuiExampleBordered from "./examples/bordered/index.vue";
   import VuiExampleSize from "./examples/size/index.vue";
+  import VuiExampleShowCount from "./examples/show-count/index.vue";
   import VuiExampleClearable from "./examples/clearable/index.vue";
-  import VuiExampleDisabled from "./examples/disabled/index.vue";
   import VuiExamplePrependAppend from "./examples/prepend-append/index.vue";
   import VuiExamplePrefixSuffix from "./examples/prefix-suffix/index.vue";
+  import VuiExampleDisabled from "./examples/disabled/index.vue";
   import VuiExampleTooltip from "./examples/tooltip/index.vue";
   import VuiExamplePassword from "./examples/password/index.vue";
   import VuiExampleSearch from "./examples/search/index.vue";

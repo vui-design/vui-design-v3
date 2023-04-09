@@ -7,6 +7,7 @@ import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { InputGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 import omit from "../../utils/omit";
 
@@ -48,7 +49,17 @@ export const createProps = () => {
       validator: (size: Size) => sizes.includes(size),
       default: undefined
     },
-    // 最大输入长度
+    // 是否显示输入字数
+    showCount: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    // 自定义字符长度计算方法，如中文占两个字节
+    bytes: {
+      type: Function as PropType<(value: string) => number>,
+      default: undefined
+    },
+    // 允许输入的最大字符数量
     maxLength: {
       type: [String, Number] as PropType<string | number>,
       default: undefined
@@ -61,7 +72,7 @@ export const createProps = () => {
     // 是否允许清空
     clearable: {
       type: Boolean as PropType<boolean>,
-      default: true
+      default: false
     },
     // 输入框是否为只读状态
     readonly: {
@@ -131,28 +142,41 @@ export default defineComponent({
 
     // 值
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
+    const value = computed(() => props.value ?? defaultValue.value ?? "");
 
     // 清空按钮显示状态
     const showBtnClear = computed(() => props.clearable && !props.readonly && !disabled.value && is.effective(value.value));
 
     // 
-    const setValue = (newValue: string | number, callback?: Function) => {
+    const change = (newValue: string, callback?: Function) => {
       if (value.value === newValue) {
         return;
       }
 
-      if (!is.existy(props.value)) {
-        defaultValue.value = newValue;
+      const maxLength = Number(props.maxLength);
+      const length = is.function(props.bytes) ? props.bytes(newValue) : newValue.length;
+
+      if (is.number(maxLength) && maxLength > 0 && length > maxLength) {
+        resume(callback);
       }
-
-      context.emit("update:value", newValue);
-      context.emit("change", newValue);
-
-      if (props.validator) {
-        vuiFormItem?.onChange(newValue);
+      else {
+        if (!is.existy(props.value)) {
+          defaultValue.value = newValue;
+        }
+  
+        context.emit("update:value", newValue);
+        context.emit("change", newValue);
+  
+        if (props.validator) {
+          vuiFormItem?.onChange(newValue);
+        }
+  
+        resume(callback);
       }
+    };
 
+    // 
+    const resume = (callback?: Function) => {
       nextTick(() => {
         if (inputRef.value && inputRef.value.value !== value.value) {
           inputRef.value.value = value.value as string;
@@ -164,19 +188,11 @@ export default defineComponent({
       });
     };
 
-    // 对外提供 focus、blur 等方法
-    const focus = () => inputRef.value?.focus();
-    const blur = () => inputRef.value?.blur();
-    const select = () => inputRef.value?.select();
-    const setSelectionRange = (
-      start: number,
-      end: number,
-      direction?: "forward" | "backward" | "none"
-    ) => {
-      inputRef.value?.setSelectionRange(start, end, direction);
-    };
+    // 对外提供 value 值，以及 focus、blur 等方法
+    const { focus, blur, select, setSelectionRange } = useSelection(inputRef);
 
     context.expose({
+      value: value.value,
       focus,
       blur,
       select,
@@ -262,7 +278,7 @@ export default defineComponent({
 
       const { value } = e.target as HTMLInputElement;
 
-      setValue(value);
+      change(value);
     };
 
     // 清空输入框值
@@ -274,7 +290,7 @@ export default defineComponent({
       const value = "";
 
       context.emit("clear");
-      setValue(value, () => focus());
+      change(value, () => focus());
     };
 
     // 组件挂载完成之后执行
@@ -307,6 +323,7 @@ export default defineComponent({
     classes.elAppend = computed(() => `${classPrefix.value}-append`);
     classes.elPrefix = computed(() => `${classPrefix.value}-prefix`);
     classes.elSuffix = computed(() => `${classPrefix.value}-suffix`);
+    classes.elCount = computed(() => `${classPrefix.value}-count`);
     classes.elBtnClear = computed(() => `${classPrefix.value}-btn-clear`);
 
     // 
@@ -371,12 +388,27 @@ export default defineComponent({
         );
       }
 
+      let count;
+
+      if (props.showCount) {
+        const content = String(value.value);
+        const maxLength = Number(props.maxLength);
+        const length = is.function(props.bytes) ? props.bytes(content) : content.length;
+
+        count = (
+          <div class={classes.elCount.value}>
+            {
+              is.number(maxLength) && maxLength > 0 ? `${length}/${maxLength}` : `${length}`
+            }
+          </div>
+        );
+      }
+
       const attributes = {
         ...omit(context.attrs, ["clsss", "style"]),
         type: props.type,
         value: value.value,
         placeholder: props.placeholder,
-        maxLength: props.maxLength,
         autocomplete: "off",
         spellcheck: false,
         readonly: props.readonly,
@@ -396,6 +428,7 @@ export default defineComponent({
           {prefix}
           <input ref={inputRef} {...attributes} />
           {btnClear}
+          {count}
           {suffix}
         </div>
       );

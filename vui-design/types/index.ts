@@ -1,4 +1,4 @@
-import type { SetupContext, Ref, VNode } from "vue";
+import type { Ref, VNode } from "vue";
 import type { sizes } from "../constants";
 
 export type VueNode = VNode | string | number | boolean | null | undefined | void;
@@ -26,5 +26,3 @@ export type Size = typeof sizes[number];
 export type GetPopupContainer = string | HTMLElement;
 
 export type GetScrollContainer = () => Window | HTMLElement;
-
-export type Authorize = (value: string | Array<string>, attrs?: SetupContext["attrs"]) => boolean;

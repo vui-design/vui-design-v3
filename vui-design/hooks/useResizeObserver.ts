@@ -7,7 +7,7 @@ export default function useResizeObserver({
   onResize
 }: {
   element: Ref<HTMLElement | null | undefined>;
-  onResize: () => void;
+  onResize: (entry: ResizeObserverEntry) => void;
 }) {
   let resizeObserver: ResizeObserver | null;
 

@@ -47,44 +47,6 @@
     }
   }
 
-  // 前置标签 & 后置标签
-  &-prepend,
-  &-append {
-    display:block;
-    box-sizing:border-box;
-    border:@input-border-width solid @input-border-color;
-    background-color:@input-addon-background-color;
-    color:@input-font-color;
-    font-family:@input-font-family;
-    margin:0;
-    white-space:nowrap;
-    transition:all @transition-duration @transition-timing-function;
-  }
-
-  &-prepend {
-    border-right-width:0;
-    border-top-left-radius:@input-border-radius;
-    border-bottom-left-radius:@input-border-radius;
-  }
-
-  &-append {
-    border-left-width:0;
-    border-top-right-radius:@input-border-radius;
-    border-bottom-right-radius:@input-border-radius;
-  }
-
-  // 前缀 & 后缀
-  &-prefix,
-  &-suffix {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    box-sizing:border-box;
-    color:@input-affix-color;
-    line-height:1;
-    transition:all @transition-duration @transition-timing-function;
-  }
-
   // 清空按钮 & 密码框明文切换按钮
   &-btn-clear,
   &-btn-toggle {
@@ -114,6 +76,56 @@
     }
   }
 
+  // 字数统计
+  &-count {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    color:@input-count-color;
+    line-height:1;
+    white-space:nowrap;
+    transition:all @transition-duration @transition-timing-function;
+  }
+
+  // 前置标签 & 后置标签
+  &-prepend,
+  &-append {
+    display:block;
+    box-sizing:border-box;
+    border:@input-border-width solid @input-border-color;
+    background-color:@input-addon-background-color;
+    color:@input-font-color;
+    font-family:@input-font-family;
+    white-space:nowrap;
+    transition:all @transition-duration @transition-timing-function;
+  }
+
+  &-prepend {
+    border-right-width:0;
+    border-top-left-radius:@input-border-radius;
+    border-bottom-left-radius:@input-border-radius;
+  }
+
+  &-append {
+    border-left-width:0;
+    border-top-right-radius:@input-border-radius;
+    border-bottom-right-radius:@input-border-radius;
+  }
+
+  // 前缀 & 后缀
+  &-prefix,
+  &-suffix {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    color:@input-affix-color;
+    line-height:1;
+    white-space:nowrap;
+    transition:all @transition-duration @transition-timing-function;
+  }
+
   // 边框
   &-bordered &-input {
     border-width:@input-border-width;
@@ -139,6 +151,12 @@
       line-height:@input-size-sm;
     }
   }
+  &-small &-btn-clear {
+    margin-left:@input-padding-sm;
+  }
+  &-small &-count {
+    margin-left:@input-padding-sm;
+  }
   &-small &-prepend,
   &-small &-append {
     height:@input-size-sm;
@@ -150,9 +168,6 @@
     margin-right:@input-padding-sm;
   }
   &-small &-suffix {
-    margin-left:@input-padding-sm;
-  }
-  &-small &-btn-clear {
     margin-left:@input-padding-sm;
   }
   &-bordered&-small &-input {
@@ -172,6 +187,12 @@
       line-height:@input-size-md;
     }
   }
+  &-medium &-btn-clear {
+    margin-left:@input-padding-md;
+  }
+  &-medium &-count {
+    margin-left:@input-padding-md;
+  }
   &-medium &-prepend,
   &-medium &-append {
     height:@input-size-md;
@@ -183,9 +204,6 @@
     margin-right:@input-padding-md;
   }
   &-medium &-suffix {
-    margin-left:@input-padding-md;
-  }
-  &-medium &-btn-clear {
     margin-left:@input-padding-md;
   }
   &-bordered&-medium &-input {
@@ -205,6 +223,12 @@
       line-height:@input-size-lg;
     }
   }
+  &-large &-btn-clear {
+    margin-left:@input-padding-lg;
+  }
+  &-large &-count {
+    margin-left:@input-padding-lg;
+  }
   &-large &-prepend,
   &-large &-append {
     height:@input-size-lg;
@@ -216,9 +240,6 @@
     margin-right:@input-padding-lg;
   }
   &-large &-suffix {
-    margin-left:@input-padding-lg;
-  }
-  &-large &-btn-clear {
     margin-left:@input-padding-lg;
   }
   &-bordered&-large &-input {

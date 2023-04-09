@@ -96,6 +96,14 @@
 	.vui-article-content table.example-api-events td:nth-child(2) {  }
 	.vui-article-content table.example-api-events td:nth-child(3) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
 	.vui-article-content table.example-api-events td:nth-child(4) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+  .vui-article-content table.example-api-methods th:nth-child(1) { white-space:nowrap; }
+	.vui-article-content table.example-api-methods th:nth-child(2) {  }
+	.vui-article-content table.example-api-methods th:nth-child(3) {  }
+	.vui-article-content table.example-api-methods th:nth-child(4) { white-space:nowrap; }
+	.vui-article-content table.example-api-methods td:nth-child(1) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-methods td:nth-child(2) {  }
+	.vui-article-content table.example-api-methods td:nth-child(3) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+	.vui-article-content table.example-api-methods td:nth-child(4) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
 	.vui-article-content ul { list-style:circle; padding-left:18px; }
 	.vui-article-content ul li p { margin-bottom:0; }
 	.vui-article-content ol { list-style:circle; padding-left:18px; }

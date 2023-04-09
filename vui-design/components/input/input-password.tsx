@@ -4,6 +4,7 @@ import { createProps } from "./input";
 import VuiIcon from "../icon";
 import VuiInput from "./input";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 
 export { createProps };
@@ -16,7 +17,7 @@ export default defineComponent({
   emits: ["update:value", "change", "focus", "blur", "keydown", "keyup", "enter", "clear"],
   setup(props, context) {
     // DOM 引用
-    const inputRef = ref<HTMLInputElement>();
+    const inputRef = ref();
 
     // 值
     const defaultValue = ref(props.defaultValue);
@@ -40,19 +41,11 @@ export default defineComponent({
       context.emit("change", newValue);
     };
 
-    // 对外提供 focus、blur 等方法
-    const focus = () => inputRef.value?.focus();
-    const blur = () => inputRef.value?.blur();
-    const select = () => inputRef.value?.select();
-    const setSelectionRange = (
-      start: number,
-      end: number,
-      direction?: "forward" | "backward" | "none"
-    ) => {
-      inputRef.value?.setSelectionRange(start, end, direction);
-    };
+    // 对外提供 value 值，以及 focus、blur 等方法
+    const { focus, blur, select, setSelectionRange } = useSelection(inputRef);
 
     context.expose({
+      value: value.value,
       focus,
       blur,
       select,
@@ -126,7 +119,7 @@ export default defineComponent({
 
           return (
             <div {...btnToggleAttributes}>
-              <VuiIcon type={encrypted.value ? "eye" : "eye-off"} />
+              <VuiIcon type={encrypted.value ? "eye-off" : "eye"} />
             </div>
           );
         }
@@ -140,17 +133,19 @@ export default defineComponent({
           type={type.value}
           value={value.value}
           placeholder={props.placeholder}
-          maxLength={props.maxLength}
-          prepend={props.prepend}
-          append={props.append}
-          prefix={props.prefix}
-          suffix={props.suffix}
-          size={props.size}
           bordered={props.bordered}
+          size={props.size}
+          showCount={props.showCount}
+          bytes={props.bytes}
+          maxLength={props.maxLength}
           autofocus={props.autofocus}
           clearable={props.clearable}
           disabled={props.disabled}
           validator={props.validator}
+          prepend={props.prepend}
+          append={props.append}
+          prefix={props.prefix}
+          suffix={props.suffix}
           v-slots={slots}
           onChange={handleChange}
           onFocus={handleFocus}
