@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Size } from "../../types";
 import type { Type } from "./types";
-import { defineComponent, inject, ref, computed, watch, nextTick } from "vue";
+import { defineComponent, inject, ref, computed, nextTick } from "vue";
 import { sizes } from "../../constants";
 import { types } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
@@ -123,13 +123,6 @@ export default defineComponent({
       }
     });
 
-    // 监听 checked 属性变化
-    watch(() => props.checked, newValue => {
-      if (is.boolean(newValue) || is.string(newValue) || is.number(newValue)) {
-        defaultChecked.value = newValue;
-      }
-    });
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
       if (disabled.value) {
@@ -164,7 +157,9 @@ export default defineComponent({
       else {
         const value = newChecked ? props.checkedValue : props.uncheckedValue;
 
-        defaultChecked.value = value;
+        if (!is.existy(props.checked)) {
+          defaultChecked.value = value;
+        }
 
         context.emit("update:checked", value);
         context.emit('change', value);

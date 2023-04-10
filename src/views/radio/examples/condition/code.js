@@ -7,14 +7,24 @@ const code =
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import { Modal } from "vui-design";
 
   export default defineComponent({
     setup() {
       const checked = ref(false);
       const handleChange = newValue => {
-        if (newValue && confirm("您确认要勾选吗？")) {
-          checked.value = newValue;
+        if (!newValue) {
+          return;
         }
+
+        Modal.confirm({
+          title: "Are you sure you want to check?",
+          description: "Some descriptions...",
+          onCancel: () => console.log("Cancel"),
+          onOk: () => {
+            checked.value = newValue;
+          }
+        });
       };
 
       return {

@@ -14,6 +14,7 @@
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import { Modal } from "vui-design";
   import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
@@ -24,11 +25,14 @@
     setup() {
       const checked = ref(false);
       const handleChange = newValue => {
-        const message = newValue ? "您确认要勾选吗？" : "您确认要取消勾选吗？";
-
-        if (confirm(message)) {
-          checked.value = newValue;
-        }
+        Modal.confirm({
+          title: newValue ? "Are you sure you want to check?" : "Are you sure you want to uncheck?",
+          description: "Some descriptions...",
+          onCancel: () => console.log("Cancel"),
+          onOk: () => {
+            checked.value = newValue;
+          }
+        });
       };
 
       return {

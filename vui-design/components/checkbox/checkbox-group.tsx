@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Size } from "../../types";
 import type { Checkbox, Layout, Type } from "./types";
-import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
+import { defineComponent, provide, inject, toRefs, ref, reactive, computed } from "vue";
 import { sizes } from "../../constants";
 import { layouts, types } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
@@ -88,20 +88,22 @@ export default defineComponent({
 
     // 选中值
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
+    const value = computed(() => props.value ?? defaultValue.value ?? []);
 
     // onChange 事件回调
-    const handleChange = (checked: boolean, value: string | number) => {
-      let nextValue = [...defaultValue.value];
+    const handleChange = (checked: boolean, newValue: string | number) => {
+      let nextValue = [...value.value];
 
       if (checked) {
-        nextValue.push(value);
+        nextValue.push(newValue);
       }
       else {
-        nextValue.splice(nextValue.indexOf(value), 1);
+        nextValue.splice(nextValue.indexOf(newValue), 1);
       }
 
-      defaultValue.value = nextValue;
+      if (!is.existy(props.value)) {
+        defaultValue.value = nextValue;
+      }
 
       context.emit("update:value", nextValue);
       context.emit('change', nextValue);
@@ -121,16 +123,6 @@ export default defineComponent({
       disabled,
       onChange: handleChange
     }));
-
-    // 
-    watch(() => props.value, newValue => {
-      if (is.array(newValue)) {
-        defaultValue.value = [...newValue];
-      }
-    }, {
-      immediate: true,
-      deep: true
-    });
 
     // 计算 class 样式
     const classPrefix = useClassPrefix("checkbox-group", props);

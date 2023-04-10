@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Size } from "../../types";
 import type { Radio, Layout, Type } from "./types";
-import { defineComponent, provide, inject, toRefs, ref, reactive, computed, watch } from "vue";
+import { defineComponent, provide, inject, toRefs, ref, reactive, computed } from "vue";
 import { sizes } from "../../constants";
 import { layouts, types } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
@@ -88,13 +88,15 @@ export default defineComponent({
 
     // 选中值
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
+    const value = computed(() => props.value ?? defaultValue.value ?? undefined);
 
     // onChange 事件回调
-    const handleChange = (checked: boolean, value: boolean | string | number) => {
-      const nextValue = checked ? value : undefined;
+    const handleChange = (checked: boolean, newValue: boolean | string | number) => {
+      const nextValue = checked ? newValue : undefined;
 
-      defaultValue.value = nextValue;
+      if (!is.existy(props.value)) {
+        defaultValue.value = nextValue;
+      }
 
       context.emit("update:value", nextValue);
       context.emit('change', nextValue);
@@ -114,15 +116,6 @@ export default defineComponent({
       disabled,
       onChange: handleChange
     }));
-
-    // 
-    watch(() => props.value, newValue => {
-      if (is.boolean(newValue) || is.string(newValue) || is.number(newValue)) {
-        defaultValue.value = newValue;
-      }
-    }, {
-      immediate: true
-    });
 
     // 计算 class 样式
     const classPrefix = useClassPrefix("radio-group", props);

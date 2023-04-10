@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Size } from "../../types";
 import type { Type } from "./types";
-import { defineComponent, inject, ref, computed, watch } from "vue";
+import { defineComponent, inject, ref, computed } from "vue";
 import { sizes } from "../../constants";
 import { types } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
@@ -118,13 +118,6 @@ export default defineComponent({
       return props.loading || disabled.value ? colours.rgba2hex(colours.hex2rgba(colour, 0.6)) : colour;
     });
 
-    // 
-    watch(() => props.checked, newValue => {
-      if (is.boolean(newValue) || is.string(newValue) || is.number(newValue)) {
-        defaultChecked.value = newValue;
-      }
-    });
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
       focused.value = true;
@@ -145,7 +138,9 @@ export default defineComponent({
 
       const value = checked.value ? props.uncheckedValue : props.checkedValue;
 
-      defaultChecked.value = value;
+      if (!is.existy(props.checked)) {
+        defaultChecked.value = value;
+      }
 
       context.emit("update:checked", value);
       context.emit('change', value);

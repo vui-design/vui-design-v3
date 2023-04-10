@@ -5,13 +5,14 @@
     </template>
     <template v-slot:title>按条件开/关</template>
     <template v-slot:description>
-      <p>通过 <code>beforeChange</code> 函数可以阻止切换。</p>
+      <p>可以判断是否允许打开或关闭开关。</p>
     </template>
   </vui-example>
 </template>
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import { Modal } from "vui-design";
   import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
@@ -22,11 +23,14 @@
     setup() {
       const checked = ref(false);
       const handleChange = newValue => {
-        const message = newValue ? "您确认要打开开关吗？" : "您确认要关闭开关吗？";
-
-        if (confirm(message)) {
-          checked.value = newValue;
-        }
+        Modal.confirm({
+          title: newValue ? "Do you want to open this task?" : "Do you want to close this task?",
+          description: "Some descriptions...",
+          onCancel: () => console.log("Cancel"),
+          onOk: () => {
+            checked.value = newValue;
+          }
+        });
       };
 
       return {

@@ -5,16 +5,20 @@ const code =
 
 <script lang="ts">
   import { defineComponent, ref } from "vue";
+  import { Modal } from "vui-design";
 
   export default defineComponent({
     setup() {
       const checked = ref(false);
       const handleChange = newValue => {
-        const message = newValue ? "您确认要打开开关吗？" : "您确认要关闭开关吗？";
-
-        if (confirm(message)) {
-          checked.value = newValue;
-        }
+        Modal.confirm({
+          title: newValue ? "Do you want to open this task?" : "Do you want to close this task?",
+          description: "Some descriptions...",
+          onCancel: () => console.log("Cancel"),
+          onOk: () => {
+            checked.value = newValue;
+          }
+        });
       };
 
       return {
