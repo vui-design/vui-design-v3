@@ -109,7 +109,7 @@ export default defineComponent({
     return () => {
       const slots = {
         ...context.slots,
-        suffix: () => {
+        affixAfter: () => {
           const btnToggleAttributes = {
             class: classes.elBtnToggle.value,
             onMousedown: handleMouse,
@@ -142,10 +142,10 @@ export default defineComponent({
           clearable={props.clearable}
           disabled={props.disabled}
           validator={props.validator}
-          prepend={props.prepend}
-          append={props.append}
-          prefix={props.prefix}
-          suffix={props.suffix}
+          addonBefore={props.addonBefore}
+          addonAfter={props.addonAfter}
+          affixBefore={props.affixBefore}
+          affixAfter={props.affixAfter}
           v-slots={slots}
           onChange={handleChange}
           onFocus={handleFocus}

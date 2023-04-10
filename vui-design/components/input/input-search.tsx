@@ -125,7 +125,7 @@ export default defineComponent({
     // 渲染
     return () => {
       const slots = {
-        append: () => {
+        addonAfter: () => {
           const buttonAttributes = {
             type: props.type,
             icon: props.icon === false ? undefined : (props.icon === true ? "search" : props.icon),

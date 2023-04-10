@@ -2,8 +2,8 @@ const code =
 `<template>
   <div class="example-input-disabled">
     <vui-input disabled placeholder="Enter something..." />
-    <vui-input disabled prepend="https://github.com/u/" placeholder="Enter something..." />
-    <vui-input disabled prefix="mic" placeholder="Enter something..." />
+    <vui-input disabled addonBefore="https://github.com/u/" placeholder="Enter something..." />
+    <vui-input disabled affixBefore="mic" placeholder="Enter something..." />
   </div>
 </template>
 

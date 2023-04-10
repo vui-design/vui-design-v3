@@ -29,12 +29,15 @@ const hiddenStyle = `
 `;
 
 let computedStyleCache = {};
-let hiddenTextarea = null;
+let hiddenTextarea: HTMLTextAreaElement | null = null;
 
-export function calculateNodeStyle(node, useCache = false) {
+export function calculateNodeStyle(
+  node: HTMLTextAreaElement,
+  useCache?: boolean
+) {
   const key = node.getAttribute("id") || node.getAttribute("name");
 
-  if (useCache && computedStyleCache[key]) {
+  if (useCache && key && computedStyleCache[key]) {
     return computedStyleCache[key];
   }
 
@@ -64,14 +67,21 @@ export function calculateNodeStyle(node, useCache = false) {
 * @param {HTMLElement} targetElement 目标元素
 * @param {Boolean} useCache 是否使用缓存
 */
-export default function getTextareaSize(targetElement, minRows = 2, maxRows = null, useCache = false) {
+export default function getTextareaSize(
+  targetElement: HTMLTextAreaElement,
+  minRows: string | number = 4,
+  maxRows?: string | number,
+  useCache?: boolean
+) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement("textarea");
     document.body.appendChild(hiddenTextarea);
   }
 
-  if (targetElement.getAttribute("wrap")) {
-    hiddenTextarea.setAttribute("wrap", targetElement.getAttribute("wrap"));
+  const wrap = targetElement.getAttribute("wrap");
+
+  if (wrap) {
+    hiddenTextarea.setAttribute("wrap", wrap);
   }
   else {
     hiddenTextarea.removeAttribute('wrap');
@@ -99,13 +109,13 @@ export default function getTextareaSize(targetElement, minRows = 2, maxRows = nu
     height = height - padding;
   }
 
-  if (minRows !== null || maxRows !== null) {
+  if (minRows != null || maxRows != null) {
     hiddenTextarea.value = "";
 
     let singleRowHeight = hiddenTextarea.scrollHeight - padding;
 
-    if (minRows !== null) {
-      minHeight = singleRowHeight * minRows;
+    if (minRows != null) {
+      minHeight = singleRowHeight * Number(minRows);
 
       if (boxSizing === "border-box") {
         minHeight = minHeight + border + padding;
@@ -114,8 +124,8 @@ export default function getTextareaSize(targetElement, minRows = 2, maxRows = nu
       height = Math.max(minHeight, height);
     }
 
-    if (maxRows !== null) {
-      maxHeight = singleRowHeight * maxRows;
+    if (typeof maxRows === "number") {
+      maxHeight = singleRowHeight * Number(maxRows);
 
       if (boxSizing === "border-box") {
         maxHeight = maxHeight + border + padding;

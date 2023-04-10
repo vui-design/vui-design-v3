@@ -1,3 +1,5 @@
+import type { Data } from "../types";
+
 /**
 * (Internal) Applies css properties to an element, similar to the jQuery
 * While this helper does assist with vendor prefixed property names, it does not perform any manipulation of values prior to setting styles.
@@ -5,7 +7,7 @@
 const cssPrefixes = ["Webkit", "Moz", "O", "ms"];
 let cssProperties = {};
 
-export function getVendorProperty(key) {
+export function getVendorProperty(key: string) {
   const style = document.body.style;
 
   if (key in style) {
@@ -27,7 +29,7 @@ export function getVendorProperty(key) {
   return key;
 };
 
-export function getStyleProperty(key) {
+export function getStyleProperty(key: string) {
   key = key.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, (match, letter) => {
     return letter.toUpperCase();
   });
@@ -35,13 +37,20 @@ export function getStyleProperty(key) {
   return cssProperties[key] || (cssProperties[key] = getVendorProperty(key));
 };
 
-export function setStyle(element, key, value) {
+export function setStyle(
+  element: HTMLElement,
+  key: string,
+  value: any
+) {
   const property = getStyleProperty(key);
 
   element.style[property] = value;
 };
 
-export default function setStyles(element, styles) {
+export default function setStyles(
+  element: HTMLElement,
+  styles: Data
+) {
   if (arguments.length === 2) {
     for (let key in styles) {
       const value = styles[key];

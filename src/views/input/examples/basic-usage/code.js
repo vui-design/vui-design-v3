@@ -1,6 +1,6 @@
 const code =
 `<template>
-  <vui-input v-model:value="value" v-on:input="handleInput" placeholder="Basic usage" />
+  <vui-input v-model:value="value" placeholder="Basic usage" />
 </template>
 
 <script lang="ts">

@@ -1,28 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-textarea-resizable">
-    <template slot="demo">
-      <vui-textarea v-model="value" resizable placeholder="Enter something..." />
+  <vui-example id="example-textarea-resizable" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-textarea v-model:value="value" resizable placeholder="Enter something..." />
     </template>
-    <template slot="title">手动改变高度</template>
-    <template slot="description">
-      <p>启用 <code>resizable</code> 属性，用户可拖动改变文本域的高度。</p>
+    <template v-slot:title>手动改变高度</template>
+    <template v-slot:description>
+      <p>启用 <code>resizable</code> 属性，用户可手动拖曳改变文本域的高度。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string>("");
+
       return {
         code,
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>

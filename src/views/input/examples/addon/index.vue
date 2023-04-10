@@ -1,12 +1,12 @@
 <template>
-  <vui-example id="example-input-prepend-append" v-bind:code="code">
+  <vui-example id="example-input-addon" v-bind:code="code">
     <template v-slot:demo>
-      <div class="example-input-prepend-append">
-        <vui-input prepend="https://github.com/u/" placeholder="Enter something..." />
-        <vui-input append="@qq.com" placeholder="Enter something..." />
+      <div class="example-input-addon">
+        <vui-input addonBefore="https://github.com/u/" placeholder="Enter something..." />
+        <vui-input addonAfter="@qq.com" placeholder="Enter something..." />
         <vui-input placeholder="Enter something...">
-          <template v-slot:prepend>https://</template>
-          <template v-slot:append>.com</template>
+          <template v-slot:addonBefore>https://</template>
+          <template v-slot:addonAfter>.com</template>
         </vui-input>
       </div>
     </template>
@@ -35,5 +35,5 @@
 </script>
 
 <style>
-  .example-input-prepend-append .vui-input:not(:first-child) { margin-top:24px; }
+  .example-input-addon .vui-input:not(:first-child) { margin-top:24px; }
 </style>

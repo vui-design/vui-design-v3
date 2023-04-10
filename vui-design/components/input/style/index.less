@@ -89,8 +89,8 @@
   }
 
   // 前置标签 & 后置标签
-  &-prepend,
-  &-append {
+  &-addon-before,
+  &-addon-after {
     display:block;
     box-sizing:border-box;
     border:@input-border-width solid @input-border-color;
@@ -101,21 +101,21 @@
     transition:all @transition-duration @transition-timing-function;
   }
 
-  &-prepend {
+  &-addon-before {
     border-right-width:0;
     border-top-left-radius:@input-border-radius;
     border-bottom-left-radius:@input-border-radius;
   }
 
-  &-append {
+  &-addon-after {
     border-left-width:0;
     border-top-right-radius:@input-border-radius;
     border-bottom-right-radius:@input-border-radius;
   }
 
   // 前缀 & 后缀
-  &-prefix,
-  &-suffix {
+  &-affix-before,
+  &-affix-after {
     display:flex;
     justify-content:center;
     align-items:center;
@@ -157,17 +157,17 @@
   &-small &-count {
     margin-left:@input-padding-sm;
   }
-  &-small &-prepend,
-  &-small &-append {
+  &-small &-addon-before,
+  &-small &-addon-after {
     height:@input-size-sm;
     padding:0 @input-padding-sm;
     font-size:@input-font-size-sm;
     line-height:@input-size-sm - @input-border-width * 2;
   }
-  &-small &-prefix {
+  &-small &-affix-before {
     margin-right:@input-padding-sm;
   }
-  &-small &-suffix {
+  &-small &-affix-after {
     margin-left:@input-padding-sm;
   }
   &-bordered&-small &-input {
@@ -193,17 +193,17 @@
   &-medium &-count {
     margin-left:@input-padding-md;
   }
-  &-medium &-prepend,
-  &-medium &-append {
+  &-medium &-addon-before,
+  &-medium &-addon-after {
     height:@input-size-md;
     padding:0 @input-padding-md;
     font-size:@input-font-size-md;
     line-height:@input-size-md - @input-border-width * 2;
   }
-  &-medium &-prefix {
+  &-medium &-affix-before {
     margin-right:@input-padding-md;
   }
-  &-medium &-suffix {
+  &-medium &-affix-after {
     margin-left:@input-padding-md;
   }
   &-bordered&-medium &-input {
@@ -229,17 +229,17 @@
   &-large &-count {
     margin-left:@input-padding-lg;
   }
-  &-large &-prepend,
-  &-large &-append {
+  &-large &-addon-before,
+  &-large &-addon-after {
     height:@input-size-lg;
     padding:0 @input-padding-lg;
     font-size:@input-font-size-lg;
     line-height:@input-size-lg - @input-border-width * 2;
   }
-  &-large &-prefix {
+  &-large &-affix-before {
     margin-right:@input-padding-lg;
   }
-  &-large &-suffix {
+  &-large &-affix-after {
     margin-left:@input-padding-lg;
   }
   &-bordered&-large &-input {
@@ -255,7 +255,7 @@
     border-color:@input-hover-border-color;
   }
   &-input:hover &-btn-clear {
-    display:block;
+    display:flex;
   }
 
   &-focused &-input {
@@ -271,7 +271,7 @@
   }
 
   // 搜素框
-  &-search &-append {
+  &-search &-addon-after {
     border:none;
     padding:0;
 
@@ -284,7 +284,7 @@
       z-index:2;
     }
   }
-  &-search&-bordered &-append {
+  &-search&-bordered &-addon-after {
     margin-left:-1px;
   }
 

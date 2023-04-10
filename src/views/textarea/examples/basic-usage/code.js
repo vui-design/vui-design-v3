@@ -1,16 +1,20 @@
 const code =
 `<template>
-  <vui-textarea v-model="value" placeholder="Basic usage" />
+  <vui-textarea v-model:value="value" placeholder="Basic usage" />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<string>("");
+
       return {
-        value: ""
+        value
       };
     }
-  };
+  });
 </script>
 `;
 

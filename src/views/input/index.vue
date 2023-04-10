@@ -15,10 +15,10 @@
         <vui-example-size />
         <vui-example-show-count />
         <vui-example-clearable />
-        <vui-example-prepend-append />
+        <vui-example-addon />
       </vui-col>
       <vui-col v-bind:span="12">
-        <vui-example-prefix-suffix />
+        <vui-example-affix />
         <vui-example-disabled />
         <vui-example-tooltip />
         <vui-example-password />
@@ -53,7 +53,7 @@
         <tr>
           <td>placeholder</td>
           <td>输入框占位文本</td>
-          <td>String | Number</td>
+          <td>String</td>
           <td>--</td>
         </tr>
         <tr>
@@ -117,25 +117,25 @@
           <td>true</td>
         </tr>
         <tr>
-          <td>prepend</td>
+          <td>addonBefore</td>
           <td>前置标签</td>
           <td>String | Slot</td>
           <td>--</td>
         </tr>
         <tr>
-          <td>append</td>
+          <td>addonAfter</td>
           <td>后置标签</td>
           <td>String | Slot</td>
           <td>--</td>
         </tr>
         <tr>
-          <td>prefix</td>
+          <td>affixBefore</td>
           <td>前缀图标类型/图标</td>
           <td>String | Slot</td>
           <td>--</td>
         </tr>
         <tr>
-          <td>suffix</td>
+          <td>affixAfter</td>
           <td>后缀图标类型/图标</td>
           <td>String | Slot</td>
           <td>--</td>
@@ -234,7 +234,7 @@
         </tr>
         <tr>
           <td>setSelectionRange</td>
-          <td><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange" target="_blank">设置密码框当前选中文本的起始和结束位置</a></td>
+          <td><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange" target="_blank">设置输入框当前选中文本的起始和结束位置</a></td>
           <td>start, end, [direction]</td>
           <td>--</td>
         </tr>
@@ -397,8 +397,8 @@
   import VuiExampleSize from "./examples/size/index.vue";
   import VuiExampleShowCount from "./examples/show-count/index.vue";
   import VuiExampleClearable from "./examples/clearable/index.vue";
-  import VuiExamplePrependAppend from "./examples/prepend-append/index.vue";
-  import VuiExamplePrefixSuffix from "./examples/prefix-suffix/index.vue";
+  import VuiExampleAddon from "./examples/addon/index.vue";
+  import VuiExampleAffix from "./examples/affix/index.vue";
   import VuiExampleDisabled from "./examples/disabled/index.vue";
   import VuiExampleTooltip from "./examples/tooltip/index.vue";
   import VuiExamplePassword from "./examples/password/index.vue";

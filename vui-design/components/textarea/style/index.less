@@ -1,0 +1,106 @@
+@import "./token.less";
+
+.@{vui-textarea} {
+  position:relative;
+  cursor:text;
+  display:inline-block;
+  box-sizing:border-box;
+  width:100%;
+  border:0 solid @textarea-border-color;
+  background-color:@textarea-background-color;
+  margin:0;
+  padding:0;
+  vertical-align:middle;
+  color:@textarea-font-color;
+  font-family:@textarea-font-family;
+  line-height:@textarea-line-height;
+  transition:all @transition-duration @transition-timing-function;
+
+  textarea {
+    appearance:none;
+    outline:none;
+    cursor:inherit;
+    display:block;
+    box-sizing:border-box;
+    width:100%;
+    min-width:100%;
+    max-width:100%;
+    border:none;
+    background-color:transparent;
+    margin:0;
+    padding:@textarea-padding-vertical @textarea-padding-horizontal;
+    color:inherit;
+    font-size:inherit;
+    font-family:inherit;
+    line-height:inherit;
+    resize:none;
+  }
+
+  // 字数统计
+  &-count {
+    position:absolute;
+    bottom:@textarea-padding-vertical + (round(@textarea-font-size * @textarea-line-height) - @textarea-font-size) / 2;
+    right:@textarea-padding-horizontal;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    color:@input-count-color;
+    line-height:1;
+    white-space:nowrap;
+    pointer-events:none;
+  }
+
+  // 清空按钮
+  &-btn-clear {
+    position:absolute;
+    top:@textarea-padding-vertical + (round(@textarea-font-size * @textarea-line-height) - @textarea-font-size) / 2;
+    right:@textarea-padding-horizontal;
+    cursor:pointer;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    box-sizing:border-box;
+    color:@textarea-btn-clear-color;
+    line-height:1;
+    transition:all @transition-duration @transition-timing-function;
+
+    &:hover {
+      color:@textarea-btn-clear-hover-color;
+    }
+  }
+
+  // 边框
+  &-bordered {
+    border-width:@input-border-width;
+    border-radius:@input-border-radius;
+  }
+
+  // 
+  &-resizable {
+    textarea {
+      resize:vertical;
+    }
+  }
+
+  // 状态
+  &:hover {
+    z-index:1;
+    border-color:@textarea-hover-border-color;
+  }
+  &:hover &-btn-clear {
+    display:flex;
+  }
+
+  &&-focused {
+    z-index:2;
+    border-color:@textarea-focus-border-color;
+  }
+
+  &&-disabled {
+    cursor:not-allowed;
+    border-color:@textarea-disabled-border-color;
+    background-color:@textarea-disabled-background-color;
+    color:@textarea-disabled-font-color;
+  }
+}

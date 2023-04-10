@@ -336,15 +336,15 @@ export default [
         },
         component: () => import("src/views/switch/index.vue")
       },
-  //     {
-  //       path: "/components/textarea",
-  //       name: "textarea",
-  //       meta: {
-  //         title: "Textarea",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/textarea/index.vue")
-  //     },
+      {
+        path: "/components/textarea",
+        name: "textarea",
+        meta: {
+          title: "Textarea",
+          group: "data-entry"
+        },
+        component: () => import("src/views/textarea/index.vue")
+      },
   //     {
   //       path: "/components/transfer",
   //       name: "transfer",

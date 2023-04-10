@@ -1,15 +1,16 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Size } from "../../types";
-import { defineComponent, inject, ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
-import { getSlotProp } from "../../utils/vue";
+import type { Autosize } from "./types";
+import { defineComponent, inject, ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
 import { sizes, keyCodes } from "../../constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
-import { InputGroupInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 import omit from "../../utils/omit";
+import setStyle from "../../utils/setStyle";
+import getTextareaSize from "../../utils/getTextareaSize";
 
 export const createProps = () => {
   return {
@@ -17,11 +18,6 @@ export const createProps = () => {
     classPrefix: {
       type: String as PropType<string>,
       default: undefined
-    },
-    // 输入框类型
-    type: {
-      type: String as PropType<string>,
-      default: "text"
     },
     // 默认值（非受控模式）
     defaultValue: {
@@ -33,7 +29,7 @@ export const createProps = () => {
       type: [String, Number] as PropType<string | number>,
       default: undefined
     },
-    // 输入框占位文本
+    // 文本域占位文本
     placeholder: {
       type: String as PropType<string>,
       default: undefined
@@ -43,7 +39,7 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: true
     },
-    // 输入框尺寸
+    // 文本域尺寸
     size: {
       type: String as PropType<Size>,
       validator: (size: Size) => sizes.includes(size),
@@ -64,8 +60,23 @@ export const createProps = () => {
       type: [String, Number] as PropType<string | number>,
       default: undefined
     },
+    // 默认可见行数
+    rows: {
+      type: [String, Number] as PropType<string | number>,
+      default: 4
+    },
     // 是否自动获得焦点
     autofocus: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
+    // 自适应内容高度
+    autosize: {
+      type: [Boolean, Object] as PropType<boolean | Autosize>,
+      default: false
+    },
+    // 是否允许手动拖曳改变高度
+    resizable: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -74,12 +85,12 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 输入框是否为只读状态
+    // 文本域是否为只读状态
     readonly: {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 输入框是否为禁用状态
+    // 文本域是否为禁用状态
     disabled: {
       type: Boolean as PropType<boolean>,
       default: undefined
@@ -88,34 +99,14 @@ export const createProps = () => {
     validator: {
       type: Boolean as PropType<boolean>,
       default: true
-    },
-    // 前置标签
-    addonBefore: {
-      type: [String, Number] as PropType<string | number>,
-      default: undefined
-    },
-    // 后置标签
-    addonAfter: {
-      type: [String, Number] as PropType<string | number>,
-      default: undefined
-    },
-    // 前缀图标类型
-    affixBefore: {
-      type: String as PropType<string>,
-      default: undefined
-    },
-    // 后缀图标类型
-    affixAfter: {
-      type: String as PropType<string>,
-      default: undefined
     }
   };
 };
 
-export type InputProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export type TextareaProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-input",
+  name: "vui-textarea",
   inheritAttrs: false,
   props: createProps(),
   emits: ["update:value", "change", "focus", "blur", "keydown", "keyup", "enter", "clear"],
@@ -123,11 +114,10 @@ export default defineComponent({
     // 注入祖先组件
     const vuiForm = inject(FormInjectionKey, undefined);
     const vuiFormItem = inject(FormItemInjectionKey, undefined);
-    const vuiInputGroup = inject(InputGroupInjectionKey, undefined);
 
     // DOM 引用
     const containerRef = ref<HTMLDivElement>();
-    const inputRef = ref<HTMLInputElement>();
+    const textareaRef = ref<HTMLTextAreaElement>();
 
     // 定时器，用于自动聚焦
     const timeout = ref();
@@ -136,9 +126,9 @@ export default defineComponent({
     const composing = ref(false);
 
     // 基础属性
-    const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
+    const size = computed(() => props.size ?? vuiForm?.size ?? "medium");
     const focused = ref(false);
-    const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? props.disabled ?? false);
+    const disabled = computed(() => props.disabled ?? props.disabled ?? false);
 
     // 值
     const defaultValue = ref(props.defaultValue);
@@ -178,8 +168,8 @@ export default defineComponent({
     // 
     const resume = (callback?: Function) => {
       nextTick(() => {
-        if (inputRef.value && inputRef.value.value !== value.value) {
-          inputRef.value.value = value.value as string;
+        if (textareaRef.value && textareaRef.value.value !== value.value) {
+          textareaRef.value.value = value.value as string;
         }
 
         if (is.function(callback)) {
@@ -188,8 +178,46 @@ export default defineComponent({
       });
     };
 
+    // 自适应内容高度
+    const resize = () => {
+      nextTick(() => {
+        if (is.server || !textareaRef.value) {
+          return;
+        }
+
+        let styles;
+
+        if (!props.autosize) {
+          const minHeight = getTextareaSize(textareaRef.value, Number(props.rows)).minHeight;
+
+          styles = {
+            height: minHeight,
+            minHeight: minHeight
+          };
+        }
+        else {
+          let { minRows, maxRows } = props.autosize as Autosize;
+
+          if (!minRows) {
+            minRows = props.rows;
+          }
+
+          styles = getTextareaSize(textareaRef.value, minRows, maxRows);
+        }
+
+        setStyle(textareaRef.value, styles);
+      });
+    };
+
+    // value、rows、autosize 等状态属性变化时实时更新高度
+    watch([value, () => props.rows, () => props.autosize], () => {
+      resize();
+    }, {
+      deep: true
+    });
+
     // 对外提供 value 值，以及 focus、blur 等方法
-    const { focus, blur, select, setSelectionRange } = useSelection(inputRef);
+    const { focus, blur, select, setSelectionRange } = useSelection(textareaRef);
 
     context.expose({
       value: value.value,
@@ -203,7 +231,7 @@ export default defineComponent({
     const handleMousedown = (e: MouseEvent) => {
       const target = e.target as Element;
 
-      if (target === containerRef.value || (target !== inputRef.value && containerRef.value?.contains(target))) {
+      if (target === containerRef.value || (target !== textareaRef.value && containerRef.value?.contains(target))) {
         e.preventDefault();
         focus();
       }
@@ -281,7 +309,7 @@ export default defineComponent({
       change(value);
     };
 
-    // 清空输入框值
+    // 清空文本域值
     const handleClear = () => {
       if (props.disabled) {
         return;
@@ -295,8 +323,12 @@ export default defineComponent({
 
     // 组件挂载完成之后执行
     onMounted(() => {
-      if (props.autofocus && inputRef.value) {
-        timeout.value = setTimeout(() => inputRef?.value?.focus());
+      // 自适应内容高度
+      resize();
+
+      // 自动聚焦
+      if (props.autofocus && textareaRef.value) {
+        timeout.value = setTimeout(() => textareaRef?.value?.focus());
       }
     });
 
@@ -306,7 +338,7 @@ export default defineComponent({
     });
 
     // 计算 class 样式
-    const classPrefix = useClassPrefix("input", props);
+    const classPrefix = useClassPrefix("textarea", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {
@@ -314,99 +346,18 @@ export default defineComponent({
         [`${classPrefix.value}`]: true,
         [`${classPrefix.value}-bordered`]: props.bordered,
         [`${classPrefix.value}-${size.value}`]: size.value,
+        [`${classPrefix.value}-resizable`]: props.resizable,
         [`${classPrefix.value}-focused`]: focused.value,
         [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
-    classes.elInput = computed(() => `${classPrefix.value}-input`);
-    classes.elAddonBefore = computed(() => `${classPrefix.value}-addon-before`);
-    classes.elAddonAfter = computed(() => `${classPrefix.value}-addon-after`);
-    classes.elAffixBefore = computed(() => `${classPrefix.value}-affix-before`);
-    classes.elAffixAfter = computed(() => `${classPrefix.value}-affix-after`);
     classes.elCount = computed(() => `${classPrefix.value}-count`);
     classes.elBtnClear = computed(() => `${classPrefix.value}-btn-clear`);
 
     // 
-    const getAddonBefore = () => {
-      if (!context.slots.addonBefore && !props.addonBefore) {
-        return;
-      }
-
-      return (
-        <div class={classes.elAddonBefore.value}>
-          {getSlotProp(context.slots, props, "addonBefore")}
-        </div>
-      );
-    };
-
-    // 
     const getInput = () => {
-      let affixBefore;
-
-      if (context.slots.affixBefore || props.affixBefore) {
-        affixBefore = (
-          <div class={classes.elAffixBefore.value}>
-            {
-              context.slots.affixBefore ? context.slots.affixBefore() : (
-                <VuiIcon type={props.affixBefore} />
-              )
-            }
-          </div>
-        );
-      }
-
-      let affixAfter;
-
-      if (context.slots.affixAfter || props.affixAfter) {
-        affixAfter = (
-          <div class={classes.elAffixAfter.value}>
-            {
-              context.slots.affixAfter ? context.slots.affixAfter() : (
-                <VuiIcon type={props.affixAfter} />
-              )
-            }
-          </div>
-        );
-      }
-
-      let btnClear;
-
-      if (showBtnClear.value) {
-        const btnClearAttributes = {
-          class: classes.elBtnClear.value,
-          onMousedown: (e: MouseEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-          },
-          onClick: handleClear
-        };
-
-        btnClear = (
-          <div {...btnClearAttributes}>
-            <VuiIcon type="crossmark-circle-filled" />
-          </div>
-        );
-      }
-
-      let count;
-
-      if (props.showCount) {
-        const content = String(value.value);
-        const maxLength = Number(props.maxLength);
-        const length = is.function(props.bytes) ? props.bytes(content) : content.length;
-
-        count = (
-          <div class={classes.elCount.value}>
-            {
-              is.number(maxLength) && maxLength > 0 ? `${length}/${maxLength}` : `${length}`
-            }
-          </div>
-        );
-      }
-
       const attributes = {
         ...omit(context.attrs, ["clsss", "style"]),
-        type: props.type,
         value: value.value,
         placeholder: props.placeholder,
         autocomplete: "off",
@@ -424,25 +375,47 @@ export default defineComponent({
       };
 
       return (
-        <div ref={containerRef} class={classes.elInput.value} onMousedown={handleMousedown}>
-          {affixBefore}
-          <input ref={inputRef} {...attributes} />
-          {btnClear}
-          {count}
-          {affixAfter}
+        <textarea ref={textareaRef} {...attributes} />
+      );
+    };
+
+    // 
+    const getCount = () => {
+      if (!props.showCount) {
+        return;
+      }
+
+      const content = String(value.value);
+      const maxLength = Number(props.maxLength);
+      const length = is.function(props.bytes) ? props.bytes(content) : content.length;
+
+      return (
+        <div class={classes.elCount.value}>
+          {
+            is.number(maxLength) && maxLength > 0 ? `${length}/${maxLength}` : `${length}`
+          }
         </div>
       );
     };
 
     // 
-    const getAddonAfter = () => {
-      if (!context.slots.addonAfter && !props.addonAfter) {
+    const getBtnClear = () => {
+      if (!showBtnClear.value) {
         return;
       }
 
+      const btnClearAttributes = {
+        class: classes.elBtnClear.value,
+        onMousedown: (e: MouseEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+        },
+        onClick: handleClear
+      };
+
       return (
-        <div class={classes.elAddonAfter.value}>
-          {getSlotProp(context.slots, props, "addonAfter")}
+        <div {...btnClearAttributes}>
+          <VuiIcon type="crossmark-circle-filled" />
         </div>
       );
     };
@@ -451,18 +424,19 @@ export default defineComponent({
     return () => {
       const attributes = {
         class: [classes.el.value, context.attrs.class],
-        style: context.attrs.style as CSSProperties
+        style: context.attrs.style as CSSProperties,
+        onMousedown: handleMousedown
       };
 
-      const addonBefore = getAddonBefore();
       const input = getInput();
-      const addonAfter = getAddonAfter();
+      const count = getCount();
+      const btnClear = getBtnClear();
 
       return (
-        <div {...attributes}>
-          {addonBefore}
+        <div ref={containerRef} {...attributes}>
           {input}
-          {addonAfter}
+          {count}
+          {btnClear}
         </div>
       );
     };

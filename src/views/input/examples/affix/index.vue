@@ -1,18 +1,18 @@
 <template>
-  <vui-example id="example-input-prefix-suffix" v-bind:code="code">
+  <vui-example id="example-input-affix" v-bind:code="code">
     <template v-slot:demo>
-      <div class="example-input-prefix-suffix">
-        <vui-input prefix="mic" placeholder="Enter something..." />
-        <vui-input suffix="calendar" placeholder="Enter something..." />
+      <div class="example-input-affix">
+        <vui-input affixBefore="mic" placeholder="Enter something..." />
+        <vui-input affixAfter="calendar" placeholder="Enter something..." />
         <vui-input placeholder="Enter something...">
-          <template v-slot:prefix>￥</template>
-          <template v-slot:suffix>RMB</template>
+          <template v-slot:affixBefore>￥</template>
+          <template v-slot:affixAfter>RMB</template>
         </vui-input>
         <vui-input placeholder="Enter something...">
-          <template v-slot:prefix>
+          <template v-slot:affixBefore>
             <vui-icon type="group" />
           </template>
-          <template v-slot:suffix>
+          <template v-slot:affixAfter>
             <vui-tooltip content="Extra Information">
               <vui-icon type="info" />
             </vui-tooltip>
@@ -45,5 +45,5 @@
 </script>
 
 <style>
-  .example-input-prefix-suffix .vui-input:not(:first-child) { margin-top:24px; }
+  .example-input-affix .vui-input:not(:first-child) { margin-top:24px; }
 </style>
