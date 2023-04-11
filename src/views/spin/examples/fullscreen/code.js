@@ -11,7 +11,6 @@ const code =
   import { Icon, Spin } from "vui-design";
 
   export default defineComponent({
-
     setup() {
       const showSpin = () => {
         const spin = Spin.spinning("Loading...");

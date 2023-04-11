@@ -3,7 +3,9 @@ const code =
   <div class="example-rate-character">
     <section>
       <vui-rate allowHalf>
-        <vui-icon slot="character" type="heart" />
+        <template v-slot:character>
+          <vui-icon type="heart" />
+        </template>
       </vui-rate>
     </section>
     <section>
@@ -15,14 +17,8 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style>
-  .example-rate-character section { display:flex; align-items:center; line-height:1; }
+  .example-rate-character section { display:flex; justify-content:flex-start; align-items:center; line-height:1; }
   .example-rate-character section + section { margin-top:16px; }
 </style>
 `;

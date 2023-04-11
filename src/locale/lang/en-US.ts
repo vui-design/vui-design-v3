@@ -349,8 +349,8 @@ export default {
       "example-rate-text": "文案提示",
       "example-rate-clearable": "清除",
       "example-rate-disabled": "只读",
-      "example-rate-character-function": "自定义字符",
-      "example-rate-character": "其他字符",
+      "example-rate-character": "自定义字符",
+      "example-rate-character-function": "其他字符",
 
       "example-select-basic-usage": "基本用法",
       "example-select-multiple": "多选",

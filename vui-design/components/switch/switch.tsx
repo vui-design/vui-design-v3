@@ -136,17 +136,17 @@ export default defineComponent({
         return;
       }
 
-      const value = checked.value ? props.uncheckedValue : props.checkedValue;
+      const newValue = checked.value ? props.uncheckedValue : props.checkedValue;
 
       if (!is.existy(props.checked)) {
-        defaultChecked.value = value;
+        defaultChecked.value = newValue;
       }
 
-      context.emit("update:checked", value);
-      context.emit('change', value);
+      context.emit("update:checked", newValue);
+      context.emit('change', newValue);
 
       if (props.validator) {
-        vuiFormItem?.onChange(value);
+        vuiFormItem?.onChange(newValue);
       }
     };
 

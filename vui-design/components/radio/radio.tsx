@@ -150,17 +150,17 @@ export default defineComponent({
         vuiRadioGroup?.onChange(newChecked, props.value as boolean | string | number);
       }
       else {
-        const value = newChecked ? props.checkedValue : props.uncheckedValue;
+        const newValue = newChecked ? props.checkedValue : props.uncheckedValue;
 
         if (!is.existy(props.checked)) {
-          defaultChecked.value = value;
+          defaultChecked.value = newValue;
         }
 
-        context.emit("update:checked", value);
-        context.emit('change', value);
+        context.emit("update:checked", newValue);
+        context.emit('change', newValue);
 
         if (props.validator) {
-          vuiFormItem?.onChange(value);
+          vuiFormItem?.onChange(newValue);
         }
       }
 

@@ -1,17 +1,7 @@
 const code =
 `<template>
-  <vui-rate v-model="value" disabled />
+  <vui-rate v-bind:value="2" disabled />
 </template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value: 2
-      };
-    }
-  };
-</script>
 `;
 
 export default code;

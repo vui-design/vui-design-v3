@@ -1,0 +1,79 @@
+@import "./token.less";
+
+.@{vui-rate} {
+  display:inline-flex;
+  justify-content:flex-start;
+  align-items:center;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  outline:none;
+  font-size:@rate-star-size;
+  line-height:1;
+  vertical-align:middle;
+
+  &-star {
+    position:relative;
+    cursor:pointer;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    box-sizing:border-box;
+    outline:none;
+    transition:all @transition-duration @transition-timing-function;
+
+    & + & {
+      margin-left:@rate-star-margin-left;
+    }
+
+    &:hover,
+    &:focus {
+      transform:scale(1.1);
+    }
+
+    &-first,
+    &-second {
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      box-sizing:border-box;
+      user-select:none;
+      transition:all @transition-duration @transition-timing-function;
+    }
+
+    &-first {
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      width:50%;
+      height:100%;
+      overflow:hidden;
+    }
+
+    &-zero &-first,
+    &-zero &-second {
+      color:@rate-star-color;
+    }
+
+    &-half &-first {
+      color:@rate-star-checked-color;
+    }
+    &-half &-second {
+      color:@rate-star-color;
+    }
+
+    &-full &-first,
+    &-full &-second {
+      color:@rate-star-checked-color;
+    }
+  }
+
+  &-disabled &-star {
+    cursor:default;
+  }
+  &-disabled &-star:hover,
+  &-disabled &-star:focus {
+    transform:scale(1);
+  }
+}

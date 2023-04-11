@@ -1,28 +1,28 @@
 <template>
-	<example v-bind:code="code" id="example-rate-disabled">
-		<template slot="demo">
-			<vui-rate v-model="value" disabled />
-		</template>
-		<template slot="title">只读</template>
-		<template slot="description">
-			<p>只读，无法进行鼠标交互。</p>
-		</template>
-	</example>
+  <vui-example id="example-rate-disabled" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-rate v-bind:value="2" disabled />
+    </template>
+    <template v-slot:title>禁用</template>
+    <template v-slot:description>
+      <p>禁用，无法进行鼠标交互。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code,
-				value: 2
-			};
-		}
-	};
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      return {
+        code
+      };
+    }
+  });
 </script>

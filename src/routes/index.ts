@@ -300,15 +300,15 @@ export default [
         },
         component: () => import("src/views/radio/index.vue")
       },
-  //     {
-  //       path: "/components/rate",
-  //       name: "rate",
-  //       meta: {
-  //         title: "Rate",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/rate/index.vue")
-  //     },
+      {
+        path: "/components/rate",
+        name: "rate",
+        meta: {
+          title: "Rate",
+          group: "data-entry"
+        },
+        component: () => import("src/views/rate/index.vue")
+      },
   //     {
   //       path: "/components/select",
   //       name: "select",

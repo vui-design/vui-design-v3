@@ -91,25 +91,25 @@ export default defineComponent({
     const value = computed(() => props.value ?? defaultValue.value ?? []);
 
     // onChange 事件回调
-    const handleChange = (checked: boolean, newValue: string | number) => {
-      let nextValue = [...value.value];
+    const handleChange = (checked: boolean, checkboxValue: string | number) => {
+      let newValue = [...value.value];
 
       if (checked) {
-        nextValue.push(newValue);
+        newValue.push(checkboxValue);
       }
       else {
-        nextValue.splice(nextValue.indexOf(newValue), 1);
+        newValue.splice(newValue.indexOf(checkboxValue), 1);
       }
 
       if (!is.existy(props.value)) {
-        defaultValue.value = nextValue;
+        defaultValue.value = newValue;
       }
 
-      context.emit("update:value", nextValue);
-      context.emit('change', nextValue);
+      context.emit("update:value", newValue);
+      context.emit('change', newValue);
 
       if (props.validator) {
-        vuiFormItem?.onChange(nextValue);
+        vuiFormItem?.onChange(newValue);
       }
     };
 

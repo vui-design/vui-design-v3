@@ -91,18 +91,18 @@ export default defineComponent({
     const value = computed(() => props.value ?? defaultValue.value ?? undefined);
 
     // onChange 事件回调
-    const handleChange = (checked: boolean, newValue: boolean | string | number) => {
-      const nextValue = checked ? newValue : undefined;
+    const handleChange = (checked: boolean, radioValue: boolean | string | number) => {
+      const newValue = checked ? radioValue : undefined;
 
       if (!is.existy(props.value)) {
-        defaultValue.value = nextValue;
+        defaultValue.value = newValue;
       }
 
-      context.emit("update:value", nextValue);
-      context.emit('change', nextValue);
+      context.emit("update:value", newValue);
+      context.emit('change', newValue);
 
       if (props.validator) {
-        vuiFormItem?.onChange(nextValue);
+        vuiFormItem?.onChange(newValue);
       }
     };
 

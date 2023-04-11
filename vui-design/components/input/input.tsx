@@ -163,7 +163,7 @@ export default defineComponent({
         if (!is.existy(props.value)) {
           defaultValue.value = newValue;
         }
-  
+
         context.emit("update:value", newValue);
         context.emit("change", newValue);
   

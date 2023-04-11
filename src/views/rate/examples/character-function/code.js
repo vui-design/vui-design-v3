@@ -10,35 +10,36 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        value1: 2,
-        value2: 3
-      };
-    },
-    methods: {
-      getRateCharacter1(index) {
-        return index + 1;
-      },
-      getRateCharacter2(index) {
-        const h = this.$createElement;
-        const types = ["emotion-skull", "emotion-unhappy", "emotion-normal", "emotion-happy", "emotion"];
-        const attrs = {
-          props: {
-            type: types[index]
-          }
-        };
+<script lang="ts">
+  import { defineComponent, ref, h } from "vue";
+  import { Icon } from "vui-design";
 
-        return h("vui-icon", attrs);
-      }
+  export default defineComponent({
+    setup() {
+      const value1 = ref<number>(2);
+      const value2 = ref<number>(3);
+
+      const getRateCharacter1 = (index: number) => index + 1;
+
+      const stars = ref<string[]>(["emotion-skull", "emotion-unhappy", "emotion-normal", "emotion-happy", "emotion"]);
+      const getRateCharacter2 = (index: number) => {
+        return h(Icon, {
+          type: stars.value[index]
+        });
+      };
+
+      return {
+        value1,
+        value2,
+        getRateCharacter1,
+        getRateCharacter2
+      };
     }
-  };
+  });
 </script>
 
 <style>
-  .example-rate-character-function section { display:flex; align-items:center; line-height:1; }
+  .example-rate-character-function section { display:flex; justify-content:flex-start; align-items:center; line-height:1; }
   .example-rate-character-function section + section { margin-top:16px; }
 </style>
 `;

@@ -1,16 +1,24 @@
 const code =
 `<template>
-  <vui-rate v-model="value" allowHalf />
+  <vui-rate v-model:value="value" allowHalf />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref, watch } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<number>(2.5);
+
+      watch(value, value => {
+        console.log(value);
+      });
+
       return {
-        value: 2.5
+        value
       };
     }
-  };
+  });
 </script>
 `;
 
