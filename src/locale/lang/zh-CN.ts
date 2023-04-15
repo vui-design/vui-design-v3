@@ -78,6 +78,7 @@ export default {
       "data-display-timeline": "Timeline 时间轴",
       "data-display-tooltip": "Tooltip 文字提示",
       "data-display-tree": "Tree 树形控件",
+      "data-display-trend": "Trend 趋势标记",
       "data-display-watermark": "Watermark 水印",
 
       "feedback": "反馈",
@@ -523,6 +524,13 @@ export default {
       "example-tooltip-colorful": "多彩文字提示",
 
       "example-tree-basic-usage": "基本用法",
+
+      "example-trend-basic-usage": "基本用法",
+      "example-trend-precision": "数值精度",
+      "example-trend-label": "标签文本",
+      "example-trend-color": "自定义颜色",
+      "example-trend-reverse-color": "颜色反转",
+      "example-trend-placeholder": "占位文本",
 
       "example-watermark-basic-usage": "基本用法",
       "example-watermark-font": "字体",

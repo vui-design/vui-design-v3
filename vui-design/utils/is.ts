@@ -44,6 +44,11 @@ export const isNaN = function(value: any): boolean {
   return window.isNaN(value) && value !== value;
 };
 
+// 检查给定的值是否是 Infinity
+export const isInfinity = function(value: any): boolean {
+  return value === -Infinity || value === Infinity;
+};
+
 // 检查给定的值是否是数值
 export const isNumber = function(value: any): value is number {
   return objToString.call(value) === "[object Number]" && !isNaN(value);
@@ -200,6 +205,7 @@ export default {
   null: isNull,
   undefined: isUndefined,
   nan: isNaN,
+  infinity: isInfinity,
   number: isNumber,
   integer: isInteger,
   decimal: isDecimal,

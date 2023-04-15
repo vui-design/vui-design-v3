@@ -65,7 +65,6 @@ import Image from "./components/image";
 import List, { ListItem, ListItemMeta } from "./components/list";
 import Popover from "./components/popover";
 import Qrcode from "./components/qrcode";
-import Ratio from "./components/ratio";
 import Ribbon from "./components/ribbon";
 import Statistic, { Countdown } from "./components/statistic";
 import Table from "./components/table";
@@ -75,6 +74,7 @@ import Timeline from "./components/timeline";
 import TimelineItem from "./components/timeline-item";
 import Tooltip from "./components/tooltip";
 import Tree from "./components/tree";
+import Trend from "./components/trend";
 import Watermark from "./components/watermark";
 // Feedback
 import Alert from "./components/alert";
@@ -174,7 +174,6 @@ const components = [
   ListItemMeta,
   Popover,
   Qrcode,
-  Ratio,
   Ribbon,
   Statistic,
   Countdown,
@@ -185,6 +184,7 @@ const components = [
   TimelineItem,
   Tooltip,
   Tree,
+  Trend,
   Watermark,
   // Feedback
   Alert,
@@ -298,7 +298,6 @@ export {
   ListItemMeta,
   Popover,
   Qrcode,
-  Ratio,
   Ribbon,
   Statistic,
   Countdown,
@@ -309,6 +308,7 @@ export {
   TimelineItem,
   Tooltip,
   Tree,
+  Trend,
   Watermark,
   // Feedback
   Alert,

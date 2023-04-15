@@ -1,0 +1,48 @@
+@import "./token.less";
+
+.@{vui-trend} {
+  display:inline-flex;
+  justify-content:flex-start;
+  align-items:center;
+  box-sizing:border-box;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:@trend-font-size;
+  line-height:@trend-line-height;
+
+  &-label {
+    display:block;
+    box-sizing:border-box;
+    margin-right:@trend-label-margin-right;
+    color:@trend-label-font-color;
+  }
+
+  &-mark {
+    display:block;
+    box-sizing:border-box;
+    width:0;
+    height:0;
+    border-style:solid;
+    margin-right:@margin-xss;
+  }
+  &-downward &-mark {
+    border-width:6px 5px 0 5px;
+    border-color:currentColor transparent transparent transparent;
+  }
+  &-upward &-mark {
+    border-width:0 5px 6px 5px;
+    border-color:transparent transparent currentColor transparent;
+  }
+
+  &-value {
+    display:block;
+    box-sizing:border-box;
+  }
+
+  &-placeholder {
+    display:block;
+    box-sizing:border-box;
+    color:@trend-placeholder-font-color;
+  }
+}

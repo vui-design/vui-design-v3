@@ -526,6 +526,15 @@ export default [
   //       },
   //       component: () => import("src/views/tree/index.vue")
   //     },
+      {
+        path: "/components/trend",
+        name: "trend",
+        meta: {
+          title: "Trend",
+          group: "data-display"
+        },
+        component: () => import("src/views/trend/index.vue")
+      },
   //     {
   //       path: "/components/watermark",
   //       name: "watermark",
