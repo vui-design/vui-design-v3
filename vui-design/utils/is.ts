@@ -173,7 +173,7 @@ export const isEmpty = function(value: any): boolean {
 
 // 检查给定的值是否存在
 export const isExisty = function(value: any): boolean {
-  return value != null;
+  return value !== null && value !== undefined;
 };
 
 // 检查给定的值是否为假值

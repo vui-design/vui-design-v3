@@ -19,13 +19,13 @@ export default defineComponent({
     // DOM 引用
     const inputRef = ref();
 
-    // 值
-    const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
-
     // 密码加密状态
     const encrypted = ref(true);
     const type = computed(() => encrypted.value ? "password" : "text");
+
+    // 值
+    const defaultValue = ref(props.defaultValue);
+    const value = computed(() => props.value ?? defaultValue.value);
 
     // 
     const setValue = (newValue: string | number) => {

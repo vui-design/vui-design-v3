@@ -1,8 +1,4 @@
-/**
-* 获取数值精度
-* @param {Number} value 数值
-*/
-export default function getNumberPrecision(value) {
+export default function getNumberPrecision(value: number): number {
   if (value == undefined) {
     return 0;
   }

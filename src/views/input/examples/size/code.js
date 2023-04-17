@@ -10,8 +10,8 @@ const code =
     </section>
     <section>
       <vui-input v-bind:size="size" placeholder="Enter something..." />
-      <vui-input v-bind:size="size" suffix="calendar" placeholder="Enter something..." />
-      <vui-input v-bind:size="size" append="@qq.com" placeholder="Enter something..." />
+      <vui-input v-bind:size="size" affixAfter="calendar" placeholder="Enter something..." />
+      <vui-input v-bind:size="size" addonAfter="@qq.com" placeholder="Enter something..." />
     </section>
   </div>
 </template>

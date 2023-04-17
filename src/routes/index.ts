@@ -282,15 +282,15 @@ export default [
         },
         component: () => import("src/views/input/index.vue")
       },
-  //     {
-  //       path: "/components/input-number",
-  //       name: "input-number",
-  //       meta: {
-  //         title: "InputNumber",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/input-number/index.vue")
-  //     },
+      {
+        path: "/components/input-number",
+        name: "input-number",
+        meta: {
+          title: "InputNumber",
+          group: "data-entry"
+        },
+        component: () => import("src/views/input-number/index.vue")
+      },
       {
         path: "/components/radio",
         name: "radio",

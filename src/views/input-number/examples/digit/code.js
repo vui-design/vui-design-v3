@@ -1,21 +1,20 @@
 const code =
 `<template>
-  <vui-input-number v-model="value" v-bind:step="0.1" v-bind:min="0" v-bind:max="10" />
+  <vui-input-number v-model:value="value" v-bind:step="0.1" v-bind:min="0" v-bind:max="10" />
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<number>(0);
+
       return {
-        value: 0
+        value
       };
-    },
-    watch: {
-      value(value) {
-        console.log(value);
-      }
     }
-  };
+  });
 </script>
 `;
 

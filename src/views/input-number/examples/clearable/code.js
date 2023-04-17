@@ -1,6 +1,6 @@
 const code =
 `<template>
-  <vui-input-number v-model:value="value" disabled />
+  <vui-input-number v-model:value="value" clearable />
 </template>
 
 <script lang="ts">

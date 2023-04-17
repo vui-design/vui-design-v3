@@ -329,7 +329,9 @@ export default {
       "example-input-number-basic-usage": "基本用法",
       "example-input-number-digit": "小数",
       "example-input-number-formatter": "格式化展示",
+      "example-input-number-bordered": "无边框",
       "example-input-number-size": "尺寸",
+      "example-input-number-clearable": "可清空",
       "example-input-number-disabled": "禁用",
 
       "example-multiple-cascader-basic-usage": "基本用法",

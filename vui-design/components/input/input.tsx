@@ -135,10 +135,12 @@ export default defineComponent({
     // 输入法输入状态
     const composing = ref(false);
 
-    // 基础属性
+    // 尺寸
     const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
+
+    // 状态
     const focused = ref(false);
-    const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? props.disabled ?? false);
+    const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? vuiForm?.disabled ?? false);
 
     // 值
     const defaultValue = ref(props.defaultValue);
@@ -405,7 +407,7 @@ export default defineComponent({
       }
 
       const attributes = {
-        ...omit(context.attrs, ["clsss", "style"]),
+        ...omit(context.attrs, ["class", "style"]),
         type: props.type,
         value: value.value,
         placeholder: props.placeholder,

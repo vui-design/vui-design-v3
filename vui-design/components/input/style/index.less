@@ -5,8 +5,6 @@
   justify-content:flex-start;
   align-items:center;
   box-sizing:border-box;
-  border-collapse:separate;
-  border-spacing:0;
   width:100%;
   vertical-align:middle;
   line-height:normal;
@@ -30,6 +28,7 @@
     transition:all @transition-duration @transition-timing-function;
 
     input {
+      flex:1;
       appearance:none;
       outline:none;
       cursor:inherit;
@@ -268,6 +267,191 @@
     border-color:@input-disabled-border-color;
     background-color:@input-disabled-background-color;
     color:@input-disabled-font-color;
+  }
+
+  // 数字输入框
+  &-number {
+    position:relative;
+    cursor:text;
+    display:inline-flex;
+    justify-content:flex-start;
+    align-items:center;
+    box-sizing:border-box;
+    border:0 solid @input-border-color;
+    background-color:@input-background-color;
+    margin:0;
+    padding:0;
+    vertical-align:middle;
+    color:@input-font-color;
+    font-family:@input-font-family;
+    transition:all @transition-duration @transition-timing-function;
+
+    input {
+      flex:1;
+      appearance:none;
+      outline:none;
+      cursor:inherit;
+      display:block;
+      box-sizing:border-box;
+      width:100%;
+      height:100%;
+      border:none;
+      background-color:transparent;
+      margin:0;
+      padding:0;
+      color:inherit;
+      font-size:inherit;
+      font-family:inherit;
+    }
+
+    &-btn-clear {
+      cursor:pointer;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      box-sizing:border-box;
+      line-height:1;
+      color:@input-btn-clear-color;
+      transition:all @transition-duration @transition-timing-function;
+
+      &:hover {
+        color:@input-btn-clear-hover-color;
+      }
+    }
+
+    &-trigger {
+      display:block;
+      box-sizing:border-box;
+      height:100%;
+      border-left:1px solid @input-border-color;
+      background:@input-background-color linear-gradient(0deg, @input-border-color 50%, @input-border-color 50%) no-repeat 50% 50%;
+      background-size:100% 1px;
+      transition:all @transition-duration @transition-timing-function;
+    }
+
+    &-btn {
+      position:relative;
+      display:block;
+      box-sizing:border-box;
+      cursor:pointer;
+      height:50%;
+      overflow:hidden;
+      color:@font-secondary-color;
+      line-height:1;
+      transition:all @transition-duration @transition-timing-function;
+  
+      .@{vui}-icon {
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%) scale(0.5);
+      }
+  
+      &:hover {
+        color:@link-hover-color;
+      }
+      &:active {
+        color:@link-hover-color;
+      }
+      &&-disabled {
+        cursor:not-allowed;
+        color:@font-disabled-color;
+      }
+    }
+
+    &-bordered {
+      border-width:@input-border-width;
+      border-radius:@input-border-radius;
+    }
+
+    &-small {
+      width:80px;
+      height:@input-size-sm;
+      padding:0 0 0 @input-padding-sm;
+      font-size:@input-font-size-sm;
+
+      input {
+        height:@input-size-sm;
+        line-height:@input-size-sm;
+      }
+    }
+    &-small &-btn-clear {
+      margin-left:@input-padding-sm;
+    }
+    &-small &-trigger {
+      width:20px;
+      margin-left:@input-padding-sm;
+    }
+    &-bordered&-small input {
+      height:@input-size-sm - @input-border-width * 2;
+      line-height:@input-size-sm - @input-border-width * 2;
+    }
+
+    &-medium {
+      width:100px;
+      height:@input-size-md;
+      padding:0 0 0 @input-padding-md;
+      font-size:@input-font-size-md;
+
+      input {
+        height:@input-size-md;
+        line-height:@input-size-md;
+      }
+    }
+    &-medium &-btn-clear {
+      margin-left:@input-padding-md;
+    }
+    &-medium &-trigger {
+      width:24px;
+      margin-left:@input-padding-md;
+    }
+    &-bordered&-medium input {
+      height:@input-size-md - @input-border-width * 2;
+      line-height:@input-size-md - @input-border-width * 2;
+    }
+
+    &-large {
+      width:120px;
+      height:@input-size-lg;
+      padding:0 0 0 @input-padding-lg;
+      font-size:@input-font-size-lg;
+  
+      input {
+        height:@input-size-lg;
+        line-height:@input-size-lg;
+      }
+    }
+    &-large &-btn-clear {
+      margin-left:@input-padding-lg;
+    }
+    &-large &-trigger {
+      width:28px;
+      margin-left:@input-padding-lg;
+    }
+    &-bordered&-large input {
+      height:@input-size-lg - @input-border-width * 2;
+      line-height:@input-size-lg - @input-border-width * 2;
+    }
+
+    &:hover {
+      z-index:1;
+      border-color:@input-hover-border-color;
+    }
+    &:hover &-btn-clear {
+      display:flex;
+    }
+
+    &&-focused {
+      z-index:2;
+      border-color:@input-focus-border-color;
+    }
+
+    &&-disabled {
+      cursor:not-allowed;
+      border-color:@input-disabled-border-color;
+      background-color:@input-disabled-background-color;
+      color:@input-disabled-font-color;
+    }
   }
 
   // 搜素框

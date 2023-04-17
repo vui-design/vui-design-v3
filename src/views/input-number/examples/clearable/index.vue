@@ -1,11 +1,11 @@
 <template>
-  <vui-example id="example-input-number-disabled" v-bind:code="code">
+  <vui-example id="example-input-number-clearable" v-bind:code="code">
     <template v-slot:demo>
-      <vui-input-number v-model:value="value" disabled />
+      <vui-input-number v-model:value="value" clearable />
     </template>
-    <template v-slot:title>禁用</template>
+    <template v-slot:title>可清空</template>
     <template v-slot:description>
-      <p>通过添加 <code>disabled</code> 属性将数字输入框设为禁用状态。</p>
+    <p>含有清空图标的输入框，点击图标清空所有内容。</p>
     </template>
   </vui-example>
 </template>

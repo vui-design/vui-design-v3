@@ -1,33 +1,31 @@
 <template>
-  <example v-bind:code="code" id="example-input-number-digit">
-    <template slot="demo">
-      <vui-input-number v-model="value" v-bind:step="0.1" v-bind:min="0" v-bind:max="10" />
+  <vui-example id="example-input-number-digit" v-bind:code="code">
+    <template v-slot:demo>
+      <vui-input-number v-model:value="value" v-bind:step="0.1" v-bind:min="0" v-bind:max="10" />
     </template>
-    <template slot="title">小数</template>
-    <template slot="description">
+    <template v-slot:title>小数</template>
+    <template v-slot:description>
       <p>和原生的数字输入框一样，<code>value</code> 的精度由 <code>step</code> 的小数位数决定。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<number>(0);
+
       return {
         code,
-        value: 0
+        value
       };
-    },
-    watch: {
-      value(value) {
-        console.log(value);
-      }
     }
-  };
+  });
 </script>

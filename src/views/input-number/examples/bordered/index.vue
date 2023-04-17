@@ -1,11 +1,11 @@
 <template>
-  <vui-example id="example-input-number-disabled" v-bind:code="code">
+  <vui-example id="example-input-number-bordered" v-bind:code="code">
     <template v-slot:demo>
-      <vui-input-number v-model:value="value" disabled />
+      <vui-input-number v-model:value="value" v-bind:bordered="false" v-bind:min="1" v-bind:max="100" />
     </template>
-    <template v-slot:title>禁用</template>
+    <template v-slot:title>无边框</template>
     <template v-slot:description>
-      <p>通过添加 <code>disabled</code> 属性将数字输入框设为禁用状态。</p>
+      <p>无边框的数字输入框。</p>
     </template>
   </vui-example>
 </template>
