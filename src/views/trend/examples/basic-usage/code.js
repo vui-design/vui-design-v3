@@ -1,8 +1,8 @@
 const code =
 `<template>
   <div class="example-trend-basic-usage">
-    <vui-trend v-bind:value="1125" v-bind:reference="1000" />
-    <vui-trend v-bind:value="80" v-bind:reference="100" />
+    <vui-trend v-bind:value="1125" v-bind:target="1000" />
+    <vui-trend v-bind:value="80" v-bind:target="100" />
   </div>
 </template>
 

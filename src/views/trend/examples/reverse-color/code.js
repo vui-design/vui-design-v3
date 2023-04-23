@@ -1,8 +1,8 @@
 const code =
 `<template>
   <div class="example-trend-reverse-color">
-    <vui-trend v-bind:value="1125" v-bind:reference="1000" reverseColor />
-    <vui-trend v-bind:value="80" v-bind:reference="100" reverseColor />
+    <vui-trend v-bind:value="1125" v-bind:target="1000" reverseColor />
+    <vui-trend v-bind:value="80" v-bind:target="100" reverseColor />
   </div>
 </template>
 

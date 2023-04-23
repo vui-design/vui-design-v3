@@ -8,13 +8,13 @@ import is from "../../utils/is";
 const colors = ["#52c41a", "#ff4d4f"];
 const getTrend = (
   value: number,
-  reference: number
+  target: number
 ) => {
-  if (!is.number(value) || !is.number(reference)) {
+  if (!is.number(value) || !is.number(target)) {
     return;
   }
 
-  const trend = ((value - reference) / Math.abs(reference)) * 100;
+  const trend = ((value - target) / Math.abs(target)) * 100;
 
   if (is.nan(trend) || is.infinity(trend)) {
     return;
@@ -35,8 +35,8 @@ export const createProps = () => {
       type: Number as PropType<number>,
       default: undefined
     },
-    // 参考值/对比值
-    reference: {
+    // 目标值/对比值
+    target: {
       type: Number as PropType<number>,
       default: undefined
     },
@@ -88,7 +88,7 @@ export default defineComponent({
     const vuiConfigProvider = inject(ConfigProviderInjectionKey, undefined);
 
     // 
-    const trend = computed(() => getTrend(props.value as number, props.reference as number));
+    const trend = computed(() => getTrend(props.value as number, props.target as number));
     const trendType = computed(() => trend.value === undefined ? "" : (trend.value < 0 ? "downward" : "upward"));
     const reverseColor = computed(() => props.reverseColor ?? vuiConfigProvider?.reverseTrendColor ?? false);
 

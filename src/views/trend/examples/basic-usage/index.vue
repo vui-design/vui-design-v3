@@ -2,8 +2,8 @@
   <vui-example id="example-trend-basic-usage" v-bind:code="code">
     <template v-slot:demo>
       <div class="example-trend-basic-usage">
-        <vui-trend v-bind:value="1125" v-bind:reference="1000" />
-        <vui-trend v-bind:value="80" v-bind:reference="100" />
+        <vui-trend v-bind:value="1125" v-bind:target="1000" />
+        <vui-trend v-bind:value="80" v-bind:target="100" />
       </div>
     </template>
     <template v-slot:title>基本用法</template>

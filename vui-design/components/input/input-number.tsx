@@ -114,11 +114,11 @@ export default defineComponent({
     const containerRef = ref<HTMLDivElement>();
     const inputRef = ref<HTMLInputElement>();
 
-    // 定时器，用于自动聚焦
-    const timeout = ref();
+    // 用于延迟自动聚焦
+    const focuser = ref();
 
-    // 定时器，用于连续累加或累减
-    const stepTimeout = ref();
+    // 用于控制长按加减按钮时连续触发计算的频率
+    const frequency = ref();
 
     // 输入法输入状态
     const composing = ref(false);
@@ -142,10 +142,12 @@ export default defineComponent({
 
     // 输入状态及输入文本
     const inputting = ref(false);
-    const text = ref(utils.convertToString(value.value, step.value, precision.value));
+    const text = ref("");
 
     watch(value, newValue => {
-      text.value = utils.convertToString(newValue, step.value, precision.value);
+      text.value = inputting.value ? text.value : utils.convertToString(newValue, step.value, precision.value);
+    }, {
+      immediate: true
     });
 
     // 清空按钮显示状态
@@ -247,9 +249,6 @@ export default defineComponent({
         return;
       }
 
-      inputting.value = false;
-      text.value = utils.convertToString(value.value, step.value, precision.value);
-
       focused.value = false;
       context.emit("blur", e);
 
@@ -318,7 +317,78 @@ export default defineComponent({
         return;
       }
 
-      change(utils.restore(characters, min.value, max.value, step.value, precision.value));
+      const string = characters.trim();
+
+      if (string.length === 0) {
+        change(undefined);
+      }
+      else {
+        let newValue = Number(string);
+
+        if (!is.number(newValue)) {
+          return;
+        }
+
+        const p = utils.getPrecision(newValue, step.value, precision.value);
+
+        if (is.number(p)) {
+          newValue = utils.setPrecision(newValue, p);
+        }
+
+        if (is.number(min.value) && newValue < min.value) {
+          return;
+        }
+
+        if (is.number(max.value) && newValue > max.value) {
+          return;
+        }
+
+        change(newValue);
+      }
+    };
+
+    // onChange 事件回调
+    const handleChange = (e: Event) => {
+      if (disabled.value) {
+        return;
+      }
+
+      const { value: characters } = e.target as HTMLInputElement;
+
+      inputting.value = false;
+
+      if (utils.isValidNumber(characters)) {
+        const string = characters.trim();
+        let newValue = Number(string);
+
+        if (!is.number(newValue)) {
+          return;
+        }
+
+        const p = utils.getPrecision(newValue, step.value, precision.value);
+
+        if (is.number(p)) {
+          newValue = utils.setPrecision(newValue, p);
+        }
+
+        if (is.number(min.value) && newValue < min.value) {
+          newValue = min.value;
+        }
+
+        if (is.number(max.value) && newValue > max.value) {
+          newValue = max.value;
+        }
+
+        if (newValue === value.value) {
+          text.value = utils.convertToString(value.value, step.value, precision.value);
+        }
+        else {
+          change(newValue);
+        }
+      }
+      else {
+        text.value = utils.convertToString(value.value, step.value, precision.value);
+      }
     };
 
     // onIncrease 事件回调
@@ -331,16 +401,16 @@ export default defineComponent({
       const loop = () => {
         increase();
 
-        clearTimeout(stepTimeout.value);
-        stepTimeout.value = setTimeout(loop, 60);
+        clearTimeout(frequency.value);
+        frequency.value = setTimeout(loop, 60);
       };
 
-      stepTimeout.value = setTimeout(loop, 500);
+      frequency.value = setTimeout(loop, 500);
     };
 
     const handleCancelIncrease = (e: MouseEvent) => {
-      clearTimeout(stepTimeout.value);
-      stepTimeout.value = undefined;
+      clearTimeout(frequency.value);
+      frequency.value = undefined;
     };
 
     // onDecrease 事件回调
@@ -353,16 +423,16 @@ export default defineComponent({
       const loop = () => {
         decrease();
 
-        clearTimeout(stepTimeout.value);
-        stepTimeout.value = setTimeout(loop, 60);
+        clearTimeout(frequency.value);
+        frequency.value = setTimeout(loop, 60);
       };
 
-      stepTimeout.value = setTimeout(loop, 500);
+      frequency.value = setTimeout(loop, 500);
     };
 
     const handleCancelDecrease = (e: MouseEvent) => {
-      clearTimeout(stepTimeout.value);
-      stepTimeout.value = undefined;
+      clearTimeout(frequency.value);
+      frequency.value = undefined;
     };
 
     // 清空输入框值
@@ -378,13 +448,13 @@ export default defineComponent({
     // 组件挂载完成之后执行
     onMounted(() => {
       if (props.autofocus && inputRef.value) {
-        timeout.value = setTimeout(() => inputRef?.value?.focus());
+        focuser.value = setTimeout(() => inputRef?.value?.focus());
       }
     });
 
     // 组件卸载之前执行
     onBeforeUnmount(() => {
-      timeout.value && clearTimeout(timeout.value);
+      focuser.value && clearTimeout(focuser.value);
     });
 
     // 计算 class 样式
@@ -449,7 +519,8 @@ export default defineComponent({
         onCompositionstart: handleComposition,
         onCompositionupdate: handleComposition,
         onCompositionend: handleComposition,
-        onInput: handleInput
+        onInput: handleInput,
+        onChange: handleChange
       };
 
       return (

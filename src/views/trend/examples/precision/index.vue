@@ -2,8 +2,8 @@
   <vui-example id="example-trend-precision" v-bind:code="code">
     <template v-slot:demo>
       <div class="example-trend-precision">
-        <vui-trend v-bind:value="1125" v-bind:reference="1000" v-bind:precision="2" />
-        <vui-trend v-bind:value="80" v-bind:reference="100" v-bind:precision="2" />
+        <vui-trend v-bind:value="1125" v-bind:target="1000" v-bind:precision="2" />
+        <vui-trend v-bind:value="80" v-bind:target="100" v-bind:precision="2" />
       </div>
     </template>
     <template v-slot:title>数值精度</template>

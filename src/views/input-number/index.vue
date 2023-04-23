@@ -10,10 +10,14 @@
     <vui-row v-bind:gutter="16">
       <vui-col v-bind:span="12">
         <vui-example-basic-usage />
-
+        <vui-example-digit />
+        <vui-example-formatter />
+        <vui-example-bordered />
       </vui-col>
       <vui-col v-bind:span="12">
-
+        <vui-example-size />
+        <vui-example-clearable />
+        <vui-example-disabled />
       </vui-col>
     </vui-row>
     <h2 id="example-api">API</h2>

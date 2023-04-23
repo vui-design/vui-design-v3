@@ -38,8 +38,8 @@
           <td>--</td>
         </tr>
         <tr>
-          <td>reference</td>
-          <td>参考值/对比值</td>
+          <td>target</td>
+          <td>目标值/对比值</td>
           <td>Number</td>
           <td>--</td>
         </tr>

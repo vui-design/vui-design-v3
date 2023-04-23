@@ -2,8 +2,8 @@
   <vui-example id="example-trend-placeholder" v-bind:code="code">
     <template v-slot:demo>
       <div class="example-trend-placeholder">
-        <vui-trend v-bind:value="1125" v-bind:reference="0" />
-        <vui-trend v-bind:value="80" v-bind:reference="0" placeholder="--" />
+        <vui-trend v-bind:value="1125" v-bind:target="0" />
+        <vui-trend v-bind:value="80" v-bind:target="0" placeholder="--" />
       </div>
     </template>
     <template v-slot:title>占位文本</template>

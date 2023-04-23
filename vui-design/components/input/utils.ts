@@ -4,7 +4,7 @@ import getNumberPrecision from "../../utils/getNumberPrecision";
 // 
 const numeric = /^[\+\-]?\d*?\.?\d*?$/;
 
-// 判断用户输入是否匹配数值格式
+// 判断用户输入是否为空或匹配数值格式（为空时表示清空输入）
 export const isCompleteNumber = (
   text: string
 ): boolean => {
