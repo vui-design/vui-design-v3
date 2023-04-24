@@ -122,6 +122,30 @@
           <td>Boolean</td>
           <td>true</td>
         </tr>
+        <tr>
+          <td>addonBefore</td>
+          <td>前置标签</td>
+          <td>String | Slot</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>addonAfter</td>
+          <td>后置标签</td>
+          <td>String | Slot</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>affixBefore</td>
+          <td>前缀图标类型/图标</td>
+          <td>String | Slot</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>affixAfter</td>
+          <td>后缀图标类型/图标</td>
+          <td>String | Slot</td>
+          <td>--</td>
+        </tr>
       </tbody>
     </table>
     <h3>InputNumber 事件</h3>
@@ -181,6 +205,43 @@
           <td>clear</td>
           <td>点击清空按钮时触发的事件回调函数</td>
           <td>Function</td>
+          <td>--</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>InputNumber 方法</h3>
+    <table class="example-api-methods">
+      <thead>
+        <tr>
+          <th width="160">方法名</th>
+          <th>说明</th>
+          <th width="220">参数</th>
+          <th width="140">参数说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>focus</td>
+          <td>使输入框获取焦点</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>blur</td>
+          <td>使输入框失去焦点</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>select</td>
+          <td>选中输入框内容</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>setSelectionRange</td>
+          <td><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange" target="_blank">设置输入框当前选中文本的起始和结束位置</a></td>
+          <td>start, end, [direction]</td>
           <td>--</td>
         </tr>
       </tbody>

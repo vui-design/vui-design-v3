@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, ref, watch } from "vue";
   import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
@@ -21,6 +21,10 @@
     },
     setup() {
       const value = ref<number>(1);
+
+      watch(value, newValue => {
+        console.log(newValue);
+      });
 
       return {
         code,

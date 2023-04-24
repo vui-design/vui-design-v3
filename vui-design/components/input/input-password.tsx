@@ -52,11 +52,6 @@ export default defineComponent({
       setSelectionRange
     });
 
-    // onChange 事件回调
-    const handleChange = (newValue: string | number) => {
-      setValue(newValue);
-    };
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
       context.emit("focus", e);
@@ -85,6 +80,11 @@ export default defineComponent({
     // onClear 事件回调
     const handleClear = () => {
       context.emit("clear");
+    };
+
+    // onChange 事件回调
+    const handleChange = (newValue: string | number) => {
+      setValue(newValue);
     };
 
     // 
@@ -140,6 +140,7 @@ export default defineComponent({
           maxLength={props.maxLength}
           autofocus={props.autofocus}
           clearable={props.clearable}
+          readonly={props.readonly}
           disabled={props.disabled}
           validator={props.validator}
           addonBefore={props.addonBefore}
@@ -147,13 +148,13 @@ export default defineComponent({
           affixBefore={props.affixBefore}
           affixAfter={props.affixAfter}
           v-slots={slots}
-          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onKeydown={handleKeydown}
           onKeyup={handleKeyup}
           onEnter={handleEnter}
           onClear={handleClear}
+          onChange={handleChange}
         />
       );
     };

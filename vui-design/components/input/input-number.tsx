@@ -1,14 +1,13 @@
-import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
+import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Size } from "../../types";
-import { defineComponent, inject, ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { defineComponent, inject, ref, computed, watch, nextTick } from "vue";
 import { sizes, keyCodes } from "../../constants";
-import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
-import { InputGroupInjectionKey } from "./context";
+import { FormItemInjectionKey } from "../form/context";
 import VuiIcon from "../icon";
+import VuiInput from "./input";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
-import omit from "../../utils/omit";
 import utils from "./utils";
 
 export const createProps = () => {
@@ -93,6 +92,26 @@ export const createProps = () => {
     validator: {
       type: Boolean as PropType<boolean>,
       default: true
+    },
+    // 前置标签
+    addonBefore: {
+      type: [String, Number] as PropType<string | number>,
+      default: undefined
+    },
+    // 后置标签
+    addonAfter: {
+      type: [String, Number] as PropType<string | number>,
+      default: undefined
+    },
+    // 前缀图标类型
+    affixBefore: {
+      type: String as PropType<string>,
+      default: undefined
+    },
+    // 后缀图标类型
+    affixAfter: {
+      type: String as PropType<string>,
+      default: undefined
     }
   };
 };
@@ -106,22 +125,13 @@ export default defineComponent({
   emits: ["update:value", "change", "focus", "blur", "keydown", "keyup", "enter", "clear"],
   setup(props, context) {
     // 注入祖先组件
-    const vuiForm = inject(FormInjectionKey, undefined);
     const vuiFormItem = inject(FormItemInjectionKey, undefined);
-    const vuiInputGroup = inject(InputGroupInjectionKey, undefined);
 
     // DOM 引用
-    const containerRef = ref<HTMLDivElement>();
     const inputRef = ref<HTMLInputElement>();
-
-    // 用于延迟自动聚焦
-    const focuser = ref();
 
     // 用于控制长按加减按钮时连续触发计算的频率
     const frequency = ref();
-
-    // 输入法输入状态
-    const composing = ref(false);
 
     // 约束 min、max 等自定义属性
     const min = computed(() => utils.restrict(props.min, -Infinity));
@@ -129,12 +139,8 @@ export default defineComponent({
     const step = computed(() => utils.restrict(props.step, 1));
     const precision = computed(() => utils.restrict(props.precision));
 
-    // 尺寸
-    const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
-
     // 状态
     const focused = ref(false);
-    const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? vuiForm?.disabled ?? false);
 
     // 值
     const defaultValue = ref(utils.restore(props.defaultValue, min.value, max.value, step.value, precision.value));
@@ -150,25 +156,21 @@ export default defineComponent({
       immediate: true
     });
 
-    // 清空按钮显示状态
-    const showBtnClear = computed(() => props.clearable && !props.readonly && !disabled.value && is.effective(value.value));
-
     // 加减按钮禁用状态
     const disabledBtnIncrease = computed(() => is.number(max.value) && utils.increase(value.value, step.value, precision.value) > max.value);
     const disabledBtnDecrease = computed(() => is.number(min.value) && utils.decrease(value.value, step.value, precision.value) < min.value);
 
     // 加
     const increase = () => {
-      const newValue = utils.increase(value.value, step.value, precision.value);
-      const disabled = is.number(max.value) && newValue > max.value;
-
       if (!focused.value) {
         focus();
       }
 
-      if (disabled) {
+      if (disabledBtnIncrease.value) {
         return;
       }
+
+      const newValue = utils.increase(value.value, step.value, precision.value);
 
       text.value = utils.convertToString(newValue, step.value, precision.value);
       change(newValue);
@@ -176,16 +178,15 @@ export default defineComponent({
 
     // 减
     const decrease = () => {
-      const newValue = utils.decrease(value.value, step.value, precision.value);
-      const disabled = is.number(min.value) && newValue < min.value;
-
       if (!focused.value) {
         focus();
       }
 
-      if (disabled) {
+      if (disabledBtnDecrease.value) {
         return;
       }
+
+      const newValue = utils.decrease(value.value, step.value, precision.value);
 
       text.value = utils.convertToString(newValue, step.value, precision.value);
       change(newValue);
@@ -223,31 +224,16 @@ export default defineComponent({
       setSelectionRange
     });
 
-    // 
-    const handleMousedown = (e: MouseEvent) => {
-      const target = e.target as Element;
-
-      if (target === containerRef.value || (target !== inputRef.value && containerRef.value?.contains(target))) {
-        e.preventDefault();
-        focus();
-      }
-    };
-
     // onFocus 事件回调
     const handleFocus = (e: FocusEvent) => {
-      if (disabled.value) {
-        return;
-      }
-
       focused.value = true;
       context.emit("focus", e);
     };
 
     // onBlur 事件回调
     const handleBlur = (e: FocusEvent) => {
-      if (disabled.value) {
-        return;
-      }
+      inputting.value = false;
+      text.value = utils.convertToString(value.value, step.value, precision.value);
 
       focused.value = false;
       context.emit("blur", e);
@@ -259,16 +245,9 @@ export default defineComponent({
 
     // onKeydown 事件回调
     const handleKeydown = (e: KeyboardEvent) => {
-      if (disabled.value) {
-        return;
-      }
-
       context.emit("keydown", e);
 
-      if (e.keyCode === keyCodes.enter) {
-        context.emit("enter", e);
-      }
-      else if (e.keyCode === keyCodes.up) {
+      if (e.keyCode === keyCodes.up) {
         e.preventDefault();
         increase();
       }
@@ -280,36 +259,21 @@ export default defineComponent({
 
     // onKeyup 事件回调
     const handleKeyup = (e: KeyboardEvent) => {
-      if (disabled.value) {
-        return;
-      }
-
       context.emit("keyup", e);
     };
 
-    // onComposition 事件回调
-    const handleComposition = (e: CompositionEvent) => {
-      if (disabled.value) {
-        return;
-      }
-
-      if (e.type === "compositionend") {
-        composing.value = false;
-        handleInput(e);
-      }
-      else {
-        composing.value = true;
-      }
+    // onEnter 事件回调
+    const handleEnter = (e: KeyboardEvent) => {
+      context.emit("enter", e);
     };
 
-    // onInput 事件回调
-    const handleInput = (e: Event) => {
-      if (composing.value || disabled.value) {
-        return;
-      }
+    // onClear 事件回调
+    const handleClear = () => {
+      context.emit("clear");
+    };
 
-      const { value: characters } = e.target as HTMLInputElement;
-
+    // onChange 事件回调
+    const handleChange = (characters: string) => {
       inputting.value = true;
       text.value = characters;
 
@@ -317,78 +281,9 @@ export default defineComponent({
         return;
       }
 
-      const string = characters.trim();
+      const newValue = utils.restore(characters, min.value, max.value, step.value, precision.value);
 
-      if (string.length === 0) {
-        change(undefined);
-      }
-      else {
-        let newValue = Number(string);
-
-        if (!is.number(newValue)) {
-          return;
-        }
-
-        const p = utils.getPrecision(newValue, step.value, precision.value);
-
-        if (is.number(p)) {
-          newValue = utils.setPrecision(newValue, p);
-        }
-
-        if (is.number(min.value) && newValue < min.value) {
-          return;
-        }
-
-        if (is.number(max.value) && newValue > max.value) {
-          return;
-        }
-
-        change(newValue);
-      }
-    };
-
-    // onChange 事件回调
-    const handleChange = (e: Event) => {
-      if (disabled.value) {
-        return;
-      }
-
-      const { value: characters } = e.target as HTMLInputElement;
-
-      inputting.value = false;
-
-      if (utils.isValidNumber(characters)) {
-        const string = characters.trim();
-        let newValue = Number(string);
-
-        if (!is.number(newValue)) {
-          return;
-        }
-
-        const p = utils.getPrecision(newValue, step.value, precision.value);
-
-        if (is.number(p)) {
-          newValue = utils.setPrecision(newValue, p);
-        }
-
-        if (is.number(min.value) && newValue < min.value) {
-          newValue = min.value;
-        }
-
-        if (is.number(max.value) && newValue > max.value) {
-          newValue = max.value;
-        }
-
-        if (newValue === value.value) {
-          text.value = utils.convertToString(value.value, step.value, precision.value);
-        }
-        else {
-          change(newValue);
-        }
-      }
-      else {
-        text.value = utils.convertToString(value.value, step.value, precision.value);
-      }
+      change(newValue);
     };
 
     // onIncrease 事件回调
@@ -435,61 +330,30 @@ export default defineComponent({
       frequency.value = undefined;
     };
 
-    // 清空输入框值
-    const handleClear = () => {
-      if (props.disabled) {
-        return;
-      }
-
-      context.emit("clear");
-      change(undefined, () => focus());
-    };
-
-    // 组件挂载完成之后执行
-    onMounted(() => {
-      if (props.autofocus && inputRef.value) {
-        focuser.value = setTimeout(() => inputRef?.value?.focus());
-      }
-    });
-
-    // 组件卸载之前执行
-    onBeforeUnmount(() => {
-      focuser.value && clearTimeout(focuser.value);
-    });
-
     // 计算 class 样式
-    const classPrefix = useClassPrefix("input-number", props);
+    const classPrefix = useClassPrefix("input", props);
     let classes: Record<string, ComputedRef> = {};
 
-    classes.el = computed(() => {
+    classes.el = computed(() => `${classPrefix.value}-number`);
+    classes.elStepHandler = computed(() => `${classPrefix.value}-step-handler`);
+    classes.elStepIncrease = computed(() => {
       return {
-        [`${classPrefix.value}`]: true,
-        [`${classPrefix.value}-bordered`]: props.bordered,
-        [`${classPrefix.value}-${size.value}`]: size.value,
-        [`${classPrefix.value}-focused`]: focused.value,
-        [`${classPrefix.value}-disabled`]: disabled.value
+        [`${classPrefix.value}-step`]: true,
+        [`${classPrefix.value}-step-increase`]: true,
+        [`${classPrefix.value}-step-disabled`]: disabledBtnIncrease.value
       };
     });
-    classes.elInput = computed(() => `${classPrefix.value}-input`);
-    classes.elBtnClear = computed(() => `${classPrefix.value}-btn-clear`);
-    classes.elTrigger = computed(() => `${classPrefix.value}-trigger`);
-    classes.elBtnIncrease = computed(() => {
+    classes.elStepDecrease = computed(() => {
       return {
-        [`${classPrefix.value}-btn`]: true,
-        [`${classPrefix.value}-btn-increase`]: true,
-        [`${classPrefix.value}-btn-disabled`]: disabledBtnIncrease.value
-      };
-    });
-    classes.elBtnDecrease = computed(() => {
-      return {
-        [`${classPrefix.value}-btn`]: true,
-        [`${classPrefix.value}-btn-decrease`]: true,
-        [`${classPrefix.value}-btn-disabled`]: disabledBtnDecrease.value
+        [`${classPrefix.value}-step`]: true,
+        [`${classPrefix.value}-step-decrease`]: true,
+        [`${classPrefix.value}-step-disabled`]: disabledBtnDecrease.value
       };
     });
 
-    // 
-    const getInput = () => {
+    // 渲染
+    return () => {
+      // 
       let characters = "";
 
       if (focused.value) {
@@ -503,100 +367,61 @@ export default defineComponent({
         }
       }
 
-      const attributes = {
-        ...omit(context.attrs, ["clsss", "style"]),
-        type: "text",
-        value: characters,
-        placeholder: props.placeholder,
-        autocomplete: "off",
-        spellcheck: false,
-        readonly: props.readonly,
-        disabled: disabled.value,
-        onFocus: handleFocus,
-        onBlur: handleBlur,
-        onKeydown: handleKeydown,
-        onKeyup: handleKeyup,
-        onCompositionstart: handleComposition,
-        onCompositionupdate: handleComposition,
-        onCompositionend: handleComposition,
-        onInput: handleInput,
-        onChange: handleChange
+      // 
+      const slots = {
+        ...context.slots,
+        affixAfter: () => {
+          return (
+            <div class={classes.elStepHandler.value}>
+              <div
+                class={classes.elStepIncrease.value}
+                onMousedown={handleIncrease}
+                onMouseup={handleCancelIncrease}
+                onMouseleave={handleCancelIncrease}
+              >
+                <VuiIcon type="chevron-up" />
+              </div>
+              <div
+                class={classes.elStepDecrease.value}
+                onMousedown={handleDecrease}
+                onMouseup={handleCancelDecrease}
+                onMouseleave={handleCancelDecrease}
+              >
+                <VuiIcon type="chevron-down" />
+              </div>
+            </div>
+          );
+        }
       };
 
+      // 
       return (
-        <input ref={inputRef} {...attributes} />
-      );
-    };
-
-    // 
-    const getBtnClear = () => {
-      if (!showBtnClear.value) {
-        return;
-      }
-
-      const btnClearAttributes = {
-        class: classes.elBtnClear.value,
-        onMousedown: (e: MouseEvent) => {
-          e.preventDefault();
-          e.stopPropagation();
-        },
-        onClick: handleClear
-      };
-
-      return (
-        <div {...btnClearAttributes}>
-          <VuiIcon type="crossmark-circle-filled" />
-        </div>
-      );
-    };
-
-    // 
-    const getTrigger = () => {
-      if (props.readonly || disabled.value) {
-        return;
-      }
-
-      return (
-        <div class={classes.elTrigger.value}>
-          <div
-            class={classes.elBtnIncrease.value}
-            onMousedown={handleIncrease}
-            onMouseup={handleCancelIncrease}
-            onMouseleave={handleCancelIncrease}
-          >
-            <VuiIcon type="chevron-up" />
-          </div>
-          <div
-            class={classes.elBtnDecrease.value}
-            onMousedown={handleDecrease}
-            onMouseup={handleCancelDecrease}
-            onMouseleave={handleCancelDecrease}
-          >
-            <VuiIcon type="chevron-down" />
-          </div>
-        </div>
-      );
-    };
-
-    // 渲染
-    return () => {
-      const attributes = {
-        ref: containerRef,
-        class: [classes.el.value, context.attrs.class],
-        style: context.attrs.style as CSSProperties,
-        onMousedown: handleMousedown
-      };
-
-      const input = getInput();
-      const btnClear = getBtnClear();
-      const trigger = getTrigger();
-
-      return (
-        <div {...attributes}>
-          {input}
-          {btnClear}
-          {trigger}
-        </div>
+        <VuiInput
+          ref={inputRef}
+          classPrefix={props.classPrefix}
+          class={classes.el.value}
+          value={characters}
+          placeholder={props.placeholder}
+          bordered={props.bordered}
+          size={props.size}
+          autofocus={props.autofocus}
+          clearable={props.clearable}
+          readonly={props.readonly}
+          disabled={props.disabled}
+          validator={false}
+          addonBefore={props.addonBefore}
+          addonAfter={props.addonAfter}
+          affixBefore={props.affixBefore}
+          affixAfter={props.affixAfter}
+          v-slots={slots}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeydown={handleKeydown}
+          onKeyup={handleKeyup}
+          onEnter={handleEnter}
+          onClear={handleClear}
+          onChange={handleChange}
+        />
       );
     };
   }

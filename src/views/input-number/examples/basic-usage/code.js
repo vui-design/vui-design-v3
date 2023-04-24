@@ -4,11 +4,15 @@ const code =
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from "vue";
+  import { defineComponent, ref, watch } from "vue";
 
   export default defineComponent({
     setup() {
       const value = ref<number>(1);
+
+      watch(value, newValue => {
+        console.log(newValue);
+      });
 
       return {
         value

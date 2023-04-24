@@ -317,6 +317,7 @@ export default defineComponent({
         [`${classPrefix.value}-bordered`]: props.bordered,
         [`${classPrefix.value}-${size.value}`]: size.value,
         [`${classPrefix.value}-focused`]: focused.value,
+        [`${classPrefix.value}-readonly`]: props.readonly,
         [`${classPrefix.value}-disabled`]: disabled.value
       };
     });
