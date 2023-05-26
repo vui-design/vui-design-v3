@@ -1,0 +1,101 @@
+@import "./token.less";
+
+.@{vui-collapse} {
+  display:block;
+  box-sizing:border-box;
+  border-width:0;
+  border-style:solid;
+  border-color:@collapse-border-color;
+  border-radius:@collapse-border-radius;
+  background-color:@collapse-background-color;
+  color:@collapse-font-color;
+  font-size:@collapse-font-size;
+  line-height:@collapse-line-height;
+  transition:all @transition-duration @transition-timing-function;
+
+  &-panel {
+    & > &-header {
+      cursor:pointer;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      box-sizing:border-box;
+      background-color:@collapse-panel-header-background-color;
+      padding:@collapse-panel-header-padding;
+      color:@collapse-panel-header-font-color;
+      font-size:@collapse-panel-header-font-size;
+      line-height:@collapse-panel-header-line-height;
+    }
+    & > &-header > &-arrow {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      box-sizing:border-box;
+
+      &-left {
+        margin-right:@collapse-panel-arrow-margin;
+      }
+      &-right {
+        margin-left:@collapse-panel-arrow-margin;
+      }
+
+      .@{vui-icon} {
+        transform:rotate(0deg) scale(0.65);
+        transition:transform @transition-duration @transition-timing-function;
+      }
+    }
+    & > &-header > &-title {
+      flex:1;
+
+      .writeEllipsis;
+    }
+    & > &-header > &-extra {
+      margin-left:@collapse-panel-extra-margin;
+    }
+    & > &-body-wrapper > &-body {
+      border-top:@collapse-border-width solid @collapse-border-color;
+      padding:@collapse-panel-body-padding;
+    }
+
+    &-active > &-header > &-arrow {
+      .@{vui-icon} {
+        transform:rotate(90deg) scale(0.65);
+      }
+    }
+
+    &-disabled > &-header {
+      cursor:not-allowed;
+      pointer-events:none;
+      color:@collapse-panel-disabled-header-font-color;
+    }
+
+    &-collapse-enter-active,
+    &-collapse-leave-active { overflow:hidden; transition:height @transition-duration @transition-timing-function; }
+  }
+
+  &-panel + &-panel {
+    border-top:@collapse-border-width solid @collapse-border-color;
+  }
+
+  &-bordered {
+    border-width:@collapse-border-width;
+  }
+
+  &-ghost {
+    background-color:transparent;
+  }
+  &-ghost > &-panel + &-panel {
+    border-top-width:0;
+  }
+  &-ghost > &-panel > &-panel-header {
+    background-color:transparent;
+    padding-left:0;
+    padding-right:0;
+  }
+  &-ghost > &-panel > &-panel-body-wrapper > &-panel-body {
+    border-top-width:0;
+    padding-left:0;
+    padding-right:0;
+    padding-top:@collapse-panel-body-padding - @padding-xs;
+  }
+}

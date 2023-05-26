@@ -29,7 +29,7 @@
     </template>
     <template v-slot:title>手风琴效果</template>
     <template v-slot:description>
-      <p>相同层级下，同时只能展开一个 <code>Submeun</code> 子菜单。</p>
+      <p>相同层级下，同时只能展开一个 <code>Submenu</code> 子菜单。</p>
     </template>
   </vui-example>
 </template>

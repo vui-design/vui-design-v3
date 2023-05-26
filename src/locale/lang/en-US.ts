@@ -183,9 +183,10 @@ export default {
       "example-collapse-basic-usage": "基本用法",
       "example-collapse-accordion": "手风琴",
       "example-collapse-borderless": "无外边框",
-      "example-collapse-arrow-align": "箭头位置",
+      "example-collapse-ghost": "幽灵折叠面板",
       "example-collapse-extra": "附加内容",
       "example-collapse-arrowless": "隐藏箭头",
+      "example-collapse-arrow-align": "箭头位置",
       "example-collapse-disabled": "禁用",
       "example-collapse-nested": "嵌套面板",
 

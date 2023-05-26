@@ -56,8 +56,7 @@ import Upload from "./components/upload";
 import Avatar, { AvatarGroup } from "./components/avatar";
 import Badge from "./components/badge";
 import Card, { CardMeta, CardGrid } from "./components/card";
-import Collapse from "./components/collapse";
-import Panel from "./components/panel";
+import Collapse, { CollapsePanel } from "./components/collapse";
 import Descriptions, { Description } from "./components/descriptions";
 import Empty from "./components/empty";
 import Image from "./components/image";
@@ -163,7 +162,7 @@ const components = [
   CardGrid,
   CardMeta,
   Collapse,
-  Panel,
+  CollapsePanel,
   Descriptions,
   Description,
   Empty,
@@ -287,7 +286,7 @@ export {
   CardGrid,
   CardMeta,
   Collapse,
-  Panel,
+  CollapsePanel,
   Descriptions,
   Description,
   Empty,

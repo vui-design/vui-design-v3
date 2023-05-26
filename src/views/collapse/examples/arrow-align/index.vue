@@ -1,48 +1,53 @@
 <template>
-	<example v-bind:code="code" id="example-collapse-arrow-align">
-		<template slot="demo">
-			<div class="example-collapse-arrow-align">
-				<vui-radio-group type="button" v-model="arrowAlign">
-					<vui-radio label="Left" value="left" />
-					<vui-radio label="Right" value="right" />
-				</vui-radio-group>
-				<vui-collapse v-bind:arrowAlign="arrowAlign">
-					<vui-panel title="This is panel header 1">
-						<p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
-					</vui-panel>
-					<vui-panel title="This is panel header 2">
-						<p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
-					</vui-panel>
-					<vui-panel title="This is panel header 3">
-						<p>A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
-					</vui-panel>
-				</vui-collapse>
-			</div>
-		</template>
-		<template slot="title">箭头位置</template>
-		<template slot="description">
-			<p>通过 <code>arrowAlign</code> 属性可以改变箭头图标的位置。</p>
-		</template>
-	</example>
+  <vui-example id="example-collapse-arrow-align" v-bind:code="code">
+    <template v-slot:demo>
+      <div class="example-collapse-arrow-align">
+        <vui-radio-group type="button" v-model:value="arrowAlign">
+          <vui-radio value="left" label="Left" />
+          <vui-radio value="right" label="Right" />
+        </vui-radio-group>
+        <vui-collapse v-model:activeKeys="activeKeys" v-bind:arrowAlign="arrowAlign">
+          <vui-collapse-panel key="1" title="This is panel header 1">
+            <p style="margin: 0;">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+          </vui-collapse-panel>
+          <vui-collapse-panel key="2" title="This is panel header 2">
+            <p style="margin: 0;">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+          </vui-collapse-panel>
+          <vui-collapse-panel key="3" title="This is panel header 3">
+            <p style="margin: 0;">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
+          </vui-collapse-panel>
+        </vui-collapse>
+      </div>
+    </template>
+    <template v-slot:title>箭头位置</template>
+    <template v-slot:description>
+      <p>通过 <code>arrowAlign</code> 属性可以改变箭头图标的位置。</p>
+    </template>
+  </vui-example>
 </template>
 
-<script>
-	import Example from "src/components/example";
-	import code from "./code";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
+  import code from "./code";
 
-	export default {
-		components: {
-			Example
-		},
-		data() {
-			return {
-				code,
-				arrowAlign: "left"
-			};
-		}
-	};
+  export default defineComponent({
+    components: {
+      VuiExample
+    },
+    setup() {
+      const activeKeys = ref<string[]>([]);
+      const arrowAlign = ref<string>("left");
+
+      return {
+        code,
+        activeKeys,
+        arrowAlign
+      };
+    }
+  });
 </script>
 
 <style>
-	.example-collapse-arrow-align > .vui-collapse { margin-top:20px; }
+  .example-collapse-arrow-align > .vui-collapse { margin-top:24px; }
 </style>

@@ -391,15 +391,15 @@ export default [
         },
         component: () => import("src/views/card/index.vue")
       },
-  //     {
-  //       path: "/components/collapse",
-  //       name: "collapse",
-  //       meta: {
-  //         title: "Collapse",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/collapse/index.vue")
-  //     },
+      {
+        path: "/components/collapse",
+        name: "collapse",
+        meta: {
+          title: "Collapse",
+          group: "data-display"
+        },
+        component: () => import("src/views/collapse/index.vue")
+      },
       {
         path: "/components/descriptions",
         name: "descriptions",

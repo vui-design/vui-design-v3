@@ -1,0 +1,1 @@
+export const arrowAligns: string[] = ["left", "right"];
