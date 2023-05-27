@@ -12,11 +12,12 @@
         <vui-example-basic-usage />
         <vui-example-precision />
         <vui-example-label />
+        <vui-example-color />
       </vui-col>
       <vui-col v-bind:span="12">
-        <vui-example-color />
         <vui-example-reverse-color />
         <vui-example-placeholder />
+        <vui-example-ratio />
       </vui-col>
     </vui-row>
     <h2 id="example-api">API</h2>
@@ -40,6 +41,12 @@
         <tr>
           <td>target</td>
           <td>目标值/对比值</td>
+          <td>Number</td>
+          <td>--</td>
+        </tr>
+        <tr>
+          <td>ratio</td>
+          <td>自定义趋势值，设置此属性后 <code>value</code> 及 <code>target</code> 属性无效</td>
           <td>Number</td>
           <td>--</td>
         </tr>
@@ -92,4 +99,5 @@
   import VuiExampleColor from "./examples/color/index.vue";
   import VuiExampleReverseColor from "./examples/reverse-color/index.vue";
   import VuiExamplePlaceholder from "./examples/placeholder/index.vue";
+  import VuiExampleRatio from "./examples/ratio/index.vue";
 </script>

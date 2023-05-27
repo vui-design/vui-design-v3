@@ -6,7 +6,7 @@ import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { RateInjectionKey } from "./context";
 import VuiRateStar from "./rate-star";
 import useClassPrefix from "../../hooks/useClassPrefix";
-import is from "../../utils/is";
+import useControlled from "../../hooks/useControlled";
 
 export const createProps = () => {
   return {
@@ -23,7 +23,7 @@ export const createProps = () => {
     // 当前评分（受控模式）
     value: {
       type: Number as PropType<number>,
-      default: undefined
+      default: 0
     },
     // Star 总数
     count: {
@@ -53,7 +53,7 @@ export const createProps = () => {
     // 是否只读，无法进行交互
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 评分变化时是否触发父级表单验证
     validator: {
@@ -78,12 +78,16 @@ export default defineComponent({
     const { allowHalf } = toRefs(props);
 
     // 内部状态
+    const disabled = computed(() => props.disabled ?? vuiForm?.disabled ?? false);
     const cleaned = ref<number>();
     const mouseentered = ref<number>();
 
-    // 评分
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 评分（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value ?? 0);
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
 
     // 获取分值
     const getStarValue = (value: number, half: number) => {
@@ -96,7 +100,7 @@ export default defineComponent({
         return;
       }
 
-      if (!is.existy(props.value)) {
+      if (!isControlled.value) {
         defaultValue.value = newValue;
       }
 
@@ -110,7 +114,7 @@ export default defineComponent({
 
     // 
     const handleMouseenter = (e: MouseEvent, starValue: number, half: number) => {
-      if (props.disabled) {
+      if (disabled.value) {
         return;
       }
 
@@ -126,7 +130,7 @@ export default defineComponent({
 
     // 
     const handleMouseleave = (e: MouseEvent) => {
-      if (props.disabled) {
+      if (disabled.value) {
         return;
       }
 
@@ -150,7 +154,7 @@ export default defineComponent({
 
     // 
     const handleClick = (e: KeyboardEvent | MouseEvent, starValue: number, half: number) => {
-      if (props.disabled) {
+      if (disabled.value) {
         return;
       }
 

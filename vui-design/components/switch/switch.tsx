@@ -6,7 +6,7 @@ import { sizes } from "../../constants";
 import { types } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import useClassPrefix from "../../hooks/useClassPrefix";
-import is from "../../utils/is";
+import useControlled from "../../hooks/useControlled";
 import colours from "../../utils/colours";
 
 export const createProps = () => {
@@ -41,12 +41,12 @@ export const createProps = () => {
     // 是否打开（受控模式）
     checked: {
       type: [Boolean, String, Number] as PropType<boolean | string | number>,
-      default: undefined
+      default: false
     },
     // 是否禁用开关
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 用于设置开关打开时的值，例如使用 0 和 1 来标记开关的打开状态
     checkedValue: {
@@ -98,14 +98,17 @@ export default defineComponent({
     const vuiForm = inject(FormInjectionKey, undefined);
     const vuiFormItem = inject(FormItemInjectionKey, undefined);
 
-    // 基础属性
+    // 内部状态
     const size = computed(() => props.size ?? vuiForm?.size ?? "medium");
     const focused = ref(false);
-    const disabled = computed(() => vuiForm?.disabled || props.disabled);
+    const disabled = computed(() => props.disabled ?? vuiForm?.disabled ?? false);
 
-    // 打开状态
+    // 是否为受控模式
+    const isControlled = useControlled("checked");
+
+    // 打开状态（defaultChecked 非受控模式，checked 受控模式）
     const defaultChecked = ref(props.defaultChecked);
-    const checked = computed(() => (props.checked ?? defaultChecked.value) === props.checkedValue);
+    const checked = computed(() => (isControlled.value ? props.checked : defaultChecked.value) === props.checkedValue);
 
     // 颜色
     const color = computed(() => {
@@ -138,7 +141,7 @@ export default defineComponent({
 
       const newValue = checked.value ? props.uncheckedValue : props.checkedValue;
 
-      if (!is.existy(props.checked)) {
+      if (!isControlled.value) {
         defaultChecked.value = newValue;
       }
 

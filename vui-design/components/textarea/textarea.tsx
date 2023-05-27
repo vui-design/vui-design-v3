@@ -6,6 +6,7 @@ import { sizes, keyCodes } from "../../constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 import omit from "../../utils/omit";
@@ -27,7 +28,7 @@ export const createProps = () => {
     // 值（受控模式）
     value: {
       type: [String, Number] as PropType<string | number>,
-      default: undefined
+      default: ""
     },
     // 文本域占位文本
     placeholder: {
@@ -125,14 +126,17 @@ export default defineComponent({
     // 输入法输入状态
     const composing = ref(false);
 
-    // 基础属性
+    // 内部状态
     const size = computed(() => props.size ?? vuiForm?.size ?? "medium");
     const focused = ref(false);
-    const disabled = computed(() => props.disabled ?? props.disabled ?? false);
+    const disabled = computed(() => props.disabled ?? vuiForm?.disabled ?? false);
 
-    // 值
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 值（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value ?? "");
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
 
     // 清空按钮显示状态
     const showBtnClear = computed(() => props.clearable && !props.readonly && !disabled.value && is.effective(value.value));
@@ -150,7 +154,7 @@ export default defineComponent({
         resume(callback);
       }
       else {
-        if (!is.existy(props.value)) {
+        if (!isControlled.value) {
           defaultValue.value = newValue;
         }
   
@@ -311,7 +315,7 @@ export default defineComponent({
 
     // 清空文本域值
     const handleClear = () => {
-      if (props.disabled) {
+      if (disabled.value) {
         return;
       }
 

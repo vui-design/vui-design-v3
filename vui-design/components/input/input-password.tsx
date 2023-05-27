@@ -4,8 +4,8 @@ import { createProps } from "./input";
 import VuiIcon from "../icon";
 import VuiInput from "./input";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useSelection from "../../hooks/useSelection";
-import is from "../../utils/is";
 
 export { createProps };
 
@@ -23,17 +23,20 @@ export default defineComponent({
     const encrypted = ref(true);
     const type = computed(() => encrypted.value ? "password" : "text");
 
-    // 值
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 值（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
 
     // 
-    const setValue = (newValue: string | number) => {
+    const change = (newValue: string | number) => {
       if (value.value === newValue) {
         return;
       }
 
-      if (!is.existy(props.value)) {
+      if (!isControlled.value) {
         defaultValue.value = newValue;
       }
 
@@ -84,7 +87,7 @@ export default defineComponent({
 
     // onChange 事件回调
     const handleChange = (newValue: string | number) => {
-      setValue(newValue);
+      change(newValue);
     };
 
     // 

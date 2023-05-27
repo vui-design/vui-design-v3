@@ -6,6 +6,7 @@ import { modes, colors } from "./constants";
 import { DropdownInjectionKey } from "../dropdown/context";
 import { MenuInjectionKey } from "./context";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useRefs from "./hooks/useRefs";
 import is from "../../utils/is";
 
@@ -51,7 +52,7 @@ export const createProps = () => {
     // 是否折叠收起菜单
     collapsed: {
       type: Boolean as PropType<boolean>,
-      default: undefined
+      default: false
     },
     // 默认展开的 Submenu 子菜单 key 值数组
     defaultOpenKeys: {
@@ -61,7 +62,7 @@ export const createProps = () => {
     // 当前展开的 Submenu 子菜单 key 值数组
     openKeys: {
       type: Array as PropType<Key[]>,
-      default: undefined
+      default: []
     },
     // 默认选中的 MenuItem 菜单项 key 值数组
     defaultSelectedKey: {
@@ -96,38 +97,22 @@ export default defineComponent({
     const mode = computed(() => vuiDropdown ? "vertical" : props.mode);
     const selectable = computed(() => vuiDropdown ? false : props.selectable);
 
-    // 折叠状态
+    // 是否为受控模式
+    const isCollapsedControlled = useControlled("collapsed");
+    const isOpenKeysControlled = useControlled("openKeys");
+    const isSelectedKeyControlled = useControlled("selectedKey");
+
+    // 折叠状态（defaultCollapsed 非受控模式，collapsed 受控模式）
     const defaultCollapsed = ref(props.defaultCollapsed);
-    const collapsed = computed(() => props.collapsed ?? defaultCollapsed.value);
+    const collapsed = computed(() => isCollapsedControlled.value ? props.collapsed : defaultCollapsed.value);
 
-    // 展开的 Submenu 子菜单 key 值数组
+    // 展开的 Submenu 子菜单 key 值数组（defaultOpenKeys 非受控模式，openKeys 受控模式）
     const defaultOpenKeys = ref(props.defaultOpenKeys);
-    const openKeys = computed(() => props.openKeys ?? defaultOpenKeys.value);
+    const openKeys = computed(() => isOpenKeysControlled.value ? props.openKeys : defaultOpenKeys.value);
 
-    // 选中的 MenuItem 菜单项 key 值数组
+    // 选中的 MenuItem 菜单项 key 值数组（defaultSelectedKey 非受控模式，selectedKey 受控模式）
     const defaultSelectedKey = ref(props.defaultSelectedKey);
-    const selectedKey = computed(() => props.selectedKey ?? defaultSelectedKey.value);
-
-    // 监听 collapsed 属性变化
-    watch(() => props.collapsed, newValue => {
-      if (is.boolean(newValue)) {
-        defaultCollapsed.value = newValue;
-      }
-    });
-
-    // 监听 openKeys 属性变化
-    watch(() => props.openKeys, newValue => {
-      if (is.array(newValue)) {
-        defaultOpenKeys.value = newValue;
-      }
-    });
-
-    // 监听 selectedKey 属性变化
-    watch(() => props.selectedKey, newValue => {
-      if (is.string(newValue) || is.number(newValue)) {
-        defaultSelectedKey.value = newValue;
-      }
-    });
+    const selectedKey = computed(() => isSelectedKeyControlled.value ? props.selectedKey : defaultSelectedKey.value);
 
     // 监听 mode 及 collapsed 属性变化
     watch([mode, collapsed], ([newMode, newCollapsed]) => {
@@ -135,13 +120,20 @@ export default defineComponent({
         return;
 			}
 
-      defaultOpenKeys.value = [];
+      const nextOpenKeys: Key[] = [];
+
+      if (!isOpenKeysControlled.value) {
+        defaultOpenKeys.value = nextOpenKeys;
+      }
+
+      context.emit("update:openKeys", nextOpenKeys);
+      context.emit("toggle", nextOpenKeys);
     });
 
     // 打开 & 关闭 Submenu 事件回调
     const handleToggle = (key: Key, level: number, open: boolean) => {
-      const index = defaultOpenKeys.value.indexOf(key);
-      let nextOpenKeys = [...defaultOpenKeys.value];
+      const index: number = openKeys.value.indexOf(key);
+      let nextOpenKeys: Key[] = [...openKeys.value];
 
       if (open && index === -1) {
         nextOpenKeys.push(key);
@@ -156,7 +148,7 @@ export default defineComponent({
 
         if (siblingKeys.length > 0) {
           siblingKeys.forEach(siblingKey => {
-            const i = nextOpenKeys.indexOf(siblingKey as Key);
+            const i: number = nextOpenKeys.indexOf(siblingKey as Key);
 
             if (i > -1) {
               nextOpenKeys.splice(i, 1);
@@ -165,7 +157,9 @@ export default defineComponent({
         }
       }
 
-      defaultOpenKeys.value = nextOpenKeys;
+      if (!isOpenKeysControlled.value) {
+        defaultOpenKeys.value = nextOpenKeys;
+      }
 
       context.emit("update:openKeys", nextOpenKeys);
       context.emit("toggle", nextOpenKeys);
@@ -174,7 +168,9 @@ export default defineComponent({
     // 点击 MenuItem 事件回调
     const handleSelect = (key: Key, level: number) => {
       if (selectable.value) {
-        defaultSelectedKey.value = key;
+        if (!isSelectedKeyControlled.value) {
+          defaultSelectedKey.value = key;
+        }
 
         context.emit("update:selectedKey", key);
         context.emit("select", key);
@@ -185,10 +181,12 @@ export default defineComponent({
       vuiDropdown?.onChange?.(false);
 
       // 
-      if ((mode.value === "horizontal" || mode.value === "vertical" || (mode.value === "inline" && collapsed.value)) && defaultOpenKeys.value.length > 0) {
-        const nextOpenKeys = [] as Key[];
+      if ((mode.value === "horizontal" || mode.value === "vertical" || (mode.value === "inline" && collapsed.value)) && openKeys.value.length > 0) {
+        const nextOpenKeys: Key[] = [];
 
-        defaultOpenKeys.value = nextOpenKeys;
+        if (!isOpenKeysControlled.value) {
+          defaultOpenKeys.value = nextOpenKeys;
+        }
 
         context.emit("update:openKeys", nextOpenKeys);
         context.emit("toggle", nextOpenKeys);

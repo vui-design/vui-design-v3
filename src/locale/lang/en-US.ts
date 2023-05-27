@@ -534,6 +534,7 @@ export default {
       "example-trend-color": "自定义颜色",
       "example-trend-reverse-color": "颜色反转",
       "example-trend-placeholder": "占位文本",
+      "example-trend-ratio": "自定义趋势值",
 
       "example-watermark-basic-usage": "基本用法",
       "example-watermark-font": "字体",

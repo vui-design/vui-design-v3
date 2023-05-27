@@ -9,6 +9,7 @@ import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollEleme
 import VuiResizeObserver from "../resize-observer";
 import VuiLazyRender from "../lazy-render";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useFirstElement from "../../hooks/useFirstElement";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import usePopupManager from "../../hooks/usePopupManager";
@@ -37,7 +38,7 @@ export const createProps = () => {
     // 弹出框是否可见（受控模式）
     visible: {
       type: Boolean as PropType<boolean>,
-      default: undefined
+      default: false
     },
     // 触发方式
     trigger: {
@@ -171,9 +172,12 @@ export default defineComponent({
     const attributes = computed(() => omit(context.attrs, listeners));
     let scrollElements: HTMLElement[] | undefined;
 
+    // 是否为受控模式
+    const isControlled = useControlled("visible");
+
     // 可见状态相关变量（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
-    const visible = computed(() => props.visible ?? defaultVisible.value);
+    const visible = computed(() => isControlled.value ? props.visible : defaultVisible.value);
     const toggling = ref(false);
     const closed = ref(visible.value ? false : true);
 
@@ -254,7 +258,9 @@ export default defineComponent({
       }
 
       const change = () => {
-        defaultVisible.value = value;
+        if (!isControlled.value) {
+          defaultVisible.value = value;
+        }
 
         context.emit("update:visible", value);
         context.emit("change", value);

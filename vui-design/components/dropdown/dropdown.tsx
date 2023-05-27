@@ -4,6 +4,7 @@ import { defineComponent, provide, ref, reactive, computed } from "vue";
 import { triggers, placements } from "../popup/constants";
 import { DropdownInjectionKey } from "./context";
 import VuiPopup from "../popup";
+import useControlled from "../../hooks/useControlled";
 
 export const createProps = () => {
   return {
@@ -20,7 +21,7 @@ export const createProps = () => {
     // 下拉菜单是否可见（受控模式）
     visible: {
       type: Boolean as PropType<boolean>,
-      default: undefined
+      default: false
     },
     // 触发方式
     trigger: {
@@ -84,13 +85,18 @@ export default defineComponent({
   props: createProps(),
   emits: ["update:visible", "change", "open", "close", "resize"],
   setup(props, context) {
+    // 是否为受控模式
+    const isControlled = useControlled("visible");
+
     // 显示状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
-    const visible = computed(() => props.visible ?? defaultVisible.value);
+    const visible = computed(() => isControlled.value ? props.visible : defaultVisible.value);
 
     // onChange 事件回调
     const handleChange = (visible: boolean) => {
-      defaultVisible.value = visible;
+      if (!isControlled.value) {
+        defaultVisible.value = visible;
+      }
 
       context.emit("update:visible", visible);
       context.emit("change", visible);

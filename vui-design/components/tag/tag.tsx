@@ -5,6 +5,7 @@ import { sizes } from "../../constants";
 import { colors } from "./constants";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 
 export const createProps = () => {
   return {
@@ -57,7 +58,7 @@ export const createProps = () => {
     // 是否可见
     visible: {
       type: Boolean as PropType<boolean>,
-      default: undefined
+      default: true
     }
   };
 };
@@ -69,13 +70,19 @@ export default defineComponent({
   props: createProps(),
   emits: ["click", "update:checked", "check", "update:visible", "close"],
   setup(props, context) {
+    // 是否为受控模式
+    const isCheckedControlled = useControlled("checked");
+
     // 选中状态（defaultChecked 非受控模式，checked 受控模式）
     const defaultChecked = ref(props.defaultChecked);
-    const checked = computed(() => props.checked ?? defaultChecked.value);
-    
+    const checked = computed(() => isCheckedControlled.value ? props.checked : defaultChecked.value);
+
+    // 是否为受控模式
+    const isVisibleControlled = useControlled("visible");
+
     // 可见状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
-    const visible = computed(() => props.visible ?? defaultVisible.value);
+    const visible = computed(() => isVisibleControlled.value ? props.visible : defaultVisible.value);
 
     // onClick 事件回调
     const handleClick = (e: MouseEvent) => {
@@ -87,7 +94,9 @@ export default defineComponent({
 
       const newChecked = !checked.value;
 
-      defaultChecked.value = newChecked;
+      if (!isCheckedControlled.value) {
+        defaultChecked.value = newChecked;
+      }
 
       context.emit("update:checked", newChecked);
       context.emit("check", newChecked);
@@ -101,7 +110,9 @@ export default defineComponent({
         return;
       }
 
-      defaultVisible.value = false;
+      if (!isVisibleControlled.value) {
+        defaultVisible.value = false;
+      }
 
       context.emit("update:visible", false);
       context.emit("close", e);

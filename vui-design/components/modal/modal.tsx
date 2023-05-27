@@ -9,6 +9,7 @@ import VuiLazyRender from "../lazy-render";
 import VuiIcon from "../icon";
 import VuiButton from "../button";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useDraggable from "../../hooks/useDraggable";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import is from "../../utils/is";
@@ -34,7 +35,7 @@ export const createProps = () => {
     // 是否可见
     visible: {
       type: Boolean as PropType<boolean>,
-      default: undefined
+      default: false
     },
     // 标题左侧的图标类型/图标
     icon: {
@@ -219,17 +220,13 @@ export default defineComponent({
     const wrapperRef = ref<HTMLDivElement>();
     const modalRef = ref<HTMLDivElement>();
 
+    // 是否为受控模式
+    const isControlled = useControlled("visible");
+
     // 可见状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
-    const visible = computed(() => props.visible ?? defaultVisible.value);
+    const visible = computed(() => isControlled.value ? props.visible : defaultVisible.value);
     const closed = ref(visible.value ? false : true);
-
-    // 监听 defaultVisible 属性变化
-    watch(() => props.defaultVisible, newValue => {
-      if (is.boolean(newValue)) {
-        defaultVisible.value = newValue;
-      }
-    });
 
     // 监听 visible 属性变化
     watch(visible, newValue => {
@@ -279,7 +276,9 @@ export default defineComponent({
 
     // 切换可见状态
     const toggle = (visible: boolean) => {
-      defaultVisible.value = visible;
+      if (!isControlled.value) {
+        defaultVisible.value = visible;
+      }
 
       context.emit("update:visible", visible);
       context.emit("change", visible);

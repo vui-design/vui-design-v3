@@ -9,6 +9,7 @@ import VuiIcon from "../icon";
 import VuiButton from "../button";
 import VuiPopup from "../popup";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";
 
 export const createProps = () => {
@@ -155,16 +156,21 @@ export default defineComponent({
     // 国际化
     const { translate } = useI18n();
 
+    // 是否为受控模式
+    const isControlled = useControlled("visible");
+
     // 可见状态（defaultVisible 非受控模式，visible 受控模式）
     const defaultVisible = ref(props.defaultVisible);
-    const visible = computed(() => props.visible ?? defaultVisible.value);
+    const visible = computed(() => isControlled.value ? props.visible : defaultVisible.value);
 
     // 确认按钮 loading 状态
     const okLoading = ref(false);
 
     // 切换可见状态
     const toggle = (visible: boolean) => {
-      defaultVisible.value = visible;
+      if (!isControlled.value) {
+        defaultVisible.value = visible;
+      }
 
       context.emit("update:visible", visible);
       context.emit("change", visible);

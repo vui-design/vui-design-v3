@@ -7,6 +7,7 @@ import { types } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { RadioGroupInjectionKey } from "./context";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";
 
 export const createProps = () => {
@@ -56,12 +57,12 @@ export const createProps = () => {
     // 是否选中（受控模式）
     checked: {
       type: [Boolean, String, Number] as PropType<boolean | string | number>,
-      default: undefined
+      default: false
     },
     // 是否禁用单选框
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 该属性仅在单独使用时有效，用于设置选中时的值，例如使用 0 和 1 来标记单选框的选中状态
     checkedValue: {
@@ -97,18 +98,21 @@ export default defineComponent({
     // DOM 引用
     const radioRef = ref<HTMLInputElement>();
 
-    // 基础属性
+    // 内部状态
     const name = computed(() => vuiRadioGroup?.name ?? props.name);
     const type = computed(() => vuiRadioGroup?.type ?? props.type ?? "default");
     const size = computed(() => props.size ?? vuiRadioGroup?.size ?? vuiForm?.size ?? "medium");
     const minWidth = computed(() => props.minWidth ?? vuiRadioGroup?.minWidth);
     const focused = ref(false);
-    const disabled = computed(() => vuiForm?.disabled || vuiRadioGroup?.disabled || props.disabled);
+    const disabled = computed(() => props.disabled ?? vuiRadioGroup?.disabled ?? vuiForm?.disabled ?? false);
 
-    // 选中状态
+    // 是否为受控模式
+    const isControlled = useControlled("checked");
+
+    // 选中状态（defaultChecked 非受控模式，checked 受控模式）
     const defaultChecked = ref(props.defaultChecked);
     const checked = computed(() => {
-      const value = props.checked ?? defaultChecked.value;
+      const value = isControlled.value ? props.checked : defaultChecked.value;
 
       if (vuiRadioGroup) {
         return vuiRadioGroup.value === props.value;
@@ -152,7 +156,7 @@ export default defineComponent({
       else {
         const newValue = newChecked ? props.checkedValue : props.uncheckedValue;
 
-        if (!is.existy(props.checked)) {
+        if (!isControlled.value) {
           defaultChecked.value = newValue;
         }
 

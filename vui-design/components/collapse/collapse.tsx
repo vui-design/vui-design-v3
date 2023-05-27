@@ -1,10 +1,11 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Key } from "../../types";
 import type { ArrowAlign } from "./types";
-import { defineComponent, provide, toRefs, ref, reactive, computed, watch } from "vue";
+import { defineComponent, provide, toRefs, ref, reactive, computed } from "vue";
 import { arrowAligns } from "./constants";
 import { CollapseInjectionKey } from "./context";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import utils from "./utils";
 
 export const createProps = () => {
@@ -77,23 +78,19 @@ export default defineComponent({
     // 解构属性
     const { showArrow, arrowAlign, accordion, clickHeaderToCollapse, destroyInactivePanel, disabled } = toRefs(props);
 
+    // 是否为受控模式
+    const isControlled = useControlled("activeKeys");
+
     // 展开状态（defaultActiveKeys 非受控模式，activeKeys 受控模式）
     const defaultActiveKeys = ref(props.defaultActiveKeys);
-    const activeKeys = computed(() => utils.getActiveKeys(props.activeKeys ?? defaultActiveKeys.value, accordion.value));
-
-    // 监听 activeKeys 属性变化
-    watch(() => props.activeKeys, newActiveKeys => {
-      defaultActiveKeys.value = utils.getActiveKeys(newActiveKeys, accordion.value);
-    }, {
-      deep: true
-    });
+    const activeKeys = computed(() => utils.getActiveKeys(isControlled.value ? props.activeKeys : defaultActiveKeys.value, accordion.value));
 
     // 展开&收起事件回调
     const handleChange = (key: Key) => {
       let newActiveKeys;
 
       if (accordion.value) {
-        newActiveKeys = activeKeys.value;
+        newActiveKeys = activeKeys.value as Key;
 
         if (newActiveKeys === key) {
           newActiveKeys = undefined;
@@ -115,7 +112,9 @@ export default defineComponent({
         }
       }
 
-      defaultActiveKeys.value = newActiveKeys;
+      if (!isControlled.value) {
+        defaultActiveKeys.value = newActiveKeys;
+      }
 
       context.emit("update:activeKeys", newActiveKeys);
       context.emit("change", newActiveKeys);

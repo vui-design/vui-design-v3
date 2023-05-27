@@ -8,8 +8,13 @@ import is from "../../utils/is";
 const colors = ["#52c41a", "#ff4d4f"];
 const getTrend = (
   value: number,
-  target: number
-) => {
+  target: number,
+  ratio?: number
+): number | undefined => {
+  if (is.number(ratio)) {
+    return ratio;
+  }
+
   if (!is.number(value) || !is.number(target)) {
     return;
   }
@@ -37,6 +42,11 @@ export const createProps = () => {
     },
     // 目标值/对比值
     target: {
+      type: Number as PropType<number>,
+      default: undefined
+    },
+    // 自定义趋势值，设置此属性后 value 及 target 属性无效
+    ratio: {
       type: Number as PropType<number>,
       default: undefined
     },
@@ -88,7 +98,7 @@ export default defineComponent({
     const vuiConfigProvider = inject(ConfigProviderInjectionKey, undefined);
 
     // 
-    const trend = computed(() => getTrend(props.value as number, props.target as number));
+    const trend = computed(() => getTrend(props.value as number, props.target as number, props.ratio));
     const trendType = computed(() => trend.value === undefined ? "" : (trend.value < 0 ? "downward" : "upward"));
     const reverseColor = computed(() => props.reverseColor ?? vuiConfigProvider?.reverseTrendColor ?? false);
 

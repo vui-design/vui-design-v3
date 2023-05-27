@@ -6,6 +6,7 @@ import { FormItemInjectionKey } from "../form/context";
 import VuiIcon from "../icon";
 import VuiInput from "./input";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 import utils from "./utils";
@@ -142,9 +143,12 @@ export default defineComponent({
     // 状态
     const focused = ref(false);
 
-    // 值
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 值（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(utils.restore(props.defaultValue, min.value, max.value, step.value, precision.value));
-    const value = computed(() => utils.restore(props.value ?? defaultValue.value ?? undefined, min.value, max.value, step.value, precision.value));
+    const value = computed(() => utils.restore(isControlled.value ? props.value : defaultValue.value, min.value, max.value, step.value, precision.value));
 
     // 输入状态及输入文本
     const inputting = ref(false);
@@ -198,7 +202,10 @@ export default defineComponent({
         return;
       }
 
-      defaultValue.value = newValue;
+      if (!isControlled.value) {
+        defaultValue.value = newValue;
+      }
+
       context.emit("update:value", newValue);
       context.emit("change", newValue);
 

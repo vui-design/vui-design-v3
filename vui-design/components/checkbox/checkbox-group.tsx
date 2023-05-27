@@ -8,6 +8,7 @@ import { FormItemInjectionKey } from "../form/context";
 import { CheckboxGroupInjectionKey } from "./context";
 import VuiCheckbox from "../checkbox";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";
 
 export const createProps = () => {
@@ -53,7 +54,7 @@ export const createProps = () => {
     // 选中的值（受控模式）
     value: {
       type: Array as PropType<Array<string | number>>,
-      default: undefined
+      default: () => []
     },
     // 以配置形式设置多选组合的选项列表
     options: {
@@ -63,7 +64,7 @@ export const createProps = () => {
     // 是否禁用多选组合
     disabled: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 选中值变化时是否触发父级表单验证
     validator: {
@@ -86,9 +87,12 @@ export default defineComponent({
     // 解构属性
     const { name, type, size, minWidth, disabled } = toRefs(props);
 
-    // 选中值
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 选中值（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value ?? []);
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
 
     // onChange 事件回调
     const handleChange = (checked: boolean, checkboxValue: string | number) => {
@@ -101,7 +105,7 @@ export default defineComponent({
         newValue.splice(newValue.indexOf(checkboxValue), 1);
       }
 
-      if (!is.existy(props.value)) {
+      if (!isControlled.value) {
         defaultValue.value = newValue;
       }
 

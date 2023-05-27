@@ -7,6 +7,7 @@ import { types } from "../button/constants";
 import VuiInput from "./input";
 import VuiButton from "../button";
 import useClassPrefix from "../../hooks/useClassPrefix";
+import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";
 
 export const createProps = () => {
@@ -88,17 +89,20 @@ export default defineComponent({
   props: createProps(),
   emits: ["update:value", "change", "search"],
   setup(props, context) {
-    // 值
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 值（defaultValue 非受控模式，value 受控模式）
     const defaultValue = ref(props.defaultValue);
-    const value = computed(() => props.value ?? defaultValue.value);
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
 
     // 
-    const setValue = (newValue: string | number) => {
+    const change = (newValue: string | number) => {
       if (value.value === newValue) {
         return;
       }
 
-      if (!is.existy(props.value)) {
+      if (!isControlled.value) {
         defaultValue.value = newValue;
       }
 
@@ -108,7 +112,7 @@ export default defineComponent({
 
     // 
     const handleChange = (newValue: string | number) => {
-      setValue(newValue);
+      change(newValue);
     };
 
     // 
