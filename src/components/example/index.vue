@@ -71,7 +71,7 @@
       const codeHeight = ref(0);
 
       // DOM 引用
-      const codeRef = ref<HTMLDivElement>(null);
+      const codeRef = ref<HTMLDivElement>();
 
       // 
       const jsFiddleUrl = computed(() => {
@@ -122,7 +122,7 @@
         textarea.style.margin = "0";
         textarea.style.padding = "0";
         textarea.style.opacity = "0";
-        textarea.value = props.code;
+        textarea.value = props.code as string;
 
         document.body.appendChild(textarea);
 
@@ -132,18 +132,18 @@
 
         copied.value = true;
 
-        let timeout = setTimeout(() => {
+        let timeout: number | undefined = setTimeout(() => {
           copied.value = false;
 
           clearTimeout(timeout);
-          timeout = null;
+          timeout = undefined;
         }, 1000);
       };
 
       onMounted(() => {
         nextTick(() => {
           ready.value = true;
-          codeHeight.value = codeRef.value?.clientHeight;
+          codeHeight.value = codeRef.value?.clientHeight as number;
         });
       });
 
