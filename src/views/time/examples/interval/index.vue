@@ -1,31 +1,33 @@
 <template>
-  <example v-bind:code="code" id="example-time-interval">
-    <template slot="demo">
+  <vui-example id="example-time-interval" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-time-interval">
-        <vui-time v-bind:value="value" v-bind:interval="interval" />
+        <vui-time v-bind:value="value" v-bind:interval="300" />
       </div>
     </template>
-    <template slot="title">更新间隔</template>
-    <template slot="description">
+    <template v-slot:title>更新间隔</template>
+    <template v-slot:description>
       <p>设置自动更新间隔，默认为 <code>60</code> 秒。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<number>(new Date().getTime());
+
       return {
         code,
-        value: new Date().getTime(),
-        interval: 5 * 60
+        value
       };
     }
-  };
+  });
 </script>

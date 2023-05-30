@@ -33,9 +33,9 @@
     },
     setup() {
       const tags = ref<string[]>(["Movies", "Books", "Music", "Sports"]);
-      const selectedTags = ref<string[]>([]);
+      const selectedTags = ref<string[]>(["Movies"]);
 
-      const handleCheck = (checked, tag) => {
+      const handleCheck = (checked: boolean, tag: string) => {
         selectedTags.value = checked ? [...selectedTags.value, tag] : selectedTags.value.filter(item => item !== tag);
       };
 

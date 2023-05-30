@@ -25,16 +25,16 @@
       const anchors = ref<string[]>([]);
 
       // 
-      const translate = anchor => t("app.anchors." + anchor);
+      const translate = (anchor: string) => t("app.anchors." + anchor);
 
       // 
-      const changeAnchors = containter => {
+      const changeAnchors = (containter: HTMLElement) => {
         if (containter) {
           const nodes = containter.querySelectorAll("[id]");
-          let value = [];
+          let value: string[] = [];
 
           nodes.forEach(node => {
-            const id = node.getAttribute("id");
+            const id: string = node.getAttribute("id") as string;
 
             if (id.includes("example-api-") || id.includes("vui-watermark-")) {
               return;
@@ -52,7 +52,7 @@
 
       // 
       onMounted(() => {
-        nextTick(() => changeAnchors(contentRef.value));
+        nextTick(() => changeAnchors(contentRef.value!));
       });
 
       // 
@@ -77,33 +77,35 @@
 	.vui-article-content blockquote { border-left:4px solid #e6e6e6; margin:16px 0; padding-left:12px; }
 	.vui-article-content blockquote p { margin-bottom:0; color:rgba(0,0,0,0.45); }
 	.vui-article-content table { width:100%; margin:16px 0; }
-	.vui-article-content table th { border:1px solid #f0f0f0; background-color:#fafafa; padding:8px 16px; font-size:13px; text-align:left; vertical-align:top; }
-	.vui-article-content table td { border:1px solid #f0f0f0; padding:8px 16px; font-size:13px; text-align:left; vertical-align:top; }
+	.vui-article-content table th { border:1px solid #f0f0f0; background-color:#fafafa; padding:8px 16px; font-size:14px; text-align:left; vertical-align:top; }
+	.vui-article-content table td { border:1px solid #f0f0f0; padding:8px 16px; font-size:14px; text-align:left; vertical-align:top; }
 	.vui-article-content table td pre { margin:0; }
 	.vui-article-content table.example-api-props th:nth-child(1) { white-space:nowrap; }
-	.vui-article-content table.example-api-props th:nth-child(2) {  }
-	.vui-article-content table.example-api-props th:nth-child(3) {  }
+	.vui-article-content table.example-api-props th:nth-child(2) { white-space:nowrap; }
+	.vui-article-content table.example-api-props th:nth-child(3) { white-space:nowrap; }
 	.vui-article-content table.example-api-props th:nth-child(4) { white-space:nowrap; }
+	.vui-article-content table.example-api-props th:nth-child(5) {  }
 	.vui-article-content table.example-api-props td:nth-child(1) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-props td:nth-child(2) {  }
-	.vui-article-content table.example-api-props td:nth-child(3) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+	.vui-article-content table.example-api-props td:nth-child(2) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-props td:nth-child(3) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
 	.vui-article-content table.example-api-props td:nth-child(4) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-events th:nth-child(1) { white-space:nowrap; }
-	.vui-article-content table.example-api-events th:nth-child(2) {  }
-	.vui-article-content table.example-api-events th:nth-child(3) {  }
-	.vui-article-content table.example-api-events th:nth-child(4) { white-space:nowrap; }
+	.vui-article-content table.example-api-props td:nth-child(5) {  }
+  .vui-article-content table.example-api-events th:nth-child(1) { white-space:nowrap; }
+	.vui-article-content table.example-api-events th:nth-child(2) { white-space:nowrap; }
+	.vui-article-content table.example-api-events th:nth-child(3) { white-space:nowrap; }
+	.vui-article-content table.example-api-events th:nth-child(4) {  }
 	.vui-article-content table.example-api-events td:nth-child(1) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-events td:nth-child(2) {  }
-	.vui-article-content table.example-api-events td:nth-child(3) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
-	.vui-article-content table.example-api-events td:nth-child(4) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-events td:nth-child(2) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-events td:nth-child(3) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-events td:nth-child(4) {  }
   .vui-article-content table.example-api-methods th:nth-child(1) { white-space:nowrap; }
-	.vui-article-content table.example-api-methods th:nth-child(2) {  }
+	.vui-article-content table.example-api-methods th:nth-child(2) { white-space:nowrap; }
 	.vui-article-content table.example-api-methods th:nth-child(3) {  }
-	.vui-article-content table.example-api-methods th:nth-child(4) { white-space:nowrap; }
+	.vui-article-content table.example-api-methods th:nth-child(4) {  }
 	.vui-article-content table.example-api-methods td:nth-child(1) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-methods td:nth-child(2) {  }
-	.vui-article-content table.example-api-methods td:nth-child(3) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
-	.vui-article-content table.example-api-methods td:nth-child(4) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-methods td:nth-child(2) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
+	.vui-article-content table.example-api-methods td:nth-child(3) {  }
+	.vui-article-content table.example-api-methods td:nth-child(4) {  }
 	.vui-article-content ul { list-style:circle; padding-left:18px; }
 	.vui-article-content ul li p { margin-bottom:0; }
 	.vui-article-content ol { list-style:circle; padding-left:18px; }

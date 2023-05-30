@@ -9,14 +9,18 @@ const code =
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+
+  export default defineComponent({
+    setup() {
+      const value = ref<number>(new Date().getTime() - 5 * 24 * 60 * 60 * 1000);
+
       return {
-        value: new Date().getTime() - 5 * 24 * 60 * 60 * 1000
+        value
       };
     }
-  };
+  });
 </script>
 `;
 

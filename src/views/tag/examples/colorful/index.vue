@@ -39,7 +39,7 @@
     </template>
     <template v-slot:title>多彩标签</template>
     <template v-slot:description>
-      <p>多种预设颜色，用作不同场景。如果预设值不能满足你的需求，可以设置为具体的颜色值。</p>
+      <p>多种预设颜色，用作不同场景。如果预设值不能满足你的需求，可以自定义 16 进制颜色值。</p>
     </template>
   </vui-example>
 </template>

@@ -1,17 +1,30 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
-import type { Size, Color } from "./types";
+import type { Size } from "../../types";
+import type { Shape, Color } from "./types";
 import { defineComponent, ref, computed } from "vue";
 import { sizes } from "../../constants";
-import { colors } from "./constants";
+import { shapes, colors } from "./constants";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useControlled from "../../hooks/useControlled";
+import colours from "../../utils/colours";
 
 export const createProps = () => {
   return {
     // 样式前缀
     classPrefix: {
       type: String as PropType<string>,
+      default: undefined
+    },
+    // 是否显示外边框
+    bordered: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
+    // 标签形状，可选值为 round、mark 或者不设
+    shape: {
+      type: String as PropType<Shape>,
+      validator: (shape: Shape) => shapes.includes(shape),
       default: undefined
     },
     // 标签尺寸
@@ -24,6 +37,11 @@ export const createProps = () => {
     color: {
       type: String as PropType<string | Color>,
       default: "default"
+    },
+    // 幽灵标签
+    ghost: {
+      type: Boolean as PropType<boolean>,
+      default: false
     },
     // 标签图标类型
     icon: {
@@ -127,12 +145,16 @@ export default defineComponent({
 
       return {
         [`${classPrefix.value}`]: true,
+        [`${classPrefix.value}-bordered`]: props.bordered,
+        [`${classPrefix.value}-${props.shape}`]: props.shape,
         [`${classPrefix.value}-${props.size}`]: props.size,
         [`${classPrefix.value}-${props.color}`]: props.color && colors.includes(props.color),
+        [`${classPrefix.value}-ghost`]: props.ghost,
         [`${classPrefix.value}-${checkedStatus}`]: props.checkable
       };
     });
     classes.elIcon = computed(() => `${classPrefix.value}-icon`);
+    classes.elLabel = computed(() => `${classPrefix.value}-label`);
     classes.elBtnClose = computed(() => `${classPrefix.value}-btn-close`);
 
     // 计算 style 样式
@@ -142,8 +164,15 @@ export default defineComponent({
       let style: CSSProperties = {};
 
       if ((props.color && colors.indexOf(props.color) === -1) && (!props.checkable || checked.value)) {
-        style.borderColor = style.backgroundColor = props.color;
-        style.color = "#fff";
+        if (props.ghost) {
+          style.borderColor = props.color;
+          style.backgroundColor = colours.hex2rgba(props.color, 0.1);
+          style.color = props.color;
+        }
+        else {
+          style.borderColor = style.backgroundColor = props.color;
+          style.color = "#fff";
+        }
       }
 
       return style;
@@ -185,7 +214,7 @@ export default defineComponent({
       return (
         <div class={classes.el.value} style={styles.el.value} onClick={handleClick}>
           {icon}
-          <label>{context.slots.default?.()}</label>
+          <span class={classes.elLabel.value}>{context.slots.default?.()}</span>
           {btnClose}
         </div>
       );

@@ -1,10 +1,31 @@
 <template>
   <vui-example id="example-tag-icon" v-bind:code="code">
     <template v-slot:demo>
-      <div class="example-tag-icon">
-        <vui-tag icon="chat-ellipsis-filled" color="primary">Comment</vui-tag>
-        <vui-tag icon="thumb-up-filled" color="success">Thumb up</vui-tag>
-        <vui-tag icon="thumb-down-filled" color="error">Thumb down</vui-tag>
+      <div>
+        <div class="example-tag-icon">
+          <vui-divider orientation="left">Normal</vui-divider>
+          <div class="vui-tag-list">
+            <vui-tag color="primary" icon="chat-ellipsis-filled">Comment</vui-tag>
+            <vui-tag color="success" icon="thumb-up-filled">Thumb Up</vui-tag>
+            <vui-tag color="error" icon="thumb-down-filled">Thumb Down</vui-tag>
+          </div>
+        </div>
+        <div class="example-tag-icon">
+          <vui-divider orientation="left">Round & Ghost</vui-divider>
+          <div class="vui-tag-list">
+            <vui-tag shape="round" color="primary" ghost icon="time-filled">Todo</vui-tag>
+            <vui-tag shape="round" color="success" ghost icon="checkmark-circle-filled">Approved</vui-tag>
+            <vui-tag shape="round" color="error" ghost icon="crossmark-circle-filled">Approval Failed</vui-tag>
+          </div>
+        </div>
+        <div class="example-tag-icon">
+          <vui-divider orientation="left">Borderless & Round & Ghost</vui-divider>
+          <div class="vui-tag-list">
+            <vui-tag v-bind:bordered="false" shape="round" color="primary" ghost icon="time-filled">Todo</vui-tag>
+            <vui-tag v-bind:bordered="false" shape="round" color="success" ghost icon="checkmark-circle-filled">Approved</vui-tag>
+            <vui-tag v-bind:bordered="false" shape="round" color="error" ghost icon="crossmark-circle-filled">Approval Failed</vui-tag>
+          </div>
+        </div>
       </div>
     </template>
     <template v-slot:title>图标标签</template>
@@ -33,6 +54,8 @@
 </script>
 
 <style>
-  .example-tag-icon { display:flex; justify-content:flex-start; align-items:flex-start; }
-  .example-tag-icon .vui-tag + .vui-tag { margin-left:8px; }
+  .example-tag-icon + .example-tag-icon { margin-top:24px; }
+  .example-tag-icon .vui-divider { margin-top:0; }
+  .example-tag-icon .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
+  .example-tag-icon .vui-tag { margin-right:8px; }
 </style>

@@ -99,8 +99,8 @@
 
   .app-layout-header { position:fixed; top:0; left:0; right:0; z-index:100; border-bottom:1px solid #f0f0f0; padding:0 20px; }
   .app-layout-header .logo { float:left; display:block; margin:0; padding:16px 0; }
-  .app-layout-header .logo a { display:flex; justify-content:flex-start; align-items:center; color:rgba(0,0,0,0.85); font-size:18px; font-weight:500; line-height:32px; }
-  .app-layout-header .logo img { display:block; width:32px; height:32px; margin-right:16px; }
+  .app-layout-header .logo a { display:flex; justify-content:flex-start; align-items:center; color:rgba(0,0,0,0.85); font-size:24px; font-weight:700; line-height:32px; }
+  .app-layout-header .logo img { display:block; width:32px; height:32px; margin-right:12px; }
   .app-layout-header .nav-list { display:flex; justify-content:flex-start; align-items:center; height:64px; list-style:none; margin:0; padding:0; }
   .app-layout-header .nav { height:64px; }
   .app-layout-header .nav a { display:block; height:64px; border-bottom:2px solid transparent; color:rgba(0,0,0,0.85); font-size:16px; line-height:64px; transition:all 0.2s; }

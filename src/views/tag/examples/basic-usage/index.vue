@@ -2,9 +2,12 @@
   <vui-example id="example-tag-basic-usage" v-bind:code="code">
     <template v-slot:demo>
       <div class="example-tag-basic-usage">
-        <vui-tag>Tag 1</vui-tag>
-        <vui-tag>Tag 2</vui-tag>
-        <vui-tag>Tag 3</vui-tag>
+        <vui-tag>Default</vui-tag>
+        <vui-tag color="primary">Primary</vui-tag>
+        <vui-tag color="info">Info</vui-tag>
+        <vui-tag color="warning">Warning</vui-tag>
+        <vui-tag color="success">Success</vui-tag>
+        <vui-tag color="error">Error</vui-tag>
       </div>
     </template>
     <template v-slot:title>基本用法</template>

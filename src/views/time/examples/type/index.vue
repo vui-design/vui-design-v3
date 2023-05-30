@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-time-type">
-    <template slot="demo">
+  <vui-example id="example-time-type" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-time-type">
         <vui-time v-bind:value="value" />
         <br />
@@ -9,26 +9,29 @@
         <vui-time type="datetime" v-bind:value="value" />
       </div>
     </template>
-    <template slot="title">显示类型</template>
-    <template slot="description">
+    <template v-slot:title>显示类型</template>
+    <template v-slot:description>
       <p>可以根据情况，设置不同的显示类型。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<number>(new Date().getTime() - 5 * 24 * 60 * 60 * 1000);
+
       return {
         code,
-        value: new Date().getTime() - 5 * 24 * 60 * 60 * 1000
+        value
       };
     }
-  };
+  });
 </script>

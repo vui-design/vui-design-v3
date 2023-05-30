@@ -19,7 +19,8 @@ export const createProps = () => {
     // 要编码的字符串
     value: {
       type: [String, Number] as PropType<string | number>,
-      default: undefined
+      default: undefined,
+      required: true
     },
     // 二维码的宽高尺寸
     size: {

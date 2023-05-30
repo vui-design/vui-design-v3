@@ -1,6 +1,6 @@
 <template>
-  <example v-bind:code="code" id="example-time-basic-usage">
-    <template slot="demo">
+  <vui-example id="example-time-basic-usage" v-bind:code="code">
+    <template v-slot:demo>
       <div class="example-time-basic-usage">
         <vui-time v-bind:value="value1" />
         <br />
@@ -15,31 +15,39 @@
         <vui-time v-bind:value="value6" />
       </div>
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
       <p>设置一个 <code>Date</code> 对象、日期字符串或时间戳，可自动转换为相对于此时此刻的时间描述。</p>
     </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../components/example/index.vue";
   import code from "./code";
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value1 = ref<Date>(new Date("2014-01-01"));
+      const value2 = ref<string>("2018-12-31");
+      const value3 = ref<number>(new Date().getTime() - 5 * 24 * 60 * 60 * 1000);
+      const value4 = ref<number>(new Date().getTime() - 5 * 60 * 60 * 1000);
+      const value5 = ref<number>(new Date().getTime() - 5 * 60 * 1000);
+      const value6 = ref<number>(new Date().getTime());
+
       return {
         code,
-        value1: new Date("2014-01-01"),
-        value2: "2019-04-01",
-        value3: new Date().getTime() - 5 * 24 * 60 * 60 * 1000,
-        value4: new Date().getTime() - 5 * 60 * 60 * 1000,
-        value5: new Date().getTime() - 5 * 60 * 1000,
-        value6: new Date().getTime()
+        value1,
+        value2,
+        value3,
+        value4,
+        value5,
+        value6
       };
     }
-  };
+  });
 </script>

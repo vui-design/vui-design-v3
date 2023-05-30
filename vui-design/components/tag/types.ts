@@ -1,4 +1,4 @@
-import type { sizes, colors } from "./constants";
+import type { shapes, colors } from "./constants";
 
-export type Size = typeof sizes[number];
+export type Shape = typeof shapes[number];
 export type Color = typeof colors[number];

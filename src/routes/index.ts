@@ -490,15 +490,15 @@ export default [
         },
         component: () => import("src/views/tag/index.vue")
       },
-  //     {
-  //       path: "/components/time",
-  //       name: "time",
-  //       meta: {
-  //         title: "Time",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/time/index.vue")
-  //     },
+      {
+        path: "/components/time",
+        name: "time",
+        meta: {
+          title: "Time",
+          group: "data-display"
+        },
+        component: () => import("src/views/time/index.vue")
+      },
   //     {
   //       path: "/components/timeline",
   //       name: "timeline",
