@@ -511,12 +511,14 @@ export default {
       "example-table-export": "导出",
 
       "example-tag-basic-usage": "基本用法",
+      "example-tag-shape": "不同形状的标签",
       "example-tag-size": "尺寸",
+      "example-tag-ghost": "幽灵标签",
       "example-tag-icon": "图标标签",
-      "example-tag-closable": "可关闭",
-      "example-tag-control": "动态添加和删除",
       "example-tag-checkable": "可选择",
       "example-tag-hot-tags": "热门标签",
+      "example-tag-closable": "可关闭",
+      "example-tag-control": "动态添加和删除",
       "example-tag-colorful": "多彩标签",
 
       "example-time-basic-usage": "基本用法",

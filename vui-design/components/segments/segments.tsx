@@ -78,7 +78,7 @@ export default defineComponent({
     const addKey = (key: Key) => keys.value.push(key);
     const removeKey = (key: Key) => keys.value.splice(keys.value.indexOf(key), 1);
 
-    // 更新 thumb 样式
+    // 用于更新 thumb 样式
     const setThumbStyle = () => {
       if (!segmentsRef.value || !segmentsThumbRef.value) {
         return;
@@ -106,7 +106,7 @@ export default defineComponent({
       deep: true
     });
 
-    // 选中分段发生变化时，更新 thumb 的位置
+    // 选中分段发生变化时，更新 thumb 样式
     watch(activeKey, () => {
       nextTick(() => setThumbStyle());
     }, {
