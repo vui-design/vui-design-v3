@@ -71,6 +71,7 @@ export default {
       "data-display-popover": "Popover 气泡卡片",
       "data-display-qrcode": "Qrcode 二维码",
       "data-display-ribbon": "Ribbon 缎带",
+      "data-display-segments": "Segments 分段控制器",
       "data-display-statistic": "Statistic 统计数值",
       "data-display-table": "Table 表格",
       "data-display-tag": "Tag 标签",
@@ -473,6 +474,15 @@ export default {
       "example-ribbon-placement": "位置",
       "example-ribbon-type": "预设类型",
       "example-ribbon-colorful": "多彩缎带",
+
+      "example-segments-basic-usage": "基本用法",
+      "example-segments-options": "配置方式",
+      "example-segments-block": "Block 分段选择器",
+      "example-segments-size": "三种大小",
+      "example-segments-icon": "图标",
+      "example-segments-disabled": "不可用",
+      "example-segments-dynamic": "动态数据",
+      "example-segments-custom": "自定义渲染",
 
       "example-statistic-basic-usage": "基本用法",
       "example-statistic-icon-and-unit": "图标/单位",

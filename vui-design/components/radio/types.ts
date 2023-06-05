@@ -19,4 +19,4 @@ export interface Radio {
   label?: string | number | RenderFunction;
   value: boolean | string | number;
   disabled?: boolean;
-}
+};

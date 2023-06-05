@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Type, Color, Placement } from "./types";
 import { defineComponent, computed } from "vue";
-import { getSlotProp } from "../..//utils/vue";
+import { getSlotProp } from "../../utils/vue";
 import { types, colors, placements } from "./constants";
 import useClassPrefix from "../../hooks/useClassPrefix";
 

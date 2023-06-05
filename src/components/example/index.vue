@@ -4,7 +4,7 @@
       <div class="demo">
         <slot name="demo"></slot>
       </div>
-      <vui-divider class="title" orientation="left" dashed>
+      <vui-divider class="title" type="dashed" orientation="left">
         <slot name="title">{{title}}</slot>
       </vui-divider>
       <div class="description">

@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, inject, ref, computed } from "vue";
-import { getSlotProp } from "../..//utils/vue";
+import { getSlotProp } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
 import { BreadcrumbInjectionKey } from "./context";
 import VuiIcon from "../icon";

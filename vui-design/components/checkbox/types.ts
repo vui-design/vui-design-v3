@@ -19,4 +19,4 @@ export interface Checkbox {
   label?: string | number | RenderFunction;
   value: string | number;
   disabled?: boolean;
-}
+};

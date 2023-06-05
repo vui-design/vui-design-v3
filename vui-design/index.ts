@@ -64,6 +64,7 @@ import List, { ListItem, ListItemMeta } from "./components/list";
 import Popover from "./components/popover";
 import Qrcode from "./components/qrcode";
 import Ribbon from "./components/ribbon";
+import Segments, { SegmentsItem } from "./components/segments";
 import Statistic, { Countdown } from "./components/statistic";
 import Table from "./components/table";
 import Tag from "./components/tag";
@@ -173,6 +174,8 @@ const components = [
   Popover,
   Qrcode,
   Ribbon,
+  Segments,
+  SegmentsItem,
   Statistic,
   Countdown,
   Table,
@@ -297,6 +300,8 @@ export {
   Popover,
   Qrcode,
   Ribbon,
+  Segments,
+  SegmentsItem,
   Statistic,
   Countdown,
   Table,

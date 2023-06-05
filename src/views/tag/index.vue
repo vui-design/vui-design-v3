@@ -127,40 +127,34 @@
     <table class="example-api-events">
       <thead>
         <tr>
-          <th width="150">事件名</th>
-          <th width="150">类型</th>
-          <th width="120">回调参数</th>
+          <th width="150">事件</th>
+          <th width="270">参数</th>
           <th>说明</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>update:checked</td>
-          <td>Function</td>
           <td>checked</td>
           <td>选中状态发生变化时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
         </tr>
         <tr>
           <td>check</td>
-          <td>Function</td>
           <td>checked</td>
           <td>选中状态发生变化时触发的事件回调函数</td>
         </tr>
         <tr>
           <td>update:visible</td>
-          <td>Function</td>
           <td>visible</td>
           <td>关闭标签时触发的事件回调函数，可以使用 <code>v-model</code> 双向绑定数据</td>
         </tr>
         <tr>
           <td>close</td>
-          <td>Function</td>
           <td>event</td>
           <td>关闭标签时触发的事件回调函数</td>
         </tr>
         <tr>
           <td>click</td>
-          <td>Function</td>
           <td>event</td>
           <td>点击标签时触发的事件回调函数</td>
         </tr>

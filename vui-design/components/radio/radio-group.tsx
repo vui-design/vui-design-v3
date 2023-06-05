@@ -6,7 +6,7 @@ import { sizes } from "../../constants";
 import { layouts, types } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
 import { RadioGroupInjectionKey } from "./context";
-import VuiRadio from "../radio";
+import VuiRadio from "./radio";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";

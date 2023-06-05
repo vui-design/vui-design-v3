@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Key } from "../../types";
 import { Transition, defineComponent, inject, ref, computed } from "vue";
-import { getSlotProp } from "../..//utils/vue";
+import { getSlotProp } from "../../utils/vue";
 import { CollapseInjectionKey } from "./context";
 import VuiIcon from "../icon";
 import useClassPrefix from "../../hooks/useClassPrefix";

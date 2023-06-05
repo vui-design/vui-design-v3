@@ -10,7 +10,7 @@ import useControlled from "../../hooks/useControlled";
 import useSelection from "../../hooks/useSelection";
 import is from "../../utils/is";
 import omit from "../../utils/omit";
-import setStyle from "../../utils/setStyle";
+import setStyles from "../../utils/setStyles";
 import getTextareaSize from "../../utils/getTextareaSize";
 
 export const createProps = () => {
@@ -209,7 +209,7 @@ export default defineComponent({
           styles = getTextareaSize(textareaRef.value, minRows, maxRows);
         }
 
-        setStyle(textareaRef.value, styles);
+        setStyles(textareaRef.value, styles);
       });
     };
 

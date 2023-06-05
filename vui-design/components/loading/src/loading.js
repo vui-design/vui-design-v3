@@ -1,6 +1,6 @@
 import clamp from "../../../utils/clamp";
 import queue from "../../../utils/queue";
-import setStyle from "../../../utils/setStyle";
+import setStyles from "../../../utils/setStyles";
 
 const VuiLoading = {};
 
@@ -55,7 +55,7 @@ VuiLoading.render = function(fromStart) {
   const elLoadingBar = elLoading.querySelector(".vui-loading-bar");
   const percentage = fromStart ? 0 : this.status * 100;
 
-  setStyle(elLoadingBar, {
+  setStyles(elLoadingBar, {
     transition: "all 0s linear",
     width: percentage + "%"
   });
@@ -79,19 +79,19 @@ VuiLoading.set = function(n) {
   const easing = settings.easing;
 
   queue(function(next) {
-    setStyle(elLoadingBar, {
+    setStyles(elLoadingBar, {
       width: status * 100 + "%",
       transition: "all " + duration + "ms " + easing
     });
 
     if (status === 1) {
-      setStyle(elLoading, {
+      setStyles(elLoading, {
         opacity: 1,
         transition: "none"
       });
 
       setTimeout(function() {
-        setStyle(elLoading, {
+        setStyles(elLoading, {
           opacity: 0,
           transition: "all " + duration + "ms linear",
         });

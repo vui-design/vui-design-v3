@@ -92,12 +92,10 @@
 	.vui-article-content table.example-api-props td:nth-child(5) {  }
   .vui-article-content table.example-api-events th:nth-child(1) { white-space:nowrap; }
 	.vui-article-content table.example-api-events th:nth-child(2) { white-space:nowrap; }
-	.vui-article-content table.example-api-events th:nth-child(3) { white-space:nowrap; }
-	.vui-article-content table.example-api-events th:nth-child(4) {  }
+	.vui-article-content table.example-api-events th:nth-child(3) {  }
 	.vui-article-content table.example-api-events td:nth-child(1) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
 	.vui-article-content table.example-api-events td:nth-child(2) { color:#ff4d4f; font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-events td:nth-child(3) { font-family:"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; white-space:nowrap; }
-	.vui-article-content table.example-api-events td:nth-child(4) {  }
+	.vui-article-content table.example-api-events td:nth-child(3) {  }
   .vui-article-content table.example-api-methods th:nth-child(1) { white-space:nowrap; }
 	.vui-article-content table.example-api-methods th:nth-child(2) { white-space:nowrap; }
 	.vui-article-content table.example-api-methods th:nth-child(3) {  }

@@ -6,7 +6,7 @@ import { sizes } from "../../constants";
 import { layouts, types } from "./constants";
 import { FormItemInjectionKey } from "../form/context";
 import { CheckboxGroupInjectionKey } from "./context";
-import VuiCheckbox from "../checkbox";
+import VuiCheckbox from "./checkbox";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useControlled from "../../hooks/useControlled";
 import is from "../../utils/is";

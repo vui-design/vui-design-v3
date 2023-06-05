@@ -464,6 +464,15 @@ export default [
         component: () => import("src/views/ribbon/index.vue")
       },
       {
+        path: "/components/segments",
+        name: "segments",
+        meta: {
+          title: "segments",
+          group: "data-display"
+        },
+        component: () => import("src/views/segments/index.vue")
+      },
+      {
         path: "/components/statistic",
         name: "statistic",
         meta: {
