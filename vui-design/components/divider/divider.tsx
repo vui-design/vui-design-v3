@@ -31,6 +31,11 @@ export const createProps = () => {
       validator: (orientation: Orientation) => orientations.includes(orientation),
       default: "center"
     },
+    // 文字是否显示为普通正文样式
+    plain: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
     // 分割线的宽度/高度
     size: {
       type: [String, Number] as PropType<string | number>,
@@ -63,7 +68,8 @@ export default defineComponent({
         [`${classPrefix.value}-${props.type}`]: props.type,
         [`${classPrefix.value}-${props.direction}`]: props.direction,
         [`${classPrefix.value}-with-text`]: withText.value,
-        [`${classPrefix.value}-with-text-${props.orientation}`]: withText.value
+        [`${classPrefix.value}-with-text-${props.orientation}`]: withText.value,
+        [`${classPrefix.value}-plain`]: props.plain
       };
     });
     classes.elText = computed(() => `${classPrefix.value}-text`);

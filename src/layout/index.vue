@@ -1,6 +1,6 @@
 <template>
-  <vui-layout class="app-layout">
-    <vui-layout-header color="light" class="app-layout-header">
+  <div class="app-layout">
+    <div class="app-layout-header">
       <h1 class="logo">
         <router-link to="/">
           <img src="~src/assets/images/logo.svg" />Vui Design
@@ -29,9 +29,9 @@
           </div>
         </vui-space>
       </vui-space>
-    </vui-layout-header>
-    <vui-layout class="app-layout-body">
-      <vui-layout-sider class="app-layout-body-sider" v-bind:width="240">
+    </div>
+    <div class="app-layout-body">
+      <div class="app-layout-body-sider">
         <a href="https://github.com/vui-design/vui-design-pro" target="_blank" class="ad">
           <img src="~src/assets/images/vui-design-pro.png" />
         </a>
@@ -49,17 +49,17 @@
             </template>
           </vui-menu>
         </div>
-      </vui-layout-sider>
+      </div>
       <vui-layout class="app-layout-body-content">
         <vui-layout-content class="app-layout-body-content-body">
-          <router-view v-bind:key="route.fullPath" />
+          <router-view />
         </vui-layout-content>
         <vui-layout-footer class="app-layout-body-content-footer">
           <p>© 2018-{{year}} Coded By Dingwei</p>
         </vui-layout-footer>
       </vui-layout>
-    </vui-layout>
-  </vui-layout>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -95,9 +95,9 @@
 </script>
 
 <style>
-  .app-layout { position:relative; min-height:100vh; background-color:#fff; padding-top:64px; }
+  .app-layout { position:relative; display:flex; flex-direction:column; min-height:100vh; background-color:#fff; padding-top:64px; }
 
-  .app-layout-header { position:fixed; top:0; left:0; right:0; z-index:100; border-bottom:1px solid #f0f0f0; padding:0 20px; }
+  .app-layout-header { flex:0 0 auto; position:fixed; top:0; left:0; right:0; z-index:100; display:block; height:64px; border-bottom:1px solid #e6e6e6; background-color:#fff; padding:0 20px; }
   .app-layout-header .logo { float:left; display:block; margin:0; padding:16px 0; }
   .app-layout-header .logo a { display:flex; justify-content:flex-start; align-items:center; color:rgba(0,0,0,0.85); font-size:24px; font-weight:700; line-height:32px; }
   .app-layout-header .logo img { display:block; width:32px; height:32px; margin-right:12px; }
@@ -115,13 +115,13 @@
   .app-layout-header .github .github-stargazers { position:relative; display:block; border:1px solid #e0e0e0; border-radius:2px; background-color:#fff; margin-left:12px; padding:4px 8px; color:rgba(0,0,0,0.85); font-size:14px; line-height:1; }
   .app-layout-header .github .github-stargazers:before { content:""; position:absolute; top:50%; left:0; width:8px; height:8px; border-width:1px; border-style:solid; border-color:#e0e0e0 transparent transparent #e0e0e0; border-radius:2px; background-color:#fff; margin-top:-4px; margin-left:-4px; transform:rotate(-45deg); }
 
-  .app-layout-body { background-color:#fff; }
-  .app-layout-body-sider { position:fixed; left:0; top:0; bottom:0; border-right:1px solid #f0f0f0; background-color:#fff; padding-top:64px; }
+  .app-layout-body { flex:auto; display:block; background-color:#fff; }
+  .app-layout-body-sider { position:fixed; left:0; top:64px; bottom:0; display:block; width:260px; border-right:1px solid #e6e6e6; background-color:#fff; overflow:auto; }
   .app-layout-body-sider .ad { display:block; height:84px; border-radius:2px; background-color:#fafafa; margin:16px 16px 0 16px; overflow:hidden; opacity:0.9; transition:all 0.2s; }
   .app-layout-body-sider .ad img { display:block; width:100%; }
   .app-layout-body-sider .ad:hover { opacity:1; }
   .app-layout-body-sider .menu { padding:16px 0; }
-  .app-layout-body-content { background-color:#fff; padding-left:241px; }
-  .app-layout-body-content .app-layout-body-content-body { padding:32px; }
-  .app-layout-body-content .app-layout-body-content-footer { border-top:1px solid #f0f0f0; padding:32px; text-align:center; }
+  .app-layout-body-content { background-color:#fff; padding-left:260px; }
+  .app-layout-body-content .app-layout-body-content-body { padding:0; }
+  .app-layout-body-content .app-layout-body-content-footer { border-top:1px solid #e6e6e6; padding:32px; text-align:center; }
 </style>

@@ -17,14 +17,14 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 文字内容
-    title: {
-      type: [String, Number] as PropType<string | number>,
-      default: undefined
-    },
     // 指定在何处显示链接的资源
     target: {
       type: String as PropType<string>,
+      default: undefined
+    },
+    // 文字内容
+    title: {
+      type: [String, Number] as PropType<string | number>,
       default: undefined
     }
   };
@@ -55,8 +55,8 @@ export default defineComponent({
       vuiAnchor?.scrollTo(props.href as string);
       vuiAnchor?.onClick(e, {
         href: props.href,
-        title: props.title,
-        target: props.target
+        target: props.target,
+        title: props.title
       });
     };
 

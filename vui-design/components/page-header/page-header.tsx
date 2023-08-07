@@ -140,7 +140,7 @@ export default defineComponent({
       // 后退按钮
       let backIcon;
 
-      if (props.backIcon) {
+      if (context.slots.backIcon || props.backIcon) {
         backIcon = (
           <div class={classes.elBack.value} onClick={handleBack}>
             {

@@ -22,7 +22,6 @@ export default function getMenuByRoutes(routes: readonly RouteRecordRaw[]) {
         path: child.path,
         name: child.name,
         meta: {
-          icon: child?.meta?.icon,
           title: child?.meta?.title
         }
       };

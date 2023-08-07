@@ -198,6 +198,7 @@ export default {
       "example-divider-basic-usage": "基本用法",
       "example-divider-vertical": "垂直分割线",
       "example-divider-with-text": "带文本的分割线",
+      "example-divider-plain": "分割文字使用正文样式",
 
       "example-space-basic-usage": "基本用法",
       "example-space-vertical": "垂直排列",

@@ -1,110 +1,44 @@
 <template>
   <vui-article>
-    <h1>PageHeader 页头</h1>
-    <p>页头位于页容器中，页容器顶部，起到了内容概览和引导页级操作的作用。包括由面包屑、标题、页面内容简介、页面级操作、页面级导航等组成。</p>
-    <h2>何时使用</h2>
-    <p>当需要使用户快速理解当前页是什么，以及方便用户使用页面功能时使用，通常也可被用作页面间导航。</p>
-    <h2>代码演示</h2>
-    <vui-example-basic-usage />
-    <vui-example-ghost />
-    <vui-example-breadcrumb />
-    <vui-example-more />
-    <vui-example-content />
-    <h2 id="example-api">API</h2>
-    <h3>PageHeader 属性</h3>
-    <table class="example-api-props">
-      <thead>
-        <tr>
-          <th width="160">属性</th>
-          <th>说明</th>
-          <th width="160">类型</th>
-          <th width="160">默认值</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>breadcrumb</td>
-          <td>面包屑配置。为数组类型时，详细项目属性请参考 <router-link to="/components/breadcrumb">BreadcrumbItem</router-link> 组件</td>
-          <td>Array | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>backIcon</td>
-          <td>自定义后退按钮图标类型/图标，如果为 <code>false</code> 则不渲染</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>avatar</td>
-          <td>标题左侧的头像地址/头像</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>title</td>
-          <td>标题</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>subTitle</td>
-          <td>副标题</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>tags</td>
-          <td>标题右侧的 <code>Tag</code> 列表，如 <code>[{ color: "red", title: "Tag" }]</code></td>
-          <td>Array | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>extra</td>
-          <td>操作区，位于标题行的行尾</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>footer</td>
-          <td><code>PageHeader</code> 的页脚，一般用于渲染横向导航菜单</td>
-          <td>String | Slot</td>
-          <td>--</td>
-        </tr>
-        <tr>
-          <td>ghost</td>
-          <td><code>PageHeader</code> 的背景类型，将会改变背景颜色</td>
-          <td>Boolean</td>
-          <td>true</td>
-        </tr>
-      </tbody>
-    </table>
-    <h3>PageHeader 事件</h3>
-    <table class="example-api-events">
-      <thead>
-        <tr>
-          <th width="160">事件名</th>
-          <th>说明</th>
-          <th width="160">类型</th>
-          <th width="160">回调参数</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>back</td>
-          <td>返回按钮的点击事件回调函数</td>
-          <td>Function</td>
-          <td>event</td>
-        </tr>
-      </tbody>
-    </table>
+    <template v-slot:header>
+      <h1>PageHeader 页头</h1>
+      <p>页头位于页容器中，页容器顶部，起到了内容概览和引导页级操作的作用。包括由面包屑、标题、页面内容简介、页面级操作、页面级导航等组成。</p>
+    </template>
+    <template v-slot:segments>
+      <vui-segments size="large" v-bind:activeKey="activeKey" v-on:change="handleChange">
+        <vui-segments-item key="examples">示例</vui-segments-item>
+        <vui-segments-item key="api">API</vui-segments-item>
+        <vui-segments-item key="guide">指南</vui-segments-item>
+      </vui-segments>
+    </template>
+    <vui-page-header-examples v-if="activeKey === 'examples'" />
+    <vui-page-header-api v-if="activeKey === 'api'" />
+    <vui-page-header-guide v-if="activeKey === 'guide'" />
   </vui-article>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+  import { defineComponent } from "vue";
   import VuiArticle from "../../components/article/index.vue";
-  import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
-  import VuiExampleGhost from "./examples/ghost/index.vue";
-  import VuiExampleBreadcrumb from "./examples/breadcrumb/index.vue";
-  import VuiExampleMore from "./examples/more/index.vue";
-  import VuiExampleContent from "./examples/content/index.vue";
+  import VuiPageHeaderExamples from "./examples/index.vue";
+  import VuiPageHeaderApi from "./api/index.vue";
+  import VuiPageHeaderGuide from "./guide/index.vue";
+  import useSegments from "../../hooks/useSegments";
+
+  export default defineComponent({
+    components: {
+      VuiArticle,
+      VuiPageHeaderExamples,
+      VuiPageHeaderApi,
+      VuiPageHeaderGuide
+    },
+    setup(props, context) {
+      const { activeKey, handleChange } = useSegments("/components/page-header");
+
+      return {
+        activeKey,
+        handleChange
+      };
+    }
+  });
 </script>

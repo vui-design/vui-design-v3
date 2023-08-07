@@ -1,10 +1,11 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes, CSSProperties, ComputedRef } from "vue";
 import type { Direction, Justify, Align, Gutter } from "./types";
 import { defineComponent, computed } from "vue";
+import { directions, justifys, aligns } from "./constants";
 import { flatten } from "../../utils/vue";
-import { directions, justifys, aligns, gutters } from "./constants";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
+import utils from "./utils";
 
 export const createProps = () => {
   return {
@@ -24,6 +25,11 @@ export const createProps = () => {
       validator: (direction: Direction) => directions.includes(direction),
       default: "horizontal"
     },
+    // 是否自动换行
+    wrap: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
     // 项目水平排列方式
     justify: {
       type: String as PropType<Justify>,
@@ -34,22 +40,17 @@ export const createProps = () => {
     align: {
       type: String as PropType<Align>,
       validator: (align: Align) => aligns.includes(align),
-      default: "middle"
+      default: "center"
     },
     // 是否在项目间插入分割线，可设置为具体的数值，用于指定分割线高度
     divider: {
       type: [Boolean, String, Number] as PropType<boolean | string | number>,
       default: false
     },
-    // 间隔大小
+    // 项目间距
     gutter: {
-      type: [String, Number, Array] as PropType<string | number | [string | number, string | number]>,
+      type: [String, Number, Array] as PropType<Gutter | [Gutter, Gutter]>,
       default: "medium"
-    },
-    // 是否自动换行
-    wrap: {
-      type: Boolean as PropType<boolean>,
-      default: true
     }
   };
 };
@@ -60,12 +61,8 @@ export default defineComponent({
   name: "vui-space",
   props: createProps(),
   setup(props, context) {
-    // 判断间距大小为预设值，还是自定义值
-    const withPresetGutter = computed(() => props.gutter && gutters.includes(props.gutter as Gutter));
-    const withCustomGutter = computed(() => props.gutter && gutters.indexOf(props.gutter as Gutter) === -1);
-
-    // 计算间距大小
-    const gutter = computed(() => is.string(props.gutter) ? props.gutter : `${props.gutter}px`);
+    // 是否显示分割线
+    const withDivider = computed(() => props.direction === "horizontal" && !!props.divider);
 
     // 计算 class 样式
     const classPrefix = useClassPrefix("space", props);
@@ -76,28 +73,29 @@ export default defineComponent({
         [`${classPrefix.value}`]: true,
         [`${classPrefix.value}-block`]: props.block,
         [`${classPrefix.value}-${props.direction}`]: props.direction,
+        [`${classPrefix.value}-wrap`]: props.direction === "horizontal" && props.wrap,
         [`${classPrefix.value}-justify-${props.justify}`]: props.direction === "horizontal" && props.justify,
         [`${classPrefix.value}-align-${props.align}`]: props.direction === "horizontal" && props.align,
-        [`${classPrefix.value}-with-divider`]: props.direction === "horizontal" && props.divider,
-        [`${classPrefix.value}-${props.gutter}`]: withPresetGutter.value
+        [`${classPrefix.value}-with-divider`]: withDivider.value
       };
     });
     classes.elItem = computed(() => `${classPrefix.value}-item`);
     classes.elDivider = computed(() => `${classPrefix.value}-divider`);
 
-    // 计算项目和分割线的 style 样式
+    // 计算 style 样式
     let styles: Record<string, ComputedRef> = {};
 
-    styles.elItem = computed(() => {
+    styles.el = computed(() => {
       let style: CSSProperties = {};
 
-      if (!props.divider && withCustomGutter) {
-        const property = props.direction === "horizontal" ? "marginLeft" : "marginTop";
+      if (is.string(props.gutter) || is.number(props.gutter) || is.array(props.gutter)) {
+        const guttets = utils.getGutters(props.gutter, withDivider.value);
 
-        style[property] = gutter.value as string;
+        style.columnGap = guttets[0];
+        style.rowGap = guttets[1];
       }
 
-      return style;
+      return style; 
     });
 
     styles.elDivider = computed(() => {
@@ -106,10 +104,6 @@ export default defineComponent({
       if (props.direction === "horizontal" && props.divider) {
         if (is.string(props.divider) || is.number(props.divider)) {
           style.height = is.string(props.divider) ? (props.divider as string) : `${props.divider}px`;
-        }
-  
-        if (withCustomGutter) {
-          style.marginLeft = style.marginRight = gutter.value as string;
         }
       }
 
@@ -136,14 +130,14 @@ export default defineComponent({
         }
 
         children.push(
-          <div class={classes.elItem.value} style={notFirst ? styles.elItem.value : undefined}>
+          <div class={classes.elItem.value}>
             {element}
           </div>
         );
       });
 
       return (
-        <div class={classes.el.value}>
+        <div class={classes.el.value} style={styles.el.value}>
           {children}
         </div>
       );

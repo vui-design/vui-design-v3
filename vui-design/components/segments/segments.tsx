@@ -91,8 +91,8 @@ export default defineComponent({
       }
 
       setStyles(segmentsThumbRef.value, {
-        width: target.clientWidth ? `${target.clientWidth}px` : undefined,
-        transform: target.offsetLeft ? `translate3d(${target.offsetLeft}px, 0px, 0px)` : undefined
+        left: target.offsetLeft ? `${target.offsetLeft}px` : undefined,
+        width: target.clientWidth ? `${target.clientWidth}px` : undefined
       });
     };
 

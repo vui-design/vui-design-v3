@@ -102,26 +102,26 @@
 
   &-with-text-left {
     &:before {
-      width:5%;
+      width:16px;
     }
     &:after {
-      width:95%;
+      flex:1;
     }
   }
   &-with-text-center {
     &:before {
-      width:50%;
+      flex:1;
     }
     &:after {
-      width:50%;
+      flex:1;
     }
   }
   &-with-text-right {
     &:before {
-      width:95%;
+      flex:1;
     }
     &:after {
-      width:5%;
+      width:16px;
     }
   }
 
@@ -131,9 +131,16 @@
     padding:0 1em;
     color:@divider-text-font-color;
     font-size:@divider-text-font-size;
+    font-weight:@divider-text-font-weight;
     font-style:normal;
     white-space:nowrap;
     text-align:center;
     line-height:1;
+  }
+
+  &-plain &-text {
+    color:@divider-plain-text-font-color;
+    font-size:@divider-plain-text-font-size;
+    font-weight:@divider-plain-text-font-weight;
   }
 }
