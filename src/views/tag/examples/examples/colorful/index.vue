@@ -64,6 +64,5 @@
 <style>
   .example-tag-colorful + .example-tag-colorful { margin-top:32px; }
   .example-tag-colorful .vui-divider { margin-top:0; }
-  .example-tag-colorful .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
-  .example-tag-colorful .vui-tag { margin-right:8px; }
+  .example-tag-colorful .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
 </style>

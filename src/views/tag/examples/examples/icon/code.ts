@@ -29,10 +29,9 @@ const code =
 </template>
 
 <style>
-  .example-tag-icon + .example-tag-icon { margin-top:24px; }
+  .example-tag-icon + .example-tag-icon { margin-top:32px; }
   .example-tag-icon .vui-divider { margin-top:0; }
-  .example-tag-icon .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
-  .example-tag-icon .vui-tag { margin-right:8px; }
+  .example-tag-icon .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
 </style>
 `;
 

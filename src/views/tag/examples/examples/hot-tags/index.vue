@@ -50,8 +50,6 @@
 </script>
 
 <style>
-  .example-tag-hot-tags { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
+  .example-tag-hot-tags { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
   .example-tag-hot-tags h4 { height:24px; color:#333; font-size:14px; font-weight:600; line-height:24px; }
-  .example-tag-hot-tags h4,
-  .example-tag-hot-tags .vui-tag { margin-right:8px; }
 </style>

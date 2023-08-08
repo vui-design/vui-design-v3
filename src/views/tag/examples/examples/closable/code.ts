@@ -28,8 +28,7 @@ const code =
 </script>
 
 <style>
-  .example-tag-closable { display:flex; justify-content:flex-start; align-items:flex-start; }
-  .example-tag-closable .vui-tag + .vui-tag { margin-left:8px; }
+  .example-tag-closable { display:flex; justify-content:flex-start; align-items:flex-start; gap:8px; }
 </style>
 `;
 

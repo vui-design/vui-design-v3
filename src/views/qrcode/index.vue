@@ -1,162 +1,44 @@
 <template>
   <vui-article>
-    <h1>Qrcode 二维码</h1>
-    <p>能够将文本转换生成二维码的组件，支持自定义配色和 Logo 配置。</p>
-    <h2>何时使用</h2>
-    <ul>
-      <li>当需要将文本转换成为二维码时使用。</li>
-    </ul>
-    <h2>代码演示</h2>
-    <vui-row v-bind:gutter="16">
-      <vui-col v-bind:span="12">
-        <vui-example-basic-usage />
-        <vui-example-no-border />
-        <vui-example-size />
-        <vui-example-image />
-        <vui-example-correct-level />
-      </vui-col>
-      <vui-col v-bind:span="12">
-        <vui-example-color />
-        <vui-example-status />
-        <vui-example-download />
-        <vui-example-popover />
-      </vui-col>
-    </vui-row>
-    <h2 id="example-api">API</h2>
-    <h3>Qrcode 属性</h3>
-    <table class="example-api-props">
-      <thead>
-        <tr>
-          <th width="140">属性</th>
-          <th width="140">类型</th>
-          <th width="160">默认值</th>
-          <th width="80">必填</th>
-          <th>说明</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>value</td>
-          <td>String</td>
-          <td>--</td>
-          <td>Y</td>
-          <td>要编码的字符串</td>
-        </tr>
-        <tr>
-          <td>size</td>
-          <td>Number</td>
-          <td>160</td>
-          <td>N</td>
-          <td>二维码的宽高尺寸，单位为 <code>px</code>，只允许生成正方形二维码</td>
-        </tr>
-        <tr>
-          <td>image</td>
-          <td>String</td>
-          <td>--</td>
-          <td>N</td>
-          <td>二维码中图片的地址（目前只支持图片地址）</td>
-        </tr>
-        <tr>
-          <td>imageSize</td>
-          <td>Number</td>
-          <td>40</td>
-          <td>N</td>
-          <td>二维码中图片的尺寸，单位为 <code>px</code></td>
-        </tr>
-        <tr>
-          <td>bordered</td>
-          <td>Boolean</td>
-          <td>true</td>
-          <td>N</td>
-          <td>是否含有边框</td>
-        </tr>
-        <tr>
-          <td>status</td>
-          <td>String</td>
-          <td>active</td>
-          <td>N</td>
-          <td>二维码状态，可选值为 <code>active</code>、<code>loading</code>、<code>expired</code> 或者不设</td>
-        </tr>
-        <tr>
-          <td>correctLevel</td>
-          <td>Number</td>
-          <td>3</td>
-          <td>N</td>
-          <td>纠错级别，可选值为 <code>0</code>、<code>1</code>、<code>2</code>、<code>3</code>，数字越大说明所需纠错级别越大</td>
-        </tr>
-        <tr>
-          <td>background</td>
-          <td>String</td>
-          <td>#ffffff</td>
-          <td>N</td>
-          <td>二维码背景色</td>
-        </tr>
-        <tr>
-          <td>foreground</td>
-          <td>String</td>
-          <td>#000000</td>
-          <td>N</td>
-          <td>二维码前景色</td>
-        </tr>
-        <tr>
-          <td>pdground</td>
-          <td>String</td>
-          <td>#000000</td>
-          <td>N</td>
-          <td>二维码三个角的颜色</td>
-        </tr>
-      </tbody>
-    </table>
-    <h3>Qrcode 事件</h3>
-    <table class="example-api-events">
-      <thead>
-        <tr>
-          <th width="140">事件名</th>
-          <th width="140">类型</th>
-          <th width="160">回调参数</th>
-          <th>说明</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>refresh</td>
-          <td>Function</td>
-          <td>--</td>
-          <td>点击刷新按钮时触发的事件回调函数</td>
-        </tr>
-      </tbody>
-    </table>
-    <h3>Qrcode 方法</h3>
-    <table class="example-api-methods">
-      <thead>
-        <tr>
-          <th width="140">方法名</th>
-          <th width="140">参数</th>
-          <th width="160">参数说明</th>
-          <th>说明</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>download</td>
-          <td>filename</td>
-          <td>自定义下载文件名</td>
-          <td>下载二维码</td>
-        </tr>
-      </tbody>
-    </table>
+    <template v-slot:header>
+      <h1>Qrcode 二维码</h1>
+      <p>能够将文本转换生成二维码的组件，支持自定义配色和 Logo 配置。</p>
+    </template>
+    <template v-slot:segments>
+      <vui-segments size="large" v-bind:activeKey="activeKey" v-on:change="handleChange">
+        <vui-segments-item key="examples">示例</vui-segments-item>
+        <vui-segments-item key="api">API</vui-segments-item>
+        <vui-segments-item key="guide">指南</vui-segments-item>
+      </vui-segments>
+    </template>
+    <vui-article-examples v-if="activeKey === 'examples'" />
+    <vui-article-api v-if="activeKey === 'api'" />
+    <vui-article-guide v-if="activeKey === 'guide'" />
   </vui-article>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+  import { defineComponent } from "vue";
   import VuiArticle from "../../components/article/index.vue";
-  import VuiExampleBasicUsage from "./examples/basic-usage/index.vue";
-  import VuiExampleNoBorder from "./examples/no-border/index.vue";
-  import VuiExampleSize from "./examples/size/index.vue";
-  import VuiExampleImage from "./examples/image/index.vue";
-  import VuiExampleCorrectLevel from "./examples/correct-level/index.vue";
-  import VuiExampleColor from "./examples/color/index.vue";
-  import VuiExampleStatus from "./examples/status/index.vue";
-  import VuiExampleDownload from "./examples/download/index.vue";
-  import VuiExamplePopover from "./examples/popover/index.vue";
+  import VuiArticleExamples from "./examples/index.vue";
+  import VuiArticleApi from "./api/index.vue";
+  import VuiArticleGuide from "./guide/index.vue";
+  import useSegments from "../../hooks/useSegments";
+
+  export default defineComponent({
+    components: {
+      VuiArticle,
+      VuiArticleExamples,
+      VuiArticleApi,
+      VuiArticleGuide
+    },
+    setup(props, context) {
+      const { activeKey, handleChange } = useSegments("/components/qrcode");
+
+      return {
+        activeKey,
+        handleChange
+      };
+    }
+  });
 </script>

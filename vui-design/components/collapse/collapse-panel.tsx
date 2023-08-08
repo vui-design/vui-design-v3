@@ -102,6 +102,11 @@ export default defineComponent({
       }
     };
 
+    // 
+    const handleExtraClick = (e: MouseEvent) => {
+      e.stopPropagation();
+    };
+
     // 展开前事件回调
     const handleBeforeOpen = (el: Element) => {
       (el as HTMLDivElement).style.height = "0px";
@@ -173,7 +178,7 @@ export default defineComponent({
 
       if (context.slots.extra || props.extra) {
         extra = (
-          <div class={classes.elExtra.value}>
+          <div class={classes.elExtra.value} onClick={handleExtraClick}>
             {getSlotProp(context.slots, props, "extra")}
           </div>
         );

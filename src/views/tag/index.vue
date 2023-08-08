@@ -11,26 +11,26 @@
         <vui-segments-item key="guide">指南</vui-segments-item>
       </vui-segments>
     </template>
-    <vui-tag-examples v-if="activeKey === 'examples'" />
-    <vui-tag-api v-if="activeKey === 'api'" />
-    <vui-tag-guide v-if="activeKey === 'guide'" />
+    <vui-article-examples v-if="activeKey === 'examples'" />
+    <vui-article-api v-if="activeKey === 'api'" />
+    <vui-article-guide v-if="activeKey === 'guide'" />
   </vui-article>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
   import VuiArticle from "../../components/article/index.vue";
-  import VuiTagExamples from "./examples/index.vue";
-  import VuiTagApi from "./api/index.vue";
-  import VuiTagGuide from "./guide/index.vue";
+  import VuiArticleExamples from "./examples/index.vue";
+  import VuiArticleApi from "./api/index.vue";
+  import VuiArticleGuide from "./guide/index.vue";
   import useSegments from "../../hooks/useSegments";
 
   export default defineComponent({
     components: {
       VuiArticle,
-      VuiTagExamples,
-      VuiTagApi,
-      VuiTagGuide
+      VuiArticleExamples,
+      VuiArticleApi,
+      VuiArticleGuide
     },
     setup(props, context) {
       const { activeKey, handleChange } = useSegments("/components/tag");

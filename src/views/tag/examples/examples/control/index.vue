@@ -82,8 +82,5 @@
 </script>
 
 <style>
-  .example-tag-control { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
-  .example-tag-control .vui-tag,
-  .example-tag-control .vui-input,
-  .example-tag-control .vui-button { margin-right:8px; }
+  .example-tag-control { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
 </style>

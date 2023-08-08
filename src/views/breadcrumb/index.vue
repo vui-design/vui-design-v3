@@ -11,26 +11,26 @@
         <vui-segments-item key="guide">指南</vui-segments-item>
       </vui-segments>
     </template>
-    <vui-breadcrumb-examples v-if="activeKey === 'examples'" />
-    <vui-breadcrumb-api v-if="activeKey === 'api'" />
-    <vui-breadcrumb-guide v-if="activeKey === 'guide'" />
+    <vui-article-examples v-if="activeKey === 'examples'" />
+    <vui-article-api v-if="activeKey === 'api'" />
+    <vui-article-guide v-if="activeKey === 'guide'" />
   </vui-article>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
   import VuiArticle from "../../components/article/index.vue";
-  import VuiBreadcrumbExamples from "./examples/index.vue";
-  import VuiBreadcrumbApi from "./api/index.vue";
-  import VuiBreadcrumbGuide from "./guide/index.vue";
+  import VuiArticleExamples from "./examples/index.vue";
+  import VuiArticleApi from "./api/index.vue";
+  import VuiArticleGuide from "./guide/index.vue";
   import useSegments from "../../hooks/useSegments";
 
   export default defineComponent({
     components: {
       VuiArticle,
-      VuiBreadcrumbExamples,
-      VuiBreadcrumbApi,
-      VuiBreadcrumbGuide
+      VuiArticleExamples,
+      VuiArticleApi,
+      VuiArticleGuide
     },
     setup(props, context) {
       const { activeKey, handleChange } = useSegments("/components/breadcrumb");

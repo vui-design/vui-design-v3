@@ -11,8 +11,7 @@ const code =
 </template>
 
 <style>
-  .example-tag-ghost { display:flex; justify-content:flex-start; align-items:flex-start; }
-  .example-tag-ghost .vui-tag + .vui-tag { margin-left:8px; }
+  .example-tag-ghost { display:flex; justify-content:flex-start; align-items:flex-start; gap:8px; }
 </style>
 `;
 

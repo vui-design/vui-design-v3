@@ -11,26 +11,26 @@
         <vui-segments-item key="guide">指南</vui-segments-item>
       </vui-segments>
     </template>
-    <vui-space-examples v-if="activeKey === 'examples'" />
-    <vui-space-api v-if="activeKey === 'api'" />
-    <vui-space-guide v-if="activeKey === 'guide'" />
+    <vui-article-examples v-if="activeKey === 'examples'" />
+    <vui-article-api v-if="activeKey === 'api'" />
+    <vui-article-guide v-if="activeKey === 'guide'" />
   </vui-article>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue";
   import VuiArticle from "../../components/article/index.vue";
-  import VuiSpaceExamples from "./examples/index.vue";
-  import VuiSpaceApi from "./api/index.vue";
-  import VuiSpaceGuide from "./guide/index.vue";
+  import VuiArticleExamples from "./examples/index.vue";
+  import VuiArticleApi from "./api/index.vue";
+  import VuiArticleGuide from "./guide/index.vue";
   import useSegments from "../../hooks/useSegments";
 
   export default defineComponent({
     components: {
       VuiArticle,
-      VuiSpaceExamples,
-      VuiSpaceApi,
-      VuiSpaceGuide
+      VuiArticleExamples,
+      VuiArticleApi,
+      VuiArticleGuide
     },
     setup(props, context) {
       const { activeKey, handleChange } = useSegments("/components/space");

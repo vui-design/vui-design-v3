@@ -11,8 +11,7 @@ const code =
 </template>
 
 <style>
-  .example-tag-basic-usage { display:flex; justify-content:flex-start; align-items:flex-start; }
-  .example-tag-basic-usage .vui-tag + .vui-tag { margin-left:8px; }
+  .example-tag-basic-usage { display:flex; justify-content:flex-start; align-items:flex-start; gap:8px; }
 </style>
 `;
 

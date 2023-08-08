@@ -32,6 +32,5 @@
 </script>
 
 <style>
-  .example-tag-size { display:flex; justify-content:flex-start; align-items:center; }
-  .example-tag-size .vui-tag + .vui-tag { margin-left:8px; }
+  .example-tag-size { display:flex; justify-content:flex-start; align-items:center; gap:8px; }
 </style>

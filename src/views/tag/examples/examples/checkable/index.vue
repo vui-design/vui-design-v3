@@ -45,6 +45,5 @@
 </script>
 
 <style>
-  .example-tag-checkable { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; row-gap:8px; }
-  .example-tag-checkable .vui-tag { margin-right:8px; }
+  .example-tag-checkable { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
 </style>
