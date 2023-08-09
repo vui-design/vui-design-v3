@@ -514,6 +514,31 @@ export default {
       "api-tag-events": "Tag 事件",
       "guide-tag-when-to-use": "何时使用",
 
+      "example-time-basic-usage": "基本用法",
+      "example-time-type": "显示类型",
+      "example-time-interval": "更新间隔",
+      "api-time-props": "Time 属性",
+      "guide-time-when-to-use": "何时使用",
+
+      "example-tooltip-basic-usage": "基本用法",
+      "example-tooltip-content": "自定义内容",
+      "example-tooltip-trigger": "触发方式",
+      "example-tooltip-placement": "位置",
+      "example-tooltip-colorful": "多彩文字提示",
+      "api-tooltip-props": "Tooltip 属性",
+      "api-tooltip-events": "Tooltip 事件",
+      "guide-tooltip-when-to-use": "何时使用",
+
+      "example-trend-basic-usage": "基本用法",
+      "example-trend-precision": "数值精度",
+      "example-trend-label": "标签文本",
+      "example-trend-color": "自定义颜色",
+      "example-trend-reverse-color": "颜色反转",
+      "example-trend-placeholder": "占位文本",
+      "example-trend-ratio": "自定义趋势值",
+      "api-trend-props": "Trend 属性",
+      "guide-trend-when-to-use": "何时使用",
+
 
 
 
@@ -651,10 +676,6 @@ export default {
       "example-table-loading": "加载中",
       "example-table-export": "导出",
 
-      "example-time-basic-usage": "基本用法",
-      "example-time-type": "显示类型",
-      "example-time-interval": "更新间隔",
-
       "example-timeline-basic-usage": "基本用法",
       "example-timeline-color": "轴点颜色",
       "example-timeline-pending": "幽灵节点",
@@ -662,21 +683,7 @@ export default {
       "example-timeline-alternate": "交替显示",
       "example-timeline-right": "右侧时间轴点",
 
-      "example-tooltip-basic-usage": "基本用法",
-      "example-tooltip-content": "自定义内容",
-      "example-tooltip-trigger": "触发方式",
-      "example-tooltip-placement": "位置",
-      "example-tooltip-colorful": "多彩文字提示",
-
       "example-tree-basic-usage": "基本用法",
-
-      "example-trend-basic-usage": "基本用法",
-      "example-trend-precision": "数值精度",
-      "example-trend-label": "标签文本",
-      "example-trend-color": "自定义颜色",
-      "example-trend-reverse-color": "颜色反转",
-      "example-trend-placeholder": "占位文本",
-      "example-trend-ratio": "自定义趋势值",
 
       "example-watermark-basic-usage": "基本用法",
       "example-watermark-font": "字体",
