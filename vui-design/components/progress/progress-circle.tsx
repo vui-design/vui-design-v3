@@ -5,6 +5,7 @@ import type { Success, Status, StrokeLinecap } from "./types";
 import { defineComponent, computed } from "vue";
 import { sizes } from "../../constants";
 import { statuses, strokeLinecaps } from "./constants";
+import VuiTooltip from "../tooltip";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import is from "../../utils/is";
 
@@ -79,6 +80,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 进度环 & 仪表盘相关变量
+    const isLarge = computed(() => props.width && props.width > 20);
     const radius = computed(() => 50 - props.strokeWidth / 2);
     const perimeter = computed(() => 2 * Math.PI * radius.value);
 
@@ -167,7 +169,7 @@ export default defineComponent({
         directive = `M 50,50 m 0,-${radius.value} a ${radius.value},${radius.value} 0 1 1 0,${radius.value * 2} a ${radius.value},${radius.value} 0 1 1 0,-${radius.value * 2}`;
       }
 
-      return (
+      let progressCircle = (
         <div class={classes.el.value} style={styles.el.value}>
           <svg viewBox="0 0 100 100" class={classes.elBar.value}>
             <path d={directive} class={classes.elBarTrail.value} style={styles.elBarTrail.value}></path>
@@ -178,9 +180,26 @@ export default defineComponent({
               )
             }
           </svg>
-          {context.slots.default?.()}
+          {
+            isLarge.value ? context.slots.default?.() : null
+          }
         </div>
       );
+
+      if (isLarge.value) {
+        return progressCircle;
+      }
+      else {
+        return (
+          <VuiTooltip
+            v-slots={{
+              content: () => context.slots.default?.()
+            }}
+          >
+            {progressCircle}
+          </VuiTooltip>
+        );
+      }
     };
   }
 });

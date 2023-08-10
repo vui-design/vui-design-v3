@@ -43,9 +43,9 @@
         <tr>
           <td>shape</td>
           <td>String</td>
-          <td>--</td>
+          <td>square</td>
           <td>N</td>
-          <td>按钮形状，可选值为 <code>round</code>、<code>circle</code> 或者不设</td>
+          <td>按钮形状，可选值为 <code>square</code>、<code>round</code>、<code>circle</code> 或者不设</td>
         </tr>
         <tr>
           <td>size</td>
@@ -146,9 +146,9 @@
         <tr>
           <td>shape</td>
           <td>String</td>
-          <td>--</td>
+          <td>square</td>
           <td>N</td>
-          <td>按钮组合形状，可选值为 <code>round</code> 或者不设</td>
+          <td>按钮组合形状，可选值为 <code>shape</code>、<code>round</code> 或者不设</td>
         </tr>
         <tr>
           <td>size</td>

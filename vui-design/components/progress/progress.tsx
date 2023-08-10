@@ -166,6 +166,10 @@ export default defineComponent({
         info = `${percentage.value}%`;
       }
 
+      if (isCircle && width.value <= 20) {
+        return info;
+      }
+
       return (
         <div class={classes.elInfo.value} style={styles.elInfo.value}>
           {info}

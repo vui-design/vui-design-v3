@@ -102,7 +102,7 @@ export default defineComponent({
     // 基础属性
     const type = computed(() => vuiButtonGroup?.type ?? props.type ?? "default");
     const ghost = computed(() => vuiButtonGroup?.ghost ?? props.ghost ?? false);
-    const shape = computed(() => vuiButtonGroup?.shape ?? props.shape);
+    const shape = computed(() => vuiButtonGroup?.shape ?? props.shape ?? "square");
     const size = computed(() => props.size ?? vuiButtonGroup?.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
     const disabled = computed(() => vuiForm?.disabled || vuiButtonGroup?.disabled || vuiInputGroup?.disabled || props.disabled);
 

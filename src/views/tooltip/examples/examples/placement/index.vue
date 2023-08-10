@@ -75,6 +75,8 @@
 </script>
 
 <style>
+  .example-tooltip-placement { width:324px; }
+
   .example-tooltip-placement .top { text-align:center; }
   .example-tooltip-placement .top .vui-button { width:60px; }
   .example-tooltip-placement .top .vui-button + .vui-button { margin-left:12px; }

@@ -27,7 +27,7 @@ export const createProps = () => {
     shape: {
       type: String as PropType<Shape>,
       validator: (shape: Shape) => shapes.includes(shape),
-      default: undefined
+      default: "square"
     },
     // 按钮占位图的尺寸
     size: {

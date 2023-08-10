@@ -29,7 +29,7 @@ export const createProps = () => {
     shape: {
       type: String as PropType<Shape>,
       validator: (shape: Shape) => shapes.includes(shape),
-      default: undefined
+      default: "square"
     },
     // 按钮尺寸
     size: {
