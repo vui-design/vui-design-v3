@@ -1,4 +1,4 @@
-import type { Ref, VNode } from "vue";
+import type { PropType, Ref, VNode } from "vue";
 import type { sizes } from "../constants";
 
 export type VueNode = VNode | string | number | boolean | null | undefined | void;
@@ -26,3 +26,54 @@ export type Size = typeof sizes[number];
 export type GetPopupContainer = string | HTMLElement;
 
 export type GetScrollContainer = () => Window | HTMLElement;
+
+export function createStringType<T extends string = string>(defaultValue?: T) {
+  return {
+    type: String as unknown as PropType<T>,
+    default: defaultValue as T
+  };
+};
+
+export function createBooleanType<T extends boolean>(defaultValue?: T) {
+  return {
+    type: Boolean as unknown as PropType<T>,
+    default: defaultValue as T
+  };
+};
+
+export function createArrayType<T extends any[]>(defaultValue?: T) {
+  return {
+    type: Array as unknown as PropType<T>,
+    default: defaultValue as T
+  };
+};
+
+export function createFunctionType<T = () => {}>(defaultValue?: T) {
+  return {
+    type: Function as PropType<T>,
+    default: defaultValue as T
+  };
+};
+
+export function createAnyType<T = any>(defaultValue?: T, required?: boolean) {
+  const type = {
+    validator: () => true,
+    default: defaultValue as T
+  } as unknown;
+
+  return required ? (type as {
+    type: PropType<T>;
+    default: T;
+    required: true;
+  }) : (type as {
+    type: PropType<T>;
+    default: T;
+  });
+};
+
+export function createSomeType<T>(types?: any[], defaultValue?: T) {
+  return types ? {
+    type: types as PropType<T>,
+    default: defaultValue as T
+  } : createAnyType<T>(defaultValue);
+};

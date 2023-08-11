@@ -539,6 +539,14 @@ export default {
       "api-trend-props": "Trend 属性",
       "guide-trend-when-to-use": "何时使用",
 
+      "example-watermark-basic-usage": "基本用法",
+      "example-watermark-multi-line": "多行水印",
+      "example-watermark-image": "图片水印",
+      "example-watermark-custom": "自定义配置",
+      "api-watermark-props": "Watermark 属性",
+      "api-watermark-font-props": "Watermark Font 字体设置",
+      "guide-watermark-when-to-use": "何时使用",
+
       "example-alert-basic-usage": "基本用法",
       "example-alert-type": "四种类型",
       "example-alert-description": "描述信息",
@@ -826,11 +834,6 @@ export default {
       "example-timeline-right": "右侧时间轴点",
 
       "example-tree-basic-usage": "基本用法",
-
-      "example-watermark-basic-usage": "基本用法",
-      "example-watermark-font": "字体",
-      "example-watermark-size": "画布尺寸",
-      "example-watermark-rotate": "旋转角度",
 
       "example-fullscreen-basic-usage": "基本用法"
     }

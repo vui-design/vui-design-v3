@@ -544,15 +544,15 @@ export default [
         },
         component: () => import("src/views/trend/index.vue")
       },
-  //     {
-  //       path: "/components/watermark",
-  //       name: "watermark",
-  //       meta: {
-  //         title: "Watermark",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/watermark/index.vue")
-  //     },
+      {
+        path: "/components/watermark",
+        name: "watermark",
+        meta: {
+          title: "Watermark",
+          group: "data-display"
+        },
+        component: () => import("src/views/watermark/index.vue")
+      },
       // 反馈
       {
         path: "/components/alert",
