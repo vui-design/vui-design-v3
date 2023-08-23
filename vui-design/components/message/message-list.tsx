@@ -8,7 +8,7 @@ export const createProps = () => {
     // 消息提示队列
     messages: {
       type: Array as PropType<MessageConfig[]>,
-      default: []
+      default: () => []
     },
     // 动画
     animation: {

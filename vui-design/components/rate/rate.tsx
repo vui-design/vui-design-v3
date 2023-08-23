@@ -38,7 +38,7 @@ export const createProps = () => {
     // 自定义每项的提示信息
     tooltips: {
       type: Array as PropType<string[]>,
-      default: []
+      default: () => []
     },
     // 是否允许半选
     allowHalf: {

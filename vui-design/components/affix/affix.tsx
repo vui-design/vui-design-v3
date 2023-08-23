@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
+import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { GetScrollContainer } from "../../types";
 import type { AffixState } from "./types";
 import { defineComponent, ref, computed, watch, watchEffect, onMounted } from "vue";
@@ -53,9 +53,9 @@ export default defineComponent({
     const containerRef = ref<HTMLDivElement>();
 
     // 状态
-    const containerStyle = ref();
-    const affixStyle = ref();
-    const affixed = ref(false);
+    const containerStyle = ref<CSSProperties>();
+    const affixStyle = ref<CSSProperties>();
+    const affixed = ref<boolean>(false);
 
     // 
     const offsetTop = computed(() => is.undefined(props.offsetTop) && is.undefined(props.offsetBottom) ? 0 : props.offsetTop);

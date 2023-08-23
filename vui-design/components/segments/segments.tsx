@@ -118,13 +118,13 @@ export default defineComponent({
     const handleResize = () => setThumbStyle();
 
     // onChange 事件回调
-    const handleChange = (activeKey: Key) => {
+    const handleChange = (key: Key) => {
       if (!isControlled.value) {
-        defaultActiveKey.value = activeKey;
+        defaultActiveKey.value = key;
       }
 
-      context.emit("update:activeKey", activeKey);
-      context.emit('change', activeKey);
+      context.emit("update:activeKey", key);
+      context.emit('change', key);
     };
 
     // 向后代组件注入当前组件

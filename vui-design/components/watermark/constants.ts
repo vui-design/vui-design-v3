@@ -1,0 +1,1 @@
+export const types: string[] = ["info", "warning", "success", "error"];

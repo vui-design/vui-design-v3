@@ -13,7 +13,7 @@ export const createProps = () => {
     // 通知提醒队列
     notifications: {
       type: Array as PropType<NotificationConfig[]>,
-      default: []
+      default: () => []
     },
     // 动画
     animation: {

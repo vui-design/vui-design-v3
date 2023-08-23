@@ -118,10 +118,10 @@ export default defineComponent({
       context.emit("error", e);
     };
 
-    // 组件挂载完成后执行
+    // 组件更新完成后执行
     onMounted(() => nextTick(() => response()));
 
-    // 组件更新后执行
+    // 组件更新完成之后执行
     onUpdated(() => nextTick(() => response()));
 
     // 计算 class 样式

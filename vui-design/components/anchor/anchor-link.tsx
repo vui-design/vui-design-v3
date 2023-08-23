@@ -60,12 +60,12 @@ export default defineComponent({
       });
     };
 
-    // 
+    // 组件挂载完成后执行
     onMounted(() => {
       vuiAnchor?.addLink(props.href as string);
     });
 
-    // 
+    // 组件卸载之前执行
     onBeforeUnmount(() => {
       vuiAnchor?.removeLink(props.href as string);
     });

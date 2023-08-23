@@ -130,7 +130,7 @@ export default defineComponent({
     // 组件挂载完成后执行
     onMounted(() => start());
 
-    // 组件更新后执行
+    // 组件更新完成后执行
     onUpdated(() => start());
 
     // 组件卸载之前执行

@@ -217,15 +217,15 @@ export default [
   //       },
   //       component: () => import("src/views/steps/index.vue")
   //     },
-  //     {
-  //       path: "/components/tabs",
-  //       name: "tabs",
-  //       meta: {
-  //         title: "Tabs",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/tabs/index.vue")
-  //     },
+      {
+        path: "/components/tabs",
+        name: "tabs",
+        meta: {
+          title: "Tabs",
+          group: "navigation"
+        },
+        component: () => import("src/views/tabs/index.vue")
+      },
   //     // 数据录入组件
   //     {
   //       path: "/components/cascader",
@@ -508,15 +508,15 @@ export default [
         },
         component: () => import("src/views/time/index.vue")
       },
-  //     {
-  //       path: "/components/timeline",
-  //       name: "timeline",
-  //       meta: {
-  //         title: "Timeline",
-  //         group: "data-display"
-  //       },
-  //       component: () => import("src/views/timeline/index.vue")
-  //     },
+      {
+        path: "/components/timeline",
+        name: "timeline",
+        meta: {
+          title: "Timeline",
+          group: "data-display"
+        },
+        component: () => import("src/views/timeline/index.vue")
+      },
       {
         path: "/components/tooltip",
         name: "tooltip",

@@ -1,11 +1,11 @@
 import type { PropType, Ref, VNode } from "vue";
 import type { sizes } from "../constants";
 
+export type Key = string | number | symbol;
+
 export type VueNode = VNode | string | number | boolean | null | undefined | void;
 
 export type VueNodeAtom = VueNode | VueNode[] | JSX.Element;
-
-export type Key = string | number | symbol;
 
 export type ElementOf<T> = T extends (infer E)[] ? E : T extends readonly (infer F)[] ? F : never;
 

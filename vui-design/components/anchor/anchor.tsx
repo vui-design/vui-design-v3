@@ -224,7 +224,7 @@ export default defineComponent({
       onClick: handleClick
     }));
 
-    // 
+    // 组件挂载完成后执行
     onMounted(() => nextTick(() => {
       const scrollContainer = props.getScrollContainer();
 
@@ -237,7 +237,7 @@ export default defineComponent({
       handleScroll();
     }));
 
-    // 
+    // 组件更新完成后执行
     onUpdated(() => nextTick(() => {
       if (scrollEvent.value) {
         const scrollContainer = props.getScrollContainer();
@@ -257,7 +257,7 @@ export default defineComponent({
       changeInkThumb();
     }));
 
-    // 
+    // 组件卸载之前执行
     onBeforeUnmount(() => {
       if (scrollEvent.value) {
         scrollEvent.value.remove();

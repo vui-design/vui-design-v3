@@ -1,0 +1,174 @@
+@import "./token.less";
+
+.@{vui-timeline} {
+  display:block;
+  color:@timeline-font-color;
+  font-size:@timeline-font-size;
+  line-height:@timeline-line-height;
+
+  &-item {
+    position:relative;
+    display:block;
+    padding-bottom:@timeline-item-padding-bottom;
+
+    &-tail {
+      position:absolute;
+      bottom:0;
+      display:block;
+      width:@timeline-item-tail-size;
+      height:calc(100% - floor(@timeline-font-size * @timeline-line-height));
+      background-color:@timeline-item-tail-color;
+    }
+
+    &-dot {
+      position:absolute;
+      top:(floor(@timeline-font-size * @timeline-line-height) - @timeline-item-dot-size) / 2;
+      display:block;
+      width:@timeline-item-dot-size;
+      height:@timeline-item-dot-size;
+      border:@timeline-item-dot-border-width solid transparent;
+      border-radius:50%;
+      background-color:@timeline-item-dot-background-color;
+      line-height:1;
+    }
+    &-dot-custom {
+      top:floor(@timeline-font-size * @timeline-line-height) / 2;
+      width:auto;
+      height:auto;
+      border:none;
+      border-radius:0;
+      background-color:transparent;
+    }
+    &-dot-gray {
+      border-color:@timeline-item-dot-gray-color;
+      color:@timeline-item-dot-gray-color;
+    }
+    &-dot-blue {
+      border-color:@timeline-item-dot-blue-color;
+      color:@timeline-item-dot-blue-color;
+    }
+    &-dot-yellow {
+      border-color:@timeline-item-dot-yellow-color;
+      color:@timeline-item-dot-yellow-color;
+    }
+    &-dot-green {
+      border-color:@timeline-item-dot-green-color;
+      color:@timeline-item-dot-green-color;
+    }
+    &-dot-red {
+      border-color:@timeline-item-dot-red-color;
+      color:@timeline-item-dot-red-color;
+    }
+
+    &-content {
+      position:relative;
+      display:block;
+      .writeBreak;
+    }
+  }
+
+  &-item:last-child {
+    padding-bottom:0;
+  }
+  &-item:last-child &-item-tail {
+    display:none;
+  }
+
+  // left
+  &-left &-item {
+    &-tail {
+      left:(@timeline-item-dot-size - @timeline-item-tail-size) / 2;
+    }
+
+    &-dot { 
+      left:0;
+    }
+    &-dot-custom {
+      left:@timeline-item-dot-size / 2;
+      transform:translate(-50%,-50%);
+    }
+
+    &-content {
+      padding-left:@timeline-item-content-padding;
+      text-align:left;
+    }
+  }
+
+  // right
+  &-right &-item {
+    &-tail {
+      right:(@timeline-item-dot-size - @timeline-item-tail-size) / 2;
+    }
+
+    &-dot {
+      right:0;
+    }
+    &-dot-custom {
+      right:@timeline-item-dot-size / 2;
+      transform:translate(50%,-50%);
+    }
+
+    &-content {
+      padding-right:@timeline-item-content-padding;
+      text-align:right;
+    }
+  }
+
+  // alternate
+  &-alternate &-item:nth-of-type(odd) &-item-tail {
+    left:50%;
+    transform:translate(-50%,0);
+  }
+
+  &-alternate &-item:nth-of-type(odd) &-item-dot {
+    left:50%;
+    transform:translate(-50%,0);
+  }
+  &-alternate &-item:nth-of-type(odd) &-item-dot-custom {
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  &-alternate &-item:nth-of-type(odd) &-item-content {
+    margin-left:50%;
+    padding-left:@timeline-item-content-padding;
+    text-align:left;
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-tail {
+    right:50%;
+    transform:translate(50%,0);
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-dot {
+    right:50%;
+    transform:translate(50%,0);
+  }
+  &-alternate &-item:nth-of-type(even) &-item-dot-custom {
+    right:50%;
+    transform:translate(50%,-50%);
+  }
+
+  &-alternate &-item:nth-of-type(even) &-item-content {
+    margin-right:50%;
+    padding-right:@timeline-item-content-padding;
+    text-align:right;
+  }
+
+  // pending
+  &-pending:not(&-reverse) &-item:nth-last-child(2) {
+    padding-bottom:@timeline-item-padding-bottom * 2;
+  }
+  &-pending:not(&-reverse) &-item:nth-last-child(2) &-item-tail {
+    background:linear-gradient(to bottom, @timeline-item-tail-color, @timeline-item-tail-color 3px, transparent 3px, transparent);
+    background-size:100% 8px;
+  }
+
+  &-pending&-reverse &-item:nth-child(1) {
+    padding-bottom:@timeline-item-padding-bottom * 2;
+  }
+  &-pending&-reverse &-item:nth-child(1) &-item-tail {
+    background:linear-gradient(to bottom, @timeline-item-tail-color, @timeline-item-tail-color 3px, transparent 3px, transparent);
+    background-size:100% 8px;
+  }
+}

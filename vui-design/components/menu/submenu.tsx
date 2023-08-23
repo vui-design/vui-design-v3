@@ -46,7 +46,7 @@ export const createProps = () => {
     // 弹出动画
     animations: {
       type: Array as PropType<string[]>,
-      default: ["vui-menu-submenu-scale", "vui-menu-submenu-collapse", "vui-dropdown-menu-submenu-scale", "vui-dropdown-menu-submenu-collapse"]
+      default: () => ["vui-menu-submenu-scale", "vui-menu-submenu-collapse", "vui-dropdown-menu-submenu-scale", "vui-dropdown-menu-submenu-collapse"]
     },
     // 是否禁用
     disabled: {

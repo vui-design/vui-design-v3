@@ -57,12 +57,12 @@ export const createProps = () => {
     // 默认展开的 Submenu 子菜单 key 值数组
     defaultOpenKeys: {
       type: Array as PropType<Key[]>,
-      default: []
+      default: () => []
     },
     // 当前展开的 Submenu 子菜单 key 值数组
     openKeys: {
       type: Array as PropType<Key[]>,
-      default: []
+      default: () => []
     },
     // 默认选中的 MenuItem 菜单项 key 值数组
     defaultSelectedKey: {

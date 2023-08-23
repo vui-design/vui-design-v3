@@ -17,7 +17,7 @@ export const createProps = () => {
     // 对话框队列
     modals: {
       type: Array as PropType<ModalConfig[]>,
-      default: []
+      default: () => []
     },
     // 打开前事件回调
     onBeforeOpen: {

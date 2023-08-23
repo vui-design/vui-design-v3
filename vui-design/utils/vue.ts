@@ -42,7 +42,14 @@ export const getSlot = (slots: Slots, prop: string = "default") => {
 };
 
 export const getSlotProp = (slots: Slots, props: Data, prop: string = "default") => {
-  return slots[prop]?.() ?? props[prop];
+  if (prop in slots) {
+    return slots[prop]();
+  }
+  else {
+    const target = props[prop];
+
+    return isFunction(target) ? target() : target;
+  }
 };
 
 export const flatten = (children: VNode | VNode[] = [], ignoreEmptyElement = true) => {

@@ -80,7 +80,7 @@ export default defineComponent({
     // 展开状态
     const active = computed(() => {
       if (vuiCollapse?.accordion) {
-        return key.value === vuiCollapse.activeKeys;
+        return key.value === vuiCollapse?.activeKeys;
       }
       else {
         return (vuiCollapse?.activeKeys as Key[]).includes(key.value);

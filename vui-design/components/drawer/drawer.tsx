@@ -143,7 +143,7 @@ export const createProps = () => {
     // 抽屉的打开/关闭动画
     animations: {
       type: Array as PropType<Array<string>>,
-      default: ["vui-drawer-backdrop-fade", "vui-drawer-slide"]
+      default: () => ["vui-drawer-backdrop-fade", "vui-drawer-slide"]
     },
     // 自定义抽屉样式类名
     class: {

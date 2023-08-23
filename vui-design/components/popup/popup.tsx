@@ -520,7 +520,7 @@ export default defineComponent({
       }
     });
 
-    // 组件更新完成之后执行
+    // 组件更新完成后执行
     onUpdated(() => {
       if (visible.value) {
         changePopupStyle();

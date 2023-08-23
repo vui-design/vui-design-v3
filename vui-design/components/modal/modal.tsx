@@ -156,7 +156,7 @@ export const createProps = () => {
     // 对话框的打开/关闭动画
     animations: {
       type: Array as PropType<Array<string>>,
-      default: ["vui-modal-backdrop-fade", "vui-modal-zoom"]
+      default: () => ["vui-modal-backdrop-fade", "vui-modal-zoom"]
     },
     // 自定义对话框样式类名
     class: {
