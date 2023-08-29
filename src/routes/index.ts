@@ -208,15 +208,15 @@ export default [
   //       },
   //       component: () => import("src/views/pagination/index.vue")
   //     },
-  //     {
-  //       path: "/components/steps",
-  //       name: "steps",
-  //       meta: {
-  //         title: "Steps",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/steps/index.vue")
-  //     },
+      {
+        path: "/components/steps",
+        name: "steps",
+        meta: {
+          title: "Steps",
+          group: "navigation"
+        },
+        component: () => import("src/views/steps/index.vue")
+      },
       {
         path: "/components/tabs",
         name: "tabs",

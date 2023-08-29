@@ -496,7 +496,7 @@ export default defineComponent({
         <div class={classes.elBody.value} style={props.bodyStyle}>
           <div class={classes.elBodyContent.value}>
             {
-              panels?.map((panel, panelIndex) => {
+              panels.map((panel, panelIndex) => {
                 return cloneVNode(panel, {
                   index: panelIndex
                 });

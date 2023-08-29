@@ -29,8 +29,7 @@ import Dropdown, { DropdownButton } from "./components/dropdown";
 import Menu, { Submenu, MenuItem, MenuItemGroup, MenuItemDivider } from "./components/menu";
 import PageHeader from "./components/page-header";
 import Pagination from "./components/pagination";
-import Steps from "./components/steps";
-import Step from "./components/step";
+import Steps, { Step } from "./components/steps";
 import Tabs, { TabPanel } from "./components/tabs";
 // Data Entry
 import Cascader from "./components/cascader";
