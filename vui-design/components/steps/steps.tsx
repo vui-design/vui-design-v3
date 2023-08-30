@@ -77,7 +77,7 @@ export default defineComponent({
     // 
     const dot = computed(() => context.slots?.dot ?? props.dot);
 
-    // 用于更新内嵌的 Step 集合
+    // 用于更新子组件 Step 集合
     const steps = ref<Step[]>([]);
     const addStep = (step: Step) => {
       const index = steps.value.findIndex(target => target.key === step.key);

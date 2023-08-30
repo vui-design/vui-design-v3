@@ -21,6 +21,7 @@
       position:relative;
       display:block;
       box-sizing:border-box;
+      max-width:100%;
       transition:all @transition-duration @transition-timing-function;
 
       &-clickable {
@@ -157,6 +158,7 @@
     display:flex;
     justify-content:center;
     align-items:stretch;
+    width:0;
   }
   &-navigation&-horizontal &-item-icon {
     position:absolute;
@@ -181,9 +183,9 @@
     bottom:0;
     left:50%;
     display:block;
+    box-sizing:border-box;
     width:0;
     height:2px;
-    background-color:transparent;
     transform:translateX(-50%);
     transition:all @transition-duration @transition-timing-function;
   }
@@ -192,7 +194,7 @@
     border-width:1px;
     border-style:solid;
     border-color:rgba(0,0,0,0.25) rgba(0,0,0,0.25) transparent transparent;
-    transform:translateX(50%) rotate(45deg);
+    transform:translateX(25%) rotate(45deg);
   }
 
   &-vertical {
@@ -221,7 +223,9 @@
   }
 
   &-dot&-vertical &-item-dot {
-    position:absolute; top:@steps-item-icon-size-md / 2 - @steps-item-dot-size-md / 2; left:0;
+    position:absolute;
+    top:@steps-item-icon-size-md / 2 - @steps-item-dot-size-md / 2;
+    left:0;
   }
   &-dot&-vertical &-item-title {
     text-align:left;
@@ -257,9 +261,9 @@
     right:0;
     top:50%;
     display:block;
+    box-sizing:border-box;
     width:2px;
     height:0;
-    background-color:transparent;
     transform:translateY(-50%);
     transition:all @transition-duration @transition-timing-function;
   }
@@ -377,7 +381,7 @@
     padding-bottom:@padding-sm;
   }
   &-navigation&-vertical&-small &-item::after {
-    bottom:-4px;
+    top:calc(100% + @margin-sm / 2 - 6px);
     width:8px;
     height:8px;
   }
@@ -487,7 +491,7 @@
     padding-bottom:@padding-md;
   }
   &-navigation&-vertical&-medium &-item::after {
-    bottom:-5px;
+    top:calc(100% + @margin-md / 2 - 8px);
     width:10px;
     height:10px;
   }
@@ -597,7 +601,7 @@
     padding-bottom:@padding-lg;
   }
   &-navigation&-vertical&-large &-item::after {
-    bottom:-6px;
+    top:calc(100% + @margin-lg / 2 - 9px);
     width:12px;
     height:12px;
   }

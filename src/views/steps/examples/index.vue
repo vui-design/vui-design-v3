@@ -7,11 +7,6 @@
     <vui-example-icon />
     <vui-example-dot />
     <vui-example-customized-dot />
-
-
-
-
-
     <vui-example-navigation />
     <vui-example-clickable />
     <vui-example-control />

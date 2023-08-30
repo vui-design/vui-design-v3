@@ -1,7 +1,7 @@
 const code =
 `<template>
   <div class="example-steps-control">
-    <vui-steps v-bind:step="step">
+    <vui-steps type="navigation" v-bind:step="step" style="box-shadow: 0 -1px 0 #e6e6e6 inset;">
       <vui-step v-for="(item, index) in steps" v-bind:key="index" v-bind:title="item.title" v-bind:description="item.description" />
     </vui-steps>
     <div class="example-steps-control-content">
@@ -51,7 +51,7 @@ const code =
 </script>
 
 <style>
-  .example-steps-control-content { border:1px dashed #e0e0e0; border-radius:2px; background-color:#fafafa; margin-top:24px; padding:48px; }
+  .example-steps-control-content { border-radius:2px; background-color:#fafafa; margin-top:24px; padding:48px; }
   .example-steps-control-content p { text-align:center; }
   .example-steps-control-content p + p { margin-top:48px; }
   .example-steps-control-content .vui-button + .vui-button { margin-left:16px; }

@@ -29,7 +29,7 @@ export const createProps = () => {
       type: Number as PropType<number>,
       default: 0
     },
-    // 步骤图标类型/图标
+    // 自定义步骤图标类型/图标
     icon: {
       type: [String, Function] as PropType<string | RenderFunction>,
       default: undefined
@@ -84,7 +84,7 @@ export default defineComponent({
       } as Step;
     };
 
-    // 
+    // onClick 事件回调
     const handleClick = (e: MouseEvent) => {
       if (props.disabled) {
         return;
@@ -123,13 +123,13 @@ export default defineComponent({
     classes.elContent = computed(() => {
       return {
         [`${classPrefix.value}-content`]: true,
-        [`${classPrefix.value}-content-clickable`]: vuiSteps?.clickable && !vuiSteps?.changeOnTitle
+        [`${classPrefix.value}-content-clickable`]: vuiSteps?.clickable && !vuiSteps?.changeOnTitle && !props.disabled
       };
     });
     classes.elTitle = computed(() => {
       return {
         [`${classPrefix.value}-title`]: true,
-        [`${classPrefix.value}-title-clickable`]: vuiSteps?.clickable && vuiSteps?.changeOnTitle
+        [`${classPrefix.value}-title-clickable`]: vuiSteps?.clickable && vuiSteps?.changeOnTitle && !props.disabled
       };
     });
     classes.elDot = computed(() => `${classPrefix.value}-dot`);
