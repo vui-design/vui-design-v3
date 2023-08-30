@@ -1,26 +1,22 @@
 const code =
 `<template>
   <div class="example-space-gutter">
-    <vui-radio-group v-model:value="gutter">
-      <vui-radio label="Small" value="small" />
-      <vui-radio label="Medium" value="medium" />
-      <vui-radio label="Large" value="large" />
-    </vui-radio-group>
-    <section>
-      <vui-space divider v-bind:gutter="gutter">
-        <a href="javascript:;">Link</a>
-        <a href="javascript:;">Link</a>
-        <a href="javascript:;">Link</a>
-      </vui-space>
-    </section>
-    <section>
-      <vui-space v-bind:gutter="gutter">
-        <vui-button type="primary">Primary</vui-button>
-        <vui-button>Default</vui-button>
-        <vui-button type="dashed">Dashed</vui-button>
-        <vui-button type="text">Text</vui-button>
-      </vui-space>
-    </section>
+    <vui-segments v-model:activeKey="gutter">
+      <vui-segments-item key="small">Small</vui-segments-item>
+      <vui-segments-item key="medium">Medium</vui-segments-item>
+      <vui-segments-item key="large">Large</vui-segments-item>
+    </vui-segments>
+    <vui-space block divider v-bind:gutter="gutter">
+      <a href="javascript:;">Link</a>
+      <a href="javascript:;">Link</a>
+      <a href="javascript:;">Link</a>
+    </vui-space>
+    <vui-space block v-bind:gutter="gutter">
+      <vui-button type="primary">Primary</vui-button>
+      <vui-button>Default</vui-button>
+      <vui-button type="dashed">Dashed</vui-button>
+      <vui-button type="text">Text</vui-button>
+    </vui-space>
   </div>
 </template>
 
@@ -39,7 +35,8 @@ const code =
 </script>
 
 <style>
-  .example-space-gutter section { margin-top:32px; }
+  .example-space-gutter .vui-space { margin-top:16px; }
+  .example-space-gutter .vui-segments + .vui-space { margin-top:32px; }
 </style>
 `;
 

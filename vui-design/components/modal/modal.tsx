@@ -35,7 +35,7 @@ export const createProps = () => {
     // 是否可见
     visible: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 标题左侧的图标类型/图标
     icon: {

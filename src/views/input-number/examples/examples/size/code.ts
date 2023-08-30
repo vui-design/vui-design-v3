@@ -1,16 +1,13 @@
 const code =
 `<template>
   <div class="example-input-number-size">
-    <section>
-      <vui-radio-group type="button" v-model:value="size">
-        <vui-radio value="small" label="Small" />
-        <vui-radio value="medium" label="Medium" />
-        <vui-radio value="large" label="Large" />
-      </vui-radio-group>
-    </section>
-    <section>
-      <vui-input-number v-model:value="value" v-bind:size="size" />
-    </section>
+    <vui-segments v-model:activeKey="size">
+      <vui-segments-item key="small">Small</vui-segments-item>
+      <vui-segments-item key="medium">Medium</vui-segments-item>
+      <vui-segments-item key="large">Large</vui-segments-item>
+    </vui-segments>
+    <br />
+    <vui-input-number v-model:value="value" v-bind:size="size" />
   </div>
 </template>
 
@@ -31,7 +28,7 @@ const code =
 </script>
 
 <style>
-  .example-input-number-size section + section { margin-top:24px; }
+  .example-input-number-size .vui-input-number { margin-top:32px; }
 </style>
 `;
 

@@ -9,7 +9,7 @@ import noop from "../../utils/noop";
 import getElement from "../../utils/getElement";
 import getTeleport from "../../utils/getTeleport";
 
-let ModalMangerInstance: ModalManger | undefined;
+let ModalManagerInstance: ModalManger | undefined;
 
 class ModalManger {
   private readonly modalIds: Set<string | number>;
@@ -66,7 +66,7 @@ class ModalManger {
 
     return {
       update: (next: ModalConfig) => this.update(id, next),
-      close: () => this.update(id, { defaultVisible: false })
+      close: () => this.update(id, { visible: false })
     };
   };
 
@@ -94,7 +94,7 @@ class ModalManger {
 
     return {
       update: (next: ModalConfig) => this.update(id, next),
-      close: () => this.update(id, { defaultVisible: false })
+      close: () => this.update(id, { visible: false })
     };
   };
 
@@ -112,7 +112,7 @@ class ModalManger {
       this.container = null;
       this.teleport = null;
 
-      ModalMangerInstance = undefined;
+      ModalManagerInstance = undefined;
     }
   };
 };
@@ -137,11 +137,11 @@ Modal.open = function(
     config.showOkButton = true;
   }
 
-  if (!ModalMangerInstance) {
-    ModalMangerInstance = new ModalManger(config);
+  if (!ModalManagerInstance) {
+    ModalManagerInstance = new ModalManger(config);
   }
 
-  return ModalMangerInstance.add(config);
+  return ModalManagerInstance.add(config);
 };
 
 types.forEach((type: Type) => {

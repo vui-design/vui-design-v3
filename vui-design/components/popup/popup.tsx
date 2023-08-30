@@ -38,7 +38,7 @@ export const createProps = () => {
     // 弹出框是否可见（受控模式）
     visible: {
       type: Boolean as PropType<boolean>,
-      default: false
+      default: undefined
     },
     // 触发方式
     trigger: {

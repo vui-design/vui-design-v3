@@ -85,7 +85,7 @@ export default defineComponent({
               const attributes = {
                 key: modal.id,
                 id: modal.id,
-                defaultVisible: modal.defaultVisible ?? true,
+                visible: modal.visible ?? true,
                 showCancelButton: modal.showCancelButton,
                 cancelButtonProps: modal.cancelButtonProps,
                 cancelText: modal.cancelText,

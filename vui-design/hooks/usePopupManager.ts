@@ -57,7 +57,7 @@ export default function usePopupManager(
     visible,
     runOnMounted,
   }: {
-    visible?: Ref<boolean>,
+    visible?: Ref<boolean | undefined>,
     runOnMounted?: boolean
   } = {}
 ) {

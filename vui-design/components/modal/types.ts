@@ -9,7 +9,7 @@ export interface ModalConfig {
   classPrefix?: string;
   id?: string | number;
   type?: Type;
-  defaultVisible?: boolean;
+  visible?: boolean;
   icon?: string | RenderFunction;
   title?: string | RenderFunction;
   description?: string | RenderFunction;

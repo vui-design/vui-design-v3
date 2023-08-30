@@ -1,11 +1,11 @@
 const code =
 `<template>
   <div class="example-descriptions-size">
-    <vui-radio-group v-model:value="size">
-      <vui-radio value="small" label="Small" />
-      <vui-radio value="medium" label="Medium" />
-      <vui-radio value="large" label="Large" />
-    </vui-radio-group>
+    <vui-segments v-model:activeKey="size">
+      <vui-segments-item key="small">Small</vui-segments-item>
+      <vui-segments-item key="medium">Medium</vui-segments-item>
+      <vui-segments-item key="large">Large</vui-segments-item>
+    </vui-segments>
     <vui-descriptions v-bind:size="size" title="Custom Size">
       <vui-description label="Product">Cloud Database</vui-description>
       <vui-description label="Billing">Prepaid</vui-description>

@@ -1,11 +1,11 @@
 const code =
 `<template>
   <div>
-    <vui-radio-group type="button" v-model:value="size">
-      <vui-radio value="small" label="Small" />
-      <vui-radio value="medium" label="Medium" />
-      <vui-radio value="large" label="Large" />
-    </vui-radio-group>
+    <vui-segments v-model:activeKey="size">
+      <vui-segments-item key="small">Small</vui-segments-item>
+      <vui-segments-item key="medium">Medium</vui-segments-item>
+      <vui-segments-item key="large">Large</vui-segments-item>
+    </vui-segments>
     <vui-divider v-bind:gutter="32" />
     <vui-steps v-bind:size="size" v-bind:step="1">
       <vui-step title="Finished" description="This is a description." />

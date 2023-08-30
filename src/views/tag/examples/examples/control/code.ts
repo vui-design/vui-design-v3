@@ -2,7 +2,7 @@ const code =
 `<template>
   <div class="example-tag-control">
     <template v-for="(tag, tagIndex) in tags" v-bind:key="tag">
-      <vui-tooltip v-if="tag.length > 20" v-bind:content="tag">
+      <vui-tooltip v-if="tag.length > 20" color="light" v-bind:content="tag">
         <vui-tag v-bind:closable="tagIndex !== 0" v-on:close="handleRemove(tag)">
           {{tag.slice(0, 20)}}...
         </vui-tag>

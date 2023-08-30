@@ -9,7 +9,7 @@ export default function useTeleportContainer({
   documentContainer
 }: {
   getPopupContainer: Ref<string | HTMLElement | null | undefined>;
-  visible: Ref<boolean>;
+  visible: Ref<boolean | undefined>;
   defaultContainer?: string;
   documentContainer?: boolean;
 }) {
