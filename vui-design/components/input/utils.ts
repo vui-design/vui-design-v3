@@ -53,7 +53,7 @@ export const getPrecision = (
   }
 
   if (b > precision) {
-    console.warn("[Vui Design][InputNumber]: the \"precision\" should not be less than the decimal places of \"step\"!");
+    console.warn("[Vui Design][InputNumber]: The \"precision\" should not be less than the decimal places of \"step\"!");
   }
 
   return precision;

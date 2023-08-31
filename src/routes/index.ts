@@ -663,15 +663,15 @@ export default [
         },
         component: () => import("src/views/backtop/index.vue")
       },
-  //     {
-  //       path: "/components/fullscreen",
-  //       name: "fullscreen",
-  //       meta: {
-  //         title: "Fullscreen",
-  //         group: "other"
-  //       },
-  //       component: () => import("src/views/fullscreen/index.vue")
-  //     }
+      {
+        path: "/components/fullscreen",
+        name: "fullscreen",
+        meta: {
+          title: "Fullscreen",
+          group: "other"
+        },
+        component: () => import("src/views/fullscreen/index.vue")
+      }
     ]
   }
 ];

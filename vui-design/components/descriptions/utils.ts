@@ -85,7 +85,7 @@ export const getCol = (
 
   if (span > spans) {
     col.span = spans;
-    console.warn("[Vui Design][Descriptions]: sum of column \"span\" in a line not match \"columns\" of descriptions.");
+    console.warn("[Vui Design][Descriptions]: Sum of column \"span\" in a line not match \"columns\" of descriptions.");
   }
 
   return col;

@@ -728,6 +728,11 @@ export default {
       "api-backtop-events": "Backtop 事件",
       "guide-backtop-when-to-use": "何时使用",
 
+      "example-fullscreen-basic-usage": "基本用法",
+      "api-fullscreen-props": "Fullscreen 属性",
+      "api-fullscreen-events": "Fullscreen 事件",
+      "guide-fullscreen-when-to-use": "何时使用",
+
 
 
 
@@ -843,9 +848,7 @@ export default {
       "example-table-loading": "加载中",
       "example-table-export": "导出",
 
-      "example-tree-basic-usage": "基本用法",
-
-      "example-fullscreen-basic-usage": "基本用法"
+      "example-tree-basic-usage": "基本用法"
     }
   }
 };
