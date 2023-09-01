@@ -655,6 +655,15 @@ export default [
         component: () => import("src/views/affix/index.vue")
       },
       {
+        path: "/components/authorizer",
+        name: "authorizer",
+        meta: {
+          title: "Authorizer",
+          group: "other"
+        },
+        component: () => import("src/views/authorizer/index.vue")
+      },
+      {
         path: "/components/backtop",
         name: "backtop",
         meta: {

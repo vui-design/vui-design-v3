@@ -27,6 +27,8 @@ export type GetPopupContainer = string | HTMLElement;
 
 export type GetScrollContainer = () => Window | HTMLElement;
 
+export type Authorize = (value: string | string[] | undefined, attrs: Data) => boolean;
+
 export function createStringType<T extends string = string>(defaultValue?: T) {
   return {
     type: String as unknown as PropType<T>,

@@ -85,12 +85,11 @@ import Skeleton, { SkeletonAvatar, SkeletonTitle, SkeletonParagraph, SkeletonInp
 import Spin from "./components/spin";
 // Other
 import Affix from "./components/affix";
+import Authorizer from "./components/authorizer";
 import Backtop from "./components/backtop";
-import Collapser from "./components/collapser";
 import Fullscreen from "./components/fullscreen";
 import Popup from "./components/popup";
 import ResizeObserver from "./components/resize-observer";
-import Loading from "./components/loading";
 
 const components = [
   // General
@@ -203,8 +202,8 @@ const components = [
   Spin,
   // Other
   Affix,
+  Authorizer,
   Backtop,
-  Collapser,
   Fullscreen,
   Popup,
   ResizeObserver
@@ -329,12 +328,11 @@ export {
   Spin,
   // Other
   Affix,
+  Authorizer,
   Backtop,
-  Collapser,
   Fullscreen,
   Popup,
-  ResizeObserver,
-  Loading
+  ResizeObserver
 };
 
 export default {

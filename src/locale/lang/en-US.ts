@@ -722,6 +722,11 @@ export default {
       "api-affix-events": "Affix 事件",
       "guide-affix-when-to-use": "何时使用",
 
+      "example-authorizer-basic-usage": "基本用法",
+      "example-authorizer-toggle": "切换访问权限",
+      "api-authorizer-props": "Authorizer 属性",
+      "guide-authorizer-how-to-use": "如何使用",
+
       "example-backtop-basic-usage": "基本用法",
       "example-backtop-custom": "自定义样式",
       "api-backtop-props": "Backtop 属性",

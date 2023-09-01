@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
-import type { Size, GetPopupContainer, GetScrollContainer } from "../../types";
+import type { Size, GetPopupContainer, GetScrollContainer, Authorize } from "../../types";
 import type { Lang } from "../../locale/types";
 import { defineComponent, provide, toRefs, reactive } from "vue";
 import { classPrefix, sizes } from "../../constants";
@@ -23,15 +23,20 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // Affix 所属滚动容器，值为一个返回对应 DOM 元素的函数
+    // Affix 固钉组件的所属滚动容器，值为一个返回对应 DOM 元素的函数
     getPopupContainer: {
       type: [String, HTMLElement] as PropType<GetPopupContainer>,
       default: "body"
     },
-    // Affix 所属滚动容器，值为一个返回对应 DOM 元素的函数
+    // Affix 固钉组件的所属滚动容器，值为一个返回对应 DOM 元素的函数
     getScrollContainer: {
       type: Function as PropType<GetScrollContainer>,
       default: () => typeof window === "undefined" ? undefined : window
+    },
+    // Authorizer 权限校验组件的全局自定义校验函数
+    authorize: {
+      type: Function as PropType<Authorize>,
+      default: undefined
     },
     // 配置语言包
     locale: {
@@ -48,7 +53,7 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 解构属性
-    const { classPrefix, size, reverseTrendColor, getPopupContainer, getScrollContainer, locale } = toRefs(props);
+    const { classPrefix, size, reverseTrendColor, getPopupContainer, getScrollContainer, authorize, locale } = toRefs(props);
 
     // 向后代组件注入当前组件
     provide(ConfigProviderInjectionKey, reactive({
@@ -57,6 +62,7 @@ export default defineComponent({
       reverseTrendColor,
       getPopupContainer,
       getScrollContainer,
+      authorize,
       locale
     }));
 

@@ -1,4 +1,4 @@
-import type { Size, GetPopupContainer, GetScrollContainer } from "../../types";
+import type { Size, GetPopupContainer, GetScrollContainer, Authorize } from "../../types";
 import type { Lang } from "../../locale/types";
 
 export interface ConfigProvider {
@@ -7,5 +7,6 @@ export interface ConfigProvider {
   reverseTrendColor?: boolean;
   getPopupContainer?: GetPopupContainer;
   getScrollContainer?: GetScrollContainer;
+  authorize?: Authorize;
   locale?: Lang;
 };
