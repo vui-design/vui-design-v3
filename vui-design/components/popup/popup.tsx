@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType, Ref, ComputedRef, HTMLAttributes, CSSP
 import type { Trigger, Placement, Position } from "./types";
 import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick, onMounted, onUpdated, onBeforeUnmount, onDeactivated } from "vue";
 import { on, off } from "../../utils/dom";
-import { getValidElements, mergeFirstChild } from "../../utils/vue";
+import { getChildren, mergeFirstChild } from "../../utils/vue";
 import { triggers, placements, listeners } from "./constants";
 import { PopupInjectionKey } from "./context";
 import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollElements } from "./utils";
@@ -618,8 +618,8 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const title = getValidElements(context.slots.title?.());
-      const content = getValidElements(context.slots.content?.());
+      const title = getChildren(context.slots.title?.());
+      const content = getChildren(context.slots.content?.());
 
       children.value = context.slots.default?.() ?? [];
 

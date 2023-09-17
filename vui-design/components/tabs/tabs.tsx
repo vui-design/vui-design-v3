@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType, RenderFunction, ComputedRef, HTMLAttri
 import type { Key, Size } from "../../types";
 import type { Type, Tab } from "./types";
 import { defineComponent, cloneVNode, provide, toRefs, ref, reactive, computed, watch, nextTick } from "vue";
-import { getSlotProp } from "../../utils/vue";
+import { getSlotProp, getChildrenByNames } from "../../utils/vue";
 import { sizes, keyCodes } from "../../constants";
 import { types } from "./constants";
 import { TabsInjectionKey } from "./context";
@@ -11,7 +11,6 @@ import VuiIcon from "../icon";
 import VuiTabsNav from "./tab-nav";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useControlled from "../../hooks/useControlled";
-import utils from "./utils";
 
 export const createProps = () => {
   return {
@@ -490,7 +489,7 @@ export default defineComponent({
 
     // 获取 body 内容
     const getBody = () => {
-      const panels = utils.getChildren(context.slots.default?.());
+      const panels = getChildrenByNames(context.slots.default?.(), "vui-tab-panel");
 
       return (
         <div class={classes.elBody.value} style={props.bodyStyle}>

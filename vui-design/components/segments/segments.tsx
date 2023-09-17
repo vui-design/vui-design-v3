@@ -97,7 +97,7 @@ export default defineComponent({
     };
 
     // 非受控模式下，若未设置 defaultActiveKey，则默认选中第一个分段
-    watch(keys.value, newKeys => {
+    watch(keys, newKeys => {
       if (!isControlled.value && !is.existy(defaultActiveKey.value)) {
         defaultActiveKey.value = newKeys[0];
       }

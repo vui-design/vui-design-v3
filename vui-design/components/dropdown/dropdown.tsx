@@ -65,7 +65,7 @@ export const createProps = () => {
       type: Number as PropType<number>,
       default: 100
     },
-    // 是否在关闭时卸载提示框
+    // 是否在关闭时卸载菜单
     destroyOnClose: {
       type: Boolean as PropType<boolean>,
       default: false

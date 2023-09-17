@@ -17,10 +17,6 @@ export type DefaultFactory<T> = (props: Data) => T | null | undefined;
 
 export type MaybeRef<T> = T | Ref<T>;
 
-export interface Slots {
-  value?: VNode[];
-};
-
 export type Size = typeof sizes[number];
 
 export type GetPopupContainer = string | HTMLElement;

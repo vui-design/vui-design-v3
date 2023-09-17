@@ -1,7 +1,7 @@
-import type { VNode, VNodeTypes, Component } from "vue";
-import type { Slots, Data } from "../types";
+import type { Component, Slots, VNode, VNodeTypes } from "vue";
+import type { Data } from "../types";
 import { Fragment, Comment, Text, isVNode, cloneVNode } from "vue";
-import { isFunction, isArray, isEffective } from "./is";
+import is from "./is";
 
 export enum ShapeFlags {
   ELEMENT = 1,
@@ -17,24 +17,28 @@ export enum ShapeFlags {
   COMPONENT_KEPT_ALIVE = 1 << 9
 };
 
-export const isText = (vnode: VNode, children: VNode["children"]): children is string => {
-  return Boolean(vnode && vnode.shapeFlag & ShapeFlags.TEXT_CHILDREN);
-};
-
 export const isElement = (vnode: VNode) => {
   return Boolean(vnode && vnode.shapeFlag & ShapeFlags.ELEMENT);
 };
 
 export const isEmptyElement = (element: any): boolean => {
-  return (element && ((element.type === Fragment && element.children.length === 0) || element.type === Comment || (element.type === Text && element.children.trim() === "")));
+  return (element && (((element.type === Fragment || element.type === "template") && element.children.length === 0) || element.type === Comment || (element.type === Text && element.children.trim() === "")));
 };
 
 export const isComponent = (vnode: VNode, type?: VNodeTypes): type is Component => {
   return Boolean(vnode && vnode.shapeFlag & ShapeFlags.COMPONENT);
 };
 
+export const isTextChildren = (vnode: VNode, children: VNode["children"]): children is string => {
+  return Boolean(vnode && vnode.shapeFlag & ShapeFlags.TEXT_CHILDREN);
+};
+
 export const isArrayChildren = (vnode: VNode, children: VNode["children"]): children is VNode[] => {
   return Boolean(vnode && vnode.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
+};
+
+export const isSlotsChildren = (vnode: VNode, children: VNode["children"]): children is Slots => {
+  return Boolean(vnode && vnode.shapeFlag & ShapeFlags.SLOTS_CHILDREN);
 };
 
 export const getSlot = (slots: Slots, prop: string = "default") => {
@@ -43,58 +47,111 @@ export const getSlot = (slots: Slots, prop: string = "default") => {
 
 export const getSlotProp = (slots: Slots, props: Data, prop: string = "default") => {
   if (prop in slots) {
-    return slots[prop]();
+    return slots[prop]?.();
   }
   else {
     const target = props[prop];
 
-    return isFunction(target) ? target() : target;
+    return is.function(target) ? target() : target;
   }
 };
 
-export const flatten = (children: VNode | VNode[] = [], ignoreEmptyElement = true) => {
-  const kids = isArray(children) ? children : [children];
-  const result: VNode[] = [];
+export const flatten = (vnodes: VNode | VNode[] = [], ignoreEmptyElement = true) => {
+  const children: VNode[] = [];
 
-  kids.forEach((kid: VNode | VNode[]) => {
-    if (isArray(kid)) {
-      result.push(...flatten(kid, ignoreEmptyElement));
+  if (!is.array(vnodes)) {
+    vnodes = [vnodes];
+  }
+
+  vnodes.forEach((vnode: VNode | VNode[]) => {
+    if (is.array(vnode)) {
+      children.push(...flatten(vnode, ignoreEmptyElement));
     }
-    else if (kid?.type === Fragment) {
-      result.push(...flatten(kid.children as VNode[], ignoreEmptyElement));
+    else if (vnode?.type === Fragment || vnode?.type === "template") {
+      children.push(...flatten(vnode.children as VNode[], ignoreEmptyElement));
     }
-    else if (isVNode(kid)) {
-      if (ignoreEmptyElement && !isEmptyElement(kid)) {
-        result.push(kid);
+    else if (isVNode(vnode)) {
+      if (ignoreEmptyElement && !isEmptyElement(vnode)) {
+        children.push(vnode);
       }
       else if (!ignoreEmptyElement) {
-        result.push(kid);
+        children.push(vnode);
       }
     }
-    else if (isEffective(kid)) {
-      result.push(kid);
+    else if (is.effective(vnode)) {
+      children.push(vnode);
     }
   });
 
-  return result;
+  return children;
 };
 
-export const getValidElements = (children: any[] = []) => {
-  const elements: any = [];
+export const getChildren = (vnodes: any[] = []) => {
+  const children: any = [];
 
-  children.forEach(child => {
-    if (isArray(child)) {
-      elements.push(...child);
+  vnodes.forEach(vnode => {
+    if (is.array(vnode)) {
+      children.push(...vnode);
     }
-    else if (child?.type === Fragment) {
-      elements.push(...getValidElements(child.children));
+    else if (vnode?.type === Fragment || vnode?.type === "template") {
+      children.push(...getChildren(vnode.children));
     }
     else {
-      elements.push(child);
+      children.push(vnode);
     }
   });
 
-  return elements.filter((element: any) => !isEmptyElement(element));
+  return children.filter((child: any) => !isEmptyElement(child));
+};
+
+export const getChildrenByNames = (vnodes: VNode[] | undefined, names: string | string[]) => {
+  if (!vnodes) {
+    return [];
+  }
+
+  if (is.string(names)) {
+    names = [names];
+  }
+
+  return flatten(vnodes).filter(vnode => {
+    return is.object(vnode.type) && names.includes((vnode.type as Component).name as string);
+  });
+};
+
+export const getChildrenText = (
+  children: string | number | boolean | VNode | VNode[]
+) => {
+  let text = "";
+
+  if (children === undefined) {
+    return text;
+  }
+
+  if (is.string(children) || is.number(children) || is.boolean(children)) {
+    text += String(children);
+  }
+  else if (isVNode(children)) {
+    if (isTextChildren(children, children.children)) {
+      text += children.children;
+    }
+    else if (isArrayChildren(children, children.children)) {
+      text += getChildrenText(children.children);
+    }
+    else if (isSlotsChildren(children, children.children)) {
+      const content = children.children.default?.();
+
+      if (content) {
+        text += getChildrenText(content);
+      }
+    }
+  }
+  else if (is.array(children)) {
+    children.forEach(child => {
+      text += getChildrenText(child);
+    });
+  }
+
+  return text;
 };
 
 export const getChildrenArray = (vnode: VNode): VNode[] | undefined => {
@@ -102,7 +159,7 @@ export const getChildrenArray = (vnode: VNode): VNode[] | undefined => {
     return vnode.children;
   }
 
-  if (isArray(vnode)) {
+  if (is.array(vnode)) {
     return vnode;
   }
 
@@ -158,7 +215,7 @@ export const mergeFirstChild = (children: VNode[] | undefined, props: Data | ((v
       const child = children[i];
 
       if (isElement(child) || isComponent(child)) {
-        children[i] = cloneVNode(child, isFunction(props) ? props(child) : props, true);
+        children[i] = cloneVNode(child, is.function(props) ? props(child) : props, true);
 
         return true;
       }

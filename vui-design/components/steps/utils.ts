@@ -1,19 +1,4 @@
-import type { VNode, Component } from "vue";
 import type { Steps } from "./types";
-import is from "../../utils/is";
-import { flatten } from "../../utils/vue";
-
-export const getChildren = (
-  children: VNode[] | undefined
-) => {
-  if (!children) {
-    return [];
-  }
-
-  return flatten(children).filter(target => {
-    return is.object(target.type) && (target.type as Component).name === "vui-step";
-  });
-};
 
 export const getStepStatus = (
   vuiSteps: Steps | undefined,
@@ -40,7 +25,6 @@ export const getNextStepStatus = (
 };
 
 export default {
-  getChildren,
   getStepStatus,
   getNextStepStatus
 };

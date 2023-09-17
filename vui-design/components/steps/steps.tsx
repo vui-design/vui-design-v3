@@ -2,11 +2,11 @@ import type { ExtractPropTypes, PropType, RenderFunction, ComputedRef, HTMLAttri
 import type { Key, Size } from "../../types";
 import type { Type, Direction, Status, Step } from "./types";
 import { defineComponent, cloneVNode, provide, toRefs, ref, reactive, computed } from "vue";
+import { getChildrenByNames } from "../../utils/vue";
 import { sizes } from "../../constants";
 import { types, directions, statuses } from "./constants";
 import { StepsInjectionKey } from "./context";
 import useClassPrefix from "../../hooks/useClassPrefix";
-import utils from "./utils";
 
 export const createProps = () => {
   return {
@@ -131,7 +131,7 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      const steps = utils.getChildren(context.slots.default?.());
+      const steps = getChildrenByNames(context.slots.default?.(), "vui-step");
 
       return (
         <div class={classes.el.value}>

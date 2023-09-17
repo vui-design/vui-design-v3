@@ -8,14 +8,13 @@
       <vui-browser>
         <vui-fullscreen v-model:enabled="fullscreen" class="example-fullscreen-basic-usage">
           <vui-layout>
-            <vui-layout-sider color="dark" collapsible v-model:collapsed="collapsed">
+            <vui-layout-sider color="dark">
               <h1 style="height: 32px; background-color: rgba(255,255,255,0.2); margin: 16px;"></h1>
               <vui-menu
                 mode="inline"
                 color="dark"
-                v-model:collapsed="collapsed"
-                v-model:openKeys="openKeys"
-                v-model:selectedKey="selectedKey"
+                v-bind:defaultOpenKeys="['1']"
+                v-bind:defaultSelectedKey="'1-1'"
               >
                 <vui-submenu key="1" icon="apps" title="Sub Menu 1">
                   <vui-menu-item key="1-1" title="Item 1-1" />
@@ -74,18 +73,11 @@
     },
     setup() {
       const fullscreen = ref<boolean>(false);
-      const collapsed = ref<boolean>(false);
-      const openKeys = ref<string[]>(["1"])
-      const selectedKey = ref<string>("1-1");
-
       const handleToggle = () => fullscreen.value = !fullscreen.value;
 
       return {
         code,
         fullscreen,
-        collapsed,
-        openKeys,
-        selectedKey,
         handleToggle
       };
     }

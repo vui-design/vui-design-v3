@@ -236,15 +236,6 @@ export default [
   //       },
   //       component: () => import("src/views/cascader/index.vue")
   //     },
-  //     {
-  //       path: "/components/cascade-transfer",
-  //       name: "cascade-transfer",
-  //       meta: {
-  //         title: "CascadeTransfer",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/cascade-transfer/index.vue")
-  //     },
       {
         path: "/components/checkbox",
         name: "checkbox",
@@ -309,15 +300,15 @@ export default [
         },
         component: () => import("src/views/rate/index.vue")
       },
-  //     {
-  //       path: "/components/select",
-  //       name: "select",
-  //       meta: {
-  //         title: "Select",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/select/index.vue")
-  //     },
+      {
+        path: "/components/select",
+        name: "select",
+        meta: {
+          title: "Select",
+          group: "data-entry"
+        },
+        component: () => import("src/views/select/index.vue")
+      },
   //     {
   //       path: "/components/slider",
   //       name: "slider",

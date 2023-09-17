@@ -28,7 +28,7 @@ import Breadcrumb, { BreadcrumbItem } from "./components/breadcrumb";
 import Dropdown, { DropdownButton } from "./components/dropdown";
 import Menu, { Submenu, MenuItem, MenuItemGroup, MenuItemDivider } from "./components/menu";
 import PageHeader from "./components/page-header";
-import Pagination from "./components/pagination";
+// import Pagination from "./components/pagination";
 import Steps, { Step } from "./components/steps";
 import Tabs, { TabPanel } from "./components/tabs";
 // Data Entry
@@ -40,15 +40,11 @@ import Checkbox, { CheckboxGroup } from "./components/checkbox";
 import Input, { InputNumber, InputPassword, InputSearch, InputGroup } from "./components/input";
 import Radio, { RadioGroup } from "./components/radio";
 import Rate from "./components/rate";
-import Select from "./components/select";
-import Option from "./components/option";
-import OptionGroup from "./components/option-group";
+import Select, { Option, OptionGroup } from "./components/select";
 import Slider from "./components/slider";
 import Switch from "./components/switch";
 import Textarea from "./components/textarea";
-import Timeroutine from "./components/timeroutine";
 import Transfer from "./components/transfer";
-import CascadeTransfer from "./components/cascade-transfer";
 import Upload from "./components/upload";
 // Data Display
 import Avatar, { AvatarGroup } from "./components/avatar";
@@ -121,7 +117,7 @@ const components = [
   MenuItemGroup,
   MenuItemDivider,
   PageHeader,
-  Pagination,
+  // Pagination,
   Steps,
   Step,
   Tabs,
@@ -147,9 +143,7 @@ const components = [
   Slider,
   Switch,
   Textarea,
-  Timeroutine,
   Transfer,
-  CascadeTransfer,
   Upload,
   // Data Display
   Avatar,
@@ -247,7 +241,7 @@ export {
   MenuItemGroup,
   MenuItemDivider,
   PageHeader,
-  Pagination,
+  // Pagination,
   Steps,
   Step,
   Tabs,
@@ -273,9 +267,7 @@ export {
   Slider,
   Switch,
   Textarea,
-  Timeroutine,
   Transfer,
-  CascadeTransfer,
   Upload,
   // Data Display
   Avatar,

@@ -130,11 +130,15 @@ export default defineComponent({
     const containerRef = ref<HTMLDivElement>();
     const inputRef = ref<HTMLInputElement>();
 
+    // 是否为受控模式
+    const isControlled = useControlled("value");
+
+    // 值（defaultValue 非受控模式，value 受控模式）
+    const defaultValue = ref(props.defaultValue);
+    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
+
     // 定时器，用于自动聚焦
     const timeout = ref();
-
-    // 输入法输入状态
-    const composing = ref(false);
 
     // 尺寸
     const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
@@ -143,12 +147,8 @@ export default defineComponent({
     const focused = ref(false);
     const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? vuiForm?.disabled ?? false);
 
-    // 是否为受控模式
-    const isControlled = useControlled("value");
-
-    // 值（defaultValue 非受控模式，value 受控模式）
-    const defaultValue = ref(props.defaultValue);
-    const value = computed(() => isControlled.value ? props.value : defaultValue.value);
+    // 输入法输入状态
+    const composing = ref(false);
 
     // 清空按钮显示状态
     const showBtnClear = computed(() => props.clearable && !props.readonly && !disabled.value && is.effective(value.value));
