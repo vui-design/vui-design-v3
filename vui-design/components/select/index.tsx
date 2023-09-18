@@ -15,8 +15,8 @@ Select.Option = Option;
 Select.OptionGroup = OptionGroup;
 Select.install = function(app: App) {
   app.component(Select.name, Select);
-  app.component(Option.name as string, Option);
-  app.component(OptionGroup.name as string, OptionGroup);
+  app.component(Option.displayName as string, Option);
+  app.component(OptionGroup.displayName as string, OptionGroup);
 
   return app;
 };

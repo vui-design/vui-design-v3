@@ -54,10 +54,10 @@ export const createProps = () => {
   };
 };
 
-export type SelectMenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export type SelectOptionProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-select-menu-item",
+  name: "vui-select-option",
   props: createProps(),
   emits: ["mouseenter", "click"],
   setup(props, context) {
@@ -80,7 +80,7 @@ export default defineComponent({
     };
 
     // 计算 class 样式
-    const classPrefix = useClassPrefix("select-menu-item", props);
+    const classPrefix = useClassPrefix("select-option", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {

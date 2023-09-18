@@ -197,7 +197,7 @@ export default defineComponent({
 
       // 
       const slots = {
-        content: () => (
+        body: () => (
           <div class={menuClasses.el.value}>
             {context.slots.default?.()}
           </div>
@@ -216,6 +216,7 @@ export default defineComponent({
             placement={vuiMenu?.mode === "horizontal" && props.level === 1 ? "bottom-left" : "right-top"}
             animation={props.animation}
             offset={4}
+            showBodyContainer={false}
             showArrow={false}
             autofitPopupMinWidth={vuiMenu?.mode === "horizontal" && props.level === 1}
             disabled={props.disabled}

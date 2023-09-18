@@ -102,7 +102,7 @@ export default defineComponent({
     const overflowed = computed(() => props.multiple && is.number(props.maxTagCount) && props.maxTagCount > 0 && count.value > props.maxTagCount);
 
     // 输入法输入状态
-    const composing = ref(false);
+    const composing = ref<boolean>(false);
 
     // 是否显示取消选择按钮/清空按钮/下拉箭头
     const showBtnDeselect = computed(() => props.multiple && !props.disabled);

@@ -1,7 +1,8 @@
-import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
+import type { ExtractPropTypes, PropType, RenderFunction, ComputedRef, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import type { Color } from "./types";
 import { defineComponent, ref, computed } from "vue";
+import { getSlotProp } from "../../utils/vue";
 import { triggers, placements } from "../popup/constants";
 import { colors } from "./constants";
 import VuiPopup from "../popup";
@@ -32,7 +33,7 @@ export const createProps = () => {
     },
     // 提示框内容
     content: {
-      type: [String, Number] as PropType<string | number>,
+      type: [String, Number, Function] as PropType<string | number | RenderFunction>,
       default: undefined
     },
     // 触发方式
@@ -73,12 +74,12 @@ export const createProps = () => {
       default: false
     },
     // 提示框内容的样式类名
-    contentClassName: {
+    bodyClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 提示框内容的样式
-    contentStyle: {
+    bodyStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
@@ -161,33 +162,16 @@ export default defineComponent({
 
       if (withCustomColor.value) {
         style.backgroundColor = props.color;
-      }
-
-      return style;
-    });
-    styles.elContent = computed(() => {
-      let style: CSSProperties = {};
-
-      if (withCustomColor.value) {
         style.color = "#fff";
       }
 
-      return [props.contentStyle, style];
-    });
-    styles.elArrow = computed(() => {
-      let style: CSSProperties = {};
-
-      if (withCustomColor.value) {
-        style.backgroundColor = props.color;
-      }
-
-      return [props.arrowStyle, style];
+      return style;
     });
 
     // 渲染
     return () => {
       const slots = {
-        content: () => context.slots.content?.() ?? props.content
+        body: () => getSlotProp(context.slots, props, "content")
       };
 
       return (
@@ -206,10 +190,10 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
-          contentClassName={props.contentClassName}
-          contentStyle={styles.elContent.value}
+          bodyClassName={props.bodyClassName}
+          bodyStyle={props.bodyStyle}
           arrowClassName={props.arrowClassName}
-          arrowStyle={styles.elArrow.value}
+          arrowStyle={props.arrowStyle}
           disabled={props.disabled}
           onChange={handleChange}
           onOpen={handleOpen}

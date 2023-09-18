@@ -14,7 +14,7 @@
     <vui-example-backfill-option-prop />
     <vui-example-max-tag-count />
     <vui-example-hide-selected-options />
-    <!-- <vui-example-big-data /> -->
+    <vui-example-big-data />
   </div>
 </template>
 

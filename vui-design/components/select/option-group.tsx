@@ -1,6 +1,5 @@
-import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
+import type { FunctionalComponent, ExtractPropTypes, PropType, HTMLAttributes } from "vue";
 import type { Label } from "./types";
-import { defineComponent } from "vue";
 
 export const createProps = () => {
   return {
@@ -23,11 +22,12 @@ export const createProps = () => {
 };
 
 export type OptionGroupProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export interface OptionGroupFC extends FunctionalComponent<OptionGroupProps> {
 
-export default defineComponent({
-  name: "vui-option-group",
-  props: createProps(),
-  setup(props, context) {
-    return () => null;
-  }
-});
+};
+
+const OptionGroup: OptionGroupFC = () => null;
+
+OptionGroup.displayName = "vui-option-group";
+
+export default OptionGroup;

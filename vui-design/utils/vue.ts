@@ -1,4 +1,4 @@
-import type { Component, Slots, VNode, VNodeTypes } from "vue";
+import type { Component, FunctionalComponent, Slots, VNode, VNodeTypes } from "vue";
 import type { Data } from "../types";
 import { Fragment, Comment, Text, isVNode, cloneVNode } from "vue";
 import is from "./is";
@@ -114,7 +114,16 @@ export const getChildrenByNames = (vnodes: VNode[] | undefined, names: string | 
   }
 
   return flatten(vnodes).filter(vnode => {
-    return is.object(vnode.type) && names.includes((vnode.type as Component).name as string);
+    let name;
+
+    if (is.object(vnode.type)) {
+      name = (vnode.type as Component).name;
+    }
+    else if (is.function(vnode.type)) {
+      name = (vnode.type as FunctionalComponent).displayName;
+    }
+
+    return names.includes(name as string);
   });
 };
 

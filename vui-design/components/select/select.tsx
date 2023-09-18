@@ -1,14 +1,14 @@
 import type { ExtractPropTypes, PropType, ComputedRef, HTMLAttributes } from "vue";
 import type { Size } from "../../types";
-import type { Value, BackfillOptionProp, MaxTagPlaceholder, Filter, FilterOptionProp, Placement, Option } from "./types";
+import type { Value, Scroll, BackfillOptionProp, MaxTagPlaceholder, Filter, FilterOptionProp, Placement, Option } from "./types";
 import { defineComponent, inject, ref, computed, watch, nextTick } from "vue";
 import { sizes, keyCodes } from "../../constants";
-import { backfillOptionProps, filterOptionProps, placements } from "./constants";
+import { scroll, backfillOptionProps, filterOptionProps, placements } from "./constants";
 import { FormInjectionKey, FormItemInjectionKey } from "../form/context";
 import { InputGroupInjectionKey } from "../input/context";
 import VuiPopup from "../popup";
 import VuiSelectSelection from "./select-selection";
-import VuiSelectMenu from "./select-menu";
+import VuiSelectOptionList from "./select-option-list";
 import VuiSelectSpin from "./select-spin";
 import VuiSelectEmpty from "./select-empty";
 import useClassPrefix from "../../hooks/useClassPrefix";
@@ -41,6 +41,11 @@ export const createProps = () => {
     options: {
       type: Array as PropType<Option[]>,
       default: () => []
+    },
+    // 虚拟滚动配置
+    scroll: {
+      type: Object as PropType<Scroll>,
+      default: () => scroll
     },
     // 回填到选择框的 Option 属性
     backfillOptionProp: {
@@ -107,11 +112,6 @@ export const createProps = () => {
     },
     // 是否处于 loading 状态（即当前是否正在进行远程搜索）
     loading: {
-      type: Boolean as PropType<boolean>,
-      default: false
-    },
-    // 输入框是否为只读状态
-    readonly: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -185,16 +185,16 @@ export default defineComponent({
     const isControlled = useControlled("value");
 
     // 选中值（defaultValue 非受控模式，value 受控模式）
-    const defaultValue = ref(props.defaultValue);
+    const defaultValue = ref<Value | Value[] | undefined>(props.defaultValue);
     const value = computed(() => utils.getValue(isControlled.value ? props.value : defaultValue.value, props.multiple));
 
     // 尺寸
     const size = computed(() => props.size ?? vuiInputGroup?.size ?? vuiForm?.size ?? "medium");
 
     // 状态
-    const hovered = ref(false);
-    const focused = ref(false);
-    const actived = ref(false);
+    const hovered = ref<boolean>(false);
+    const focused = ref<boolean>(false);
+    const actived = ref<boolean>(false);
     const disabled = computed(() => props.disabled ?? vuiInputGroup?.disabled ?? vuiForm?.disabled ?? false);
 
     // 当前搜索关键字及经过筛选的选项列表
@@ -525,7 +525,7 @@ export default defineComponent({
     return () => {
       // 菜单
       const slots = {
-        content: () => props.loading ? (
+        body: () => props.loading ? (
           <VuiSelectSpin
             classPrefix={props.classPrefix}
             loadingText={props.loadingText}
@@ -537,13 +537,15 @@ export default defineComponent({
               notFoundText={props.notFoundText}
             />
           ) : (
-            <VuiSelectMenu
+            <VuiSelectOptionList
               classPrefix={props.classPrefix}
               value={selection.value}
+              activedType={activedType.value}
               activedValue={activedValue.value}
-              items={options.value}
+              activedValueIndex={activedValueIndex.value}
+              options={options.value}
+              scroll={props.scroll}
               multiple={props.multiple}
-              visible={dropdownVisible.value}
               onPreselect={handlePreselect}
               onSelect={handleSelect}
               onDeselect={handleDeselect}
@@ -566,6 +568,7 @@ export default defineComponent({
             autofitPopupWidth={props.autofitPopupWidth}
             autofitPopupMinWidth={props.autofitPopupMinWidth}
             offset={4}
+            showBodyContainer={false}
             showArrow={false}
             destroyOnClose={props.destroyOnClose}
             disabled={disabled.value}

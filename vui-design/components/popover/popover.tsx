@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, HTMLAttributes, CSSProperties } from "vue";
+import type { ExtractPropTypes, PropType, RenderFunction, HTMLAttributes, CSSProperties } from "vue";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
 import { getSlotProp } from "../../utils/vue";
@@ -25,12 +25,12 @@ export const createProps = () => {
     },
     // 气泡卡片标题
     title: {
-      type: [String, Number] as PropType<string | number>,
+      type: [String, Number, Function] as PropType<string | number | RenderFunction>,
       default: undefined
     },
     // 气泡卡片内容
     content: {
-      type: [String, Number] as PropType<string | number>,
+      type: [String, Number, Function] as PropType<string | number | RenderFunction>,
       default: undefined
     },
     // 触发方式
@@ -70,23 +70,23 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 气泡卡片标题的样式类名
-    titleClassName: {
+    // 气泡卡片头部的样式类名
+    headerClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
-    // 气泡卡片标题的样式
-    titleStyle: {
+    // 气泡卡片头部的样式
+    headerStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 气泡卡片内容的样式类名
-    contentClassName: {
+    bodyClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 气泡卡片内容的样式
-    contentStyle: {
+    bodyStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
@@ -150,8 +150,8 @@ export default defineComponent({
     // 渲染
     return () => {
       const slots = {
-        title: () => getSlotProp(context.slots, props, "title"),
-        content: () => getSlotProp(context.slots, props, "content")
+        header: () => getSlotProp(context.slots, props, "title"),
+        body: () => getSlotProp(context.slots, props, "content")
       };
 
       return (
@@ -168,10 +168,10 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
-          titleClassName={props.titleClassName}
-          titleStyle={props.titleStyle}
-          contentClassName={props.contentClassName}
-          contentStyle={props.contentStyle}
+          headerClassName={props.headerClassName}
+          headerStyle={props.headerStyle}
+          bodyClassName={props.bodyClassName}
+          bodyStyle={props.bodyStyle}
           arrowClassName={props.arrowClassName}
           arrowStyle={props.arrowStyle}
           disabled={props.disabled}

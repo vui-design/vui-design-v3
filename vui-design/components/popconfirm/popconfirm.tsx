@@ -3,6 +3,7 @@ import type { Type } from "../button/types";
 import type { Trigger, Placement } from "../popup/types";
 import { defineComponent, ref, computed } from "vue";
 import { useI18n } from "../../locale";
+import { getSlotProp } from "../../utils/vue";
 import { types } from "../button/constants";
 import { triggers, placements } from "../popup/constants";
 import VuiIcon from "../icon";
@@ -98,23 +99,23 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 气泡确认框标题的样式类名
-    titleClassName: {
-      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
-      default: undefined
-    },
-    // 气泡确认框标题的样式
-    titleStyle: {
-      type: [String, Object] as PropType<CSSProperties>,
-      default: undefined
-    },
     // 气泡确认框内容的样式类名
-    contentClassName: {
+    bodyClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 气泡确认框内容的样式
-    contentStyle: {
+    bodyStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 气泡确认框头部的样式类名
+    footerClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 气泡确认框头部的样式
+    footerStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
@@ -231,25 +232,25 @@ export default defineComponent({
 
     // 渲染
     return () => {
-      // 图标
-      const icon = context.slots.icon?.() ?? (
-        <VuiIcon type={props.icon ?? "help-filled"} />
-      );
-
-      // 标题
-      const title = context.slots.title?.() ?? props.title;
-
       // 插槽
       const slots = {
-        title: () => {
+        body: () => {
           return (
             <>
-              <div class={classes.elIcon.value}>{icon}</div>
-              {title}
+              <div class={classes.elIcon.value}>
+                {
+                  context.slots.icon?.() ?? (
+                    <VuiIcon type={props.icon ?? "help-filled"} />
+                  )
+                }
+              </div>
+              {
+                getSlotProp(context.slots, props, "title")
+              }
             </>
           );
         },
-        content: () => {
+        footer: () => {
           const cancelText = props.cancelText ?? translate("popconfirm.cancelText");
           const okText = props.okText ?? translate("popconfirm.okText");
 
@@ -277,10 +278,10 @@ export default defineComponent({
           mouseEnterDelay={props.mouseEnterDelay}
           mouseLeaveDelay={props.mouseLeaveDelay}
           destroyOnClose={props.destroyOnClose}
-          titleClassName={props.titleClassName}
-          titleStyle={props.titleStyle}
-          contentClassName={props.contentClassName}
-          contentStyle={props.contentStyle}
+          bodyClassName={props.bodyClassName}
+          bodyStyle={props.bodyStyle}
+          footerClassName={props.footerClassName}
+          footerStyle={props.footerStyle}
           arrowClassName={props.arrowClassName}
           arrowStyle={props.arrowStyle}
           disabled={props.disabled}

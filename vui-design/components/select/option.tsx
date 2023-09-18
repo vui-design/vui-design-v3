@@ -1,6 +1,5 @@
-import type { ExtractPropTypes, PropType, HTMLAttributes } from "vue";
+import type { FunctionalComponent, ExtractPropTypes, PropType, HTMLAttributes } from "vue";
 import type { Value, Label } from "./types";
-import { defineComponent } from "vue";
 
 export const createProps = () => {
   return {
@@ -28,11 +27,12 @@ export const createProps = () => {
 };
 
 export type OptionProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export interface OptionFC extends FunctionalComponent<OptionProps> {
 
-export default defineComponent({
-  name: "vui-option",
-  props: createProps(),
-  setup(props, context) {
-    return () => null;
-  }
-});
+};
+
+const Option: OptionFC = () => null;
+
+Option.displayName = "vui-option";
+
+export default Option;

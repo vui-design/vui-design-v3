@@ -29,14 +29,14 @@ export const createProps = () => {
   };
 };
 
-export type SelectMenuItemGroupProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
+export type SelectOptionGroupProps = Partial<ExtractPropTypes<ReturnType<typeof createProps>>> & HTMLAttributes;
 
 export default defineComponent({
-  name: "vui-select-menu-item-group",
+  name: "vui-select-option-group",
   props: createProps(),
   setup(props, context) {
     // 计算 class 样式
-    const classPrefix = useClassPrefix("select-menu-item-group", props);
+    const classPrefix = useClassPrefix("select-option-group", props);
     let classes: Record<string, ComputedRef> = {};
 
     classes.el = computed(() => {

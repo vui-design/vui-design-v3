@@ -1,4 +1,4 @@
-import type { Component, Slots, VNode } from "vue";
+import type { FunctionalComponent, Slots, VNode } from "vue";
 import type { Value, Filter, Option } from "./types";
 import is from "../../utils/is";
 import { getChildrenByNames, getChildrenText, getChildren } from "../../utils/vue";
@@ -142,7 +142,7 @@ export const getOptions = (
       option.disabled = parent.disabled;
     }
 
-    const name = (type as Component).name;
+    const name = (type as FunctionalComponent).displayName;
 
     if (name === "vui-option-group") {
       option.type = "option-group";

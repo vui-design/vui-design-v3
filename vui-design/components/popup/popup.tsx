@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType, Ref, ComputedRef, HTMLAttributes, CSSP
 import type { Trigger, Placement, Position } from "./types";
 import { Teleport, Transition, defineComponent, provide, inject, toRefs, ref, reactive, computed, watch, nextTick, onMounted, onUpdated, onBeforeUnmount, onDeactivated } from "vue";
 import { on, off } from "../../utils/dom";
-import { getChildren, mergeFirstChild } from "../../utils/vue";
+import { mergeFirstChild } from "../../utils/vue";
 import { triggers, placements, listeners } from "./constants";
 import { PopupInjectionKey } from "./context";
 import { getMouseScrollRect, getElementScrollRect, getPopupStyle, getScrollElements } from "./utils";
@@ -14,7 +14,6 @@ import useFirstElement from "../../hooks/useFirstElement";
 import useTeleportContainer from "../../hooks/useTeleportContainer";
 import usePopupManager from "../../hooks/usePopupManager";
 import useResizeObserver from "../../hooks/useResizeObserver";
-import is from "../../utils/is";
 import omit from "../../utils/omit";
 import throttleByRaf from "../../utils/throttleByRaf";
 
@@ -66,6 +65,11 @@ export const createProps = () => {
     offset: {
       type: Number as PropType<number>,
       default: 0
+    },
+    // 不渲染 body 外容器
+    showBodyContainer: {
+      type: Boolean as PropType<boolean>,
+      default: true
     },
     // 弹出框是否显示箭头
     showArrow: {
@@ -122,23 +126,33 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 弹出框标题的样式类名
-    titleClassName: {
+    // 弹出框头部的样式类名
+    headerClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
-    // 弹出框标题的样式
-    titleStyle: {
+    // 弹出框头部的样式
+    headerStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
     // 弹出框内容的样式类名
-    contentClassName: {
+    bodyClassName: {
       type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
       default: undefined
     },
     // 弹出框内容的样式
-    contentStyle: {
+    bodyStyle: {
+      type: [String, Object] as PropType<CSSProperties>,
+      default: undefined
+    },
+    // 弹出框底部的样式类名
+    footerClassName: {
+      type: [String, Object, Array] as PropType<string | object | Array<string | object>>,
+      default: undefined
+    },
+    // 弹出框底部的样式
+    footerStyle: {
       type: [String, Object] as PropType<CSSProperties>,
       default: undefined
     },
@@ -200,8 +214,8 @@ export default defineComponent({
     const elStyle = ref<CSSProperties>({});
 
     // DOM 引用相关变量
-    const popup = ref<HTMLElement>();
-    const arrow = ref<HTMLElement>();
+    const popupRef = ref<HTMLElement>();
+    const arrowRef = ref<HTMLElement>();
 
     // 更新鼠标位置
     const mouse = ref<Position>({ top: 0, left: 0 });
@@ -216,7 +230,7 @@ export default defineComponent({
 
     // 更新弹出框样式
     const changePopupStyle = () => {
-      if (!firstElement.value || !popup.value || !container.value) {
+      if (!firstElement.value || !popupRef.value || !container.value) {
         return;
       }
 
@@ -224,7 +238,7 @@ export default defineComponent({
 
       rects.container = container.value.getBoundingClientRect();
       rects.trigger = props.alignMousePoint ? getMouseScrollRect(mouse.value) : getElementScrollRect(firstElement.value, rects.container);
-      rects.popup = getElementScrollRect(popup.value, rects.container);
+      rects.popup = getElementScrollRect(popupRef.value, rects.container);
 
       const { style, position } = getPopupStyle(props.placement, rects.container, rects.trigger, rects.popup, props.offset);
 
@@ -396,7 +410,7 @@ export default defineComponent({
     };
 
     const handleOutsideClick = (e: MouseEvent) => {
-      if (firstElement.value?.contains(e.target as HTMLElement) || popup.value?.contains(e.target as HTMLElement)) {
+      if (firstElement.value?.contains(e.target as HTMLElement) || popupRef.value?.contains(e.target as HTMLElement)) {
         return;
       }
 
@@ -529,7 +543,7 @@ export default defineComponent({
 
     // 组件卸载之前执行
     onBeforeUnmount(() => {
-      vuiPopup?.removeChildRef?.(popup);
+      vuiPopup?.removeChildRef?.(popupRef);
 
       if (outsideListener) {
         removeOutsideListener();
@@ -564,13 +578,14 @@ export default defineComponent({
     };
 
     provide(PopupInjectionKey, reactive({
+      visible,
       addChildRef,
       removeChildRef,
       onMouseenter: handleMouseenter,
       onMouseleave: handleMouseleave
     }));
 
-    vuiPopup?.addChildRef?.(popup);
+    vuiPopup?.addChildRef?.(popupRef);
 
     // 计算 class 样式
     const classPrefix = useClassPrefix(props.name, props);
@@ -582,16 +597,22 @@ export default defineComponent({
         [`${classPrefix.value}-placement-${placement.value}`]: true
       };
     });
-    classes.elTitle = computed(() => {
+    classes.elHeader = computed(() => {
       return {
-        [`${classPrefix.value}-title`]: true,
-        [`${props.titleClassName}`]: props.titleClassName
+        [`${classPrefix.value}-header`]: true,
+        [`${props.headerClassName}`]: props.headerClassName
       };
     });
-    classes.elContent = computed(() => {
+    classes.elBody = computed(() => {
       return {
-        [`${classPrefix.value}-content`]: true,
-        [`${props.contentClassName}`]: props.contentClassName
+        [`${classPrefix.value}-body`]: true,
+        [`${props.bodyClassName}`]: props.bodyClassName
+      };
+    });
+    classes.elFooter = computed(() => {
+      return {
+        [`${classPrefix.value}-footer`]: true,
+        [`${props.footerClassName}`]: props.footerClassName
       };
     });
     classes.elArrow = computed(() => {
@@ -612,15 +633,14 @@ export default defineComponent({
         pointerEvents: toggling.value ? "none" : undefined
       };
     });
-    styles.elTitle = computed(() => props.titleStyle);
-    styles.elContent = computed(() => props.contentStyle);
+    styles.elHeader = computed(() => props.headerStyle);
+    styles.elBody = computed(() => props.bodyStyle);
+    styles.elFooter = computed(() => props.footerStyle);
     styles.elArrow = computed(() => props.arrowStyle);
 
     // 渲染
     return () => {
-      const title = getChildren(context.slots.title?.());
-      const content = getChildren(context.slots.content?.());
-
+      // 
       children.value = context.slots.default?.() ?? [];
 
       mergeFirstChild(children.value, {
@@ -632,6 +652,49 @@ export default defineComponent({
         onContextmenu: handleTriggerContextmenu
       });
 
+      // 
+      let header;
+
+      if (context.slots.header) {
+        header = (
+          <div class={classes.elHeader.value} style={styles.elHeader.value}>
+            {context.slots.header()}
+          </div>
+        );
+      }
+
+      // 
+      let body;
+
+      if (context.slots.body) {
+        body = props.showBodyContainer ? (
+          <div class={classes.elBody.value} style={styles.elBody.value}>
+            {context.slots.body()}
+          </div>
+        ) : context.slots.body();
+      }
+
+      // 
+      let footer;
+
+      if (context.slots.footer) {
+        footer = (
+          <div class={classes.elFooter.value} style={styles.elFooter.value}>
+            {context.slots.footer()}
+          </div>
+        );
+      }
+
+      // 
+      let arrow;
+
+      if (props.showArrow) {
+        arrow = (
+          <div ref={arrowRef} class={classes.elArrow.value} style={styles.elArrow.value}></div>
+        );
+      }
+
+      // 
       return (
         <>
           <VuiResizeObserver onResize={handleTargetResize}>
@@ -643,18 +706,11 @@ export default defineComponent({
                 props.destroyOnClose && !visible.value && closed.value ? null : (
                   <VuiResizeObserver onResize={handleResize}>
                     <Transition appear name={props.animation} onBeforeEnter={handleBeforeOpen} onAfterEnter={handleOpen} onBeforeLeave={handleBeforeClose} onAfterLeave={handleClose}>
-                      <div ref={popup} data-placement={placement.value} v-show={visible.value} class={classes.el.value} style={styles.el.value} {...attributes.value} onMouseenter={handleMouseenter} onMouseleave={handleMouseleave} onMousedown={handleMousedown}>
-                        {
-                          !(is.array(title) ? title.length : title) ? null : (
-                            <div class={classes.elTitle.value} style={styles.elTitle.value}>{title}</div>
-                          )
-                        }
-                        <div class={classes.elContent.value} style={styles.elContent.value}>{content}</div>
-                        {
-                          !props.showArrow ? null : (
-                            <div ref={arrow} class={classes.elArrow.value} style={styles.elArrow.value}></div>
-                          )
-                        }
+                      <div ref={popupRef} data-placement={placement.value} v-show={visible.value} class={classes.el.value} style={styles.el.value} {...attributes.value} onMouseenter={handleMouseenter} onMouseleave={handleMouseleave} onMousedown={handleMousedown}>
+                        {header}
+                        {body}
+                        {footer}
+                        {arrow}
                       </div>
                     </Transition>
                   </VuiResizeObserver>

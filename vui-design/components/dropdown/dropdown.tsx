@@ -126,7 +126,7 @@ export default defineComponent({
     return () => {
       // 菜单
       const slots = {
-        content: () => context.slots.menu?.()
+        body: () => context.slots.menu?.()
       };
 
       // 
@@ -142,6 +142,7 @@ export default defineComponent({
           autofitPopupWidth={props.autofitPopupWidth}
           autofitPopupMinWidth={props.autofitPopupMinWidth}
           offset={props.trigger === "contextmenu" ? 0 : 4}
+          showBodyContainer={false}
           showArrow={false}
           alignMousePoint={props.trigger === "contextmenu"}
           mouseEnterDelay={props.mouseEnterDelay}

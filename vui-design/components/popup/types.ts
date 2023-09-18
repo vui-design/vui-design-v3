@@ -23,8 +23,9 @@ export interface ScrollRect {
 };
 
 export interface Popup {
-  onMouseenter: (event: MouseEvent) => void;
-  onMouseleave: (event: MouseEvent) => void;
+  visible: boolean;
   addChildRef: (ref: any) => void;
   removeChildRef: (ref: any) => void;
+  onMouseenter: (event: MouseEvent) => void;
+  onMouseleave: (event: MouseEvent) => void;
 };

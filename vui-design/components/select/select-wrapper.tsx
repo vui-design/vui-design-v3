@@ -67,6 +67,7 @@ export default defineComponent({
           value={value.value}
           placeholder={props.placeholder}
           options={options}
+          scroll={props.scroll}
           backfillOptionProp={props.backfillOptionProp}
           bordered={props.bordered}
           size={props.size}
@@ -79,7 +80,6 @@ export default defineComponent({
           allowCreate={props.allowCreate}
           clearKeywordOnSelect={props.clearKeywordOnSelect}
           clearable={props.clearable}
-          readonly={props.readonly}
           disabled={props.disabled}
           loading={props.loading}
           validator={props.validator}
