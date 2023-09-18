@@ -6,7 +6,6 @@
     </template>
     <template v-slot:demo>
       <vui-select
-        searchable
         v-model:value="value"
         v-on:change="handleChange"
         style="width: 200px;"

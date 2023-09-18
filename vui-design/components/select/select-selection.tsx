@@ -245,7 +245,7 @@ export default defineComponent({
 
     styles.el = computed(() => {
       return {
-        cursor: props.disabled ? "not-allowed" : (props.focused ? "text" : "pointer")
+        cursor: props.disabled ? "not-allowed" : (props.searchable ? "text" : "pointer")
       };
     });
     styles.elItem = computed(() => {
