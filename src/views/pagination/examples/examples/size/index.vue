@@ -11,9 +11,9 @@
           <vui-segments-item key="medium">Medium</vui-segments-item>
           <vui-segments-item key="large">Large</vui-segments-item>
         </vui-segments>
-        <vui-pagination simple v-bind:size="size" v-bind:total="100" />
-        <vui-pagination simple v-bind:size="size" v-bind:total="100" showPageSizer showPageJumper />
-        <vui-pagination simple v-bind:size="size" v-bind:total="100" showTotal />
+        <vui-pagination v-bind:size="size" v-bind:total="100" />
+        <vui-pagination v-bind:size="size" v-bind:total="100" showPageSizer showPageJumper />
+        <vui-pagination v-bind:size="size" v-bind:total="100" showTotal />
       </div>
     </template>
   </vui-example>
