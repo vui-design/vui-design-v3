@@ -23,7 +23,7 @@
     overflow:hidden;
     color:@backtop-content-font-color;
     font-size:@backtop-content-font-size;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     svg {
       display:block;
@@ -40,7 +40,7 @@
   &-fade-enter-active,
   &-fade-leave-active {
     opacity:1;
-    transition:opacity @transition-duration @transition-timing-function;
+    transition:opacity @transition-duration-4 @transition-timing-function-standard;
   }
   &-fade-enter,
   &-fade-leave-active {

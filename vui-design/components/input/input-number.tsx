@@ -55,7 +55,7 @@ export const createProps = () => {
     },
     // 输入框占位文本
     placeholder: {
-      type: String as PropType<string>,
+      type: [String, Number] as PropType<string | number>,
       default: undefined
     },
     // 是否含有边框
@@ -408,7 +408,7 @@ export default defineComponent({
           classPrefix={props.classPrefix}
           class={classes.el.value}
           value={characters}
-          placeholder={props.placeholder}
+          placeholder={props.placeholder as string}
           bordered={props.bordered}
           size={props.size}
           autofocus={props.autofocus}

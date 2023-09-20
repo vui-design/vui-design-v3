@@ -10,7 +10,7 @@
   background-color:@segments-background-color;
   padding:@segments-padding;
   vertical-align:middle;
-  transition:all @transition-duration @transition-timing-function;
+  transition:all @transition-duration-4 @transition-timing-function-standard;
 
   &-thumb {
     position:absolute;
@@ -20,7 +20,7 @@
     border-radius:@segments-border-radius;
     background-color:@segments-thumb-color;
     box-shadow:@segments-thumb-box-shadow;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
   }
 
   &-item {
@@ -35,12 +35,12 @@
     overflow:hidden;
     color:@segments-item-font-color;
     text-align:center;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     &-icon {
       display:block;
       box-sizing:border-box;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       .@{vui}-icon {
         display:block;

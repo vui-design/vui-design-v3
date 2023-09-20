@@ -16,7 +16,7 @@
     border:1px solid @checkbox-border-color;
     border-radius:@checkbox-border-radius;
     background-color:@checkbox-background-color;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     svg {
       position:absolute;
@@ -24,7 +24,7 @@
       left:50%;
       opacity:0;
       transform:scale(0);
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       &:nth-child(1) {
         fill:@checkbox-indeterminate-color;
@@ -177,7 +177,7 @@
     font-weight:400;
     white-space:nowrap;
     text-align:center;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     &-input {
       position:absolute;
@@ -221,7 +221,7 @@
       border-style:solid;
       border-color:@checkbox-button-border-color @checkbox-button-border-color transparent transparent;
       border-radius:@checkbox-button-border-radius;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
     }
 
     // size

@@ -11,7 +11,7 @@
   border-radius:@card-border-radius;
   background-color:@card-background-color;
   overflow:hidden;
-  transition:all @transition-duration @transition-timing-function;
+  transition:all @transition-duration-4 @transition-timing-function-standard;
 
   &-bordered {
     border:@card-border-width solid @card-border-color;
@@ -33,7 +33,7 @@
     box-sizing:border-box;
     border-bottom:@card-border-width solid @card-border-color;
     padding:@card-header-padding;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
   }
 
   &-body {
@@ -44,7 +44,7 @@
     font-size:@modal-body-font-size;
     text-align:left;
     line-height:@modal-body-line-height;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     .clearfix;
   }
@@ -54,7 +54,7 @@
     box-sizing:border-box;
     border-top:@card-border-width solid @card-border-color;
     padding:@card-footer-padding;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     .clearfix;
   }
@@ -91,7 +91,7 @@
     color:@card-extra-font-color;
     font-size:@card-extra-font-size;
     font-weight:400;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
   }
 
   &-with-grid > &-body {
@@ -185,7 +185,7 @@
     color:@card-action-font-color;
     font-size:@card-action-font-size;
     text-align:center;
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
 
     &:hover {
       color:@card-action-hover-font-color;

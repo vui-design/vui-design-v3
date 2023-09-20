@@ -199,15 +199,15 @@ export default [
         },
         component: () => import("src/views/page-header/index.vue")
       },
-  //     {
-  //       path: "/components/pagination",
-  //       name: "pagination",
-  //       meta: {
-  //         title: "Pagination",
-  //         group: "navigation"
-  //       },
-  //       component: () => import("src/views/pagination/index.vue")
-  //     },
+      {
+        path: "/components/pagination",
+        name: "pagination",
+        meta: {
+          title: "Pagination",
+          group: "navigation"
+        },
+        component: () => import("src/views/pagination/index.vue")
+      },
       {
         path: "/components/steps",
         name: "steps",

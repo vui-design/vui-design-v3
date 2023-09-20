@@ -30,7 +30,7 @@
       height:round(@anchor-font-size * @anchor-line-height);
       background-color:@anchor-ink-color;
       opacity:0;
-      transition:top @transition-duration @transition-timing-function;
+      transition:top @transition-duration-4 @transition-timing-function-standard;
     }
 
     &-active > &-thumb {
@@ -50,7 +50,7 @@
       color:@anchor-link-title-font-color;
       white-space:nowrap;
       text-overflow:ellipsis;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       &:only-child {
         margin-bottom:0;

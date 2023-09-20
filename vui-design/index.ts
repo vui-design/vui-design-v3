@@ -28,7 +28,7 @@ import Breadcrumb, { BreadcrumbItem } from "./components/breadcrumb";
 import Dropdown, { DropdownButton } from "./components/dropdown";
 import Menu, { Submenu, MenuItem, MenuItemGroup, MenuItemDivider } from "./components/menu";
 import PageHeader from "./components/page-header";
-// import Pagination from "./components/pagination";
+import Pagination from "./components/pagination";
 import Steps, { Step } from "./components/steps";
 import Tabs, { TabPanel } from "./components/tabs";
 // Data Entry
@@ -117,7 +117,7 @@ const components = [
   MenuItemGroup,
   MenuItemDivider,
   PageHeader,
-  // Pagination,
+  Pagination,
   Steps,
   Step,
   Tabs,
@@ -241,7 +241,7 @@ export {
   MenuItemGroup,
   MenuItemDivider,
   PageHeader,
-  // Pagination,
+  Pagination,
   Steps,
   Step,
   Tabs,

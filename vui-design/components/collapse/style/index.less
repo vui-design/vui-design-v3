@@ -11,7 +11,7 @@
   color:@collapse-font-color;
   font-size:@collapse-font-size;
   line-height:@collapse-line-height;
-  transition:all @transition-duration @transition-timing-function;
+  transition:all @transition-duration-4 @transition-timing-function-standard;
 
   &-panel {
     & > &-header {
@@ -41,7 +41,7 @@
 
       .@{vui-icon} {
         transform:rotate(0deg) scale(0.65);
-        transition:transform @transition-duration @transition-timing-function;
+        transition:transform @transition-duration-4 @transition-timing-function-standard;
       }
     }
     & > &-header > &-title {
@@ -70,7 +70,7 @@
     }
 
     &-collapse-enter-active,
-    &-collapse-leave-active { overflow:hidden; transition:height @transition-duration @transition-timing-function; }
+    &-collapse-leave-active { overflow:hidden; transition:height @transition-duration-4 @transition-timing-function-standard; }
   }
 
   &-panel + &-panel {

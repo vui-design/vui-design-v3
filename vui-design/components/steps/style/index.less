@@ -22,7 +22,7 @@
       display:block;
       box-sizing:border-box;
       max-width:100%;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       &-clickable {
         cursor:pointer;
@@ -35,7 +35,7 @@
       align-items:center;
       box-sizing:border-box;
       border-radius:50%;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       .@{vui-icon} {
         display:block;
@@ -48,7 +48,7 @@
       justify-content:center;
       align-items:center;
       box-sizing:border-box;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       .@{vui-icon} {
         display:block;
@@ -61,7 +61,7 @@
       display:block;
       box-sizing:border-box;
       border-radius:50%;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       &::after {
         content:"";
@@ -81,7 +81,7 @@
       display:block;
       box-sizing:border-box;
       line-height:@steps-item-title-line-height;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
 
       .writeEllipsis;
 
@@ -94,7 +94,7 @@
       display:block;
       box-sizing:border-box;
       line-height:@steps-item-description-line-height;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
     }
 
     &::after {
@@ -102,7 +102,7 @@
       position:absolute;
       display:block;
       box-sizing:border-box;
-      transition:all @transition-duration @transition-timing-function;
+      transition:all @transition-duration-4 @transition-timing-function-standard;
     }
   }
 
@@ -187,7 +187,7 @@
     width:0;
     height:2px;
     transform:translateX(-50%);
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
   }
   &-navigation&-horizontal &-item:not(:last-child)::after {
     right:0;
@@ -265,7 +265,7 @@
     width:2px;
     height:0;
     transform:translateY(-50%);
-    transition:all @transition-duration @transition-timing-function;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
   }
   &-navigation&-vertical &-item:not(:last-child)::after {
     left:50%;

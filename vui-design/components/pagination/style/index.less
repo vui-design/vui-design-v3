@@ -1,0 +1,373 @@
+@import "./token.less";
+
+.@{vui-pagination} {
+  display:block;
+  box-sizing:border-box;
+  color:@pagination-font-color;
+  line-height:1;
+  transition:all @transition-duration-4 @transition-timing-function-standard;
+
+  &-align-left {
+    text-align:left;
+  }
+  &-align-center {
+    text-align:center;
+  }
+  &-align-right {
+    text-align:right;
+  }
+
+  &-total {
+    display:inline-block;
+    box-sizing:border-box;
+    vertical-align:middle;
+  }
+
+  &-button {
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    box-sizing:border-box;
+    border:1px solid @pagination-item-border-color;
+    border-radius:@pagination-item-border-radius;
+    background-color:@pagination-item-background-color;
+    vertical-align:middle;
+    color:@pagination-font-color;
+    text-align:center;
+    user-select:none;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
+
+    &:hover {
+      border-color:@pagination-item-hover-border-color;
+      color:@pagination-item-hover-font-color;
+    }
+    &:focus {
+      border-color:@pagination-item-hover-border-color;
+      color:@pagination-item-hover-font-color;
+    }
+    &:active {
+      border-color:@pagination-item-active-border-color;
+      color:@pagination-item-active-font-color;
+    }
+    &&-disabled {
+      cursor:not-allowed;
+      border-color:@pagination-item-disabled-border-color;
+      color:@pagination-item-disabled-font-color;
+    }
+
+    svg {
+      position:absolute;
+      top:50%;
+      left:50%;
+      display:block;
+      width:0.75em;
+      height:0.75em;
+      fill:currentColor;
+      transform:translate(-50%, -50%);
+    }
+  }
+
+  &-item {
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    box-sizing:border-box;
+    border:1px solid @pagination-item-border-color;
+    border-radius:@pagination-item-border-radius;
+    background-color:@pagination-item-background-color;
+    vertical-align:middle;
+    color:@pagination-font-color;
+    text-align:center;
+    user-select:none;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
+
+    &:hover {
+      border-color:@pagination-item-hover-border-color;
+      color:@pagination-item-hover-font-color;
+    }
+    &:focus {
+      border-color:@pagination-item-hover-border-color;
+      color:@pagination-item-hover-font-color;
+    }
+    &:active,
+    &&-active {
+      border-color:@pagination-item-active-border-color;
+      color:@pagination-item-active-font-color;
+    }
+  }
+
+  &-ellipsis {
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    box-sizing:border-box;
+    border:1px solid transparent;
+    border-radius:@pagination-item-border-radius;
+    background-color:transparent;
+    vertical-align:middle;
+    color:@pagination-font-color;
+    text-align:center;
+    user-select:none;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
+
+    & &-icon {
+      position:absolute;
+      top:50%;
+      left:50%;
+      display:block;
+      opacity:0.45;
+      transform:translate(-50%, -50%);
+      transition:all @transition-duration-4 @transition-timing-function-standard;
+    }
+    & &-arrow {
+      position:absolute;
+      top:50%;
+      left:50%;
+      display:block;
+      width:0.75em;
+      height:0.75em;
+      fill:currentColor;
+      opacity:0;
+      transform:translate(-50%, -50%);
+      transition:all @transition-duration-4 @transition-timing-function-standard;
+    }
+
+    &:hover {
+      color:@pagination-item-hover-font-color;
+    }
+    &:hover &-icon {
+      opacity:0;
+    }
+    &:hover &-arrow {
+      opacity:1;
+    }
+    &:focus {
+      color:@pagination-item-hover-font-color;
+    }
+    &:focus &-icon {
+      opacity:0;
+    }
+    &:focus &-arrow {
+      opacity:1;
+    }
+    &:active {
+      color:@pagination-item-active-font-color;
+    }
+    &:active &-icon {
+      opacity:0;
+    }
+    &:active &-arrow {
+      opacity:1;
+    }
+  }
+
+  &-page-sizer {
+    display:inline-block;
+    box-sizing:border-box;
+    vertical-align:middle;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
+  }
+
+  &-page-jumper {
+    display:inline-block;
+    box-sizing:border-box;
+    vertical-align:middle;
+    transition:all @transition-duration-4 @transition-timing-function-standard;
+
+    & span {
+      float:left;
+      display:block;
+    }
+
+    & .@{vui}-input {
+      float:left;
+      display:block;
+    }
+    & .@{vui}-input .@{vui}-input-input input {
+      text-align:center;
+    }
+  }
+
+  &-small {
+    font-size:@pagination-font-size-sm;
+  }
+  &-small &-total {
+    height:@pagination-item-size-sm;
+    margin-right:@pagination-item-margin-sm * 2;
+    line-height:@pagination-item-size-sm;
+  }
+  &-small &-button {
+    min-width:@pagination-item-size-sm;
+    height:@pagination-item-size-sm;
+    padding:@pagination-item-padding-sm;
+    line-height:@pagination-item-size-sm - 2px;
+  }
+  &-small &-item {
+    min-width:@pagination-item-size-sm;
+    height:@pagination-item-size-sm;
+    margin-left:@pagination-item-margin-sm;
+    padding:@pagination-item-padding-sm;
+    line-height:@pagination-item-size-sm - 2px;
+  }
+  &-small &-item + &-button {
+    margin-left:@pagination-item-margin-sm;
+  }
+  &-small &-ellipsis {
+    min-width:@pagination-item-size-sm;
+    height:@pagination-item-size-sm;
+    margin-left:@pagination-item-margin-sm;
+    padding:@pagination-item-padding-sm;
+    line-height:@pagination-item-size-sm - 2px;
+  }
+  &-small &-page-sizer {
+    height:@pagination-item-size-sm;
+    margin-left:@pagination-item-margin-sm * 2;
+  }
+  &-small &-page-jumper {
+    height:@pagination-item-size-sm;
+    margin-left:@pagination-item-margin-sm * 2;
+    line-height:@pagination-item-size-sm;
+  }
+  &-small &-page-jumper .vui-input {
+    width:40px;
+    margin-left:@pagination-item-margin-sm;
+    margin-right:@pagination-item-margin-sm;
+  }
+
+  &-medium {
+    font-size:@pagination-font-size-md;
+  }
+  &-medium &-total {
+    height:@pagination-item-size-md;
+    margin-right:@pagination-item-margin-md * 2;
+    line-height:@pagination-item-size-md;
+  }
+  &-medium &-button {
+    min-width:@pagination-item-size-md;
+    height:@pagination-item-size-md;
+    padding:@pagination-item-padding-md;
+    line-height:@pagination-item-size-md - 2px;
+  }
+  &-medium &-item {
+    min-width:@pagination-item-size-md;
+    height:@pagination-item-size-md;
+    margin-left:@pagination-item-margin-md;
+    padding:@pagination-item-padding-md;
+    line-height:@pagination-item-size-md - 2px;
+  }
+  &-medium &-item + &-button {
+    margin-left:@pagination-item-margin-md;
+  }
+  &-medium &-ellipsis {
+    min-width:@pagination-item-size-md;
+    height:@pagination-item-size-md;
+    margin-left:@pagination-item-margin-md;
+    padding:@pagination-item-padding-md;
+    line-height:@pagination-item-size-md - 2px;
+  }
+  &-medium &-page-sizer {
+    height:@pagination-item-size-md;
+    margin-left:@pagination-item-margin-md * 2;
+  }
+  &-medium &-page-jumper {
+    height:@pagination-item-size-md;
+    margin-left:@pagination-item-margin-md * 2;
+    line-height:@pagination-item-size-md;
+  }
+  &-medium &-page-jumper .vui-input {
+    width:50px;
+    margin-left:@pagination-item-margin-md;
+    margin-right:@pagination-item-margin-md;
+  }
+
+  &-large {
+    font-size:@pagination-font-size-lg;
+  }
+  &-large &-total {
+    height:@pagination-item-size-lg;
+    margin-right:@pagination-item-margin-lg * 2;
+    line-height:@pagination-item-size-lg;
+  }
+  &-large &-button {
+    min-width:@pagination-item-size-lg;
+    height:@pagination-item-size-lg;
+    padding:@pagination-item-padding-lg;
+    line-height:@pagination-item-size-lg - 2px;
+  }
+  &-large &-item {
+    min-width:@pagination-item-size-lg;
+    height:@pagination-item-size-lg;
+    margin-left:@pagination-item-margin-lg;
+    padding:@pagination-item-padding-lg;
+    line-height:@pagination-item-size-lg - 2px;
+  }
+  &-large &-item + &-button {
+    margin-left:@pagination-item-margin-lg;
+  }
+  &-large &-ellipsis {
+    min-width:@pagination-item-size-lg;
+    height:@pagination-item-size-lg;
+    margin-left:@pagination-item-margin-lg;
+    padding:@pagination-item-padding-lg;
+    line-height:@pagination-item-size-lg - 2px;
+  }
+  &-large &-page-sizer {
+    height:@pagination-item-size-lg;
+    margin-left:@pagination-item-margin-lg * 2;
+  }
+  &-large &-page-jumper {
+    height:@pagination-item-size-lg;
+    margin-left:@pagination-item-margin-lg * 2;
+    line-height:@pagination-item-size-lg;
+  }
+  &-large &-page-jumper .vui-input {
+    width:60px;
+    margin-left:@pagination-item-margin-lg;
+    margin-right:@pagination-item-margin-lg;
+  }
+
+  &-simple &-button {
+    border-width:0;
+    background-color:transparent;
+  }
+  &-simple &-page-jumper {
+    margin-left:0;
+  }
+  &-simple &-page-jumper span {
+    margin-left:4px;
+  }
+  &-simple &-page-jumper .vui-input {
+    margin-left:0;
+    margin-right:0;
+  }
+
+  &-simple&-small &-button {
+    line-height:@pagination-item-size-sm;
+  }
+  &-simple&-small &-button-prev {
+    margin-right:@pagination-item-margin-sm;
+  }
+  &-simple&-small &-button-next {
+    margin-left:@pagination-item-margin-sm;
+  }
+
+  &-simple&-medium &-button {
+    line-height:@pagination-item-size-md;
+  }
+  &-simple&-medium &-button-prev {
+    margin-right:@pagination-item-margin-md;
+  }
+  &-simple&-medium &-button-next {
+    margin-left:@pagination-item-margin-md;
+  }
+
+  &-simple&-large &-button {
+    line-height:@pagination-item-size-lg;
+  }
+  &-simple&-large &-button-prev {
+    margin-right:@pagination-item-margin-lg;
+  }
+  &-simple&-large &-button-next {
+    margin-left:@pagination-item-margin-lg;
+  }
+}
