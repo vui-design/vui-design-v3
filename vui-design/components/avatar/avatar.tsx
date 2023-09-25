@@ -181,12 +181,16 @@ export default defineComponent({
       }
       else if (type.value === "text") {
         children = (
-          <div ref={avatarTextRef} class={classes.elChildren.value} style={styles.elChildren.value}>{context.slots.default?.()}</div>
+          <div ref={avatarTextRef} class={classes.elChildren.value} style={styles.elChildren.value}>
+            {context.slots.default?.()}
+          </div>
         );
       }
 
       return (
-        <div ref={avatarRef} class={classes.el.value} style={styles.el.value}>{children}</div>
+        <div ref={avatarRef} class={classes.el.value} style={styles.el.value}>
+          {children}
+        </div>
       );
     };
   }

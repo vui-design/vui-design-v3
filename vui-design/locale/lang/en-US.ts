@@ -1,21 +1,19 @@
 export default {
   locale: "en-US",
-  empty: {
-    description: "No Data"
-  },
-  image: {
-    error: "Loading failed"
-  },
-  form: {
-    optional: "(optional)"
+  pagination: {
+    prevPage: "Previous Page",
+    nextPage: "Next Page",
+    prevFivePage: "Previous 5 Pages",
+    nextFivePage: "Next 5 Pages",
+    total: "Total",
+    item: "item",
+    items: "items",
+    pageSize: "/ page",
+    goto: "Goto",
+    page: ""
   },
   cascader: {
     placeholder: "Select",
-    notFound: "No Data"
-  },
-  select: {
-    placeholder: "Select",
-    loading: "Loading...",
     notFound: "No Data"
   },
   datepicker: {
@@ -86,26 +84,28 @@ export default {
     placeholder: "Drag the mouse to select a time period",
     clear: "Clear"
   },
+  select: {
+    placeholder: "Select",
+    loading: "Loading...",
+    notFound: "No Data"
+  },
   transfer: {
     search: "Please enter search content",
     notFound: "No Data"
   },
-  cascadeTransfer: {
-    search: "Please enter search content",
-    notFound: "No Data",
-    clear: "Clear"
+  upload: {
+    buttonText: "Upload",
+    drag: "Click or drag the file here to upload",
+    dragover: "Release the file and upload"
   },
-  pagination: {
-    prevPage: "Previous Page",
-    nextPage: "Next Page",
-    prevFivePage: "Previous 5 Pages",
-    nextFivePage: "Next 5 Pages",
-    total: "Total",
-    item: "item",
-    items: "items",
-    pageSize: "/ page",
-    goto: "Goto",
-    page: ""
+  form: {
+    optional: "(optional)"
+  },
+  empty: {
+    description: "No Data"
+  },
+  image: {
+    error: "Loading failed"
   },
   qrcode: {
     expired: "QR code expired",

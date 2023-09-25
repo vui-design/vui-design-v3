@@ -1,0 +1,1 @@
+export const listTypes: string[] = ["text", "picture", "picture-card"];

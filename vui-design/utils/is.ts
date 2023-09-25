@@ -156,6 +156,16 @@ export const isError = function(value: any): boolean {
   return objToString.call(value) === "[object Error]";
 };
 
+// 检查给定的值是否是文件对象
+export const isFile = function(value: any): value is File {
+  return objToString.call(value) === "[object File]";
+};
+
+// 检查给定的值是否是 Blob 对象
+export const isBlob = function(value: any): value is Blob {
+  return objToString.call(value) === "[object Blob]";
+};
+
 // 检查给定的值是否为空，可用于判断参数列表、数组、对象或字符串是否为空
 export const isEmpty = function(value: any): boolean {
   if (isObject(value)) {
@@ -226,6 +236,8 @@ export default {
   json: isPlainObject,
   promise: isPromise,
   error: isError,
+  file: isFile,
+  blob: isBlob,
   empty: isEmpty,
   existy: isExisty,
   falsy: isFalsy,

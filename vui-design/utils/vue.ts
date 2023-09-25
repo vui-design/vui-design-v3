@@ -22,7 +22,7 @@ export const isElement = (vnode: VNode) => {
 };
 
 export const isEmptyElement = (element: any): boolean => {
-  return (element && (((element.type === Fragment || element.type === "template") && element.children.length === 0) || element.type === Comment || (element.type === Text && element.children.trim() === "")));
+  return (element && ((element.type === Fragment && element.children.length === 0) || element.type === Comment || (element.type === Text && element.children.trim() === "")));
 };
 
 export const isComponent = (vnode: VNode, type?: VNodeTypes): type is Component => {
@@ -67,7 +67,7 @@ export const flatten = (vnodes: VNode | VNode[] = [], ignoreEmptyElement = true)
     if (is.array(vnode)) {
       children.push(...flatten(vnode, ignoreEmptyElement));
     }
-    else if (vnode?.type === Fragment || vnode?.type === "template") {
+    else if (vnode?.type === Fragment) {
       children.push(...flatten(vnode.children as VNode[], ignoreEmptyElement));
     }
     else if (isVNode(vnode)) {
@@ -93,7 +93,7 @@ export const getChildren = (vnodes: any[] = []) => {
     if (is.array(vnode)) {
       children.push(...vnode);
     }
-    else if (vnode?.type === Fragment || vnode?.type === "template") {
+    else if (vnode?.type === Fragment) {
       children.push(...getChildren(vnode.children));
     }
     else {

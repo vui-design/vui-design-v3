@@ -345,15 +345,15 @@ export default [
   //       },
   //       component: () => import("src/views/transfer/index.vue")
   //     },
-  //     {
-  //       path: "/components/upload",
-  //       name: "upload",
-  //       meta: {
-  //         title: "Upload",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/upload/index.vue")
-  //     },
+      {
+        path: "/components/upload",
+        name: "upload",
+        meta: {
+          title: "Upload",
+          group: "data-entry"
+        },
+        component: () => import("src/views/upload/index.vue")
+      },
       // 数据展示组件
       {
         path: "/components/avatar",

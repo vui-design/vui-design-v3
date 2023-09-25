@@ -1,21 +1,19 @@
 export default {
   locale: "zh-CN",
-  empty: {
-    description: "暂无数据"
-  },
-  image: {
-    error: "加载失败"
-  },
-  form: {
-    optional: "(可选)"
+  pagination: {
+    prevPage: "上一页",
+    nextPage: "下一页",
+    prevFivePage: "向前 5 页",
+    nextFivePage: "向后 5 页",
+    total: "共",
+    item: "条",
+    items: "条",
+    pageSize: "条/页",
+    goto: "跳至",
+    page: "页"
   },
   cascader: {
     placeholder: "请选择",
-    notFound: "暂无数据"
-  },
-  select: {
-    placeholder: "请选择",
-    loading: "加载中...",
     notFound: "暂无数据"
   },
   datepicker: {
@@ -86,26 +84,28 @@ export default {
     placeholder: "可拖动鼠标选择时间段",
     clear: "清空"
   },
+  select: {
+    placeholder: "请选择",
+    loading: "加载中...",
+    notFound: "暂无数据"
+  },
   transfer: {
     search: "请输入搜索内容",
     notFound: "暂无数据"
   },
-  cascadeTransfer: {
-    search: "请输入搜索内容",
-    notFound: "暂无数据",
-    clear: "清空"
+  upload: {
+    buttonText: "点击上传",
+    drag: "点击或拖拽文件到此处上传",
+    dragover: "释放文件并开始上传"
   },
-  pagination: {
-    prevPage: "上一页",
-    nextPage: "下一页",
-    prevFivePage: "向前 5 页",
-    nextFivePage: "向后 5 页",
-    total: "共",
-    item: "条",
-    items: "条",
-    pageSize: "条/页",
-    goto: "跳至",
-    page: "页"
+  form: {
+    optional: "(可选)"
+  },
+  empty: {
+    description: "暂无数据"
+  },
+  image: {
+    error: "加载失败"
   },
   qrcode: {
     expired: "二维码已过期",
