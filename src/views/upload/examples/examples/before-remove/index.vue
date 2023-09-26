@@ -1,6 +1,6 @@
 <template>
   <vui-example id="example-upload-before-remove" v-bind:code="code">
-    <template v-slot:title>移除前校验</template>
+    <template v-slot:title>移除前询问</template>
     <template v-slot:description>
       <p>钩子函数 <code>beforeRemove</code> 会在每一个文件被移除之前执行；如果返回 <code>false</code> 或者 <code>Promise.reject</code>， 那么将会取消当前的移除操作。</p>
     </template>

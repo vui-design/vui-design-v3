@@ -450,7 +450,7 @@ export default {
       "example-upload-manually": "手动上传",
       "example-upload-upload-png-only": "只上传 png 图片",
       "example-upload-transform-file": "上传前转换文件",
-      "example-upload-before-remove": "移除前校验",
+      "example-upload-before-remove": "移除前询问",
       "api-upload-props": "Upload 属性",
       "api-upload-events": "Upload 事件",
       "api-upload-methods": "Upload 方法",
