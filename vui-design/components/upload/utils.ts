@@ -95,7 +95,7 @@ const getDirectoryFiles = (e: DragEvent, accept: string, callback: (files: File[
 };
 
 /**
-* 获取等待上传的文件列表
+* 获取选择的文件列表
 * @param {Event | DragEvent} e 事件对象
 * @param {Boolean} multiple 是否支持多文件上传
 * @param {Number} accept 接受上传的文件类型
@@ -122,7 +122,7 @@ const getSelectedFiles = (e: Event | DragEvent, multiple: boolean, accept: strin
 };
 
 /**
-* 获取等待上传的文件
+* 获取选择的文件
 * @param {File} file 原始文件对象
 * @param {String} listType 文件列表展示类型
 */
