@@ -2,9 +2,9 @@ import type { ListType, UploadFile } from "./types";
 import guid from "../../utils/guid";
 
 /**
-* 判断是否为允许被上传的文件类型
+* 判断是否为允许上传的文件类型
 * @param {File} file 原始文件对象
-* @param {String} accept 允许被上传的文件类型
+* @param {String} accept 允许上传的文件类型
 */
 const isAcceptFile = (file: File, accept: string) => {
   const name = file.name;
@@ -27,6 +27,98 @@ const isAcceptFile = (file: File, accept: string) => {
 
     return false;
   });
+};
+
+/**
+* 获取文件夹下的所有文件列表
+* @param {DragEvent} e 事件对象
+* @param {String} accept 允许上传的文件类型
+* @param {Function} callback 回调函数
+*/
+const getDirectoryFiles = (e: DragEvent, accept: string, callback: (files: File[]) => void) => {
+  const files: File[] = [];
+  const onFinish = () => !restFileCount && callback(files);
+  let restFileCount = 0;
+
+  const loop = (item: FileSystemEntry | null) => {
+    restFileCount += 1;
+
+    if (item?.isFile) {
+      (item as FileSystemFileEntry).file((file: File) => {
+        restFileCount -= 1;
+
+        if (!accept || isAcceptFile(file, accept)) {
+          Object.defineProperty(file, "webkitRelativePath", {
+            value: item.fullPath.replace(/^\//, "")
+          });
+
+          files.push(file);
+        }
+
+        onFinish();
+      });
+    }
+    else if (item?.isDirectory) {
+      const reader = (item as FileSystemDirectoryEntry).createReader();
+      let flag = false;
+
+      const readEntries = () => {
+        reader.readEntries((entries) => {
+          if (!flag) {
+            restFileCount -= 1;
+            flag = true;
+          }
+
+          if (entries.length === 0) {
+            onFinish();
+          }
+          else {
+            readEntries();
+            entries.forEach(loop);
+          }
+        });
+      };
+
+      readEntries();
+    }
+    else {
+      restFileCount -= 1;
+      onFinish();
+    }
+  };
+
+  Array.prototype.slice.call(((e as DragEvent).dataTransfer as DataTransfer).items).forEach((item: DataTransferItem) => {
+    if (item.webkitGetAsEntry) {
+      loop(item.webkitGetAsEntry());
+    }
+  });
+};
+
+/**
+* 获取等待上传的文件列表
+* @param {Event | DragEvent} e 事件对象
+* @param {Boolean} multiple 是否支持多文件上传
+* @param {Number} accept 接受上传的文件类型
+*/
+const getSelectedFiles = (e: Event | DragEvent, multiple: boolean, accept: string) => {
+  let files: File[] = [];
+
+  if (e.type === "change") {
+    files = Array.prototype.slice.call((e.target as HTMLInputElement).files);
+  }
+  else if (e.type === "drop") {
+    files = Array.prototype.slice.call(((e as DragEvent).dataTransfer as DataTransfer).files);
+  }
+
+  if (accept) {
+    files = files.filter(file => isAcceptFile(file, accept));
+  }
+
+  if (!multiple && files.length > 1) {
+    files = files.slice(0, 1);
+  }
+
+  return files;
 };
 
 /**
@@ -64,35 +156,11 @@ const getSelectedFile = (file: File, listType: ListType) => {
 };
 
 /**
-* 获取等待上传的文件列表
-* @param {Event | DragEvent} e 事件对象
-* @param {Object} options 选项
+* 获取已选择或已上传的文件列表
+* @param {UploadFile[]} fileList 文件列表
 */
-const getSelectedFiles = (e: Event | DragEvent, options: Record<string, unknown>) => {
-  let files: File[] = [];
-
-  if (e.type === "change") {
-    files = Array.prototype.slice.call((e.target as HTMLInputElement).files);
-  }
-  else if (e.type === "drop") {
-    if (options.directory) {
-      console.log(e);
-      console.log(e.dataTransfer.items);
-    }
-    else {
-      files = Array.prototype.slice.call(((e as DragEvent).dataTransfer as DataTransfer).files);
-    }
-  }
-
-  if (options.accept) {
-    files = files.filter(file => isAcceptFile(file, options.accept as string));
-  }
-
-  if (options.directory) {
-    return files;
-  }
-
-  return !options.multiple && files.length > 1 ? files.slice(0, 1) : files;
+const getFileList = (fileList: UploadFile[] = []) => {
+  return fileList.map(file => getFile(file));
 };
 
 /**
@@ -118,19 +186,12 @@ const getFile = (file: UploadFile) => {
 };
 
 /**
-* 获取已选择或已上传的文件列表
-* @param {UploadFile[]} fileList 文件列表
-*/
-const getFileList = (fileList: UploadFile[] = []) => {
-  return fileList.map(file => getFile(file));
-};
-
-/**
 * 默认导出指定接口
 */
 export default {
-  getSelectedFile,
+  getDirectoryFiles,
   getSelectedFiles,
-  getFile,
-  getFileList
+  getSelectedFile,
+  getFileList,
+  getFile
 };

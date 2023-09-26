@@ -235,15 +235,20 @@ export default defineComponent({
 
       dragover.value = false;
 
-      const files: File[] = utils.getSelectedFiles(e, {
-        multiple: props.multiple,
-        directory: props.directory,
-        accept: props.accept
-      });
-
-      files.forEach(file => {
-        handleProcess(file);
-      });
+      if (props.directory) {
+        utils.getDirectoryFiles(e, props.accept, files => {
+          files.forEach(file => {
+            handleProcess(file);
+          });
+        });
+      }
+      else {
+        const files: File[] = utils.getSelectedFiles(e, props.multiple, props.accept);
+  
+        files.forEach(file => {
+          handleProcess(file);
+        });
+      }
     };
 
     // onInputChange 事件回调
@@ -252,11 +257,7 @@ export default defineComponent({
         return;
       }
 
-      const files: File[] = utils.getSelectedFiles(e, {
-        multiple: props.multiple,
-        directory: props.directory,
-        accept: props.accept
-      });
+      const files: File[] = utils.getSelectedFiles(e, props.multiple || props.directory, props.accept);
 
       files.forEach(file => {
         handleProcess(file);
