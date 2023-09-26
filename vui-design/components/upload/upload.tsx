@@ -49,13 +49,13 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 是否支持拖拽上传
-    draggable: {
+    // 是否支持多文件上传
+    multiple: {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 是否支持多文件上传
-    multiple: {
+    // 是否支持拖拽上传
+    draggable: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -206,10 +206,8 @@ export default defineComponent({
       if (index > -1) {
         return;
       }
-      console.log(123, uploadFile)
 
       uploadFileList.push(uploadFile);
-      console.log(321, uploadFileList)
 
       context.emit("select", uploadFileList, uploadFile);
       handleChange(uploadFileList, uploadFile);
@@ -329,8 +327,8 @@ export default defineComponent({
             classPrefix={props.classPrefix}
             listType={props.listType}
             extra={props.extra}
-            draggable={props.draggable}
             multiple={props.multiple}
+            draggable={props.draggable}
             directory={props.directory}
             accept={props.accept}
             request={props.request}

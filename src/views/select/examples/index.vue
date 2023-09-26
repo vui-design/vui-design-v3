@@ -1,21 +1,25 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-multiple />
-    <vui-example-size />
-    <vui-example-searchable />
-    <vui-example-remote-search />
-    <vui-example-users />
-    <vui-example-bordered />
-    <vui-example-clearable />
-    <vui-example-disabled />
-    <vui-example-group />
-    <vui-example-coordinate />
-    <vui-example-backfill-option-prop />
-    <vui-example-max-tag-count />
-    <vui-example-hide-selected-options />
-    <vui-example-big-data />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-multiple />
+      <vui-example-size />
+      <vui-example-searchable />
+      <vui-example-remote-search />
+      <vui-example-users />
+      <vui-example-bordered />
+      <vui-example-clearable />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-disabled />
+      <vui-example-group />
+      <vui-example-coordinate />
+      <vui-example-backfill-option-prop />
+      <vui-example-max-tag-count />
+      <vui-example-hide-selected-options />
+      <vui-example-big-data />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

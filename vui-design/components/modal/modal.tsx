@@ -195,12 +195,12 @@ export const createProps = () => {
     },
     // 点击取消按钮（或右上角关闭按钮、背景遮罩）的事件回调函数
     onCancel: {
-      type: Function as PropType<() => any>,
+      type: Function as PropType<(id: string | number) => any>,
       default: undefined
     },
     // 点击确定按钮的事件回调函数
     onOk: {
-      type: Function as PropType<() => any>,
+      type: Function as PropType<(id: string | number) => any>,
       default: undefined
     }
   };
@@ -316,7 +316,7 @@ export default defineComponent({
 
     // 点击取消按钮时的事件回调
     const handleCancel = () => {
-      const hook = props.onCancel?.();
+      const hook = props.onCancel?.(props.id as string | number);
 
       if (is.boolean(hook) && hook === false) {
         return;
@@ -339,7 +339,7 @@ export default defineComponent({
 
     // 点击确定按钮时的事件回调
     const handleOk = () => {
-      const hook = props.onOk?.();
+      const hook = props.onOk?.(props.id as string | number);
 
       if (is.boolean(hook) && hook === false) {
         return;

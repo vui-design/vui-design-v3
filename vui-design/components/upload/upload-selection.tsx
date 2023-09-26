@@ -31,13 +31,13 @@ export const createProps = () => {
       type: String as PropType<string>,
       default: undefined
     },
-    // 是否支持拖拽上传
-    draggable: {
+    // 是否支持多文件上传
+    multiple: {
       type: Boolean as PropType<boolean>,
       default: false
     },
-    // 是否支持多文件上传
-    multiple: {
+    // 是否支持拖拽上传
+    draggable: {
       type: Boolean as PropType<boolean>,
       default: false
     },
@@ -235,7 +235,11 @@ export default defineComponent({
 
       dragover.value = false;
 
-      const files: File[] = utils.getSelectedFiles(e, props.multiple, props.accept);
+      const files: File[] = utils.getSelectedFiles(e, {
+        multiple: props.multiple,
+        directory: props.directory,
+        accept: props.accept
+      });
 
       files.forEach(file => {
         handleProcess(file);
@@ -248,7 +252,11 @@ export default defineComponent({
         return;
       }
 
-      const files: File[] = utils.getSelectedFiles(e, props.multiple, props.accept);
+      const files: File[] = utils.getSelectedFiles(e, {
+        multiple: props.multiple,
+        directory: props.directory,
+        accept: props.accept
+      });
 
       files.forEach(file => {
         handleProcess(file);
@@ -384,10 +392,11 @@ export default defineComponent({
             type="file"
             key={inputKey.value}
             ref={inputRef}
-            multiple={props.multiple}
             accept={props.accept}
+            multiple={props.multiple}
             disabled={props.disabled}
             onChange={handleInputChange}
+            {...props.directory ? { directory: "directory", webkitdirectory: "webkitdirectory" } : {}}
           />
           {button}
         </div>

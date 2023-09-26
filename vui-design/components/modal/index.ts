@@ -33,6 +33,8 @@ class ModalManger {
     const vm = createVNode(ModalList, {
       classPrefix,
       modals: this.modals.value,
+      onCancel: this.close,
+      onOk: this.close,
       onBeforeOpen: noop,
       onOpen: noop,
       onAfterOpen: noop,
@@ -66,19 +68,8 @@ class ModalManger {
 
     return {
       update: (next: ModalConfig) => this.update(id, next),
-      close: () => this.update(id, { visible: false })
+      close: () => this.close(id)
     };
-  };
-
-  remove = (id: string | number) => {
-    const index = this.modals.value.findIndex(modal => modal.id === id);
-
-    if (index > -1) {
-      this.modalIds.delete(id);
-      this.modals.value.splice(index, 1);
-    }
-
-    this.destroy();
   };
 
   update = (id: string | number, config: ModalConfig) => {
@@ -94,8 +85,23 @@ class ModalManger {
 
     return {
       update: (next: ModalConfig) => this.update(id, next),
-      close: () => this.update(id, { visible: false })
+      close: () => this.close(id)
     };
+  };
+
+  close = (id: string | number) => {
+    this.update(id, { visible: false });
+  };
+
+  remove = (id: string | number) => {
+    const index = this.modals.value.findIndex(modal => modal.id === id);
+
+    if (index > -1) {
+      this.modalIds.delete(id);
+      this.modals.value.splice(index, 1);
+    }
+
+    this.destroy();
   };
 
   clear = () => {

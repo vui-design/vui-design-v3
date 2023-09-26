@@ -14,21 +14,20 @@ const code =
 </template>
 
 <script lang="ts">
-  import type { UploadFile } from "vui-design";;
+  import type { UploadFile } from "vui-design";
   import { defineComponent, ref } from "vue";
   import { Message } from "vui-design";
 
-  function getBase64(image, callback) {
+  const getBase64 = (image: File, callback: (url: string | ArrayBuffer) => void) => {
     let reader = new FileReader();
 
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(image);
-  }
+  };
 
   export default defineComponent({
     setup() {
       const avatar = ref<string>("");
-      const uploading = ref<boolean>(false);
 
       const beforeUpload = (file: File) => {
         let isJPG = file.type === "image/jpeg";
@@ -47,20 +46,13 @@ const code =
       };
 
       const handleChange = (newFileList: UploadFile[], newFile: UploadFile) => {
-        if (newFile.status === "progress") {
-          uploading.value = true;
-        }
-        else if (newFile.status === "success") {
-          getBase64(newFile.rawFile, url => {
-            avatar.value = url;
-            uploading.value = false;
-          });
+        if (newFile.status === "success") {
+          getBase64(newFile.rawFile, url => avatar.value = url as string);
         }
       };
 
       return {
         avatar,
-        uploading,
         beforeUpload,
         handleChange
       };

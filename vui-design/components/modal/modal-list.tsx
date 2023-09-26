@@ -19,6 +19,16 @@ export const createProps = () => {
       type: Array as PropType<ModalConfig[]>,
       default: () => []
     },
+    // 点击取消按钮（或右上角关闭按钮、背景遮罩）的事件回调函数
+    onCancel: {
+      type: Function as PropType<(id: string | number) => any>,
+      default: undefined
+    },
+    // 点击确定按钮的事件回调函数
+    onOk: {
+      type: Function as PropType<(id: string | number) => any>,
+      default: undefined
+    },
     // 打开前事件回调
     onBeforeOpen: {
       type: Function as PropType<(id: string | number) => any>,
@@ -59,6 +69,8 @@ export default defineComponent({
   props: createProps(),
   setup(props, context) {
     // 
+    const handleCancel = (id: string | number) => props.onCancel?.(id);
+    const handleOk = (id: string | number) => props.onOk?.(id);
     const handleBeforeOpen = (id: string | number) => props.onBeforeOpen?.(id);
     const handleOpen = (id: string | number) => props.onOpen?.(id);
     const handleAfterOpen = (id: string | number) => props.onAfterOpen?.(id);
@@ -75,6 +87,8 @@ export default defineComponent({
         <>
           {
             props.modals.map((modal: ModalConfig) => {
+              const onCancel = createChainedFunction(handleCancel, modal.onCancel);
+              const onOk = createChainedFunction(handleOk, modal.onOk);
               const onBeforeOpen = createChainedFunction(handleBeforeOpen, modal.onBeforeOpen);
               const onOpen = createChainedFunction(handleOpen, modal.onOpen);
               const onAfterOpen = createChainedFunction(handleAfterOpen, modal.onAfterOpen);
@@ -109,8 +123,8 @@ export default defineComponent({
                 footerStyle: modal.footerStyle,
                 backdropClassName: modal.backdropClassName,
                 backdropStyle: modal.backdropStyle,
-                onCancel: modal.onCancel,
-                onOk: modal.onOk,
+                onCancel,
+                onOk,
                 onBeforeOpen,
                 onOpen,
                 onAfterOpen,

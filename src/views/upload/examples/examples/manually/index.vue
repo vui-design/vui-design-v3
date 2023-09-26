@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-  import type { UploadFile } from "vui-design";;
+  import type { UploadFile } from "vui-design";
   import { defineComponent, ref } from "vue";
   import VuiExample from "../../../../../components/example/index.vue";
   import code from "./code";

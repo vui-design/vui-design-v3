@@ -2,7 +2,7 @@
   <vui-example id="example-upload-picture-card" v-bind:code="code">
     <template v-slot:title>照片墙</template>
     <template v-slot:description>
-      <p>用户可以上传图片并在列表中显示缩略图。当上传照片数到达限制后，上传按钮消失。</p>
+      <p>用户可以上传图片并在列表中显示缩略图，当上传照片数到达限制后，上传按钮消失。</p>
     </template>
     <template v-slot:demo>
       <vui-upload
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-  import type { UploadFile } from "vui-design";;
+  import type { UploadFile } from "vui-design";
   import { defineComponent, ref } from "vue";
   import VuiExample from "../../../../../components/example/index.vue";
   import code from "./code";

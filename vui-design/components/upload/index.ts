@@ -8,7 +8,7 @@ Upload.install = function(app: App) {
 };
 
 export type { UploadProps } from "./upload";
-export type { UploadFile, UploadRequestOptions, UploadRequest } from "./types";
+export type { UploadFile, UploadRequest, UploadRequestOptions } from "./types";
 
 export { createProps as createUploadProps } from "./upload";
 

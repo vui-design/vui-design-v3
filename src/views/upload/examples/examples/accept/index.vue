@@ -1,19 +1,16 @@
 <template>
-  <vui-example id="example-upload-draggable" v-bind:code="code">
-    <template v-slot:title>拖拽上传</template>
+  <vui-example id="example-upload-accept" v-bind:code="code">
+    <template v-slot:title>允许上传的文件类型</template>
     <template v-slot:description>
-      <p>把文件拖入指定区域完成上传，同样支持点击上传；设置 <code>multiple</code> 后，可以一次上传多个文件。</p>
+      <p>使用 <code>accept</code> 属性控制允许上传的文件类型，详见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input/file#accept" target="_blank">HTML标准</a>。</p>
     </template>
     <template v-slot:demo>
       <vui-upload
         action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
         v-model:fileList="fileList"
-        v-bind:multiple="multiple"
-        v-bind:draggable="draggable"
+        v-bind:accept="accept"
         v-on:change="handleChange"
-      >
-        <template v-slot:extra>Only JPG / PNG files can be uploaded, and no more than 500kb</template>
-      </vui-upload>
+      />
     </template>
   </vui-example>
 </template>
@@ -30,8 +27,7 @@
     },
     setup() {
       const fileList = ref<UploadFile[]>([]);
-      const multiple = ref<boolean>(true);
-      const draggable = ref<boolean>(true);
+      const accept = ref<string>("image/jpeg, image/png");
       const handleChange = (newFileList: UploadFile[], newFile: UploadFile) => {
         console.log(newFileList);
       };
@@ -39,8 +35,7 @@
       return {
         code,
         fileList,
-        multiple,
-        draggable,
+        accept,
         handleChange
       };
     }

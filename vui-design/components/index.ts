@@ -84,7 +84,7 @@ export { default as Textarea } from "./textarea";
 // export type { TransferProps } from "./transfer";
 // export { default as Transfer } from "./transfer";
 
-export type { UploadProps, UploadFile, UploadRequestOptions, UploadRequest } from "./upload";
+export type { UploadProps, UploadFile, UploadRequest, UploadRequestOptions } from "./upload";
 export { default as Upload } from "./upload";
 
 // Data Display

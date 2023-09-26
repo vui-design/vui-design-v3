@@ -55,18 +55,18 @@
           <td>额外内容，位于选择按钮右侧，可用于设置描述信息或手动上传按钮</td>
         </tr>
         <tr>
-          <td>draggable</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>N</td>
-          <td>是否支持拖拽上传</td>
-        </tr>
-        <tr>
           <td>multiple</td>
           <td>Boolean</td>
           <td>false</td>
           <td>N</td>
           <td>是否支持多文件上传</td>
+        </tr>
+        <tr>
+          <td>draggable</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>N</td>
+          <td>是否支持拖拽上传</td>
         </tr>
         <tr>
           <td>directory</td>

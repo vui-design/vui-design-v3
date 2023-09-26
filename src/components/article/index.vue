@@ -101,17 +101,17 @@
   .vui-article { color:rgba(0,0,0,0.85); font-size:14px; line-height:2; }
 
   .vui-article-header { position:relative; z-index:1; border-bottom:1px solid #f0f0f0; background:url("../../assets/images/components.png") no-repeat calc(100% - 32px) 0; padding:32px 304px 56px 32px; }
-  .vui-article-header-content { max-width:1080px; margin:0 auto; }
+  .vui-article-header-content { max-width:1200px; margin:0 auto; }
   .vui-article-header-content h1 { margin:0; font-size:48px; font-weight:700; }
   .vui-article-header-content p { margin:0; color:rgba(0,0,0,0.65); }
 
   .vui-article-segments { position:relative; z-index:2; height:0; padding:0 304px 0 32px; }
-  .vui-article-segments-content { max-width:1080px; margin:0 auto; transform:translate(0, -50%); }
+  .vui-article-segments-content { max-width:1200px; margin:0 auto; transform:translate(0, -50%); }
   .vui-article-segments-content .vui-segments-large {  }
   .vui-article-segments-content .vui-segments-large .vui-segments-item { padding:0 32px; }
 
   .vui-article-body { position:relative; z-index:1; padding:56px 304px 32px 32px; }
-  .vui-article-body-content { max-width:1080px; margin:0 auto; }
+  .vui-article-body-content { max-width:1200px; margin:0 auto; }
   .vui-article-body-content h2 { font-size:20px; font-weight:600; }
   .vui-article-body-content h3 { font-size:16px; font-weight:600; }
   .vui-article-body-content p { font-size:14px; }

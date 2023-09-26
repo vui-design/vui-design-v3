@@ -19,6 +19,10 @@ export interface UploadFile {
   rawFile?: File;
 };
 
+export interface UploadRequest extends XMLHttpRequest {
+
+};
+
 export interface UploadRequestOptions {
   action: string;
   name: string;
@@ -29,8 +33,4 @@ export interface UploadRequestOptions {
   onProgress: (progress: ProgressEvent) => void;
   onSuccess: (response?: any) => void;
   onError: (error?: Error | ProgressEvent) => void;
-};
-
-export interface UploadRequest extends XMLHttpRequest {
-
 };

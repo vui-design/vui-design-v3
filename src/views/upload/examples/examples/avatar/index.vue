@@ -21,18 +21,18 @@
 </template>
 
 <script lang="ts">
-  import type { UploadFile } from "vui-design";;
+  import type { UploadFile } from "vui-design";
   import { defineComponent, ref } from "vue";
   import { Message } from "vui-design";
   import VuiExample from "../../../../../components/example/index.vue";
   import code from "./code";
 
-  function getBase64(image, callback) {
+  const getBase64 = (image: File, callback: (url: string | ArrayBuffer) => void) => {
     let reader = new FileReader();
 
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(image);
-  }
+  };
 
   export default defineComponent({
     components: {
@@ -59,7 +59,7 @@
 
       const handleChange = (newFileList: UploadFile[], newFile: UploadFile) => {
         if (newFile.status === "success") {
-          getBase64(newFile.rawFile, url => avatar.value = url);
+          getBase64(newFile.rawFile, url => avatar.value = url as string);
         }
       };
 
