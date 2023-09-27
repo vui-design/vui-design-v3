@@ -2,6 +2,7 @@
 
 .@{vui-space} {
   display:inline-flex;
+  transition:all @transition-duration-4 @transition-timing-function-standard;
   
   &-block {
     display:flex;
@@ -12,6 +13,7 @@
   }
 
   &-divider {
+    flex:0 0 auto;
     display:block;
     width:@space-divider-width;
     height:@space-divider-height;

@@ -59,5 +59,5 @@
 </script>
 
 <style>
-  .example-select-size .vui-space { margin-top:32px; }
+  .example-select-size .vui-space { margin-top:24px; }
 </style>

@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-placement />
-    <vui-example-headless-and-footless />
-    <vui-example-button-props />
-    <vui-example-hide-close-button />
-    <vui-example-promise />
-    <vui-example-customized-footer />
-    <vui-example-multi-level />
-    <vui-example-get-popup-container />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-placement />
+      <vui-example-headless-and-footless />
+      <vui-example-button-props />
+      <vui-example-hide-close-button />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-promise />
+      <vui-example-customized-footer />
+      <vui-example-multi-level />
+      <vui-example-get-popup-container />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

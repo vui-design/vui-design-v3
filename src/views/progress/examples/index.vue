@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <vui-example-line />
-    <vui-example-line-small />
-    <vui-example-circle />
-    <vui-example-circle-small />
-    <vui-example-circle-micro />
-    <vui-example-dashboard />
-    <vui-example-dynamic />
-    <vui-example-segment />
-    <vui-example-formatter />
-    <vui-example-stroke-color />
-    <vui-example-stroke-linecap />
-    <vui-example-steps />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-line />
+      <vui-example-line-small />
+      <vui-example-circle />
+      <vui-example-circle-small />
+      <vui-example-circle-micro />
+      <vui-example-dashboard />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-dynamic />
+      <vui-example-segment />
+      <vui-example-formatter />
+      <vui-example-stroke-color />
+      <vui-example-stroke-linecap />
+      <vui-example-steps />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

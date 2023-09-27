@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-size />
-    <vui-example-inside />
-    <vui-example-nested />
-    <vui-example-delay />
-    <vui-example-indicator />
-    <vui-example-message />
-    <vui-example-fullscreen />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-size />
+      <vui-example-inside />
+      <vui-example-nested />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-delay />
+      <vui-example-indicator />
+      <vui-example-message />
+      <vui-example-fullscreen />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

@@ -28,7 +28,7 @@ const code =
 </template>
 
 <style>
-  .example-badge-colorful + .example-badge-colorful { margin-top:32px; }
+  .example-badge-colorful + .example-badge-colorful { margin-top:24px; }
   .example-badge-colorful .vui-divider { margin-top:0; }
   .example-badge-colorful .vui-badge { display:block; }
   .example-badge-colorful .vui-badge + .vui-badge { margin-top:12px; }

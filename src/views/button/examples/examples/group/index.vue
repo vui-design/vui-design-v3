@@ -87,7 +87,7 @@
 
 <style>
   .example-button-group { line-height:1; }
-  .example-button-group + .example-button-group { margin-top:32px; }
+  .example-button-group + .example-button-group { margin-top:24px; }
   .example-button-group .vui-divider { margin-top:0; }
   .example-button-group .vui-button-group + .vui-button-group { margin-left:12px; }
 </style>

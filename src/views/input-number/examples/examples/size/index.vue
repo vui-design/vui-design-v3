@@ -41,5 +41,5 @@
 </script>
 
 <style>
-  .example-input-number-size .vui-input-number { margin-top:32px; }
+  .example-input-number-size .vui-input-number { margin-top:24px; }
 </style>

@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-placement />
-    <vui-example-type />
-    <vui-example-colorful />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-placement />
+      <vui-example-type />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-colorful />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

@@ -40,6 +40,6 @@
 </script>
 
 <style>
-  .example-input-size .vui-segments + .vui-input { margin-top:32px; }
+  .example-input-size .vui-segments + .vui-input { margin-top:24px; }
   .example-input-size .vui-input + .vui-input { margin-top:24px; }
 </style>

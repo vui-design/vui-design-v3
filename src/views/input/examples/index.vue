@@ -1,18 +1,22 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-bordered />
-    <vui-example-size />
-    <vui-example-show-count />
-    <vui-example-clearable />
-    <vui-example-addon />
-    <vui-example-affix />
-    <vui-example-disabled />
-    <vui-example-tooltip />
-    <vui-example-password />
-    <vui-example-search />
-    <vui-example-group />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-bordered />
+      <vui-example-size />
+      <vui-example-show-count />
+      <vui-example-clearable />
+      <vui-example-addon />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-affix />
+      <vui-example-disabled />
+      <vui-example-tooltip />
+      <vui-example-password />
+      <vui-example-search />
+      <vui-example-group />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

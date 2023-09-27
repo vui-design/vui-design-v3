@@ -1,19 +1,23 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-headless-and-footless />
-    <vui-example-button-props />
-    <vui-example-hide-close-button />
-    <vui-example-width />
-    <vui-example-position />
-    <vui-example-fullscreen />
-    <vui-example-draggable />
-    <vui-example-promise />
-    <vui-example-customized-footer />
-    <vui-example-confirm />
-    <vui-example-infomation />
-    <vui-example-update-and-close />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-headless-and-footless />
+      <vui-example-button-props />
+      <vui-example-hide-close-button />
+      <vui-example-width />
+      <vui-example-position />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-fullscreen />
+      <vui-example-draggable />
+      <vui-example-promise />
+      <vui-example-customized-footer />
+      <vui-example-confirm />
+      <vui-example-infomation />
+      <vui-example-update-and-close />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

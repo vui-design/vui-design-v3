@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-type />
-    <vui-example-interval />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-type />
+      <vui-example-interval />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

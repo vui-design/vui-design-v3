@@ -49,5 +49,5 @@
 
 <style>
   .example-space-gutter .vui-space { margin-top:16px; }
-  .example-space-gutter .vui-segments + .vui-space { margin-top:32px; }
+  .example-space-gutter .vui-segments + .vui-space { margin-top:24px; }
 </style>

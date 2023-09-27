@@ -72,7 +72,7 @@ const code =
 </template>
 
 <style>
-  .example-tooltip-colorful + .example-tooltip-colorful { margin-top:32px; }
+  .example-tooltip-colorful + .example-tooltip-colorful { margin-top:24px; }
   .example-tooltip-colorful .vui-divider { margin-top:0; }
   .example-tooltip-colorful .vui-tooltip-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:12px; }
 </style>

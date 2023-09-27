@@ -1,6 +1,6 @@
 const code =
 `<template>
-  <div class="example-dropdown-button">
+  <vui-space block>
     <vui-dropdown-button v-on:click="handleClick">
       Button
       <template v-slot:menu>
@@ -34,7 +34,7 @@ const code =
         </vui-menu>
       </template>
     </vui-dropdown-button>
-  </div>
+  </vui-space>
 </template>
 
 <script lang="ts">

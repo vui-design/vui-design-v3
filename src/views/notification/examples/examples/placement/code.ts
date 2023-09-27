@@ -30,7 +30,7 @@ const code =
 </script>
 
 <style>
-  .example-notification-placement .vui-button + .vui-button { margin-left:16px; }
+  .example-notification-placement { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:16px; }
 </style>
 `;
 

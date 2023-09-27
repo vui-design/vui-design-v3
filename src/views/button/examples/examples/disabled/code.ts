@@ -1,28 +1,27 @@
 const code =
 `<template>
   <div class="example-button-disabled">
-    <section>
+    <vui-space block>
       <vui-button type="primary">Primary</vui-button>
       <vui-button type="primary" disabled>Primary(disabled)</vui-button>
-    </section>
-    <section>
+    </vui-space>
+    <vui-space block>
       <vui-button>Default</vui-button>
       <vui-button disabled>Default(disabled)</vui-button>
-    </section>
-    <section>
+    </vui-space>
+    <vui-space block>
       <vui-button type="dashed">Dashed</vui-button>
       <vui-button type="dashed" disabled>Dashed(disabled)</vui-button>
-    </section>
-    <section>
+    </vui-space>
+    <vui-space block>
       <vui-button type="text">Text</vui-button>
       <vui-button type="text" disabled>Text(disabled)</vui-button>
-    </section>
+    </vui-space>
   </div>
 </template>
 
 <style>
-  .example-button-disabled section + section { margin-top:16px; }
-  .example-button-disabled .vui-button { margin-right:16px; }
+  .example-button-disabled .vui-space + .vui-space { margin-top:16px; }
 </style>
 `;
 

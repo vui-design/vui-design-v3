@@ -5,7 +5,7 @@
       <p>按钮包含八种类型。一般情况下，我们将 <code>primary</code> 类型用于主按钮，而次按钮使用 <code>default</code> 类型，建议主按钮在同一个操作区域最多出现一次。</p>
     </template>
     <template v-slot:demo>
-      <div class="example-button-type">
+      <vui-space block wrap v-bind:gutter="16">
         <vui-button type="primary">Primary</vui-button>
         <vui-button type="info">Info</vui-button>
         <vui-button type="warning">Warning</vui-button>
@@ -14,7 +14,7 @@
         <vui-button>Default</vui-button>
         <vui-button type="dashed">Dashed</vui-button>
         <vui-button type="text">Text</vui-button>
-      </div>
+      </vui-space>
     </template>
   </vui-example>
 </template>
@@ -35,7 +35,3 @@
     }
   });
 </script>
-
-<style>
-  .example-button-type .vui-button { margin:0 16px 16px 0; }
-</style>

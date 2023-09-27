@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-card />
-    <vui-example-size />
-    <vui-example-icon />
-    <vui-example-custom-title />
-    <vui-example-disabled />
-    <vui-example-addable />
-    <vui-example-closable />
-    <vui-example-editable />
-    <vui-example-extra />
-    <vui-example-custom-add-trigger />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-card />
+      <vui-example-size />
+      <vui-example-icon />
+      <vui-example-custom-title />
+      <vui-example-disabled />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-addable />
+      <vui-example-closable />
+      <vui-example-editable />
+      <vui-example-extra />
+      <vui-example-custom-add-trigger />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

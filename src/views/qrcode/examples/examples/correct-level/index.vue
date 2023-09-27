@@ -6,12 +6,12 @@
     </template>
     <template v-slot:demo>
       <div class="example-qrcode-correct-level">
-        <vui-radio-group type="button" v-model:value="correctLevel">
-          <vui-radio v-bind:value="0">0</vui-radio>
-          <vui-radio v-bind:value="1">1</vui-radio>
-          <vui-radio v-bind:value="2">2</vui-radio>
-          <vui-radio v-bind:value="3">3</vui-radio>
-        </vui-radio-group>
+        <vui-segments v-model:activeKey="correctLevel">
+          <vui-segments-item v-bind:key="0">0</vui-segments-item>
+          <vui-segments-item v-bind:key="1">1</vui-segments-item>
+          <vui-segments-item v-bind:key="2">2</vui-segments-item>
+          <vui-segments-item v-bind:key="3">3</vui-segments-item>
+        </vui-segments>
         <vui-qrcode
           v-bind:correctLevel="correctLevel"
           value="https://vui-design.github.io/vui-design-doc/"
@@ -42,5 +42,5 @@
 </script>
 
 <style>
-  .example-qrcode-correct-level .vui-qrcode { margin-top:24px; }
+  .example-qrcode-correct-level .vui-segments + .vui-qrcode { margin-top:16px; }
 </style>

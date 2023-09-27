@@ -5,7 +5,7 @@
       <p>添加 <code>loading</code> 属性即可让按钮处于加载中状态，最后两个按钮演示点击后进入加载状态。</p>
     </template>
     <template v-slot:demo>
-      <div class="example-dropdown-button-loading">
+      <vui-space block>
         <vui-dropdown-button type="primary" loading>
           Submit
           <template v-slot:menu>
@@ -39,7 +39,7 @@
             </vui-menu>
           </template>
         </vui-dropdown-button>
-      </div>
+      </vui-space>
     </template>
   </vui-example>
 </template>
@@ -70,7 +70,3 @@
     }
   });
 </script>
-
-<style>
-  .example-dropdown-button-loading .vui-dropdown-button + .vui-dropdown-button { margin-left:16px; }
-</style>

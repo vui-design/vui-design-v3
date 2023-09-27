@@ -62,7 +62,7 @@
 </script>
 
 <style>
-  .example-tag-colorful + .example-tag-colorful { margin-top:32px; }
+  .example-tag-colorful + .example-tag-colorful { margin-top:24px; }
   .example-tag-colorful .vui-divider { margin-top:0; }
   .example-tag-colorful .vui-tag-list { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:8px; }
 </style>

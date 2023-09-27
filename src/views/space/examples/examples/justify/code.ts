@@ -36,7 +36,7 @@ const code =
 
 <style>
   .example-space-justify-block { border:1px solid #f0f0f0; padding:16px; }
-  .example-space-justify-block + .example-space-justify-block { margin-top:32px; }
+  .example-space-justify-block + .example-space-justify-block { margin-top:24px; }
 </style>
 `;
 

@@ -7,7 +7,7 @@ const code = `
     <vui-col v-bind:span="12">
       <vui-countdown v-bind:value="deadline" formatter="HH:mm:ss:SSS" title="Million Seconds" />
     </vui-col>
-    <vui-col v-bind:span="24" style="margin-top: 32px;">
+    <vui-col v-bind:span="24" style="margin-top: 24px;">
       <vui-countdown v-bind:value="deadline" formatter="D 天 H 时 m 分 s 秒" title="Day Level" />
     </vui-col>
   </vui-row>

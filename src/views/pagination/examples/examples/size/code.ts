@@ -27,7 +27,7 @@ const code =
 </script>
 
 <style>
-  .example-pagination-size .vui-segments + .vui-pagination { margin-top:32px; }
+  .example-pagination-size .vui-segments + .vui-pagination { margin-top:24px; }
   .example-pagination-size .vui-pagination + .vui-pagination { margin-top:24px; }
 </style>
 `;

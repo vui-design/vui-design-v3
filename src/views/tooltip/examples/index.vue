@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-customized-content />
-    <vui-example-trigger />
-    <vui-example-placement />
-    <vui-example-colorful />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-customized-content />
+      <vui-example-trigger />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-placement />
+      <vui-example-colorful />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

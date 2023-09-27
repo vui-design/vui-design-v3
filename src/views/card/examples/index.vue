@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-simple />
-    <vui-example-no-border />
-    <vui-example-shadow />
-    <vui-example-loading />
-    <vui-example-grid />
-    <vui-example-flexible-content />
-    <vui-example-inner />
-    <vui-example-in-column />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-simple />
+      <vui-example-no-border />
+      <vui-example-shadow />
+      <vui-example-loading />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-grid />
+      <vui-example-flexible-content />
+      <vui-example-inner />
+      <vui-example-in-column />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

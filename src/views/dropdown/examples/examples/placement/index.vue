@@ -6,7 +6,7 @@
     </template>
     <template v-slot:demo>
       <div class="example-dropdown-placement">
-        <div class="example-dropdown-placement-top">
+        <vui-space block>
           <vui-dropdown placement="top-left">
             <vui-button>Top Left</vui-button>
             <template v-slot:menu>
@@ -40,8 +40,8 @@
               </vui-menu>
             </template>
           </vui-dropdown>
-        </div>
-        <div class="example-dropdown-placement-bottom">
+        </vui-space>
+        <vui-space block>
           <vui-dropdown placement="bottom-left">
             <vui-button>Bottom Left</vui-button>
             <template v-slot:menu>
@@ -75,7 +75,7 @@
               </vui-menu>
             </template>
           </vui-dropdown>
-        </div>
+        </vui-space>
       </div>
     </template>
   </vui-example>
@@ -99,10 +99,5 @@
 </script>
 
 <style>
-  .example-dropdown-placement-top {  }
-  .example-dropdown-placement-top .vui-button {  }
-  .example-dropdown-placement-top .vui-button + .vui-button { margin-left:16px; }
-  .example-dropdown-placement-bottom { margin-top:16px; }
-  .example-dropdown-placement-bottom .vui-button {  }
-  .example-dropdown-placement-bottom .vui-button + .vui-button { margin-left:16px; }
+  .example-dropdown-placement .vui-space + .vui-space { margin-top:16px; }
 </style>

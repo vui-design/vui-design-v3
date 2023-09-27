@@ -1,16 +1,20 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-disabled />
-    <vui-example-condition />
-    <vui-example-state-value />
-    <vui-example-controller />
-    <vui-example-group />
-    <vui-example-group-vertical />
-    <vui-example-group-options />
-    <vui-example-button />
-    <vui-example-size />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-disabled />
+      <vui-example-condition />
+      <vui-example-state-value />
+      <vui-example-controller />
+      <vui-example-group />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-group-vertical />
+      <vui-example-group-options />
+      <vui-example-button />
+      <vui-example-size />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

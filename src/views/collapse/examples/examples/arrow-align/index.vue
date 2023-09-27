@@ -6,10 +6,10 @@
     </template>
     <template v-slot:demo>
       <div class="example-collapse-arrow-align">
-        <vui-radio-group type="button" v-model:value="arrowAlign">
-          <vui-radio value="left" label="Left" />
-          <vui-radio value="right" label="Right" />
-        </vui-radio-group>
+        <vui-segments v-model:activeKey="arrowAlign">
+          <vui-segments-item key="left">Left</vui-segments-item>
+          <vui-segments-item key="right">Right</vui-segments-item>
+        </vui-segments>
         <vui-collapse v-model:activeKeys="activeKeys" v-bind:arrowAlign="arrowAlign">
           <vui-collapse-panel key="1" title="This is panel header 1">
             <p style="margin: 0;">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>
@@ -49,5 +49,5 @@
 </script>
 
 <style>
-  .example-collapse-arrow-align > .vui-collapse { margin-top:24px; }
+  .example-collapse-arrow-align .vui-segments + .vui-collapse { margin-top:16px; }
 </style>

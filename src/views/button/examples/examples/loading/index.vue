@@ -6,15 +6,15 @@
     </template>
     <template v-slot:demo>
       <div class="example-button-loading">
-        <section>
+        <vui-space block>
           <vui-button type="primary" icon="dustbin" v-bind:loading="loading1" v-on:click="handleClick1">Click me</vui-button>
           <vui-button type="primary" v-bind:loading="loading2" v-on:click="handleClick2">Click me</vui-button>
           <vui-button type="primary" loading>Loading...</vui-button>
-        </section>
-        <section>
+        </vui-space>
+        <vui-space block>
           <vui-button type="primary" shape="circle" loading />
           <vui-button shape="circle" loading />
-        </section>
+        </vui-space>
       </div>
     </template>
   </vui-example>
@@ -48,6 +48,5 @@
 </script>
 
 <style>
-  .example-button-loading section + section { margin-top:16px; }
-  .example-button-loading .vui-button { margin-right:16px; }
+  .example-button-loading .vui-space + .vui-space { margin-top:16px; }
 </style>

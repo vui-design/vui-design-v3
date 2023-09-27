@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-no-description />
-    <vui-example-customize />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-no-description />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-customize />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

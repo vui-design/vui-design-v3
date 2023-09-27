@@ -90,9 +90,9 @@ const code =
 
   .example-watermark-custom-main { flex:1; }
 
-  .example-watermark-custom-sider { border-left:1px solid #eee; margin-left:32px; padding-left:32px; }
+  .example-watermark-custom-sider { border-left:1px solid #eee; margin-left:24px; padding-left:24px; }
   .example-watermark-custom-sider dl { margin:0; }
-  .example-watermark-custom-sider dl + dl { margin-top:32px; }
+  .example-watermark-custom-sider dl + dl { margin-top:24px; }
   .example-watermark-custom-sider dl dt { color:#262626; font-size:16px; }
   .example-watermark-custom-sider dl dd { margin:8px 0 0 0; }
 </style>

@@ -62,7 +62,7 @@
 </script>
 
 <style>
-  .example-breadcrumb-link + .example-breadcrumb-link { margin-top:32px; }
+  .example-breadcrumb-link + .example-breadcrumb-link { margin-top:24px; }
   .example-breadcrumb-link .vui-divider { margin-top:0; }
   .example-breadcrumb-link .vui-breadcrumb + .vui-breadcrumb { margin-top:8px; }
 </style>

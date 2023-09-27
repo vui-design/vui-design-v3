@@ -62,7 +62,7 @@
 </script>
 
 <style>
-  .example-grid-gutter + .example-grid-gutter { margin-top:32px; }
+  .example-grid-gutter + .example-grid-gutter { margin-top:24px; }
   .example-grid-gutter .vui-divider { margin-top:0; }
   .example-grid-gutter .vui-row .vui-col div { height:48px; overflow:hidden; color:#fff; text-align:center; line-height:48px; }
   .example-grid-gutter .vui-row .vui-col:nth-child(odd) div { background-color:rgba(45,140,240,0.7); }

@@ -12,7 +12,7 @@
           <vui-step title="Waiting" description="This is a description." />
           <vui-step title="Waiting" description="This is a description." />
         </vui-steps>
-        <vui-divider v-bind:gutter="32" />
+        <vui-divider v-bind:gutter="24" />
         <vui-steps type="dot" direction="vertical" v-bind:step="1">
           <vui-step title="Finished" description="This is a description." />
           <vui-step title="In Progress" description="This is a description." />

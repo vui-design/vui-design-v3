@@ -120,7 +120,7 @@
 </script>
 
 <style>
-  .example-ribbon-colorful + .example-ribbon-colorful { margin-top:32px; }
+  .example-ribbon-colorful + .example-ribbon-colorful { margin-top:24px; }
   .example-ribbon-colorful .vui-divider { margin-top:0; }
   .example-ribbon-colorful .vui-ribbon-wrapper + .vui-ribbon-wrapper { margin-top:24px; }
 </style>

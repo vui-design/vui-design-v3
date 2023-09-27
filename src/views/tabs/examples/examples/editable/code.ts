@@ -73,7 +73,7 @@ const code =
 </script>
 
 <style>
-  .example-tabs-editable .vui-tabs + .vui-tabs { margin-top:32px; }
+  .example-tabs-editable .vui-tabs + .vui-tabs { margin-top:24px; }
 </style>
 `;
 

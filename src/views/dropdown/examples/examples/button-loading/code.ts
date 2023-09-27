@@ -1,6 +1,6 @@
 const code =
 `<template>
-  <div class="example-dropdown-button-loading">
+  <vui-space block>
     <vui-dropdown-button type="primary" loading>
       Submit
       <template v-slot:menu>
@@ -34,7 +34,7 @@ const code =
         </vui-menu>
       </template>
     </vui-dropdown-button>
-  </div>
+  </vui-space>
 </template>
 
 <script lang="ts">
@@ -57,10 +57,6 @@ const code =
     }
   });
 </script>
-
-<style>
-  .example-dropdown-button-loading .vui-dropdown-button + .vui-dropdown-button { margin-left:16px; }
-</style>
 `;
 
 export default code;

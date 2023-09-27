@@ -7,7 +7,7 @@ const code =
       <vui-step title="Step 3" description="This is a description." />
       <vui-step title="Waiting" description="This is a description." disabled />
     </vui-steps>
-    <vui-divider v-bind:gutter="32" />
+    <vui-divider v-bind:gutter="24" />
     <vui-steps direction="vertical" v-bind:step="step" v-on:change="handleChange">
       <vui-step title="Step 1" description="This is a description." />
       <vui-step title="Step 2" description="This is a description." />

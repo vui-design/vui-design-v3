@@ -72,9 +72,9 @@
 
 <style>
   .example-grid-playground { line-height:1; }
-  .example-grid-playground h4 { margin:32px 0 16px 0; }
+  .example-grid-playground h4 { margin:24px 0 16px 0; }
   .example-grid-playground h4:first-child { margin-top:0; }
-  .example-grid-playground .vui-row { margin-top:32px; }
+  .example-grid-playground .vui-row { margin-top:24px; }
   .example-grid-playground .vui-row .vui-col div { height:96px; overflow:hidden; color:#fff; text-align:center; line-height:96px; }
   .example-grid-playground .vui-row .vui-col:nth-child(odd) div { background-color:rgba(45,140,240,0.7); }
   .example-grid-playground .vui-row .vui-col:nth-child(even) div { background-color:rgba(45,140,240,1); }

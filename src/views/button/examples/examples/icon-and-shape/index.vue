@@ -8,7 +8,7 @@
     </template>
     <template v-slot:demo>
       <div class="example-button-icon-and-shape">
-        <section>
+        <vui-space block wrap v-bind:gutter="16">
           <vui-button type="primary" icon="search">Search</vui-button>
           <vui-button type="primary" icon="search" shape="round">Search</vui-button>
           <vui-button type="primary" icon="search" shape="circle" />
@@ -18,8 +18,8 @@
           <vui-button type="primary" shape="circle">
             <vui-icon type="more-x" />
           </vui-button>
-        </section>
-        <section>
+        </vui-space>
+        <vui-space block wrap v-bind:gutter="16">
           <vui-button icon="search">Search</vui-button>
           <vui-button icon="search" shape="round">Search</vui-button>
           <vui-button icon="search" shape="circle" />
@@ -29,7 +29,7 @@
           <vui-button shape="circle">
             <vui-icon type="more-x" />
           </vui-button>
-        </section>
+        </vui-space>
       </div>
     </template>
   </vui-example>
@@ -53,6 +53,5 @@
 </script>
 
 <style>
-  .example-button-icon-and-shape section + section { margin-top:16px; }
-  .example-button-icon-and-shape .vui-button { margin-right:16px; }
+  .example-button-icon-and-shape .vui-space + .vui-space { margin-top:16px; }
 </style>

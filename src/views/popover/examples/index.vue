@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-trigger />
-    <vui-example-control />
-    <vui-example-placement />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-trigger />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-control />
+      <vui-example-placement />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

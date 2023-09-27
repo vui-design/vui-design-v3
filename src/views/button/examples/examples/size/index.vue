@@ -60,5 +60,5 @@
 
 <style>
   .example-button-size .vui-space { margin-top:16px; }
-  .example-button-size .vui-segments + .vui-space { margin-top:32px; }
+  .example-button-size .vui-segments + .vui-space { margin-top:24px; }
 </style>

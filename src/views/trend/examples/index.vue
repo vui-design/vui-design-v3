@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-precision />
-    <vui-example-label />
-    <vui-example-color />
-    <vui-example-reverse-color />
-    <vui-example-placeholder />
-    <vui-example-ratio />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-precision />
+      <vui-example-label />
+      <vui-example-color />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-reverse-color />
+      <vui-example-placeholder />
+      <vui-example-ratio />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

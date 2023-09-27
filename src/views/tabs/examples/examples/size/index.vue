@@ -70,5 +70,5 @@
 </script>
 
 <style>
-  .example-tabs-size .vui-tabs { margin-top:32px; }
+  .example-tabs-size .vui-tabs { margin-top:24px; }
 </style>

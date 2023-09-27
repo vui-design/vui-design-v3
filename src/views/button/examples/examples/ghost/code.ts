@@ -13,8 +13,7 @@ const code =
 </template>
 
 <style>
-  .example-button-ghost { background-color:#bec8c8; padding:8px 16px; }
-  .example-button-ghost .vui-button { margin:8px 16px 8px 0; }
+  .example-button-ghost { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:16px; background-color:#bec8c8; padding:16px; }
 </style>
 `;
 

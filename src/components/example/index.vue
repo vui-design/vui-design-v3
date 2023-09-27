@@ -164,7 +164,7 @@
   .vui-example + .vui-example { margin-top:24px; }
 
   .vui-example-case { position:relative; }
-  .vui-example-case .demo { padding:32px; }
+  .vui-example-case .demo { padding:24px; }
   .vui-example-case .title { position:relative; margin:0; }
   .vui-example-case .description { position:relative; padding:24px; }
   .vui-example-case .description ul { list-style:circle; margin-bottom:10px; padding-left:18px; }

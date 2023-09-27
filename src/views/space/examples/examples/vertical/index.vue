@@ -6,7 +6,7 @@
     </template>
     <template v-slot:demo>
       <vui-space block direction="vertical">
-        <vui-card style="width: 320px;" title="Card title">
+        <vui-card style="width: 50%;" title="Card title">
           <p>Card content...</p>
           <p>Card content...</p>
         </vui-card>

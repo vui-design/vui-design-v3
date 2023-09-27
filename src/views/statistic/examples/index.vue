@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-icon-and-unit />
-    <vui-example-card />
-    <vui-example-extra />
-    <vui-example-countdown />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-icon-and-unit />
+      <vui-example-card />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-extra />
+      <vui-example-countdown />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

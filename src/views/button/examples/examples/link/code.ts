@@ -9,7 +9,7 @@ const code =
 </template>
 
 <style>
-  .example-button-link .vui-button { margin:0 16px 16px 0; }
+  .example-button-link { display:flex; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; gap:16px; }
 </style>
 `;
 

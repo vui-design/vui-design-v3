@@ -75,6 +75,8 @@
 </script>
 
 <style>
+  .example-popover-placement { width:324px; }
+
   .example-popover-placement .top { text-align:center; }
   .example-popover-placement .top .vui-button { width:60px; }
   .example-popover-placement .top .vui-button + .vui-button { margin-left:12px; }

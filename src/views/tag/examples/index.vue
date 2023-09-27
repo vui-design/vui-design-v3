@@ -1,16 +1,20 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-shape />
-    <vui-example-size />
-    <vui-example-ghost />
-    <vui-example-icon />
-    <vui-example-checkable />
-    <vui-example-hot-tags />
-    <vui-example-closable />
-    <vui-example-control />
-    <vui-example-colorful />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-shape />
+      <vui-example-size />
+      <vui-example-ghost />
+      <vui-example-icon />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-checkable />
+      <vui-example-hot-tags />
+      <vui-example-closable />
+      <vui-example-control />
+      <vui-example-colorful />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

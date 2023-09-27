@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-half />
-    <vui-example-text />
-    <vui-example-clearable />
-    <vui-example-disabled />
-    <vui-example-character />
-    <vui-example-character-function />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-half />
+      <vui-example-text />
+      <vui-example-clearable />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-disabled />
+      <vui-example-character />
+      <vui-example-character-function />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

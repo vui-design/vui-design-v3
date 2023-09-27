@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-accordion />
-    <vui-example-borderless />
-    <vui-example-ghost />
-    <vui-example-extra />
-    <vui-example-arrowless />
-    <vui-example-arrow-align />
-    <vui-example-disabled />
-    <vui-example-nested />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-accordion />
+      <vui-example-borderless />
+      <vui-example-ghost />
+      <vui-example-extra />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-arrowless />
+      <vui-example-arrow-align />
+      <vui-example-disabled />
+      <vui-example-nested />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

@@ -210,30 +210,12 @@
       }
     }
 
-    &:after {
-      position:absolute;
-      top:1px;
-      right:1px;
-      content:"";
-      display:block;
-      width:0;
-      height:0;
-      border-style:solid;
-      border-color:@checkbox-button-border-color @checkbox-button-border-color transparent transparent;
-      border-radius:@checkbox-button-border-radius;
-      transition:all @transition-duration-4 @transition-timing-function-standard;
-    }
-
     // size
     &-small {
       height:@checkbox-button-size-sm;
       padding:0 @checkbox-button-padding-size-sm;
       font-size:@checkbox-button-font-size-sm;
       line-height:@checkbox-button-size-sm - @checkbox-button-border-width * 2;
-
-      &:after {
-        border-width:3px;
-      }
     }
 
     &-medium {
@@ -241,10 +223,6 @@
       padding:0 @checkbox-button-padding-size-md;
       font-size:@checkbox-button-font-size-md;
       line-height:@checkbox-button-size-md - @checkbox-button-border-width * 2;
-
-      &:after {
-        border-width:4px;
-      }
     }
 
     &-large {
@@ -252,10 +230,6 @@
       padding:0 @checkbox-button-padding-size-lg;
       font-size:@checkbox-button-font-size-lg;
       line-height:@checkbox-button-size-lg - @checkbox-button-border-width * 2;
-
-      &:after {
-        border-width:5px;
-      }
     }
 
     // hovered
@@ -275,10 +249,6 @@
       z-index:3 !important;
       border-color:@checkbox-button-checked-border-color;
       color:@checkbox-button-checked-font-color !important;
-
-      &:after {
-        border-color:@checkbox-button-checked-border-color @checkbox-button-checked-border-color transparent transparent;
-      }
     }
 
     // focused & checked
@@ -293,10 +263,6 @@
       border-color:@checkbox-button-disabled-border-color;
       background-color:@checkbox-button-disabled-background-color;
       color:@checkbox-button-disabled-font-color !important;
-
-      &:after {
-        border-color:@checkbox-button-disabled-border-color @checkbox-button-disabled-border-color transparent transparent;
-      }
     }
 
     // checked & disabled

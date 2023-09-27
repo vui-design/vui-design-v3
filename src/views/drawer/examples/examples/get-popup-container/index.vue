@@ -44,5 +44,5 @@
 </script>
 
 <style>
-  .example-drawer-get-popup-container { position:relative; height:240px; border:1px solid #f0f0f0; background-color:#f6f6f6; padding:48px; overflow:hidden; }
+  .example-drawer-get-popup-container { position:relative; height:240px; border:1px solid #f0f0f0; background-color:#f6f6f6; padding:24px; overflow:hidden; }
 </style>

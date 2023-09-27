@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-icon />
-    <vui-example-separator />
-    <vui-example-dropdown />
-    <vui-example-link />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-icon />
+      <vui-example-separator />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-dropdown />
+      <vui-example-link />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

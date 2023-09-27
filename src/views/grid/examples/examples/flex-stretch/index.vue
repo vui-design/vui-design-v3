@@ -54,7 +54,7 @@
 </script>
 
 <style>
-  .example-grid-flex-stretch + .example-grid-flex-stretch { margin-top:32px; }
+  .example-grid-flex-stretch + .example-grid-flex-stretch { margin-top:24px; }
   .example-grid-flex-stretch .vui-divider { margin-top:0; }
   .example-grid-flex-stretch .vui-row { background-color:#ececec; }
   .example-grid-flex-stretch .vui-row + .vui-row { margin-top:16px; }

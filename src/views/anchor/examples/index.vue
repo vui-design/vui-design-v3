@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-open-in-new-window />
-    <vui-example-static />
-    <vui-example-customize-highlight />
-    <vui-example-offset />
-    <vui-example-click />
-    <vui-example-change />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-open-in-new-window />
+      <vui-example-static />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-customize-highlight />
+      <vui-example-offset />
+      <vui-example-click />
+      <vui-example-change />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

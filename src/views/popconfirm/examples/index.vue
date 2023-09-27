@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-icon />
-    <vui-example-local />
-    <vui-example-trigger-condition />
-    <vui-example-promise />
-    <vui-example-placement />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-icon />
+      <vui-example-local />
+      <vui-example-trigger-condition />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-promise />
+      <vui-example-placement />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

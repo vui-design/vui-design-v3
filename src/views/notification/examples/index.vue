@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-type />
-    <vui-example-duration />
-    <vui-example-placement />
-    <vui-example-update />
-    <vui-example-more />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-type />
+      <vui-example-duration />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-placement />
+      <vui-example-update />
+      <vui-example-more />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

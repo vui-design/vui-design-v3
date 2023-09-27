@@ -87,5 +87,5 @@
 </script>
 
 <style>
-  .example-authorizer-toggle .vui-segments { margin-bottom:32px; }
+  .example-authorizer-toggle .vui-segments { margin-bottom:24px; }
 </style>

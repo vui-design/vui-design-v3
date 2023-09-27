@@ -55,7 +55,7 @@
 </script>
 
 <style>
-  .example-grid-order + .example-grid-order { margin-top:32px; }
+  .example-grid-order + .example-grid-order { margin-top:24px; }
   .example-grid-order .vui-divider { margin-top:0; }
   .example-grid-order .vui-row { background-color:#f6f6f6; }
   .example-grid-order .vui-row .vui-col div { height:48px; overflow:hidden; color:#fff; text-align:center; line-height:48px; }

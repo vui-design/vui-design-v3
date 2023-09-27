@@ -5,7 +5,7 @@
       <p>左侧是常规按钮，右侧是额外的相关功能菜单，可通过 <code>icon</code> 属性来修改右侧按钮的图标。</p>
     </template>
     <template v-slot:demo>
-      <div class="example-dropdown-button">
+      <vui-space block>
         <vui-dropdown-button v-on:click="handleClick">
           Button
           <template v-slot:menu>
@@ -39,7 +39,7 @@
             </vui-menu>
           </template>
         </vui-dropdown-button>
-      </div>
+      </vui-space>
     </template>
   </vui-example>
 </template>
@@ -70,7 +70,3 @@
     }
   });
 </script>
-
-<style>
-  .example-dropdown-button .vui-dropdown-button + .vui-dropdown-button { margin-left:16px; }
-</style>

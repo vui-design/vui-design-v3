@@ -50,7 +50,7 @@ const code =
 </template>
 
 <style>
-  .example-grid-justify + .example-grid-justify { margin-top:32px; }
+  .example-grid-justify + .example-grid-justify { margin-top:24px; }
   .example-grid-justify .vui-divider { margin-top:0; }
   .example-grid-justify .vui-row { background-color:#f6f6f6; }
   .example-grid-justify .vui-row .vui-col div { height:48px; overflow:hidden; color:#fff; text-align:center; line-height:48px; }

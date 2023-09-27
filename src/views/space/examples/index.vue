@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-vertical />
-    <vui-example-justify />
-    <vui-example-align />
-    <vui-example-divider />
-    <vui-example-size />
-    <vui-example-customize />
-    <vui-example-wrap />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-vertical />
+      <vui-example-justify />
+      <vui-example-align />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-divider />
+      <vui-example-size />
+      <vui-example-customize />
+      <vui-example-wrap />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

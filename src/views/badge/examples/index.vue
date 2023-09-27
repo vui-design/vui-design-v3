@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <vui-example-basic-usage />
-    <vui-example-overflow-count />
-    <vui-example-text />
-    <vui-example-dot />
-    <vui-example-alone />
-    <vui-example-offset />
-    <vui-example-status />
-    <vui-example-colorful />
-  </div>
+  <vui-row v-bind:gutter="24">
+    <vui-col v-bind:span="12">
+      <vui-example-basic-usage />
+      <vui-example-overflow-count />
+      <vui-example-text />
+      <vui-example-dot />
+      <vui-example-alone />
+    </vui-col>
+    <vui-col v-bind:span="12">
+      <vui-example-offset />
+      <vui-example-status />
+      <vui-example-colorful />
+    </vui-col>
+  </vui-row>
 </template>
 
 <script lang="ts">

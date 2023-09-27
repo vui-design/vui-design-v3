@@ -8,7 +8,7 @@ const code =
       <vui-timeline-item>Network problems being solved 2018-01-01</vui-timeline-item>
       <vui-timeline-item>Recording...</vui-timeline-item>
     </vui-timeline>
-    <vui-button type="primary" style="margin-top: 32px;" v-on:click="handleClick">Toggle Reverse</vui-button>
+    <vui-button type="primary" style="margin-top: 24px;" v-on:click="handleClick">Toggle Reverse</vui-button>
   </div>
 </template>
 
