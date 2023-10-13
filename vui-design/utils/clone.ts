@@ -1,10 +1,14 @@
 import is from "./is";
 
-function isInstanceOf(value, type) {
-  return type != null && value instanceof type;
-}
+const Map = window.Map ?? function() {};
+const Set = window.Set ?? function() {};
+const Promise = window.Promise ?? function() {};
 
-function getRegExpFlags(value) {
+const isInstanceOf = (value: any, type: any) => {
+  return type !== null && value instanceof type;
+};
+
+const getRegExpFlags = (value: RegExp) => {
   var flags = "";
 
   if (value.global) {
@@ -20,34 +24,37 @@ function getRegExpFlags(value) {
   }
 
   return flags;
-}
+};
 
-var Map = window.Map || function() {};
-var Set = window.Set || function() {};
-var Promise = window.Promise || function() {};
+interface Circular {
+  circular?: boolean;
+  depth?: number;
+  prototype?: Record<string, any>;
+  includeNonEnumerable?: boolean;
+};
 
-function clone(parent, circular, depth, prototype, includeNonEnumerable) {
+export default (parent: any, circular?: boolean | Circular, depth?: number, prototype?: Record<string, any>, includeNonEnumerable?: boolean) => {
   if (typeof circular === "object") {
-    circular = circular.circular;
-    depth = circular.depth;
-    prototype = circular.prototype;
     includeNonEnumerable = circular.includeNonEnumerable;
+    prototype = circular.prototype;
+    depth = circular.depth;
+    circular = circular.circular;
   }
 
-  var allParents = [];
-  var allChildren = [];
-  var useBuffer = typeof Buffer != "undefined";
+  let parents: any[] = [];
+  let children: any[] = [];
+  let useBuffer = typeof Buffer !== "undefined";
 
-  if (typeof circular == "undefined") {
+  if (typeof circular === "undefined") {
     circular = true;
   }
 
-  if (typeof depth == "undefined") {
+  if (typeof depth === "undefined") {
     depth = Infinity;
   }
 
-  function copy(parent, depth) {
-    if (parent === null) {
+  const copy = (parent: any, depth: number) => {
+    if (parent == null) {
       return null;
     }
 
@@ -55,10 +62,10 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
       return parent;
     }
 
-    var proto;
-    var child;
+    let proto;
+    let child: any;
 
-    if (typeof parent != "object") {
+    if (typeof parent !== "object") {
       return parent;
     }
 
@@ -69,10 +76,10 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
       child = new Set();
     }
     else if (isInstanceOf(parent, Promise)) {
-      child = new Promise(function(resolve, reject) {
-        parent.then(function(value) {
+      child = new Promise((resolve, reject) => {
+        parent.then((value: any) => {
           resolve(copy(value, depth - 1));
-        }, function(error) {
+        }, (error: any) => {
           reject(copy(error, depth - 1));
         });
       });
@@ -105,7 +112,7 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
       child = Object.create(parent);
     }
     else {
-      if (typeof prototype == "undefined") {
+      if (typeof prototype === "undefined") {
         proto = Object.getPrototypeOf(parent);
       }
       else {
@@ -116,44 +123,42 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     }
 
     if (circular) {
-      var index = allParents.indexOf(parent);
+      let index = parents.indexOf(parent);
 
-      if (index != -1) {
-        return allChildren[index];
+      if (index !== -1) {
+        return children[index];
       }
 
-      allParents.push(parent);
-      allChildren.push(child);
+      parents.push(parent);
+      children.push(child);
     }
 
     if (isInstanceOf(parent, Map)) {
-      parent.forEach(function(value, key) {
-        var newKey = copy(key, depth - 1);
-        var newValue = copy(value, depth - 1);
+      parent.forEach((value: any, key: any) => {
+        const newKey = copy(key, depth - 1);
+        const newValue = copy(value, depth - 1);
 
         child.set(newKey, newValue);
       });
     }
 
     if (isInstanceOf(parent, Set)) {
-      parent.forEach(function(value) {
-        var entry = copy(value, depth - 1);
-
-        child.add(entry);
+      parent.forEach((value: any) => {
+        child.add(copy(value, depth - 1));
       });
     }
 
-    for (var i in parent) {
-      var attrs = Object.getOwnPropertyDescriptor(parent, i);
+    for (let i in parent) {
+      let attrs = Object.getOwnPropertyDescriptor(parent, i);
 
       if (attrs) {
         child[i] = copy(parent[i], depth - 1);
       }
 
       try {
-        var objProperty = Object.getOwnPropertyDescriptor(parent, i);
+        const objProperty = Object.getOwnPropertyDescriptor(parent, i);
 
-        if (objProperty.set === "undefined") {
+        if (typeof objProperty?.set === "undefined") {
           continue;
         }
 
@@ -170,11 +175,11 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
     }
 
     if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(parent);
+      const symbols = Object.getOwnPropertySymbols(parent);
 
-      for (var i = 0; i < symbols.length; i++) {
-        var symbol = symbols[i];
-        var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
+      for (let i = 0; i < symbols.length; i++) {
+        const symbol = symbols[i];
+        const descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
 
         if (descriptor && !descriptor.enumerable && !includeNonEnumerable) {
           continue;
@@ -182,43 +187,29 @@ function clone(parent, circular, depth, prototype, includeNonEnumerable) {
 
         child[symbol] = copy(parent[symbol], depth - 1);
 
-        Object.defineProperty(child, symbol, descriptor);
+        Object.defineProperty(child, symbol, descriptor!);
       }
     }
 
     if (includeNonEnumerable) {
-      var allPropertyNames = Object.getOwnPropertyNames(parent);
+      const ownPropertyNames = Object.getOwnPropertyNames(parent);
 
-      for (var i = 0; i < allPropertyNames.length; i++) {
-        var propertyName = allPropertyNames[i];
-        var descriptor = Object.getOwnPropertyDescriptor(parent, propertyName);
+      for (let i = 0; i < ownPropertyNames.length; i++) {
+        const ownPropertyName = ownPropertyNames[i];
+        const descriptor = Object.getOwnPropertyDescriptor(parent, ownPropertyName);
 
         if (descriptor && descriptor.enumerable) {
           continue;
         }
 
-        child[propertyName] = copy(parent[propertyName], depth - 1);
+        child[ownPropertyName] = copy(parent[ownPropertyName], depth - 1);
 
-        Object.defineProperty(child, propertyName, descriptor);
+        Object.defineProperty(child, ownPropertyName, descriptor!);
       }
     }
 
     return child;
-  }
+  };
 
   return copy(parent, depth);
 };
-
-clone.clonePrototype = function clonePrototype(parent) {
-  if (parent === null) {
-    return null;
-  }
-
-  var c = function() {};
-
-  c.prototype = parent;
-
-  return new c();
-};
-
-export default clone;

@@ -1,15 +1,19 @@
 const code =
 `<template>
   <vui-cascader
-    v-model="value"
+    v-model:value="value"
     v-bind:options="options"
+    v-on:change="handleChange"
     style="width: 200px;"
     placeholder="Please select"
   />
 </template>
 
-<script>
-  const options = [
+<script lang="ts">
+  import type { CascaderOption } from "vui-design";
+  import { defineComponent, ref } from "vue";
+
+  const options: CascaderOption[] = [
     {
       value: "zhejiang",
       label: "Zhejiang",
@@ -44,19 +48,20 @@ const code =
     }
   ];
 
-  export default {
-    data() {
-      return {
-        value: [],
-        options: options
-      };
-    },
-    watch: {
-      value(value) {
+  export default defineComponent({
+    setup() {
+      const value = ref<string[]>([]);
+      const handleChange = (value: string[]) => {
         console.log(value);
-      }
+      };
+
+      return {
+        value,
+        options,
+        handleChange
+      };
     }
-  };
+  });
 </script>
 `;
 

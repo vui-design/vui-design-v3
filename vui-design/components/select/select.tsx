@@ -9,8 +9,8 @@ import { InputGroupInjectionKey } from "../input/context";
 import VuiPopup from "../popup";
 import VuiSelectSelection from "./select-selection";
 import VuiSelectOptionList from "./select-option-list";
-import VuiSelectSpin from "./select-spin";
 import VuiSelectEmpty from "./select-empty";
+import VuiSelectSpin from "./select-spin";
 import useClassPrefix from "../../hooks/useClassPrefix";
 import useControlled from "../../hooks/useControlled";
 import utils from "./utils";
@@ -120,7 +120,7 @@ export const createProps = () => {
       type: Boolean as PropType<boolean>,
       default: undefined
     },
-    // 值变化时是否触发父级表单验证
+    // 选中值变化时是否触发父级表单验证
     validator: {
       type: Boolean as PropType<boolean>,
       default: true
@@ -222,7 +222,7 @@ export default defineComponent({
     // 当前选中的选项或选项列表
     const selection = ref<Option[] | Option>();
 
-    // 下拉菜单显示状态
+    // 下拉选项显示状态
     const dropdownVisible = computed(() => {
       let visible = actived.value;
 
@@ -395,16 +395,16 @@ export default defineComponent({
     };
 
     // onInput 事件回调
-    const handleInput = (v: string) => {
+    const handleInput = (characters: string) => {
       if (!props.searchable) {
         return;
       }
 
       actived.value = true;
-      keyword.value = v;
+      keyword.value = characters;
 
       if (!props.filter) {
-        context.emit("search", v);
+        context.emit("search", characters);
       }
     };
 

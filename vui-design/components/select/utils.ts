@@ -4,12 +4,12 @@ import is from "../../utils/is";
 import { getChildrenByNames, getChildrenText, getChildren } from "../../utils/vue";
 
 /**
-* 默认筛选函数
+* 默认的筛选函数
 * @param {String} keyword 关键词
 * @param {Object} option 选项
 * @param {String} property 筛选时按选项的指定属性进行过滤，如设置为 children 表示对内嵌内容进行搜索
 */
-const defaultFilter = (
+const picker = (
   keyword: string,
   option: Option,
   property: string
@@ -175,7 +175,7 @@ export const getFilteredOptions = (
   property: string = "children",
   keyword: string
 ): Option[] => {
-  const predicate = is.function(filter) ? filter : defaultFilter;
+  const predicate = is.function(filter) ? filter : picker;
   let array: Option[] = [];
 
   options.forEach(target => {

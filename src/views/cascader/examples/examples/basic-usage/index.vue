@@ -1,25 +1,28 @@
 <template>
-  <example v-bind:code="code" id="example-cascader-basic-usage">
-    <template slot="demo">
+  <vui-example id="example-cascader-basic-usage" v-bind:code="code">
+    <template v-slot:title>基本用法</template>
+    <template v-slot:description>
+      <p>省市区级联。</p>
+    </template>
+    <template v-slot:demo>
       <vui-cascader
-        v-model="value"
+        v-model:value="value"
         v-bind:options="options"
+        v-on:change="handleChange"
         style="width: 200px;"
         placeholder="Please select"
       />
     </template>
-    <template slot="title">基本用法</template>
-    <template slot="description">
-      <p>省市区级联。</p>
-    </template>
-  </example>
+  </vui-example>
 </template>
 
-<script>
-  import Example from "src/components/example";
+<script lang="ts">
+  import type { CascaderOption } from "vui-design";
+  import { defineComponent, ref } from "vue";
+  import VuiExample from "../../../../../components/example/index.vue";
   import code from "./code";
 
-  const options = [
+  const options: CascaderOption[] = [
     {
       value: "zhejiang",
       label: "Zhejiang",
@@ -54,21 +57,22 @@
     }
   ];
 
-  export default {
+  export default defineComponent({
     components: {
-      Example
+      VuiExample
     },
-    data() {
+    setup() {
+      const value = ref<string[]>([]);
+      const handleChange = (value: string[]) => {
+        console.log(value);
+      };
+
       return {
         code,
-        value: [],
-        options: options
+        value,
+        options,
+        handleChange
       };
-    },
-    watch: {
-      value(value) {
-        console.log(value);
-      }
     }
-  };
+  });
 </script>

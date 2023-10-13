@@ -273,7 +273,7 @@
         </tr>
       </tbody>
     </table>
-    <h2 id="api-upload-file-props">UploadFile 属性</h2>
+    <h2 id="api-upload-file-props">UploadFile 说明</h2>
     <p>组件返回的文件对象，非 <code>File</code> 原生对象（其继承自 <code>File</code>，附带了额外的属性用于渲染）。</p>
     <table class="api-props">
       <thead>

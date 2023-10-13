@@ -51,8 +51,8 @@ export type { TabsProps, TabPanelProps } from "./tabs";
 export { default as Tabs, TabPanel } from "./tabs";
 
 // Data Entry
-// export type { CascaderProps } from "./cascader";
-// export { default as Cascader } from "./cascader";
+export type { CascaderProps, CascaderOption, CascaderOptionKeys, CascaderTrigger, CascaderFormatter, CascaderFilter, CascaderFilterOptionProp, CascaderPlacement } from "./cascader";
+export { default as Cascader } from "./cascader";
 
 export type { CheckboxProps, CheckboxGroupProps } from "./checkbox";
 export { default as Checkbox, CheckboxGroup } from "./checkbox";

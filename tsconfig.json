@@ -9,7 +9,8 @@
     },
     "ignoreDeprecations": "5.0",
     "verbatimModuleSyntax": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "types": ["node"]
   },
   "references": [
     {

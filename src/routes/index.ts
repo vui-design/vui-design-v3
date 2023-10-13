@@ -226,16 +226,16 @@ export default [
         },
         component: () => import("src/views/tabs/index.vue")
       },
-  //     // 数据录入组件
-  //     {
-  //       path: "/components/cascader",
-  //       name: "cascader",
-  //       meta: {
-  //         title: "Cascader",
-  //         group: "data-entry"
-  //       },
-  //       component: () => import("src/views/cascader/index.vue")
-  //     },
+      // 数据录入组件
+      {
+        path: "/components/cascader",
+        name: "cascader",
+        meta: {
+          title: "Cascader",
+          group: "data-entry"
+        },
+        component: () => import("src/views/cascader/index.vue")
+      },
       {
         path: "/components/checkbox",
         name: "checkbox",
